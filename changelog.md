@@ -45,6 +45,9 @@
 - [x] Fixed 0 getting ignored if number was forced
 - [x] Fixed the tooltips remaining sticky on ALT + TAB
 
+# v0.3.2
+- [x] Fixed the download link
+
 # Backlog
 ### Features
 - [ ] Dark theme
