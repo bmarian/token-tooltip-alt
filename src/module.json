@@ -10,6 +10,6 @@
   "compatibleCoreVersion": "0.7.4",
   "url": "https://github.com/bmarian/token-tooltip-alt",
   "manifest": "https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/src/module.json",
-  "download": "https://github.com/bmarian/token-tooltip-alt/raw/master/package/token-tooltip-alt-v0.3.3.zip",
+  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v0.3.3/token-tooltip-alt-v0.3.3.zip",
   "changelog": "https://github.com/bmarian/token-tooltip-alt/releases"
 }
