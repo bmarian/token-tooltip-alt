@@ -1,0 +1,37 @@
+.#{$module-name}-tooltip-container {
+  &.hidden {
+    display: none;
+  }
+  background: white;
+
+  position: absolute;
+  width: auto;
+
+  padding: 5px;
+  //font-size: 1rem; moved to a setting and needs to be added inline...
+
+  border: 2px solid;
+  border-radius: 5px;
+  max-width: 300px;
+
+  & .#{$module-name}-tooltip-content {
+    display: flex;
+    flex-direction: column;
+
+    & .#{$module-name}-tooltip-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: left;
+
+      & i {
+        width: 40px;
+        padding-right: 5px;
+        text-align: center;
+      }
+      
+      & span {
+        word-break: break-word;
+      }
+    }
+  }
+}

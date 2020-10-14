@@ -1,0 +1,11 @@
+<div class="{{moduleName}}-tooltip-content">
+    {{#if tokenName}}
+        <h4 class="{{moduleName}}-tooltip-item title"><span>{{tokenName}}</span></h4>
+    {{/if}}
+    {{#each stats}}
+        <div class="{{../moduleName}}-tooltip-item">
+            <i class="fas {{icon}}" style="color: {{color}};"></i>
+            <span>{{value}}</span>
+        </div>
+    {{/each}}
+</div>

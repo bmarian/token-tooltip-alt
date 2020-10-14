@@ -1,0 +1,20 @@
+<tr class="{{moduleName}}-row" index="{{index}}">
+    <td class="{{moduleName}}-row_color">
+        <input type="color" name="color{{#unless isFriendly}}_h{{/unless}}.{{index}}" value="#000000" data-dtype="String">
+    </td>
+    <td class="{{moduleName}}-row_icon">
+        <input type="text" name="icon{{#unless isFriendly}}_h{{/unless}}.{{index}}" value="" data-dtype="String">
+    </td>
+    <td class="{{moduleName}}-row_tracked-value">
+        <input type="text" name="value{{#unless isFriendly}}_h{{/unless}}.{{index}}" value="" data-dtype="String">
+    </td>
+    <td class="{{moduleName}}-row_expression">
+        <input type="checkbox" name="expression{{#unless isFriendly}}_h{{/unless}}.{{index}}" data-dtype="Boolean">
+    </td>
+    <td class="{{moduleName}}-row_isNumber">
+        <input type="checkbox" name="isNumber{{#unless isFriendly}}_h{{/unless}}.{{index}}" data-dtype="Boolean">
+    </td>
+    <td class="{{moduleName}}-row_delete">
+        <button class="{{moduleName}}-row_button delete{{#unless isFriendly}}_h{{/unless}}" type="button" title="Delete"><i class="fa fa-trash"></i></button>
+    </td>
+</tr>

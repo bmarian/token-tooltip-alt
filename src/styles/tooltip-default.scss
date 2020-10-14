@@ -1,0 +1,21 @@
+.#{$module-name}-tooltip-container {
+  &.default {
+    background: url("../../ui/parchment.jpg") repeat;
+
+    & .#{$module-name}-tooltip-content {
+
+      & .#{$module-name}-tooltip-item {
+        &.title {
+          border-bottom: 1px solid;
+          & span {
+            color: black;
+          }
+        }
+
+        & span {
+          color: black;
+        }
+      }
+    }
+  }
+}

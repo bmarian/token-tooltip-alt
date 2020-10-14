@@ -1,0 +1,32 @@
+.#{$module-name}-form {
+  & .#{$module-name}-table {
+    & thead {
+      & tr {
+        text-align: center;
+        
+        // Just making things smaller to leve space for the value field
+        & .#{$module-name}-col_icon {
+         width: 100px; 
+        }
+        & .#{$module-name}-col_expression,
+        & .#{$module-name}-col_isNumber{
+          width: 30px;
+        }
+        & .#{$module-name}-col_delete,
+        & .#{$module-name}-col_color {
+         width: 50px; 
+        }
+      }
+    }
+    & tbody {
+      & .#{$module-name}-row_expression,
+      & .#{$module-name}-row_isNumber {
+        text-align: center;
+      }
+    }
+  }
+  
+  & input[type="color"] {
+    width: 50px;
+  }
+}
