@@ -1,4 +1,5 @@
 # Token Tooltip Alt
+![Downloads](https://img.shields.io/github/downloads/bmarian/token-tooltip-alt/total?style=for-the-badge)
 ![License](https://img.shields.io/github/license/bmarian/token-tooltip-alt?style=for-the-badge)
 ![GitHub Latest Release](https://img.shields.io/github/release/bmarian/token-tooltip-alt?style=for-the-badge)
 ![Foundry Version](https://img.shields.io/badge/FoundryVTT-0.7.3-blueviolet?style=for-the-badge)
