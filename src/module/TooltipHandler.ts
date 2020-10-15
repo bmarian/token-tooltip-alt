@@ -47,15 +47,48 @@ class TooltipHandler {
         this._tooltipContainer.html(content);
     }
 
-    private _getTooltipPosition(token: any): any {
+    private _getTooltipPosition(token: any, tooltipContainer: any): any {
+        let where = Settings.getSetting(Settings.settingKeys.TOOLTIP_POSITION);
         const tokenWT = token.worldTransform;
-        return {
-            left: tokenWT.tx + (token.width * tokenWT.a),
-            // -5 comes from the token border when hovering, just makes the tooltip look nicer
-            top: tokenWT.ty - 5,
+
+        const padding = 5;
+        const leftTopPadding = 20;
+
+        const position = {
             zIndex: token.zIndex,
-            color: Settings.getSetting(Settings.settingKeys.ACCENT_COLOR),
+            color: Settings.getSetting(Settings.settingKeys.ACCENT_COLOR)
         };
+
+        if (where === 'surprise') {
+            where = Settings.tooltipPositions[Math.floor(Math.random() * Settings.tooltipPositions.length)];
+        }
+
+        switch (where) {
+            case 'right': {
+                position['top'] = tokenWT.ty - padding;
+                position['left'] = tokenWT.tx + (token.w * tokenWT.a) + padding;
+                break;
+            }
+            case 'bottom': {
+                position['top'] = tokenWT.ty + (token.h * tokenWT.a) + padding;
+                position['left'] = tokenWT.tx - padding;
+                break;
+            }
+            case 'left': {
+                const cW = tooltipContainer.width();
+                position['top'] = tokenWT.ty - padding;
+                position['left'] = tokenWT.tx - cW - leftTopPadding;
+                break;
+            }
+            case 'top': {
+                const cH = tooltipContainer.height();
+                position['top'] = tokenWT.ty - cH - leftTopPadding;
+                position['left'] = tokenWT.tx - padding;
+                break;
+            }
+        }
+
+        return position;
     }
 
     // TODO: See if there is an efficient solution to check if tokens are in view
@@ -64,7 +97,7 @@ class TooltipHandler {
     }
 
     private _positionTooltip(tooltipContainer: any, token: any): void {
-        const position = this._getTooltipPosition(token);
+        const position = this._getTooltipPosition(token, tooltipContainer);
         tooltipContainer.css(position);
     }
 
@@ -137,20 +170,23 @@ class TooltipHandler {
         });
     }
 
-    private _getTooltipData(token: any, visibilityType: string): Object {
+    private _getTooltipData(token: any, visibilityType: string): any {
         const stats = [];
         const data = token?.actor?.data?.data;
         const isVisibilityFull = visibilityType === this._visibilityTypes.FULL;
         const useAccentColor = Settings.getSetting(Settings.settingKeys.USE_ACCENT_COLOR_FOR_EVERYTHING);
+        const exceptionValue = Settings.getSetting(Settings.settingKeys.DONT_SHOW);
 
         const itemList = isVisibilityFull ?
             Settings.getSetting(Settings.settingKeys.TOOLTIP_ITEMS) : Settings.getSetting(Settings.settingKeys.HOSTILE_ITEMS)
-
 
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
 
             const value = item?.expression ? this._expressionHandler(data, item?.value) : this._getNestedData(data, item?.value);
+
+            if (exceptionValue !== '' && value === exceptionValue) return {stats: []}
+
             if (useAccentColor) item.color = Settings.getSetting(Settings.settingKeys.ACCENT_COLOR);
 
             this._appendStat(item, value, stats);
@@ -189,7 +225,9 @@ class TooltipHandler {
 
     private _appendAltTooltipContainer(tooltipHTML: any): JQuery {
         const systemClass = Settings.getSystemSpecificClass();
-        const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass}"></div>`);
+        const darkClass = Settings.getSetting(Settings.settingKeys.DARK_THEME) ? 'dark' : '';
+
+        const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} ${darkClass}"></div>`);
         tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem');
 
         tooltipContainer.append(tooltipHTML);
@@ -201,7 +239,11 @@ class TooltipHandler {
     private async _getTooltipHTML(token: any): Promise<HTMLElement> {
         const visibilityType = this._typeToShow(token);
         if (visibilityType === this._visibilityTypes.NONE) return null;
-        return await renderTemplate(Settings.templatePaths[0], this._getTooltipData(token, visibilityType));
+
+        const tooltipData = this._getTooltipData(token, visibilityType);
+        if (!tooltipData.stats.length) return;
+
+        return await renderTemplate(Settings.templatePaths[0], tooltipData);
     }
 
     private async _handleTooltip(token: any, isHovering: boolean): Promise<void> {
