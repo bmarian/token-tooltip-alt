@@ -47,17 +47,48 @@ class TooltipHandler {
         this._tooltipContainer.html(content);
     }
 
-    private _getTooltipPosition(token: any): any {
+    private _getTooltipPosition(token: any, tooltipContainer: any): any {
+        let where = Settings.getSetting(Settings.settingKeys.TOOLTIP_POSITION);
         const tokenWT = token.worldTransform;
-        const padding = 5;
 
-        return {
-            left: tokenWT.tx + (token.w * tokenWT.a) + padding,
-            // -5 comes from the token border when hovering, just makes the tooltip look nicer
-            top: tokenWT.ty - padding,
+        const padding = 5;
+        const leftTopPadding = 20;
+
+        const position = {
             zIndex: token.zIndex,
-            color: Settings.getSetting(Settings.settingKeys.ACCENT_COLOR),
+            color: Settings.getSetting(Settings.settingKeys.ACCENT_COLOR)
         };
+
+        if (where === 'surprise') {
+            where = Settings.tooltipPositions[Math.floor(Math.random() * Settings.tooltipPositions.length)];
+        }
+
+        switch (where) {
+            case 'right': {
+                position['top'] = tokenWT.ty - padding;
+                position['left'] = tokenWT.tx + (token.w * tokenWT.a) + padding;
+                break;
+            }
+            case 'bottom': {
+                position['top'] = tokenWT.ty + (token.h * tokenWT.a) + padding;
+                position['left'] = tokenWT.tx - padding;
+                break;
+            }
+            case 'left': {
+                const cW = tooltipContainer.width();
+                position['top'] = tokenWT.ty - padding;
+                position['left'] = tokenWT.tx - cW - leftTopPadding;
+                break;
+            }
+            case 'top': {
+                const cH = tooltipContainer.height();
+                position['top'] = tokenWT.ty - cH - leftTopPadding;
+                position['left'] = tokenWT.tx - padding;
+                break;
+            }
+        }
+
+        return position;
     }
 
     // TODO: See if there is an efficient solution to check if tokens are in view
@@ -66,7 +97,7 @@ class TooltipHandler {
     }
 
     private _positionTooltip(tooltipContainer: any, token: any): void {
-        const position = this._getTooltipPosition(token);
+        const position = this._getTooltipPosition(token, tooltipContainer);
         tooltipContainer.css(position);
     }
 

@@ -67,7 +67,9 @@ class Settings {
         FONT_SIZE: 'fontSize',
         USE_ACCENT_COLOR_FOR_EVERYTHING: 'useAccentColorForEverything',
         ACCENT_COLOR: 'accentColor',
+        TOOLTIP_POSITION: 'tooltipPosition',
     }
+    public tooltipPositions = ["top", "right", "bottom", "left"];
 
     private constructor() {
     }
@@ -99,6 +101,25 @@ class Settings {
                         "owned": "Owned tokens",
                         "friendly": "Friendly tokens",
                         "all": "All tokens"
+                    }
+                },
+            },
+            {
+                key: "tooltipPosition",
+                settings: {
+                    name: "Tooltip position",
+                    hint: "Where should the tooltip be displayed.",
+                    type: String,
+                    scope: "world",
+                    config: true,
+                    restricted: true,
+                    default: "right",
+                    choices: {
+                        "top": "Top",
+                        "right": "Right",
+                        "bottom": "Bottom",
+                        "left": "Left",
+                        "surprise": "Surprise me"
                     }
                 },
             },
