@@ -86,7 +86,7 @@ Just check the `Nr` checkbox, this will try to pull out a number from the string
 Let's say you don't want to show your players the actual hp of a monster, but you still want to show them how much dmg they've done, 
 you can use a formula `{attributes.hp.max - attributes.hp.value}`
 
-![broken-heart](https://i.imgur.com/oTu8Tga.png)
+![broken-heart](https://i.imgur.com/72aRZIL.png)
 
 This uses [string-math](https://github.com/devrafalko/string-math) so whatever works there should work here.
 
