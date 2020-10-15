@@ -26,10 +26,11 @@ class Init {
 
     public async canvasInitHook(): Promise<void> {
         const systemClass = Settings.getSystemSpecificClass();
-        const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} hidden"></div>`);
+        const darkClass = Settings.getSetting(Settings.settingKeys.DARK_THEME) ? 'dark' : '';
+        const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} ${darkClass} hidden"></div>`);
         $('.game').append(tooltipContainer);
         
-        // $(window).on('blur', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
+        $(window).on('blur', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
     }
 }
 

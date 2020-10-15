@@ -222,7 +222,9 @@ class TooltipHandler {
 
     private _appendAltTooltipContainer(tooltipHTML: any): JQuery {
         const systemClass = Settings.getSystemSpecificClass();
-        const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass}"></div>`);
+        const darkClass = Settings.getSetting(Settings.settingKeys.DARK_THEME) ? 'dark' : '';
+
+        const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} ${darkClass}"></div>`);
         tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem');
 
         tooltipContainer.append(tooltipHTML);

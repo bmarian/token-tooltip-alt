@@ -68,6 +68,7 @@ class Settings {
         USE_ACCENT_COLOR_FOR_EVERYTHING: 'useAccentColorForEverything',
         ACCENT_COLOR: 'accentColor',
         TOOLTIP_POSITION: 'tooltipPosition',
+        DARK_THEME: 'darkTheme',
     }
     public tooltipPositions = ["top", "right", "bottom", "left"];
 
@@ -211,10 +212,26 @@ class Settings {
                 },
             },
             {
+                key: "darkTheme",
+                settings: {
+                    name: "Dark theme --requires restart--",
+                    hint: "Apply a dark theme for the tooltip.",
+                    type: Boolean,
+                    scope: "world",
+                    restricted: true,
+                    default: false,
+                },
+                custom: {
+                    type: 'checkbox',
+                    dataDtype: 'Boolean',
+                    isCheckbox: true,
+                },
+            },
+            {
                 key: "useAccentColorForEverything",
                 settings: {
-                    name: "Use accent color evrywhere",
-                    hint: "Use the accent color for everything",
+                    name: "Use accent color everywhere",
+                    hint: "Use the accent color for everything.",
                     type: Boolean,
                     scope: "world",
                     restricted: true,

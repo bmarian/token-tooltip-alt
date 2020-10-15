@@ -17,5 +17,24 @@
         }
       }
     }
+
+    &.dark {
+      background: rgba(0, 0, 0, 0.8) none;
+
+      & .#{$module-name}-tooltip-content {
+
+        & .#{$module-name}-tooltip-item {
+          &.title {
+            & span {
+              color: white;
+            }
+          }
+
+          & span {
+            color: white;
+          }
+        }
+      }
+    }
   }
 }

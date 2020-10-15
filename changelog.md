@@ -50,17 +50,16 @@
 
 # v0.3.4
 ### Features
-- [x] Open the tooltip wherever you want
-- [ ] Popup animation
+- [x] Open the tooltip wherever you want. (closes #1)
+- [x] Hide if some value is equal to some given value
+- [x] Dark theme
 
 ### Bugs
 - [x] Fixed the positioning of the tooltip
 - [x] Fix the empty tooltip if nothing should be displayed inside
-- [ ] If the value starts with a string can't force a number out of it (help parseFloat a little)
 
 # Backlog
 ### Features
-- [ ] Dark theme
 - [ ] Presets for other systems
 - [ ] Popup delay
 - [ ] Autocomplete
