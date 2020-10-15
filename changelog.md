@@ -45,18 +45,24 @@
 - [x] Fixed 0 getting ignored if number was forced
 - [x] Fixed the tooltips remaining sticky on ALT + TAB
 
-# v0.3.2
+# v0.3.3
 - [x] Fixed the download link
+
+# v0.3.4
+### Features
+- [ ] Open the tooltip wherever you want
+
+### Bugs
+- [x] Fixed the positioning of the tooltip
+- [ ] If the value starts with a string can't force a number out of it (help parseFloat a little)
 
 # Backlog
 ### Features
 - [ ] Dark theme
 - [ ] Presets for other systems
-- [ ] Open the tooltip wherever you want
 - [ ] Popup delay
 - [ ] Popup animation
 - [ ] Autocomplete
 
 ### Bugs
-- [ ] If the value starts with a string can't force a number out of it (help parseFloat a little)
 - [ ] Spamming hover while ALT is pressed keeps the tooltips stiky until you hover again or press ALT again

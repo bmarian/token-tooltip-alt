@@ -49,10 +49,12 @@ class TooltipHandler {
 
     private _getTooltipPosition(token: any): any {
         const tokenWT = token.worldTransform;
+        const padding = 5;
+
         return {
-            left: tokenWT.tx + (token.width * tokenWT.a),
+            left: tokenWT.tx + (token.w * tokenWT.a) + padding,
             // -5 comes from the token border when hovering, just makes the tooltip look nicer
-            top: tokenWT.ty - 5,
+            top: tokenWT.ty - padding,
             zIndex: token.zIndex,
             color: Settings.getSetting(Settings.settingKeys.ACCENT_COLOR),
         };
