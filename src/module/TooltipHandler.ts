@@ -170,7 +170,7 @@ class TooltipHandler {
         });
     }
 
-    private _getTooltipData(token: any, visibilityType: string): Object {
+    private _getTooltipData(token: any, visibilityType: string): any {
         const stats = [];
         const data = token?.actor?.data?.data;
         const isVisibilityFull = visibilityType === this._visibilityTypes.FULL;
@@ -234,7 +234,11 @@ class TooltipHandler {
     private async _getTooltipHTML(token: any): Promise<HTMLElement> {
         const visibilityType = this._typeToShow(token);
         if (visibilityType === this._visibilityTypes.NONE) return null;
-        return await renderTemplate(Settings.templatePaths[0], this._getTooltipData(token, visibilityType));
+
+        const tooltipData = this._getTooltipData(token, visibilityType);
+        if (!tooltipData.stats.length) return;
+
+        return await renderTemplate(Settings.templatePaths[0], tooltipData);
     }
 
     private async _handleTooltip(token: any, isHovering: boolean): Promise<void> {

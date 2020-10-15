@@ -50,10 +50,12 @@
 
 # v0.3.4
 ### Features
-- [ ] Open the tooltip wherever you want
+- [x] Open the tooltip wherever you want
+- [ ] Popup animation
 
 ### Bugs
 - [x] Fixed the positioning of the tooltip
+- [x] Fix the empty tooltip if nothing should be displayed inside
 - [ ] If the value starts with a string can't force a number out of it (help parseFloat a little)
 
 # Backlog
@@ -61,7 +63,6 @@
 - [ ] Dark theme
 - [ ] Presets for other systems
 - [ ] Popup delay
-- [ ] Popup animation
 - [ ] Autocomplete
 
 ### Bugs

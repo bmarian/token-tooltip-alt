@@ -29,7 +29,7 @@ class Init {
         const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} hidden"></div>`);
         $('.game').append(tooltipContainer);
         
-        $(window).on('blur', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
+        // $(window).on('blur', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
     }
 }
 
