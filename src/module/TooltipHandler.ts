@@ -175,15 +175,18 @@ class TooltipHandler {
         const data = token?.actor?.data?.data;
         const isVisibilityFull = visibilityType === this._visibilityTypes.FULL;
         const useAccentColor = Settings.getSetting(Settings.settingKeys.USE_ACCENT_COLOR_FOR_EVERYTHING);
+        const exceptionValue = Settings.getSetting(Settings.settingKeys.DONT_SHOW);
 
         const itemList = isVisibilityFull ?
             Settings.getSetting(Settings.settingKeys.TOOLTIP_ITEMS) : Settings.getSetting(Settings.settingKeys.HOSTILE_ITEMS)
-
 
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
 
             const value = item?.expression ? this._expressionHandler(data, item?.value) : this._getNestedData(data, item?.value);
+
+            if (exceptionValue !== '' && value === exceptionValue) return {stats: []}
+
             if (useAccentColor) item.color = Settings.getSetting(Settings.settingKeys.ACCENT_COLOR);
 
             this._appendStat(item, value, stats);

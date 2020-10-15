@@ -69,6 +69,7 @@ class Settings {
         ACCENT_COLOR: 'accentColor',
         TOOLTIP_POSITION: 'tooltipPosition',
         DARK_THEME: 'darkTheme',
+        DONT_SHOW: 'dontShow',
     }
     public tooltipPositions = ["top", "right", "bottom", "left"];
 
@@ -122,6 +123,18 @@ class Settings {
                         "left": "Left",
                         "surprise": "Surprise me"
                     }
+                },
+            },
+            {
+                key: "dontShow",
+                settings: {
+                    name: "Don't show",
+                    hint: "If one of the tracked values is equal to this one that token will not have a tooltip. Leave blank if you want a tooltip for every token.",
+                    type: String,
+                    scope: "world",
+                    config: true,
+                    restricted: true,
+                    default: '',
                 },
             },
             {

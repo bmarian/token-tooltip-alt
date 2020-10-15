@@ -53,6 +53,7 @@
 - [x] Open the tooltip wherever you want. (closes #1)
 - [x] Hide if some value is equal to some given value
 - [x] Dark theme
+- [x] Don't show for a specific value
 
 ### Bugs
 - [x] Fixed the positioning of the tooltip
