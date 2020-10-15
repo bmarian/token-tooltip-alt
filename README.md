@@ -25,7 +25,8 @@ A few options are available for this module
 `Friendly tokens` - the players will see tooltips for all the tokens they own and all the tokens that are marked as friendly
 
 `All tokens` - the players will see tooltips for all the tokens they own, all the friendly tokens, and the first 2 fields for the hostile tokens
-
+- `Tooltip position`: Self-descriptive, chose where the tooltip should be shown
+- `Don't show`: This option can be used to specify a value (e.g. -99), if any of the tracked values are equal to this no tooltip will be shown for that token. If left blank the tooltip will follow the normal rules.
 - `Show all tooltips on ALT`: If true, when pressing ALT you will see a tooltip for every visible token on the scene
 - `Show tooltips for hidden tokens on ALT`: If this is true you when pressing alt you will see tooltips for all tokens on the scene
 - `Display token name`: Display the token name in the tooltip
@@ -49,6 +50,9 @@ This is what players would see for hostile tokens if your Tooltip visibility is 
 
 #### Display token name
 Display the token name in the tooltip 
+
+#### Dark theme 
+Provides a dark theme for the tooltip
 
 #### Use accent color everywhere
 If set to true the tooltip will only use the accent color for everything
