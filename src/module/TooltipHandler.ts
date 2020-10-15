@@ -185,7 +185,7 @@ class TooltipHandler {
 
             const value = item?.expression ? this._expressionHandler(data, item?.value) : this._getNestedData(data, item?.value);
 
-            if (exceptionValue !== '' && value === exceptionValue) return {stats: []}
+            if (exceptionValue !== '' && value?.toString() === exceptionValue) return {stats: []}
 
             if (useAccentColor) item.color = Settings.getSetting(Settings.settingKeys.ACCENT_COLOR);
 
