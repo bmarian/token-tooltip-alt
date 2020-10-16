@@ -93,6 +93,7 @@ class Settings {
         TOOLTIP_POSITION: 'tooltipPosition',
         DARK_THEME: 'darkTheme',
         DONT_SHOW: 'dontShow',
+        DATA_SOURCE: 'dataSource',
     }
     public tooltipPositions = ["top", "right", "bottom", "left"];
 
@@ -149,10 +150,24 @@ class Settings {
                 },
             },
             {
+                key: "dataSource",
+                settings: {
+                    name: "Data source --advanced--",
+                    hint: "This is an advanced feature, please don't change it if you don't know what you are doing. " +
+                          "If you know, this could give you the possibility to track almost anything in the token object.",
+                    type: String,
+                    scope: "world",
+                    config: true,
+                    restricted: true,
+                    default: 'actor.data.data',
+                },
+            },
+            {
                 key: "dontShow",
                 settings: {
                     name: "Don't show",
-                    hint: "If one of the tracked values is equal to this one that token will not have a tooltip. Leave blank if you want a tooltip for every token.",
+                    hint: "If one of the tracked values is equal to this one that token will not have a tooltip. " +
+                          "Leave blank if you want a tooltip for every token.",
                     type: String,
                     scope: "world",
                     config: true,
