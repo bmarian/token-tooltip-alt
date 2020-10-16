@@ -67,6 +67,10 @@
 - [x] Fixed the object logic for detecting if something is null (closes #3)
 - [x] Fixed the leaf elements not caught by the `strictpathexp` (closes #4)
 
+# v0.3.6
+### Features
+- [x] Added a data source option
+
 # Backlog
 ### Features
 - [ ] Presets for other systems
