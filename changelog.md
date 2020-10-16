@@ -73,11 +73,14 @@
 # v0.3.7
 - [x] Don't display the entire formula if an element is wrong (closes #8)
 
+# v0.4.0
+### Features
+- [ ] Animations
+
 # Backlog
 ### Features
 - [ ] Presets for other systems
 - [ ] Popup delay
-- [ ] Animations
 
 ### Bugs
 - [ ] Spamming hover while ALT is pressed keeps the tooltips stiky until you hover again or press ALT again
