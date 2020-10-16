@@ -10,6 +10,7 @@ class TooltipHandler {
     private _wasTabDown = false;
     private _strictPathExp = new RegExp(/^([\w_-]+\.)*([\w_-]+)$/);
     private _numberExp = new RegExp(/\d+/);
+    private _animationSpeed = 200;
 
     private constructor() {
     }
@@ -19,18 +20,53 @@ class TooltipHandler {
         return TooltipHandler._instance;
     }
 
-    private _animateIn(tokenContainer: any): void {
-        tokenContainer.css('display', 'block');
+    private _animateIn(tokenContainer: any, animationType: string, where: string): void {
+        tokenContainer.css({display: 'block'});
+
+        switch (animationType) {
+            case 'fade': {
+                tokenContainer.css({opacity: 0});
+                tokenContainer.animate({opacity: 1}, this._animationSpeed);
+                break;
+            }
+            case 'grow': {
+                // tokenContainer.css({width: 0});
+                tokenContainer.animate({width: 'show'}, this._animationSpeed);
+                break;
+            }
+        }
     }
 
-    private _animateOut(tokenContainer: any): void {
-        tokenContainer.remove();
-        tokenContainer = null;
+    private _animateOut(tokenContainer: any, animationType: string, where: string): void {
+        const endFunction = () => {
+            tokenContainer.remove();
+            tokenContainer = null;
+        }
+
+        switch (animationType) {
+            case 'none': {
+                endFunction();
+                break;
+            }
+            case 'fade': {
+                tokenContainer.animate({opacity: 0}, this._animationSpeed, endFunction);
+                break;
+            }
+            case 'grow': {
+                tokenContainer.animate({width: 'hide'}, this._animationSpeed, endFunction);
+                break;
+            }
+        }
     }
 
     private _animate(out: boolean, tokenContainer: any): void {
         if (!tokenContainer) return;
-        return this[out ? '_animateOut' : '_animateIn'](tokenContainer);
+
+        let animationType = 'fade';
+        const where = Settings.getSetting(Settings.settingKeys.TOOLTIP_POSITION);
+        if (where === 'surprise') animationType = 'none';
+
+        return this[out ? '_animateOut' : '_animateIn'](tokenContainer, animationType, where);
     }
 
     private _initializeContainer(): JQuery {

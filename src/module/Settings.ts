@@ -113,7 +113,7 @@ class Settings {
     private _getSettings(): Array<any> {
         return [
             {
-                key: "tooltipVisibility",
+                key: this.settingKeys.TOOLTIP_VISIBILITY,
                 settings: {
                     name: "Tooltip visibility",
                     hint: "This option determines which tokens display a tooltip when a player hovers over them.",
@@ -131,7 +131,7 @@ class Settings {
                 },
             },
             {
-                key: "tooltipPosition",
+                key: this.settingKeys.TOOLTIP_POSITION,
                 settings: {
                     name: "Tooltip position",
                     hint: "Where should the tooltip be displayed.",
@@ -150,7 +150,7 @@ class Settings {
                 },
             },
             {
-                key: "dataSource",
+                key: this.settingKeys.DATA_SOURCE,
                 settings: {
                     name: "Data source --advanced--",
                     hint: "This is an advanced feature, please don't change it if you don't know what you are doing. " +
@@ -163,7 +163,7 @@ class Settings {
                 },
             },
             {
-                key: "dontShow",
+                key: this.settingKeys.DONT_SHOW,
                 settings: {
                     name: "Don't show",
                     hint: "If one of the tracked values is equal to this one that token will not have a tooltip. " +
@@ -176,7 +176,7 @@ class Settings {
                 },
             },
             {
-                key: "showAllOnAlt",
+                key: this.settingKeys.SHOW_ALL_ON_ALT,
                 settings: {
                     name: "Show on <ALT>",
                     hint: "Display a tooltip for every visible token on the scene.",
@@ -188,7 +188,7 @@ class Settings {
                 },
             },
             {
-                key: "showTooltipForHiddenTokens",
+                key: this.settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS,
                 settings: {
                     name: "Show for hidden tokens",
                     hint: "Display tooltips for hidden tokens when pressing <ALT>.",
@@ -200,7 +200,7 @@ class Settings {
                 },
             },
             {
-                key: "debugOutput",
+                key: this.settingKeys.DEBUG_OUTPUT,
                 settings: {
                     name: "Debug output",
                     hint: "Display some useful debug output in the console.",
@@ -212,7 +212,7 @@ class Settings {
                 },
             },
             {
-                key: "tooltipItems",
+                key: this.settingKeys.TOOLTIP_ITEMS,
                 settings: {
                     type: Object,
                     scope: "world",
@@ -221,7 +221,7 @@ class Settings {
                 },
             },
             {
-                key: "hostileItems",
+                key: this.settingKeys.HOSTILE_ITEMS,
                 settings: {
                     type: Object,
                     scope: "world",
@@ -247,7 +247,7 @@ class Settings {
     public getSettingsEditorOptions(): Array<any> {
         return [
             {
-                key: "displayNameInTooltip",
+                key: this.settingKeys.DISPLAY_NAMES_IN_TOOLTIP,
                 settings: {
                     name: "Display token name",
                     hint: "Display the token name in the tooltip.",
@@ -263,9 +263,9 @@ class Settings {
                 },
             },
             {
-                key: "darkTheme",
+                key: this.settingKeys.DARK_THEME,
                 settings: {
-                    name: "Dark theme --requires restart--",
+                    name: "Dark theme",
                     hint: "Apply a dark theme for the tooltip.",
                     type: Boolean,
                     scope: "world",
@@ -279,7 +279,7 @@ class Settings {
                 },
             },
             {
-                key: "useAccentColorForEverything",
+                key: this.settingKeys.USE_ACCENT_COLOR_FOR_EVERYTHING,
                 settings: {
                     name: "Use accent color everywhere",
                     hint: "Use the accent color for everything.",
@@ -295,10 +295,10 @@ class Settings {
                 },
             },
             {
-                key: "fontSize",
+                key: this.settingKeys.FONT_SIZE,
                 settings: {
                     name: "Font size --requires restart--",
-                    hint: "Customize the fontsize used for the tooltip (e.g. 1.2rem | 15px).",
+                    hint: "Customize the font size used for the tooltip (e.g. 1.2rem | 15px).",
                     type: String,
                     scope: "world",
                     restricted: true,
@@ -310,7 +310,7 @@ class Settings {
                 },
             },
             {
-                key: "accentColor",
+                key: this.settingKeys.ACCENT_COLOR,
                 settings: {
                     name: "Accent color",
                     hint: "Set a accent color for the border, and title.",
