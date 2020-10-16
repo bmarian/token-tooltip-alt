@@ -149,6 +149,7 @@ class TooltipHandler {
 
         let res = data;
         for (let i = 0; i < paths.length; i++) {
+            if (res === undefined) return null;
             res = res?.[paths[i]];
         }
         return res;
@@ -167,11 +168,20 @@ class TooltipHandler {
 
     private _expressionHandler(data: any, expression: string): any {
         const th = this;
-        return expression.replace(/{([^}]*)}/g, (_0: string, dataPath: string) => {
+        let hasNull = false;
+        const exp = expression.replace(/{([^}]*)}/g, (_0: string, dataPath: string) => {
             const value = th[th._strictPathExp.test(dataPath) ? '_getNestedData' : '_handleOperations'](data, dataPath);
+
             // The explicit check is needed for values that have 0;
-            return value !== null ? value : '';
+            if (value === null) {
+                hasNull = true;
+                return '';
+            }
+
+            return value;
         });
+
+        return hasNull ? null : exp;
     }
 
     private _getDataSource(token: any): any {

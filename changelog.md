@@ -70,6 +70,9 @@
 # v0.3.6
 - [x] Added a data source option (closes #6)
 
+# v0.3.7
+- [x] Don't display the entire formula if an element is wrong (closes #8)
+
 # Backlog
 ### Features
 - [ ] Presets for other systems
