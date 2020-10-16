@@ -61,11 +61,11 @@
 
 # v0.3.5
 ### Features
-
+- [x] Added a preset for cyphersystem
 
 ### Bugs
-- [ ] Fixed the object logic for detecting if something is null, use this instead`if (isNaN(values.value) || isNaN(values.max) || values.value === null || values.max === null) return;`
-
+- [x] Fixed the object logic for detecting if something is null (closes #3)
+- [x] Fixed the leaf elements not caught by the `strictpathexp` (closes #4)
 
 # Backlog
 ### Features
@@ -75,4 +75,3 @@
 
 ### Bugs
 - [ ] Spamming hover while ALT is pressed keeps the tooltips stiky until you hover again or press ALT again
-- [ ] Fixed the object logic for detecting if something is null, use this instead`if (isNaN(values.value) || isNaN(values.max) || values.value === null || values.max === null) return;`

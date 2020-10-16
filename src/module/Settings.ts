@@ -50,6 +50,29 @@ class Settings {
                 isNumber: false,
             },
         ],
+        'cyphersystem': [
+            {
+                color: '#ff0000',
+                icon: 'fa-fist-raised',
+                value: 'pools.might',
+                expression: false,
+                isNumber: false,
+            },
+            {
+                color: '#00ff00',
+                icon: 'fa-running',
+                value: 'pools.speed',
+                expression: false,
+                isNumber: false,
+            },
+            {
+                color: '#0000ff',
+                icon: 'fa-brain',
+                value: 'pools.intellect',
+                expression: false,
+                isNumber: false,
+            },
+        ],
     }
     private _systemSpecificClasses = [];
     public templatePaths = [

@@ -8,7 +8,7 @@ class TooltipHandler {
     private _visibilityTypes = {FULL: 'full', PARTIAL: 'partial', NONE: 'none'};
     private _altTooltipContainers = [];
     private _wasTabDown = false;
-    private _strictPathExp = new RegExp(/^(\w+\.)+(\w+)$/);
+    private _strictPathExp = new RegExp(/^(\w+\.)*(\w+)$/);
 
     private constructor() {
     }
@@ -113,12 +113,12 @@ class TooltipHandler {
     }
 
     private _appendObjectStat(values: any, item: any, statsArray: Array<any>): void {
-        if (!(isNaN(values.value) && isNaN(values.max))) {
-            const temp = values.temp > 0 ? `(${values.temp})` : '';
-            const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
-            const value = `${values.value}${temp}/${values.max}${tempmax}`;
-            statsArray.push({value, icon: item?.icon, color: item?.color});
-        }
+        if (isNaN(values.value) || isNaN(values.max) || values.value === null || values.max === null) return;
+
+        const temp = values.temp > 0 ? `(${values.temp})` : '';
+        const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
+        const value = `${values.value}${temp}/${values.max}${tempmax}`;
+        statsArray.push({value, icon: item?.icon, color: item?.color});
     }
 
     private _appendStat(item: any, value: any, statsArray: Array<any>): void {
@@ -155,7 +155,7 @@ class TooltipHandler {
 
     private _handleOperations(data: any, operation: string): any {
         const th = this;
-        const o = operation.replace(/([^\d\W]+\.)+([^\d\W]+)/g, (dataPath: string) => {
+        const o = operation.replace(/([^\d\W]+\.)*([^\d\W]+)/g, (dataPath: string) => {
             return th._extractNumber(th._getNestedData(data, dataPath));
         });
         return stringMath(o);
