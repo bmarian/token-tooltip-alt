@@ -8,7 +8,8 @@ class TooltipHandler {
     private _visibilityTypes = {FULL: 'full', PARTIAL: 'partial', NONE: 'none'};
     private _altTooltipContainers = [];
     private _wasTabDown = false;
-    private _strictPathExp = new RegExp(/^(\w+\.)*(\w+)$/);
+    private _strictPathExp = new RegExp(/^([\w_-]+\.)*([\w_-]+)$/);
+    private _numberExp = new RegExp(/\d+/);
 
     private constructor() {
     }
@@ -155,7 +156,10 @@ class TooltipHandler {
 
     private _handleOperations(data: any, operation: string): any {
         const th = this;
-        const o = operation.replace(/([^\d\W]+\.)*([^\d\W]+)/g, (dataPath: string) => {
+        const o = operation.replace(/([\w_-]+\.)*([\w_-]+)/g, (dataPath: string) => {
+            if (th._numberExp.test(dataPath)) return dataPath;
+            if (/-/.test(dataPath)) return dataPath;
+
             return th._extractNumber(th._getNestedData(data, dataPath));
         });
         return stringMath(o);
@@ -170,9 +174,14 @@ class TooltipHandler {
         });
     }
 
+    private _getDataSource(token: any): any {
+        const dataPath = Settings.getSetting(Settings.settingKeys.DATA_SOURCE);
+        return dataPath === '' ? token : this._getNestedData(token, dataPath);
+    }
+
     private _getTooltipData(token: any, visibilityType: string): any {
         const stats = [];
-        const data = token?.actor?.data?.data;
+        const data = this._getDataSource(token);
         const isVisibilityFull = visibilityType === this._visibilityTypes.FULL;
         const useAccentColor = Settings.getSetting(Settings.settingKeys.USE_ACCENT_COLOR_FOR_EVERYTHING);
         const exceptionValue = Settings.getSetting(Settings.settingKeys.DONT_SHOW);

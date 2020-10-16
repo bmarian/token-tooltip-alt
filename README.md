@@ -26,6 +26,7 @@ A few options are available for this module
 
 `All tokens` - the players will see tooltips for all the tokens they own, all the friendly tokens, and the first 2 fields for the hostile tokens
 - `Tooltip position`: Self-descriptive, chose where the tooltip should be shown
+- `Data source`: This is an advanced feature, with this you chose how deep into the token object the search for values start. (I don't know how to explain this better, take a look at the `Tracking a flag` example.)
 - `Don't show`: This option can be used to specify a value (e.g. -99), if any of the tracked values are equal to this no tooltip will be shown for that token. If left blank the tooltip will follow the normal rules.
 - `Show all tooltips on ALT`: If true, when pressing ALT you will see a tooltip for every visible token on the scene
 - `Show tooltips for hidden tokens on ALT`: If this is true you when pressing alt you will see tooltips for all tokens on the scene
@@ -98,3 +99,10 @@ Of course! Use as many as you like, go wild!
 #### Make a different tooltip for the enemies
 
 ![enemy](https://i.imgur.com/MGHA6UZ.png)
+
+#### Tracking a flag
+Flags are usually locate in `token.data.flags`. To access them and other values we set the `Data source` to empty. 
+This means we are starting the search from the token object. Let's say we want to track the stealth rolls added by [Conditional Visibility](https://foundryvtt.com/packages/conditional-visibility/).
+It will look something like this: `data.flags.conditional-visibility._ste`, ugly I know, but the effect it's pretty nice.
+
+![flag-tracking](https://i.imgur.com/uFpA5xz.gif)
