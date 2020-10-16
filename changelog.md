@@ -74,7 +74,6 @@
 ### Features
 - [ ] Presets for other systems
 - [ ] Popup delay
-- [ ] Autocomplete
 - [ ] Animations
 
 ### Bugs
