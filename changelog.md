@@ -77,6 +77,9 @@
 ### Features
 - [ ] Animations
 
+### Bugs
+- [x] Fixed the <TAB> functionality
+
 # Backlog
 ### Features
 - [ ] Presets for other systems

@@ -19,14 +19,29 @@ class TooltipHandler {
         return TooltipHandler._instance;
     }
 
+    private _animateIn(tokenContainer: any): void {
+        tokenContainer.css('display', 'block');
+    }
+
+    private _animateOut(tokenContainer: any): void {
+        tokenContainer.remove();
+        tokenContainer = null;
+    }
+
+    private _animate(out: boolean, tokenContainer: any): void {
+        if (!tokenContainer) return;
+        return this[out ? '_animateOut' : '_animateIn'](tokenContainer);
+    }
+
     private _initializeContainer(): JQuery {
         this._removeContainer();
 
         const systemClass = Settings.getSystemSpecificClass();
         const darkClass = Settings.getSetting(Settings.settingKeys.DARK_THEME) ? 'dark' : '';
         this._tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} ${darkClass}"></div>`);
-        this._tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem');
+        this._tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem').css('display', 'none');
         $('.game').append(this._tooltipContainer);
+        this._animate(false, this._tooltipContainer);
 
         return this._tooltipContainer;
     }
@@ -35,7 +50,7 @@ class TooltipHandler {
         this._wasTabDown = false;
         while (this._altTooltipContainers.length > 0) {
             const tooltipInfo = this._altTooltipContainers.pop();
-            tooltipInfo?.tooltip.remove();
+            this._animate(true, tooltipInfo.tooltip);
         }
     }
 
@@ -233,8 +248,7 @@ class TooltipHandler {
 
     private _removeContainer(): void {
         if (this._tooltipContainer) {
-            this._tooltipContainer.remove()
-            this._tooltipContainer = null;
+            this._animate(true, this._tooltipContainer);
         }
     }
 
@@ -243,10 +257,11 @@ class TooltipHandler {
         const darkClass = Settings.getSetting(Settings.settingKeys.DARK_THEME) ? 'dark' : '';
 
         const tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} ${darkClass}"></div>`);
-        tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem');
+        tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem').css('display', 'none');
 
         tooltipContainer.append(tooltipHTML);
         $('.game').append(tooltipContainer);
+        this._animate(false, tooltipContainer);
 
         return tooltipContainer;
     }
@@ -287,7 +302,7 @@ class TooltipHandler {
         const tooltipContainer = this._appendAltTooltipContainer(tooltipHTML);
         this._positionTooltip(tooltipContainer, token);
 
-        this._altTooltipContainers.push({id: token?.id , tooltip: tooltipContainer});
+        this._altTooltipContainers.push({id: token?.id, tooltip: tooltipContainer});
     }
 
     public async hoverTokenHook(token: any, isHovering: boolean): Promise<void> {
