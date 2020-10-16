@@ -20,31 +20,26 @@ class TooltipHandler {
     }
 
     private _initializeContainer(): JQuery {
-        if (!this._tooltipContainer) {
-            this._tooltipContainer = $(`.${Utils.moduleName}-tooltip-container`);
-            this._tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem');
-        }
+        this._removeContainer();
+
+        const systemClass = Settings.getSystemSpecificClass();
+        const darkClass = Settings.getSetting(Settings.settingKeys.DARK_THEME) ? 'dark' : '';
+        this._tooltipContainer = $(`<div class="${Utils.moduleName}-tooltip-container ${systemClass} ${darkClass}"></div>`);
+        this._tooltipContainer.css('fontSize', Settings.getSetting(Settings.settingKeys.FONT_SIZE) || '1rem');
+        $('.game').append(this._tooltipContainer);
+
         return this._tooltipContainer;
-    }
-
-    private _toggleContainer(show: boolean): void {
-        this._tooltipContainer[show ? 'removeClass' : 'addClass']('hidden');
-    }
-
-    private _clearContainer(): void {
-        this._tooltipContainer.empty();
     }
 
     private _clearAltContainers(): void {
         this._wasTabDown = false;
         while (this._altTooltipContainers.length > 0) {
-            const tooltipContainer = this._altTooltipContainers.pop();
-            tooltipContainer.remove();
+            const tooltipInfo = this._altTooltipContainers.pop();
+            tooltipInfo?.tooltip.remove();
         }
     }
 
     private _appendToContainer(content: any): void {
-        this._clearContainer();
         this._tooltipContainer.html(content);
     }
 
@@ -236,10 +231,11 @@ class TooltipHandler {
         return this._visibilityTypes.NONE;
     }
 
-    private _hideTooltip(): void {
-        this._initializeContainer();
-        this._clearContainer();
-        this._toggleContainer(false);
+    private _removeContainer(): void {
+        if (this._tooltipContainer) {
+            this._tooltipContainer.remove()
+            this._tooltipContainer = null;
+        }
     }
 
     private _appendAltTooltipContainer(tooltipHTML: any): JQuery {
@@ -266,24 +262,24 @@ class TooltipHandler {
     }
 
     private async _handleTooltip(token: any, isHovering: boolean): Promise<void> {
-        this._initializeContainer();
+        if (!isHovering) return this._removeContainer();
 
-        if (!isHovering) {
-            this._clearContainer();
-            this._toggleContainer(false);
-            return;
-        }
+        this._initializeContainer();
 
         const tooltipHTML = await this._getTooltipHTML(token);
         if (!tooltipHTML) return;
 
         this._appendToContainer(tooltipHTML);
-        this._toggleContainer(true);
         this._positionTooltip(this._tooltipContainer, token);
     }
 
     private async _handleAltTooltips(token: any, isHovering: boolean): Promise<void> {
         if (!isHovering) return;
+
+        for (let i = 0; i < this._altTooltipContainers.length; i++) {
+            const tooltipInfo = this._altTooltipContainers[i];
+            if (tooltipInfo.id === token?.id) return;
+        }
 
         const tooltipHTML = await this._getTooltipHTML(token);
         if (!tooltipHTML) return;
@@ -291,7 +287,7 @@ class TooltipHandler {
         const tooltipContainer = this._appendAltTooltipContainer(tooltipHTML);
         this._positionTooltip(tooltipContainer, token);
 
-        this._altTooltipContainers.push(tooltipContainer);
+        this._altTooltipContainers.push({id: token?.id , tooltip: tooltipContainer});
     }
 
     public async hoverTokenHook(token: any, isHovering: boolean): Promise<void> {
@@ -319,7 +315,7 @@ class TooltipHandler {
     }
 
     public hideTooltipOnHook(): void {
-        this._hideTooltip();
+        this._removeContainer();
         this._clearAltContainers();
     }
 }
