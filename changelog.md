@@ -68,14 +68,14 @@
 - [x] Fixed the leaf elements not caught by the `strictpathexp` (closes #4)
 
 # v0.3.6
-### Features
-- [x] Added a data source option
+- [x] Added a data source option (closes #6)
 
 # Backlog
 ### Features
 - [ ] Presets for other systems
 - [ ] Popup delay
 - [ ] Autocomplete
+- [ ] Animations
 
 ### Bugs
 - [ ] Spamming hover while ALT is pressed keeps the tooltips stiky until you hover again or press ALT again
