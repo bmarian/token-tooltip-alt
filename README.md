@@ -101,7 +101,7 @@ Of course! Use as many as you like, go wild!
 ![enemy](https://i.imgur.com/MGHA6UZ.png)
 
 #### Tracking a flag
-Flags are usually locate in `token.data.flags`. To access them and other values we set the `Data source` to empty. 
+Flags are usually located in `token.data.flags`. To access them and other values we set the `Data source` to empty. 
 This means we are starting the search from the token object. Let's say we want to track the stealth rolls added by [Conditional Visibility](https://foundryvtt.com/packages/conditional-visibility/).
 It will look something like this: `data.flags.conditional-visibility._ste`, ugly I know, but the effect it's pretty nice.
 
