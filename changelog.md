@@ -59,6 +59,14 @@
 - [x] Fixed the positioning of the tooltip
 - [x] Fix the empty tooltip if nothing should be displayed inside
 
+# v0.3.5
+### Features
+
+
+### Bugs
+- [ ] Fixed the object logic for detecting if something is null, use this instead`if (isNaN(values.value) || isNaN(values.max) || values.value === null || values.max === null) return;`
+
+
 # Backlog
 ### Features
 - [ ] Presets for other systems
