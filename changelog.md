@@ -75,7 +75,7 @@
 
 # v1.0.0
 ### Features
-- [ ] A rewrite to make it easier for later enhancements
+- [x] A rewrite to make it easier for later enhancements
 - [x] Animation bases
 
 ### Bugs
