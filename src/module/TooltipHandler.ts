@@ -62,7 +62,7 @@ class TooltipHandler {
     private _animate(out: boolean, tokenContainer: any): void {
         if (!tokenContainer) return;
 
-        let animationType = 'fade';
+        let animationType = 'none';
         const where = Settings.getSetting(Settings.settingKeys.TOOLTIP_POSITION);
         if (where === 'surprise') animationType = 'none';
 

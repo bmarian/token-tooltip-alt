@@ -73,9 +73,10 @@
 # v0.3.7
 - [x] Don't display the entire formula if an element is wrong (closes #8)
 
-# v0.4.0
+# v1.0.0
 ### Features
-- [ ] Animations
+- [ ] A rewrite to make it easier for later enhancements
+- [x] Animation bases
 
 ### Bugs
 - [x] Fixed the <TAB> functionality
