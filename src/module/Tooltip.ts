@@ -30,7 +30,8 @@ class Tooltip {
     private readonly _gameBody;
     private readonly _visibility;
     private readonly _template;
-    private readonly _accentColor;
+    private readonly _forceAccentColor;
+    private readonly _useAccentColor;
     private readonly _settingsKeys;
     private readonly _exception;
     private readonly _moduleName;
@@ -63,7 +64,8 @@ class Tooltip {
         this._data = path === '' ? token : this._getNestedData(this._token, path);
 
         this._settingsKeys = Settings.settingKeys;
-        this._accentColor = this._getSetting(this._settingsKeys.USE_ACCENT_COLOR_FOR_EVERYTHING) ? this._getSetting(this._settingsKeys.ACCENT_COLOR) : null;
+        this._forceAccentColor = this._getSetting(this._settingsKeys.ACCENT_COLOR);
+        this._useAccentColor = this._getSetting(this._settingsKeys.USE_ACCENT_COLOR_FOR_EVERYTHING);
         this._exception = this._getSetting(this._settingsKeys.DONT_SHOW);
     }
 
@@ -193,7 +195,7 @@ class Tooltip {
             const value = this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
 
             if (this._exception !== '' && value?.toString() === this._exception) return {stats: []};
-            if (this._accentColor) item.color = this._accentColor;
+            if (this._useAccentColor) item.color = this._forceAccentColor;
 
             this._appendStat(item, value, stats);
         }
@@ -248,7 +250,7 @@ class Tooltip {
 
         const position = {
             zIndex: this._token.zIndex,
-            color: this._accentColor,
+            color: this._forceAccentColor,
         };
 
         switch (this._where) {
@@ -301,6 +303,8 @@ class Tooltip {
 
     // will first remove the tooltip from the DOM, then make the reference null
     private _destroyTooltip(): void {
+        if (!this._tooltip) return;
+
         this._tooltip.remove();
         this._tooltip = null;
     }
