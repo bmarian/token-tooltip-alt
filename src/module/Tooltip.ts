@@ -143,6 +143,8 @@ class Tooltip {
 
         if ((isFriendly || isObservable) && (this._visibility === 'friendly' || this._visibility === 'all')) return this._tooltipTypes.FULL;
         if (this._visibility === 'all') return this._tooltipTypes.PARTIAL;
+
+        return this._tooltipTypes.NONE;
     }
 
     // appends stats with only a value
