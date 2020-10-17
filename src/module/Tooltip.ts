@@ -30,7 +30,7 @@ class Tooltip {
     private readonly _gameBody;
     private readonly _visibility;
     private readonly _template;
-    private readonly _useAccentColor;
+    private readonly _accentColor;
     private readonly _settingsKeys;
     private readonly _exception;
     private readonly _moduleName;
@@ -63,7 +63,7 @@ class Tooltip {
         this._data = this._getNestedData(this._token, path);
 
         this._settingsKeys = Settings.settingKeys;
-        this._useAccentColor = this._getSetting(this._settingsKeys.USE_ACCENT_COLOR_FOR_EVERYTHING);
+        this._accentColor = this._getSetting(this._settingsKeys.USE_ACCENT_COLOR_FOR_EVERYTHING) ? this._getSetting(this._settingsKeys.ACCENT_COLOR) : null;
         this._exception = this._getSetting(this._settingsKeys.DONT_SHOW);
     }
 
@@ -143,6 +143,12 @@ class Tooltip {
         if (this._visibility === 'all') return this._tooltipTypes.PARTIAL;
     }
 
+    // appends to a stats array a structure for stats
+    private _appendStat(item: any, value: any, stats: Array<any>): void {
+        if (!(item && value && stats)) return;
+        // TODO
+    }
+
     // generates an array of stats that should be displayed
     private _getTooltipData(tooltipType: string): any {
         const stats = [];
@@ -153,6 +159,11 @@ class Tooltip {
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
             const value = this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
+
+            if (this._exception !== '' && value?.toString() === this._exception) return {stats: []};
+            if (this._accentColor) item.color = this._accentColor;
+
+            this._appendStat(item, value, stats);
         }
 
         const tokenName = this._getSetting(this._settingsKeys.DISPLAY_NAMES_IN_TOOLTIP) ? this._token?.data?.name : null;
