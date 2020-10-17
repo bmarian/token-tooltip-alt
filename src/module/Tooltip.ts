@@ -143,10 +143,43 @@ class Tooltip {
         if (this._visibility === 'all') return this._tooltipTypes.PARTIAL;
     }
 
+
+    // appends stats with only a value
+    private _appendSimpleStat(value: any, item: any, stats: Array<any>): void {
+        if (typeof value !== 'string' && isNaN(value)) return;
+        const v = item.isNumber ? this._extractNumber(value) : value;
+        stats.push({value: v, icon: item?.icon, color: item?.color});
+    }
+
+    // appends object stats (they need to have a fixed structure)
+    // {value, max} and optional {temp, tempmax}
+    private _appendObjectStat(values: any, item: any, stats: Array<any>): void {
+        if (isNaN(values.value) || isNaN(values.max) || values.value === null || values.max === null) return;
+
+        const temp = values.temp > 0 ? `(${values.temp})` : '';
+        const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
+        const value = `${values.value}${temp}/${values.max}${tempmax}`;
+        stats.push({value, icon: item?.icon, color: item?.color});
+    }
+
     // appends to a stats array a structure for stats
     private _appendStat(item: any, value: any, stats: Array<any>): void {
         if (!(item && value && stats)) return;
-        // TODO
+
+        if (typeof value === 'object') {
+            this._appendObjectStat(
+                {
+                    value: this._extractNumber(value.value),
+                    max: this._extractNumber(value.max),
+                    temp: this._extractNumber(value.temp),
+                    tempmax: this._extractNumber(value.tempmax),
+                },
+                item,
+                stats
+            );
+        } else {
+            this._appendSimpleStat(value, item, stats);
+        }
     }
 
     // generates an array of stats that should be displayed
@@ -206,12 +239,63 @@ class Tooltip {
         this._gameBody.append(this._tooltip);
     }
 
+    // returns the coordinates for the tooltip position
+    // should only be called by _positionTooltip()
+    private _getTooltipPosition(): any {
+        const tokenWT = this._token.worldTransform;
+
+        const padding = 5;
+        const ltPadding = 20; // padding for left and top positioning
+
+        const position = {
+            zIndex: this._token.zIndex,
+            color: this._accentColor,
+        };
+
+        switch (this._where) {
+            case 'right': {
+                position['top'] = tokenWT.ty - padding;
+                position['left'] = tokenWT.tx + (this._token.w * tokenWT.a) + padding;
+                break;
+            }
+            case 'bottom': {
+                position['top'] = tokenWT.ty + (this._token.h * tokenWT.a) + padding;
+                position['left'] = tokenWT.tx - padding;
+                break;
+            }
+            case 'left': {
+                const cW = this._tooltip.width();
+                position['top'] = tokenWT.ty - padding;
+                position['left'] = tokenWT.tx - cW - ltPadding;
+                break;
+            }
+            case 'top': {
+                const cH = this._tooltip.height();
+                position['top'] = tokenWT.ty - cH - ltPadding;
+                position['left'] = tokenWT.tx - padding;
+                break;
+            }
+        }
+
+        return position;
+    }
+
+    // positions the newly created tooltip
+    // should only be called by _createTooltip()
+    private _positionTooltip(): void {
+        const position = this._getTooltipPosition();
+        this._tooltip.css(position);
+    }
+
     // creates a tooltip, and only displays it if it has content
     private _createTooltip(): void {
         this._createContainer();
-        const hasContent = this._populateContainer();
 
-        if (hasContent) this._appendContainerToBody();
+        const hasContent = this._populateContainer();
+        if (!hasContent) return;
+
+        this._appendContainerToBody();
+        this._positionTooltip();
     }
 
     // will first remove the tooltip from the DOM, then make the reference null

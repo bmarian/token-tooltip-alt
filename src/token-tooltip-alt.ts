@@ -1,6 +1,6 @@
-import TooltipHandler from "./module/TooltipHandler";
 import Settings from "./module/Settings";
 import Utils from "./module/Utils";
+import TooltipFactory from "./module/TooltipFactory";
 
 Hooks.once('init', async () => {
     Settings.registerSettings();
@@ -11,20 +11,20 @@ Hooks.once('init', async () => {
 });
 
 Hooks.once('canvasInit', () => {
-    $(window).on('blur', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
+    $(window).on('blur', TooltipFactory.removeTooltips.bind(TooltipFactory));
     $(window).on('keyup', (ev) => {
-        if (ev.key === 'Alt') TooltipHandler.hideTooltipOnHook();
+        if (ev.key === 'Alt') TooltipFactory.removeTooltips();
     });
 });
 
-Hooks.on('hoverToken', TooltipHandler.hoverTokenHook.bind(TooltipHandler));
-Hooks.on('preUpdateToken', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
-Hooks.on('canvasPan', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
+Hooks.on('hoverToken', TooltipFactory.hoverToken.bind(TooltipFactory));
+Hooks.on('preUpdateToken', TooltipFactory.removeTooltips.bind(TooltipFactory));
+Hooks.on('canvasPan', TooltipFactory.removeTooltips.bind(TooltipFactory));
 Hooks.on('renderTokenHUD', () => {
     // TODO: Follow the TokenHUD branch for a better fix... maybe!?
     const hasHealthEstimate = game?.modules?.get('healthEstimate')?.active;
     if (hasHealthEstimate) return;
-    TooltipHandler.hideTooltipOnHook();
+    TooltipFactory.removeTooltips();
 });
-Hooks.on('deleteToken', TooltipHandler.hideTooltipOnHook.bind(TooltipHandler));
+Hooks.on('deleteToken', TooltipFactory.removeTooltips.bind(TooltipFactory));
 
