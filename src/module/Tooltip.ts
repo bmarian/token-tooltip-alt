@@ -36,17 +36,17 @@ class Tooltip {
     private readonly _moduleName;
 
     constructor(
-        token: any,
-        themeClass: string,
-        systemClass: string,
-        fontSize: string,
-        where: string,
-        animType: string,
-        animSpeed: number,
-        path: string,
-        visibility: string,
-        template: string,
-        gameBody: JQuery
+        token?: any,
+        themeClass?: string,
+        systemClass?: string,
+        fontSize?: string,
+        where?: string,
+        animType?: string,
+        animSpeed?: number,
+        path?: string,
+        visibility?: string,
+        template?: string,
+        gameBody?: JQuery
     ) {
         this._token = token;
         this._themeClass = themeClass;
@@ -213,14 +213,14 @@ class Tooltip {
         const data = this._getTooltipData(type);
         if (!data.stats.length) return null;
 
-        return await renderTemplate(this._template, data);
+        return renderTemplate(this._template, data)
     }
 
     // populates the tooltip container with the build content, and returns if the tooltip has content
     // should only be called by _createTooltip()
-    private _populateContainer(): boolean {
-        const content = this._buildTooltipContent();
-        if (!content) this._tooltip.html(content);
+    private async _populateContainer(): Promise<boolean> {
+        const content = await this._buildTooltipContent();
+        if (content && this._tooltip) this._tooltip.html(content);
 
         return !!content;
     }
@@ -282,15 +282,17 @@ class Tooltip {
     // positions the newly created tooltip
     // should only be called by _createTooltip()
     private _positionTooltip(): void {
+        if (!this._tooltip) return;
+
         const position = this._getTooltipPosition();
         this._tooltip.css(position);
     }
 
     // creates a tooltip, and only displays it if it has content
-    private _createTooltip(): void {
+    private async _createTooltip(): Promise<void> {
         this._createContainer();
 
-        const hasContent = this._populateContainer();
+        const hasContent = await this._populateContainer();
         if (!hasContent) return;
 
         this._appendContainerToBody();
@@ -311,15 +313,16 @@ class Tooltip {
     // the name is a bit misleading, this will attempt to create the tooltip,
     // then play an animation to show it
     public show(): void {
-        this._createTooltip();
-
-        switch (this._animType) {
-            case 'fade': {
-                this._tooltip.css({opacity: 0});
-                this._tooltip.animate({opacity: 1}, this._animSpeed);
-                break;
+        const t = this;
+        this._createTooltip().then(() => {
+            switch (t._animType) {
+                case 'fade': {
+                    t._tooltip.css({opacity: 0});
+                    t._tooltip.animate({opacity: 1}, this._animSpeed);
+                    break;
+                }
             }
-        }
+        });
     }
 
     // the name is a bit misleading, this will attempt to play an animation,

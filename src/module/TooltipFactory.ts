@@ -3,7 +3,7 @@ import Settings from "./Settings";
 
 class TooltipFactory {
     private static _instance: TooltipFactory;
-    private tooltips: Array<Tooltip> = [];
+    private _tooltips: Array<Tooltip> = [];
 
     private constructor() {
     }
@@ -28,6 +28,7 @@ class TooltipFactory {
         return where;
     }
 
+    // create an array of data needed to initialize a tooltip
     private _getTooltipData(token: any): any {
         return [
             token,                                                              // token
@@ -44,10 +45,52 @@ class TooltipFactory {
         ];
     }
 
+    // get settings for <ALT>
+    private _getAltSettings(): any {
+        return {
+            showOnAlt: this._getSetting(Settings.settingKeys.SHOW_ALL_ON_ALT),
+            showAllOnAlt: this._getSetting(Settings.settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS),
+        }
+    }
+
+    // generates a tooltip if that token doesn't have one and adds it to the array, and shows it
+    private _addTooltip(token: any): Tooltip {
+        for (let i = 0; i < this._tooltips.length; i++) {
+            const t = this._tooltips[i];
+            if (t.getTokenId() === token?.id) return null;
+        }
+
+        const tooltip = new Tooltip(...this._getTooltipData(token));
+        this._tooltips.push(tooltip);
+        tooltip.show();
+    }
+
+    // generates a tooltip if that token doesn't have one and adds it to the array, and shows it
+    private _removeTooltip(token: any): void {
+        for (let i = 0; i < this._tooltips.length; i++) {
+            const t = this._tooltips[i];
+            if (t.getTokenId() === token?.id) {
+                t.hide();
+                this._tooltips.splice(i,1);
+                break;
+            }
+        }
+    }
+
+    // removes all the tooltips and destroys the objects
+    private _removeTooltips(): void {
+        while (this._tooltips.length > 0) {
+            this._tooltips.pop().hide();
+        }
+    }
+
     public async hoverToken(token: any, isHovering: boolean): Promise<void> {
+        if (!token?.actor) return;
+        this[isHovering ? '_addTooltip' : '_removeTooltip'](token);
     }
 
     public removeTooltips(): void {
+        this._removeTooltips();
     }
 }
 
