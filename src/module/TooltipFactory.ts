@@ -71,7 +71,7 @@ class TooltipFactory {
             const t = this._tooltips[i];
             if (t.getTokenId() === token?.id) {
                 t.hide();
-                this._tooltips.splice(i,1);
+                this._tooltips.splice(i, 1);
                 break;
             }
         }
@@ -84,11 +84,13 @@ class TooltipFactory {
         }
     }
 
+    // public hook when hovering over a token (more precise when a token is focused)
     public async hoverToken(token: any, isHovering: boolean): Promise<void> {
         if (!token?.actor) return;
         this[isHovering ? '_addTooltip' : '_removeTooltip'](token);
     }
 
+    // public hook to remove all tooltips
     public removeTooltips(): void {
         this._removeTooltips();
     }
