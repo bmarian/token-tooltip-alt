@@ -73,11 +73,18 @@
 # v0.3.7
 - [x] Don't display the entire formula if an element is wrong (closes #8)
 
+# v1.0.0
+### Features
+- [x] A rewrite to make it easier for later enhancements
+- [x] Animation bases
+
+### Bugs
+- [x] Fixed the <TAB> functionality
+
 # Backlog
 ### Features
 - [ ] Presets for other systems
 - [ ] Popup delay
-- [ ] Animations
 
 ### Bugs
 - [ ] Spamming hover while ALT is pressed keeps the tooltips stiky until you hover again or press ALT again
