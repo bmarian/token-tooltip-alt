@@ -60,7 +60,7 @@ class Tooltip {
 
         this._gameBody = gameBody;
         this._moduleName = Utils.moduleName;
-        this._data = this._getNestedData(this._token, path);
+        this._data = path === '' ? token : this._getNestedData(this._token, path);
 
         this._settingsKeys = Settings.settingKeys;
         this._accentColor = this._getSetting(this._settingsKeys.USE_ACCENT_COLOR_FOR_EVERYTHING) ? this._getSetting(this._settingsKeys.ACCENT_COLOR) : null;
@@ -142,7 +142,6 @@ class Tooltip {
         if ((isFriendly || isObservable) && (this._visibility === 'friendly' || this._visibility === 'all')) return this._tooltipTypes.FULL;
         if (this._visibility === 'all') return this._tooltipTypes.PARTIAL;
     }
-
 
     // appends stats with only a value
     private _appendSimpleStat(value: any, item: any, stats: Array<any>): void {
@@ -302,6 +301,11 @@ class Tooltip {
     private _destroyTooltip(): void {
         this._tooltip.remove();
         this._tooltip = null;
+    }
+
+    // get the assigned token's id
+    public getTokenId(): string {
+        return this._token?.id;
     }
 
     // the name is a bit misleading, this will attempt to create the tooltip,
