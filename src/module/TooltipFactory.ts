@@ -91,12 +91,11 @@ class TooltipFactory {
         const isAltPressed = keyboard?.isDown('Alt');
 
         if (isAltPressed) {
-            const alt = this._getSetting(Settings.settingKeys.SHOW_ALL_ON_ALT);
-            if (!alt) return;
+            const altSettings = this._getAltSettings();
+            if (!altSettings.showOnAlt) return;
 
-            const showHidden = this._getSetting(Settings.settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS);
             const isTokenHidden = token?.data?.hidden;
-            if (alt && !showHidden && isTokenHidden) return;
+            if (altSettings.showOnAlt && !altSettings.showAllOnAlt && isTokenHidden) return;
         }
 
         this[isHovering ? '_addTooltip' : '_removeTooltip'](token);
