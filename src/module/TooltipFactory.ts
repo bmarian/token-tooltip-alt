@@ -87,6 +87,18 @@ class TooltipFactory {
     // public hook when hovering over a token (more precise when a token is focused)
     public async hoverToken(token: any, isHovering: boolean): Promise<void> {
         if (!token?.actor) return;
+
+        const isAltPressed = keyboard?.isDown('Alt');
+
+        if (isAltPressed) {
+            const alt = this._getSetting(Settings.settingKeys.SHOW_ALL_ON_ALT);
+            if (!alt) return;
+
+            const showHidden = this._getSetting(Settings.settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS);
+            const isTokenHidden = token?.data?.hidden;
+            if (alt && !showHidden && isTokenHidden) return;
+        }
+
         this[isHovering ? '_addTooltip' : '_removeTooltip'](token);
     }
 
