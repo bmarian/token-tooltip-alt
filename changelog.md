@@ -81,6 +81,10 @@
 ### Bugs
 - [x] Fixed the <TAB> functionality
 
+# v1.0.1
+### Bugs
+- [x] Fixed the <TAB> functionality (but better)
+
 # Backlog
 ### Features
 - [ ] Presets for other systems
