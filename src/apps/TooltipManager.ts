@@ -9,7 +9,10 @@ export default class TooltipManager extends FormApplication {
             title: 'Tooltip manager',
             template: CONSTANTS.APPS.TOOLTIP_MANAGER,
             width: CONSTANTS.APPS.TOOLTIP_MANAGER_WIDTH,
+
             submitOnChange: true,
+            closeOnSubmit: false,
+            submitOnClose: false,
         };
     }
 
@@ -32,7 +35,8 @@ export default class TooltipManager extends FormApplication {
         }
     }
 
-    // generate a list of actors
+    // generate a list of actors, to delete it just use in the console
+    // game.settings.set('token-tooltip-alt', 'actors', [])
     private _getActorsList(): any {
         const systemActors = game?.system?.entityTypes?.Actor || [];
         let actors = this._getSetting(CONSTANTS.SETTING_KEYS.ACTORS);
@@ -40,6 +44,16 @@ export default class TooltipManager extends FormApplication {
         if (!systemActors.length) return returnActors;
 
         const check = actors.length > 0;
+
+        // if the actors array is empty we need to add a default, this will
+        // happen only the first time this menu is opened
+        if (!check) {
+            const defaultActor = {
+                ...this._actorPreset(CONSTANTS.APPS.TOOLTIP_DEFAULT_ACTOR_ID),
+                isDefault: true,
+            };
+            actors.push(defaultActor);
+        }
 
         // this will take all the system actors and add them to the actors list
         // doing it every time in case a new actor was added or one was modified
@@ -61,9 +75,13 @@ export default class TooltipManager extends FormApplication {
             }
         }
 
+        // this will take care of the changed values, it will add a new property 'removed',
+        // redundant for now but maybe I will implement a way of transferring the old
+        // tooltips from that one
         for (let i = 0; i < actors.length; i++) {
             const actor = actors[i];
-            if (actor.removed || !systemActors.includes(actor.id)) actor.removed = true;
+
+            if (actor.id !== CONSTANTS.APPS.TOOLTIP_DEFAULT_ACTOR_ID && (actor.removed || !systemActors.includes(actor.id))) actor.removed = true;
             else returnActors.push(actor);
         }
 

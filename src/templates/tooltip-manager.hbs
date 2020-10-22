@@ -17,13 +17,19 @@
             {{#each actors}}
                 <tr class="{{../moduleName}}-row" index="{{@index}}">
                     <td class="{{../moduleName}}-row_id">
-                        <input type="text" name="id.{{@index}}" value="{{id}}" data-dtype="String" disabled>
+                        <label>
+                            <input type="text" name="id.{{@index}}" value="{{id}}" data-dtype="String" disabled>
+                        </label>
                     </td>
                     <td class="{{../moduleName}}-row_enable">
-                        <input type="checkbox" name="enable.{{@index}}" data-dtype="Boolean" {{#if enable}}checked{{/if}}>
+                        <label>
+                            <input type="checkbox" name="enable.{{@index}}" data-dtype="Boolean" {{#if enable}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
+                        </label>
                     </td>
                     <td class="{{../moduleName}}-row_custom">
-                        <input type="checkbox" name="custom.{{@index}}" data-dtype="Boolean" {{#if custom}}checked{{/if}}>
+                        <label>
+                            <input type="checkbox" name="custom.{{@index}}" data-dtype="Boolean" {{#if custom}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
+                        </label>
                     </td>
                     <td class="{{../moduleName}}-row_edit">
                         <button class="{{../moduleName}}-row_button edit" type="button" title="Edit">
