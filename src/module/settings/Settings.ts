@@ -20,7 +20,6 @@ class Settings {
             key: this._settingKeys.TOOLTIP_VISIBILITY,
             settings: {
                 name: "Tooltip visibility",
-                hint: "This option determines which tokens display a tooltip when a player hovers over them.",
                 type: String,
                 scope: "world",
                 config: true,
@@ -37,8 +36,7 @@ class Settings {
         {
             key: this._settingKeys.TOOLTIP_POSITION,
             settings: {
-                name: "Tooltip position",
-                hint: "Where should the tooltip be displayed.",
+                name: "Tooltip placement",
                 type: String,
                 scope: "world",
                 config: true,
@@ -56,9 +54,9 @@ class Settings {
         {
             key: this._settingKeys.DATA_SOURCE,
             settings: {
-                name: "Data source --advanced--",
+                name: "Data source",
                 hint: "This is an advanced feature, please don't change it if you don't know what you are doing. " +
-                    "If you know, this could give you the possibility to track almost anything in the token object.",
+                    "This will determine from where the tooltip data is pulled.",
                 type: String,
                 scope: "world",
                 config: true,
@@ -69,8 +67,8 @@ class Settings {
         {
             key: this._settingKeys.DONT_SHOW,
             settings: {
-                name: "Don't show",
-                hint: "If one of the tracked values is equal to this one that token will not have a tooltip. " +
+                name: "Exception",
+                hint: "If one of the tracked values is equal to this one that token will not display a tooltip. " +
                     "Leave blank if you want a tooltip for every token.",
                 type: String,
                 scope: "world",
@@ -94,8 +92,8 @@ class Settings {
         {
             key: this._settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS,
             settings: {
-                name: "Show for hidden tokens",
-                hint: "Display tooltips for hidden tokens when pressing <ALT>.",
+                name: "Show all on <ALT>",
+                hint: "Display a tooltips for every token on the scene. Dose nothing if 'Show on <ALT>' is set to false.",
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -107,7 +105,7 @@ class Settings {
             key: this._settingKeys.DEBUG_OUTPUT,
             settings: {
                 name: "Debug output",
-                hint: "Display some useful debug output in the console.",
+                hint: "Display some useful debug information in the console.",
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -269,7 +267,6 @@ class Settings {
     private _registerTooltipManager(): void {
         SettingsUtil.registerMenu(CONSTANTS.SETTING_KEYS.TOOLTIP_MANAGER, {
             name: 'Tooltip manager',
-            hint: 'Manage your tooltips.',
             label: 'Tooltip manager',
             icon: 'fas fa-edit',
             type: TooltipManager,
