@@ -1,10 +1,13 @@
 import {CONSTANTS, getSystemTooltip} from "../enums/Constants";
 import SettingsUtil from "./SettingsUtil";
+import TooltipManager from "../../apps/TooltipManager";
 
 class Settings {
     private static _instance: Settings;
+
     private constructor() {
     }
+
     public static getInstance(): Settings {
         if (!Settings._instance) Settings._instance = new Settings();
         return Settings._instance;
@@ -25,7 +28,7 @@ class Settings {
                 default: "gm",
                 choices: {
                     "gm": "GM only",
-                    "owned": "Owned/Observed tokens",
+                    "owned": "Owned tokens",
                     "friendly": "Friendly tokens",
                     "all": "All tokens"
                 }
@@ -113,7 +116,7 @@ class Settings {
             },
         },
     ];
-    private _tooltipManagerSettings = [
+    private _tooltipEditorSettings = [
         {
             key: this._settingKeys.DISPLAY_NAMES_IN_TOOLTIP,
             settings: {
@@ -194,8 +197,26 @@ class Settings {
         },
     ];
     private _hiddenConfigureSettings = [
-
+        {
+            key: this._settingKeys.GM_ITEMS,
+            settings: {
+                type: Object,
+                scope: "world",
+                restricted: true,
+                default: {},
+            },
+        },
+        {
+            key: this._settingKeys.PLAYER_ITEMS,
+            settings: {
+                type: Object,
+                scope: "world",
+                restricted: true,
+                default: {},
+            },
+        },
     ];
+    // this is a list with all the old settings before v2.0.0
     private _oldHiddenConfigureSettings = [
         {
             key: this._settingKeys.PORTED,
@@ -231,8 +252,8 @@ class Settings {
         return this._publicConfigureSettings;
     }
 
-    public getTooltipMangerSettings(): any {
-        return this._tooltipManagerSettings;
+    public getTooltipEditorSettings(): any {
+        return this._tooltipEditorSettings;
     }
 
     public getHiddenConfigureSettings(): any {
@@ -242,16 +263,29 @@ class Settings {
     public getOldHiddenConfigureSettings(): any {
         return this._oldHiddenConfigureSettings;
     }
+
     // --- GETTERS --- \\
+
+    private _registerTooltipManager(): void {
+        SettingsUtil.registerMenu(CONSTANTS.SETTING_KEYS.TOOLTIP_MANAGER, {
+            name: 'Tooltip manager',
+            hint: 'Manage your tooltips.',
+            label: 'Tooltip manager',
+            icon: 'fas fa-edit',
+            type: TooltipManager,
+            restricted: true,
+        });
+    }
 
     // makes a big list from all the available settings and registers them
     public registerSettings(): void {
         const settings = [
             ...this._publicConfigureSettings,
-            ...this._tooltipManagerSettings,
+            ...this._tooltipEditorSettings,
             ...this._hiddenConfigureSettings,
             ...this._oldHiddenConfigureSettings,
         ];
+        this._registerTooltipManager();
         SettingsUtil.registerSettings(settings);
     }
 }

@@ -14,6 +14,9 @@ export const CONSTANTS = {
         DARK_THEME: 'darkTheme',
         DONT_SHOW: 'dontShow',
         DATA_SOURCE: 'dataSource',
+        GM_ITEMS: 'gmItems',
+        PLAYER_ITEMS: 'playerItems',
+        TOOLTIP_MANAGER: 'tooltipManager',
 
         // old settings
         TOOLTIP_ITEMS: 'tooltipItems',
@@ -24,6 +27,11 @@ export const CONSTANTS = {
     TEMPLATES: {
         TOOLTIP: `modules/${Utils.moduleName}/templates/tooltip.hbs`,
         SETTINGS_EDITOR_ROW: `modules/${Utils.moduleName}/templates/settings-editor-row.hbs`,
+    },
+
+    APPS: {
+        MIN_WIDTH: 700,
+        TOOLTIP_MANAGER: `modules/${Utils.moduleName}/templates/tooltip-manager.hbs`
     },
 
     SYSTEM_DEFAULT: 'default',
