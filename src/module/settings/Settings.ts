@@ -1,4 +1,4 @@
-import {CONSTANTS, getSystemTooltip} from "../enums/Constants";
+import {CONSTANTS} from "../enums/Constants";
 import SettingsUtil from "./SettingsUtil";
 import TooltipManager from "../../apps/TooltipManager";
 
@@ -201,7 +201,7 @@ class Settings {
                 type: Object,
                 scope: "world",
                 restricted: true,
-                default: {},
+                default: [],
             },
         },
         {
@@ -210,7 +210,16 @@ class Settings {
                 type: Object,
                 scope: "world",
                 restricted: true,
-                default: {},
+                default: [],
+            },
+        },
+        {
+            key: this._settingKeys.ACTORS,
+            settings: {
+                type: Object,
+                scope: "world",
+                restricted: true,
+                default: [],
             },
         },
     ];

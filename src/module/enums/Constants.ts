@@ -17,6 +17,7 @@ export const CONSTANTS = {
         GM_ITEMS: 'gmItems',
         PLAYER_ITEMS: 'playerItems',
         TOOLTIP_MANAGER: 'tooltipManager',
+        ACTORS: 'actors',
 
         // old settings
         TOOLTIP_ITEMS: 'tooltipItems',
@@ -30,7 +31,7 @@ export const CONSTANTS = {
     },
 
     APPS: {
-        MIN_WIDTH: 700,
+        TOOLTIP_MANAGER_WIDTH: 500,
         TOOLTIP_MANAGER: `modules/${Utils.moduleName}/templates/tooltip-manager.hbs`
     },
 
