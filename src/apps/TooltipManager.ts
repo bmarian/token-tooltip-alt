@@ -26,7 +26,7 @@ export default class TooltipManager extends FormApplication {
     // generate a preset for a newly added system actor
     private _actorPreset(actor: string): any {
         return {
-            id: actor,
+            id: actor, // should be checked against token.actor.data.type
             enable: true,
             custom: false,
         }
