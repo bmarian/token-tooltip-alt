@@ -88,6 +88,13 @@
 # v1.0.2
 - [x] Updated for 0.7.5
 
+# v2.0.0
+### Features
+- [ ] Reworked the settings menu
+- [ ] Added bars
+- [ ] Added a max-row setting
+- [ ] Internationalization
+
 # Backlog
 ### Features
 - [ ] Presets for other systems
