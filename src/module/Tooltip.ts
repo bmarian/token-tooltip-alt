@@ -1,6 +1,7 @@
 import Utils from "./Utils";
 import Settings from "./Settings";
 import stringMath from "../lib/MathEngine";
+import {CONSTANTS} from "./enums/Constants";
 
 class Tooltip {
     private _tooltipTypes = {FULL: 'full', PARTIAL: 'partial', NONE: 'none'};
@@ -63,7 +64,7 @@ class Tooltip {
         this._moduleName = Utils.moduleName;
         this._data = path === '' ? token : this._getNestedData(this._token, path);
 
-        this._settingsKeys = Settings.settingKeys;
+        this._settingsKeys = CONSTANTS.SETTING_KEYS;
         this._forceAccentColor = this._getSetting(this._settingsKeys.ACCENT_COLOR);
         this._useAccentColor = this._getSetting(this._settingsKeys.USE_ACCENT_COLOR_FOR_EVERYTHING);
         this._exception = this._getSetting(this._settingsKeys.DONT_SHOW);

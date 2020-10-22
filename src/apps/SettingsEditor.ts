@@ -1,5 +1,6 @@
 import Utils from "../module/Utils";
 import Settings from "../module/Settings";
+import {CONSTANTS} from "../module/enums/Constants";
 
 export default class SettingsEditor extends FormApplication {
     static get defaultOptions(): any {
@@ -17,8 +18,8 @@ export default class SettingsEditor extends FormApplication {
 
     private _prepareListsForDisplay(): {} {
         return {
-            tooltipItems: Settings.getSetting(Settings.settingKeys.TOOLTIP_ITEMS) || [],
-            hostileItems: Settings.getSetting(Settings.settingKeys.HOSTILE_ITEMS) || [],
+            tooltipItems: Settings.getSetting(CONSTANTS.SETTING_KEYS.TOOLTIP_ITEMS) || [],
+            hostileItems: Settings.getSetting(CONSTANTS.SETTING_KEYS.HOSTILE_ITEMS) || [],
         };
     }
     
@@ -47,7 +48,7 @@ export default class SettingsEditor extends FormApplication {
             index: lastIndex + 1,
             isFriendly
         }
-        const $newRow = $(await renderTemplate(Settings.templatePaths[1], data));
+        const $newRow = $(await renderTemplate(CONSTANTS.TEMPLATES.SETTINGS_EDITOR_ROW, data));
         $tbody.append($newRow);
 
         // TODO: Make this... not so bad... maybe...
@@ -102,8 +103,8 @@ export default class SettingsEditor extends FormApplication {
         }
 
         Utils.debug({tooltipItems, hostileItems});
-        const ti = Settings.setSetting(Settings.settingKeys.TOOLTIP_ITEMS, tooltipItems);
-        const hi = Settings.setSetting(Settings.settingKeys.HOSTILE_ITEMS, hostileItems);
+        const ti = Settings.setSetting(CONSTANTS.SETTING_KEYS.TOOLTIP_ITEMS, tooltipItems);
+        const hi = Settings.setSetting(CONSTANTS.SETTING_KEYS.HOSTILE_ITEMS, hostileItems);
 
         return {ti, hi};
     }
