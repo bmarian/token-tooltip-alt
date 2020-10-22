@@ -1,7 +1,7 @@
-import Settings from "./module/Settings";
 import Utils from "./module/Utils";
 import TooltipFactory from "./module/TooltipFactory";
 import {CONSTANTS} from "./module/enums/Constants";
+import Settings from "./module/settings/Settings";
 
 Hooks.once('init', async () => {
     Settings.registerSettings();

@@ -1,6 +1,6 @@
 import Tooltip from "./Tooltip";
-import Settings from "./Settings";
 import {CONSTANTS, getSystemTheme} from "./enums/Constants";
+import SettingsUtil from "./settings/SettingsUtil";
 
 class TooltipFactory {
     private static _instance: TooltipFactory;
@@ -17,7 +17,7 @@ class TooltipFactory {
 
     // get a value from Settings
     private _getSetting(setting: string): any {
-        return Settings.getSetting(setting);
+        return SettingsUtil.getSetting(setting);
     }
 
     // get the positioning from settings, and if surprise pick a random possible position

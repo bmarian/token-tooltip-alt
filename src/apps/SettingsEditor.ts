@@ -1,6 +1,7 @@
 import Utils from "../module/Utils";
-import Settings from "../module/Settings";
 import {CONSTANTS} from "../module/enums/Constants";
+import SettingsUtil from "../module/settings/SettingsUtil";
+import Settings from "../module/settings/Settings";
 
 export default class SettingsEditor extends FormApplication {
     static get defaultOptions(): any {
@@ -16,18 +17,28 @@ export default class SettingsEditor extends FormApplication {
         };
     }
 
+    // get a value from Settings
+    private _getSetting(key: string): any {
+        return SettingsUtil.getSetting(key);
+    }
+
+    // get a value from Settings
+    private _setSetting(key: string, value: any): any {
+        return SettingsUtil.setSetting(key, value);
+    }
+
     private _prepareListsForDisplay(): {} {
         return {
-            tooltipItems: Settings.getSetting(CONSTANTS.SETTING_KEYS.TOOLTIP_ITEMS) || [],
-            hostileItems: Settings.getSetting(CONSTANTS.SETTING_KEYS.HOSTILE_ITEMS) || [],
+            tooltipItems: this._getSetting(CONSTANTS.SETTING_KEYS.TOOLTIP_ITEMS) || [],
+            hostileItems: this._getSetting(CONSTANTS.SETTING_KEYS.HOSTILE_ITEMS) || [],
         };
     }
     
     private _prepareSettingsEditorOptions(): Array<{}> {
-        const settingsEditorOptions = Settings.getSettingsEditorOptions();
+        const settingsEditorOptions = Settings.getTooltipMangerSettings();
         for (let i = 0; i < settingsEditorOptions.length; i++) {
             const setting = settingsEditorOptions[i];
-            const value = Settings.getSetting(setting.key);
+            const value = this._getSetting(setting.key);
 
             if (setting?.custom) setting.custom.value = value;
         }
@@ -99,12 +110,12 @@ export default class SettingsEditor extends FormApplication {
             if (!settings.hasOwnProperty(key)) continue;
             
             const v = settings[key];
-            Settings.setSetting(key, v);
+            this._setSetting(key, v);
         }
 
         Utils.debug({tooltipItems, hostileItems});
-        const ti = Settings.setSetting(CONSTANTS.SETTING_KEYS.TOOLTIP_ITEMS, tooltipItems);
-        const hi = Settings.setSetting(CONSTANTS.SETTING_KEYS.HOSTILE_ITEMS, hostileItems);
+        const ti = this._setSetting(CONSTANTS.SETTING_KEYS.TOOLTIP_ITEMS, tooltipItems);
+        const hi = this._setSetting(CONSTANTS.SETTING_KEYS.HOSTILE_ITEMS, hostileItems);
 
         return {ti, hi};
     }

@@ -6,8 +6,6 @@ export const CONSTANTS = {
         SHOW_ALL_ON_ALT: 'showAllOnAlt',
         SHOW_TOOLTIP_FOR_HIDDEN_TOKENS: 'showTooltipForHiddenTokens',
         DISPLAY_NAMES_IN_TOOLTIP: 'displayNameInTooltip',
-        TOOLTIP_ITEMS: 'tooltipItems',
-        HOSTILE_ITEMS: 'hostileItems',
         DEBUG_OUTPUT: 'debugOutput',
         FONT_SIZE: 'fontSize',
         USE_ACCENT_COLOR_FOR_EVERYTHING: 'useAccentColorForEverything',
@@ -16,6 +14,11 @@ export const CONSTANTS = {
         DARK_THEME: 'darkTheme',
         DONT_SHOW: 'dontShow',
         DATA_SOURCE: 'dataSource',
+
+        // old settings
+        TOOLTIP_ITEMS: 'tooltipItems',
+        HOSTILE_ITEMS: 'hostileItems',
+        PORTED: 'ported',
     },
 
     TEMPLATES: {

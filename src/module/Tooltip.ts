@@ -1,7 +1,7 @@
 import Utils from "./Utils";
-import Settings from "./Settings";
 import stringMath from "../lib/MathEngine";
 import {CONSTANTS} from "./enums/Constants";
+import SettingsUtil from "./settings/SettingsUtil";
 
 class Tooltip {
     private _tooltipTypes = {FULL: 'full', PARTIAL: 'partial', NONE: 'none'};
@@ -71,8 +71,8 @@ class Tooltip {
     }
 
     // get a value from Settings
-    private _getSetting(setting: string): any {
-        return Settings.getSetting(setting);
+    private _getSetting(key: string): any {
+        return SettingsUtil.getSetting(key);
     }
 
     // extracts data from an object, and a string path,
