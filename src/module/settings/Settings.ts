@@ -226,6 +226,24 @@ class Settings {
         },
     ]
 
+    // --- GETTERS --- \\
+    public getPublicConfigureSettings(): any {
+        return this._publicConfigureSettings;
+    }
+
+    public getTooltipMangerSettings(): any {
+        return this._tooltipManagerSettings;
+    }
+
+    public getHiddenConfigureSettings(): any {
+        return this._hiddenConfigureSettings;
+    }
+
+    public getOldHiddenConfigureSettings(): any {
+        return this._oldHiddenConfigureSettings;
+    }
+    // --- GETTERS --- \\
+
     // makes a big list from all the available settings and registers them
     public registerSettings(): void {
         const settings = [
@@ -235,10 +253,6 @@ class Settings {
             ...this._oldHiddenConfigureSettings,
         ];
         SettingsUtil.registerSettings(settings);
-    }
-
-    public getTooltipMangerSettings(): any {
-        return this._tooltipManagerSettings;
     }
 }
 
