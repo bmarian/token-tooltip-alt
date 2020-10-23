@@ -168,7 +168,7 @@ class Tooltip {
 
     // appends to a stats array a structure for stats
     private _appendStat(item: any, value: any, stats: Array<any>): void {
-        if (!(item && value && stats)) return;
+        if (!(item && stats?.length)) return;
 
         if (typeof value === 'object') {
             this._appendObjectStat(
