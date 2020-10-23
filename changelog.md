@@ -80,6 +80,7 @@
 
 ### Bugs
 - [x] Fixed the <TAB> functionality
+- [x] Spamming hover while ALT is pressed keeps the tooltips stiky until you hover again or press ALT again
 
 # v1.0.1
 ### Bugs
@@ -93,12 +94,13 @@
 - [ ] Reworked the settings menu
 - [ ] Added bars
 - [ ] Added a max-row setting
-- [ ] Internationalization
+
+### Bugs
+- [x] Fixed 0 values not being displayed... again
 
 # Backlog
 ### Features
-- [ ] Presets for other systems
 - [ ] Popup delay
+- [ ] Internationalization
 
 ### Bugs
-- [ ] Spamming hover while ALT is pressed keeps the tooltips stiky until you hover again or press ALT again
