@@ -77,6 +77,17 @@ class TooltipFactory {
         }
     }
 
+    // determines if a token should display a tooltip or not based on the ACTORS settings
+    private _shouldActorHaveTooltip(token: any): boolean {
+        const actorType = token?.actor?.data?.type;
+        const actors = this._getSetting(this._settingKeys.ACTORS);
+        for (let i = 0; i < actors.length; i++) {
+            const actor = actors[i];
+            if (actor.id === actorType) return actor.enable;
+        }
+        return true;
+    }
+
     // removes all the tooltips and destroys the objects
     private _removeTooltips(): void {
         while (this._tooltips.length > 0) {
@@ -86,7 +97,7 @@ class TooltipFactory {
 
     // public hook when hovering over a token (more precise when a token is focused)
     public async hoverToken(token: any, isHovering: boolean): Promise<void> {
-        if (!token?.actor) return;
+        if (!token?.actor || !this._shouldActorHaveTooltip(token)) return;
 
         const isAltPressed = keyboard?.isDown('Alt');
 
