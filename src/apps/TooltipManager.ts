@@ -1,6 +1,7 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
 import {CONSTANTS} from "../module/enums/Constants";
 import Utils from "../module/Utils";
+import TooltipEditor from "./TooltipEditor";
 
 export default class TooltipManager extends FormApplication {
     static get defaultOptions(): any {
@@ -92,7 +93,6 @@ export default class TooltipManager extends FormApplication {
     // returns the data used by the tooltip-manager.hbs template
     public getData(options?: {}): any {
         return {
-            options: this.options,
             moduleName: Utils.moduleName,
             actors: this._getActorsList(),
         };
@@ -123,8 +123,21 @@ export default class TooltipManager extends FormApplication {
         this._setSetting(CONSTANTS.SETTING_KEYS.ACTORS, actors);
     }
 
+    // the click event for the edit buttons
+    private _openTooltipEditor(): void {
+        const $this = $(this);
+        const actorType = $this.attr('name');
+        if (!actorType) return;
+        const te = new TooltipEditor({actorType}, {title: actorType.toUpperCase()});
+
+        // TODO: See if there is an option to not display multiple tooltip editors
+        te.render(true);
+        Utils.debug(`Opened an editor for: ${actorType}`)
+    }
+
+    // adds the events for the open editor buttons
     public activateListeners($html: JQuery<HTMLElement>): void {
         super.activateListeners($html);
-        // new ImportWindow().render(true); initializing a new window
+        $html.find(`.${Utils.moduleName}-row_button.edit`).on('click', this._openTooltipEditor)
     }
 }

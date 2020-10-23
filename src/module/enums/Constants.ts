@@ -33,6 +33,11 @@ export const CONSTANTS = {
     APPS: {
         TOOLTIP_MANAGER: `modules/${Utils.moduleName}/templates/tooltip-manager.hbs`,
         TOOLTIP_MANAGER_WIDTH: 500,
+
+        TOOLTIP_EDITOR: `modules/${Utils.moduleName}/templates/tooltip-editor.hbs`,
+        TOOLTIP_EDITOR_ROW: `modules/${Utils.moduleName}/templates/tooltip-editor-row.hbs`,
+        TOOLTIP_EDITOR_WIDTH: 700,
+
         TOOLTIP_DEFAULT_ACTOR_ID: 'default',
     },
 
