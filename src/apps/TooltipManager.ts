@@ -89,6 +89,7 @@ export default class TooltipManager extends FormApplication {
         return returnActors;
     }
 
+    // returns the data used by the tooltip-manager.hbs template
     public getData(options?: {}): any {
         return {
             options: this.options,
@@ -97,10 +98,33 @@ export default class TooltipManager extends FormApplication {
         };
     }
 
+    // save the new settings for actors on every submit
+    // (with the current implementation this means on every change event)
+    // this SHOULD be light weight enough to not create any problems and
+    // to keep the UX nice
     protected async _updateObject(event: Event | JQuery.Event, formData: any): Promise<any> {
+        const expObj = expandObject(formData);
+        const actors = this._getSetting(CONSTANTS.SETTING_KEYS.ACTORS);
+
+        for (let key in expObj) {
+            if (!expObj.hasOwnProperty(key)) continue;
+            const values = expObj[key];
+
+            for (let i = 0; i < actors.length; i++) {
+                const actor = actors[i];
+                if (actor.id === key) {
+                    actor.enable = values.enable;
+                    actor.custom = values.custom;
+                }
+            }
+        }
+
+        Utils.debug(actors);
+        this._setSetting(CONSTANTS.SETTING_KEYS.ACTORS, actors);
     }
 
     public activateListeners($html: JQuery<HTMLElement>): void {
         super.activateListeners($html);
+        // new ImportWindow().render(true); initializing a new window
     }
 }

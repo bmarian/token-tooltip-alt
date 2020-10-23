@@ -18,17 +18,17 @@
                 <tr class="{{../moduleName}}-row" index="{{@index}}">
                     <td class="{{../moduleName}}-row_id">
                         <label>
-                            <input type="text" name="id.{{@index}}" value="{{id}}" data-dtype="String" disabled>
+                            <input type="text" name="{{id}}" value="{{id}}" data-dtype="String" disabled>
                         </label>
                     </td>
                     <td class="{{../moduleName}}-row_enable">
                         <label>
-                            <input type="checkbox" name="enable.{{@index}}" data-dtype="Boolean" {{#if enable}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
+                            <input type="checkbox" name="{{id}}.enable" data-dtype="Boolean" {{#if enable}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
                         </label>
                     </td>
                     <td class="{{../moduleName}}-row_custom">
                         <label>
-                            <input type="checkbox" name="custom.{{@index}}" data-dtype="Boolean" {{#if custom}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
+                            <input type="checkbox" name="{{id}}.custom" data-dtype="Boolean" {{#if custom}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
                         </label>
                     </td>
                     <td class="{{../moduleName}}-row_edit">
