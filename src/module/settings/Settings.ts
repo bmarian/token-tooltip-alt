@@ -17,23 +17,6 @@ class Settings {
 
     private _publicConfigureSettings = [
         {
-            key: this._settingKeys.TOOLTIP_VISIBILITY,
-            settings: {
-                name: "Tooltip visibility",
-                type: String,
-                scope: "world",
-                config: true,
-                restricted: true,
-                default: "gm",
-                choices: {
-                    "gm": "GM only",
-                    "owned": "Owned tokens",
-                    "friendly": "Friendly tokens",
-                    "all": "All tokens"
-                }
-            },
-        },
-        {
             key: this._settingKeys.TOOLTIP_POSITION,
             settings: {
                 name: "Tooltip placement",
@@ -250,6 +233,15 @@ class Settings {
                 scope: "world",
                 restricted: true,
                 default: [],
+            },
+        },
+        {
+            key: this._settingKeys.TOOLTIP_VISIBILITY,
+            settings: {
+                type: String,
+                scope: "world",
+                restricted: true,
+                default: "gm",
             },
         },
     ]
