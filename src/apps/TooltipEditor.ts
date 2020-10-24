@@ -25,6 +25,23 @@ export default class TooltipEditor extends FormApplication {
         }
     }
 
+    // create default static settings for
+    // name - true for gm / the last tokenDisposition in the array
+    // accentColor - #000000
+    // use accent color for everything - false
+    // token dispositions - always adding the latest one
+    private _createDefaultStatics(staticSettings: any, isPlayer: boolean, tokenDispositions: Array<string>): void {
+        const name = CONSTANTS.SETTING_KEYS.DISPLAY_NAMES_IN_TOOLTIP;
+        const accentColor = CONSTANTS.SETTING_KEYS.ACCENT_COLOR;
+        const useAccentEverywhere = CONSTANTS.SETTING_KEYS.USE_ACCENT_COLOR_FOR_EVERYTHING;
+        const tokenDis = CONSTANTS.SETTING_KEYS.TOKEN_DISPOSITIONS;
+
+        if (!(name in staticSettings)) staticSettings[name] = isPlayer ? tokenDispositions[tokenDispositions.length - 1] : true;
+        if (!(accentColor in staticSettings)) staticSettings[accentColor] = '#000000';
+        if (!(useAccentEverywhere in staticSettings)) staticSettings[useAccentEverywhere] = false;
+        staticSettings[tokenDis] = tokenDispositions;
+    }
+
     // check if no defaults are present for a disposition and creates them
     private _createDefaultSettings(entitySettings: Array<any>, tokenDispositions: Array<string>): void {
         let add;
@@ -58,29 +75,52 @@ export default class TooltipEditor extends FormApplication {
 
     // handles the settings for the current actorType (getting the current settings if present, or creating
     // defaults if nothing is there)
+    // reset: game.settings.set('token-tooltip-alt', 'gmSettings', {}); game.settings.set('token-tooltip-alt', 'playerSettings', {});
     private _getItemLists(): any {
         const returnGmItems = [];
         const returnPlayerItems = [];
         const actorType = this?.object?.actorType;
-
-        const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS)[actorType] || [];
-        const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS)[actorType] || [];
-
         const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS);
 
-        this._createDefaultSettings(gmSettings, tokenDispositions);
-        this._createDefaultSettings(playerSettings, tokenDispositions);
+        const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
+        const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
 
-        this._removeDeprecatedSettings(gmSettings, tokenDispositions, returnGmItems);
-        this._removeDeprecatedSettings(playerSettings, tokenDispositions, returnPlayerItems);
+        // get the settings for the current actorType
+        const gmSettingsForType = gmSettings[actorType] || {};
+        const playerSettingsForType = playerSettings[actorType] || {};
 
-        gmSettings[actorType] = returnGmItems;
-        playerSettings[actorType] = returnPlayerItems;
+        // get the items
+        const gmItems = gmSettingsForType.items || [];
+        const playerItems = playerSettingsForType.items || [];
+
+        // get the 'static' options (color, display name, etc)
+        const gmStatic = gmSettingsForType.static || {};
+        const playerStatic = playerSettingsForType.static || {};
+
+        // verify/create the values for items
+        this._createDefaultSettings(gmItems, tokenDispositions);
+        this._createDefaultSettings(playerItems, tokenDispositions);
+        this._removeDeprecatedSettings(gmItems, tokenDispositions, returnGmItems);
+        this._removeDeprecatedSettings(playerItems, tokenDispositions, returnPlayerItems);
+
+        // verify/create the values for static
+        this._createDefaultStatics(gmStatic, false, tokenDispositions);
+        this._createDefaultStatics(playerStatic, true, tokenDispositions);
+
+        // set the new values
+        gmSettingsForType.items = returnGmItems;
+        playerSettingsForType.items = returnPlayerItems;
+        gmSettingsForType.static = gmStatic;
+        playerSettingsForType.static = playerStatic;
+        gmSettings[actorType] = gmSettingsForType;
+        playerSettings[actorType] = playerSettingsForType;
 
         this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
         this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
+        const returnSettings = {gmSettings: gmSettingsForType, playerSettings: playerSettingsForType};
 
-        return {gmSettings: returnGmItems, playerSettings: returnPlayerItems};
+        Utils.debug(returnSettings);
+        return returnSettings;
     }
 
     // get a value from Settings

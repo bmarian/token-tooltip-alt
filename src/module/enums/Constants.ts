@@ -10,6 +10,7 @@ export const CONSTANTS = {
         FONT_SIZE: 'fontSize',
         USE_ACCENT_COLOR_FOR_EVERYTHING: 'useAccentColorForEverything',
         ACCENT_COLOR: 'accentColor',
+        TOKEN_DISPOSITIONS: 'tokenDispositions',
         TOOLTIP_POSITION: 'tooltipPosition',
         DARK_THEME: 'darkTheme',
         DONT_SHOW: 'dontShow',

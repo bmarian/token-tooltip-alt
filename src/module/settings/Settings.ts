@@ -20,6 +20,7 @@ class Settings {
             key: this._settingKeys.TOOLTIP_POSITION,
             settings: {
                 name: "Tooltip placement",
+                hint: "Determine the tooltip's position.",
                 type: String,
                 scope: "world",
                 config: true,
@@ -32,6 +33,16 @@ class Settings {
                     "left": "Left",
                     "surprise": "Surprise me"
                 }
+            },
+        },
+        {
+            key: this._settingKeys.FONT_SIZE,
+            settings: {
+                name: "Font size",
+                hint: "Customize the tooltip's font size (e.g. 1.2rem | 15px).",
+                type: String,
+                config: true,
+                default: '1rem',
             },
         },
         {
@@ -144,21 +155,6 @@ class Settings {
                 type: 'checkbox',
                 dataDtype: 'Boolean',
                 isCheckbox: true,
-            },
-        },
-        {
-            key: this._settingKeys.FONT_SIZE,
-            settings: {
-                name: "Font size --requires restart--",
-                hint: "Customize the font size used for the tooltip (e.g. 1.2rem | 15px).",
-                type: String,
-                scope: "world",
-                restricted: true,
-                default: '1rem',
-            },
-            custom: {
-                type: 'text',
-                dataDtype: 'String',
             },
         },
         {
