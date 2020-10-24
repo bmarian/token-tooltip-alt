@@ -71,9 +71,7 @@ export default class TooltipManager extends FormApplication {
                     }
                 }
             }
-            if (add) {
-                actors.push(this._actorPreset(systemActor));
-            }
+            if (add) actors.push(this._actorPreset(systemActor));
         }
 
         // this will take care of the changed values, it will add a new property 'removed',

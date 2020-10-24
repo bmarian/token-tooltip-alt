@@ -51,7 +51,7 @@ class Settings {
             key: this._settingKeys.DONT_SHOW,
             settings: {
                 name: "Exception",
-                hint: "If one of the tracked values is equal to this one that token will not display a tooltip. " +
+                hint: "If one of the tracked values is equal to this one, that token will not display a tooltip. " +
                     "Leave blank if you want a tooltip for every token.",
                 type: String,
                 scope: "world",
@@ -179,7 +179,7 @@ class Settings {
     ];
     private _hiddenConfigureSettings = [
         {
-            key: this._settingKeys.GM_ITEMS,
+            key: this._settingKeys.GM_SETTINGS,
             settings: {
                 type: Object,
                 scope: "world",
@@ -188,12 +188,12 @@ class Settings {
             },
         },
         {
-            key: this._settingKeys.PLAYER_ITEMS,
+            key: this._settingKeys.PLAYER_SETTINGS,
             settings: {
                 type: Object,
                 scope: "world",
                 restricted: true,
-                default: [],
+                default: {},
             },
         },
         {
@@ -202,7 +202,7 @@ class Settings {
                 type: Object,
                 scope: "world",
                 restricted: true,
-                default: [],
+                default: {},
             },
         },
     ];

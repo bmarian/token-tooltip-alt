@@ -14,8 +14,8 @@ export const CONSTANTS = {
         DARK_THEME: 'darkTheme',
         DONT_SHOW: 'dontShow',
         DATA_SOURCE: 'dataSource',
-        GM_ITEMS: 'gmItems',
-        PLAYER_ITEMS: 'playerItems',
+        GM_SETTINGS: 'gmSettings',
+        PLAYER_SETTINGS: 'playerSettings',
         TOOLTIP_MANAGER: 'tooltipManager',
         ACTORS: 'actors',
 
@@ -36,7 +36,7 @@ export const CONSTANTS = {
 
         TOOLTIP_EDITOR: `modules/${Utils.moduleName}/templates/tooltip-editor.hbs`,
         TOOLTIP_EDITOR_ROW: `modules/${Utils.moduleName}/templates/tooltip-editor-row.hbs`,
-        TOOLTIP_EDITOR_WIDTH: 700,
+        TOOLTIP_EDITOR_WIDTH: 1200,
 
         TOOLTIP_DEFAULT_ACTOR_ID: 'default',
     },
