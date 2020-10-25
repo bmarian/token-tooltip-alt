@@ -1,16 +1,23 @@
 <form class="{{moduleName}}-form">
-    <p>
-        For more information on how to use this section, please refer to the 
-        <a href="https://github.com/bmarian/token-tooltip-alt/blob/master/README.md">README</a>
-    </p>
-
     <div class="{{moduleName}}-container form-group">
-        <div class="form-group">
-            <h2>GM</h2>
-        </div>
-        <div class="form-group">
-            <h2>Player</h2>
-        </div>
+        <!-- Left side of the screen reserved for GM settings -->
+        {{> 'modules/token-tooltip-alt/templates/tooltip-editor-gm.hbs' this}}
+
+        <!-- Right side of the screen reserved for Player settings -->
+        {{> 'modules/token-tooltip-alt/templates/tooltip-editor-player.hbs' this}}
     </div>
+
+    <!-- Footer buttons -->
+    <footer class="{{moduleName}}-footer sheet-footer flexrow">
+        <button type="submit" name="submit" class="{{moduleName}}-footer_button submit">
+            <i class="fa fa-check"></i> <span>Save</span>
+        </button>
+
+        {{#if (eq isDefault false)}}
+            <button type="button" name="import" class="{{moduleName}}-footer_button import">
+                <i class="fas fa-edit"></i> <span>Import from default</span>
+            </button>
+        {{/if}}
+    </footer>
 
 </form>

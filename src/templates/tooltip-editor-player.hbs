@@ -1,0 +1,39 @@
+<div class="{{moduleName}}-container player">
+    <h1>Player</h1>
+
+    <!-- Generates the tables of items -->
+    {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table.hbs' settings=playerSettings.items type='player'}}
+
+    <h1>Settings</h1>
+
+    <!-- Display name in tooltip depending on the disposition -->
+    <div class="form-group">
+        <label>Display name</label>
+        <div class="form-fields">
+            <select name="player.static.tooltipPosition">
+                {{#each playerSettings.static.tokenDispositions}}
+                    <option value="{{this}}" {{#if (eq ../playerSettings.static.displayNameInTooltip this)}}selected{{/if}}>{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <p class="notes">Display the token's name in the tooltip depending on the disposition.</p>
+    </div>
+
+    <!-- Use accent color everywhere -->
+    <div class="form-group">
+        <label>Use accent color everywhere</label>
+        <div class="form-fields">
+            <input type="checkbox" name="player.static.useAccentEverywhere" data-dtype="Boolean" {{#if playerSettings.static.useAccentEverywhere}}checked{{/if}}>
+        </div>
+        <p class="notes">Use the accent color everywhere instead of the custom colors.</p>
+    </div>
+
+    <!-- Accent color -->
+    <div class="form-group">
+        <label>Accent color</label>
+        <div class="form-fields">
+            <input type="color" name="player.static.accentColor" data-dtype="String" value="{{playerSettings.static.accentColor}}">
+        </div>
+        <p class="notes">Set an accent color for the border and title.</p>
+    </div>
+</div>

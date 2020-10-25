@@ -1,4 +1,13 @@
 .#{$module-name}-form {
+  & .#{$module-name}-container {
+    &.gm {
+      padding-right: 5px;
+    }
+    &.player {
+      padding-left: 5px;
+    }
+  }
+
   & .#{$module-name}-table {
     & thead {
       & tr {

@@ -1,0 +1,56 @@
+{{#each settings}}
+    <h2>{{disposition}}</h2>
+
+    <div class="form-group">
+        <table class="{{../moduleName}}-table_{{disposition}}">
+            <thead>
+            <tr>
+                <th scope="col" class="{{../moduleName}}-col_color">Color</th>
+                <th scope="col" class="{{../moduleName}}-col_icon">Icon</th>
+                <th scope="col" class="{{../moduleName}}-col_value">Value</th>
+                <th scope="col" class="{{../moduleName}}-col_expression">Exp</th>
+                <th scope="col" class="{{../moduleName}}-col_isNumber">Nr</th>
+                <th scope="col" class="{{../moduleName}}-col_delete">Delete</th>
+            </tr>
+            </thead>
+
+            <tbody class="{{../moduleName}}-{{disposition}}">
+            {{#each items}}
+                <tr class="{{../../moduleName}}-row" index="{{@index}}">
+
+                    <!-- name example: type = gm, disposition = neutral => gm.items.neutral.color.1 -->
+                    <td class="{{../../moduleName}}-row_color">
+                        <input type="color" name="{{../type}}.items.{{../disposition}}.color.{{@index}}" value="{{color}}" data-dtype="String">
+                    </td>
+                    <td class="{{../../moduleName}}-row_icon">
+                        <input type="text" name="{{../type}}.items.{{../disposition}}.icon.{{@index}}" value="{{icon}}" data-dtype="String">
+                    </td>
+                    <td class="{{../../moduleName}}-row_tracked-value">
+                        <input type="text" name="{{../type}}.items.{{../disposition}}.value.{{@index}}" value="{{value}}" data-dtype="String">
+                    </td>
+                    <td class="{{../../moduleName}}-row_expression">
+                        <input type="checkbox" name="{{../type}}.items.{{../disposition}}.expression.{{@index}}" data-dtype="Boolean" {{#if expression}}checked{{/if}}>
+                    </td>
+                    <td class="{{../../moduleName}}-row_isNumber">
+                        <input type="checkbox" name="{{../type}}.items.{{../disposition}}.isNumber.{{@index}}" data-dtype="Boolean" {{#if isNumber}}checked{{/if}}>
+                    </td>
+                    <td class="{{../../moduleName}}-row_delete">
+                        <button class="{{../../moduleName}}-row_button {{../type}}.items.{{../disposition}}.delete" type="button" title="Delete"><i class="fa fa-trash"></i></button>
+                    </td>
+
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group">
+        <button type="button" name="{{type}}.items.{{disposition}}.add" class="{{moduleName}}-button add_{{disposition}}">
+            <i class="fa fa-plus"></i> <span>Add</span>
+        </button>
+        {{#if (ne @index 0)}}
+            <button type="button" name="{{type}}.items.{{disposition}}.clone" class="{{moduleName}}-footer_button clone_{{disposition}}">
+                <i class="fas fa-edit"></i> <span>Copy from above</span>
+            </button>
+        {{/if}}
+    </div>
+{{/each}}

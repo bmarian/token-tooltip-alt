@@ -1,0 +1,35 @@
+<div class="{{moduleName}}-container gm">
+    <h1>GM</h1>
+
+    <!-- Generates the tables of items -->
+    {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table.hbs' settings=gmSettings.items type='gm'}}
+
+    <h1>Settings</h1>
+
+    <!-- Display name in tooltip -->
+    <div class="form-group">
+        <label>Display name</label>
+        <div class="form-fields">
+            <input type="checkbox" name="gm.static.displayNameInTooltip" data-dtype="Boolean" {{#if gmSettings.static.displayNameInTooltip}}checked{{/if}}>
+        </div>
+        <p class="notes">Display the token's name in the tooltip.</p>
+    </div>
+
+    <!-- Use accent color everywhere -->
+    <div class="form-group">
+        <label>Use accent color everywhere</label>
+        <div class="form-fields">
+            <input type="checkbox" name="gm.static.useAccentEverywhere" data-dtype="Boolean" {{#if gmSettings.static.useAccentEverywhere}}checked{{/if}}>
+        </div>
+        <p class="notes">Use the accent color everywhere instead of the custom colors.</p>
+    </div>
+
+    <!-- Accent color -->
+    <div class="form-group">
+        <label>Accent color</label>
+        <div class="form-fields">
+            <input type="color" name="gm.static.accentColor" data-dtype="String" value="{{gmSettings.static.accentColor}}">
+        </div>
+        <p class="notes">Set an accent color for the border and title.</p>
+    </div>
+</div>

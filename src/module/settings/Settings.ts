@@ -110,22 +110,6 @@ class Settings {
     ];
     private _tooltipEditorSettings = [
         {
-            key: this._settingKeys.DISPLAY_NAMES_IN_TOOLTIP,
-            settings: {
-                name: "Display token name",
-                hint: "Display the token name in the tooltip.",
-                type: Boolean,
-                scope: "world",
-                restricted: true,
-                default: false,
-            },
-            custom: {
-                type: 'checkbox',
-                dataDtype: 'Boolean',
-                isCheckbox: true,
-            },
-        },
-        {
             key: this._settingKeys.DARK_THEME,
             settings: {
                 name: "Dark theme",
@@ -134,11 +118,6 @@ class Settings {
                 scope: "world",
                 restricted: true,
                 default: false,
-            },
-            custom: {
-                type: 'checkbox',
-                dataDtype: 'Boolean',
-                isCheckbox: true,
             },
         },
         {
@@ -150,26 +129,6 @@ class Settings {
                 scope: "world",
                 restricted: true,
                 default: false,
-            },
-            custom: {
-                type: 'checkbox',
-                dataDtype: 'Boolean',
-                isCheckbox: true,
-            },
-        },
-        {
-            key: this._settingKeys.ACCENT_COLOR,
-            settings: {
-                name: "Accent color",
-                hint: "Set a accent color for the border, and title.",
-                type: String,
-                scope: "world",
-                restricted: true,
-                default: '#000000',
-            },
-            custom: {
-                type: 'color',
-                dataDtype: 'String',
             },
         },
     ];
@@ -238,6 +197,24 @@ class Settings {
                 scope: "world",
                 restricted: true,
                 default: "gm",
+            },
+        },
+        {
+            key: this._settingKeys.ACCENT_COLOR,
+            settings: {
+                type: String,
+                scope: "world",
+                restricted: true,
+                default: '#000000',
+            },
+        },
+        {
+            key: this._settingKeys.DISPLAY_NAMES_IN_TOOLTIP,
+            settings: {
+                type: Boolean,
+                scope: "world",
+                restricted: true,
+                default: true,
             },
         },
     ]
