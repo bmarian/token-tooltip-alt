@@ -234,7 +234,7 @@ export default class TooltipManager extends FormApplication {
         const $this = $(this);
         const actorType = $this.attr('name');
         if (!actorType) return;
-        const te = new TooltipEditor({actorType}, {title: actorType.toUpperCase()});
+        const te = new TooltipEditor({actorType}, {title: actorType.toUpperCase(), classes: [`${Utils.moduleName}-tooltip-editor-window`]});
 
         // TODO: See if there is an option to not display multiple tooltip editors
         te.render(true);

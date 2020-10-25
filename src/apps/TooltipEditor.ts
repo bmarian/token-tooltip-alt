@@ -58,19 +58,38 @@ export default class TooltipEditor extends FormApplication {
     private _getAssociatedTable($button: any, $context: any): any {
         const disposition = $button.attr('disposition');
         const dType = $button.attr('dType');
-        return $context.find(`.${Utils.moduleName}-table[disposition=${disposition}][dType=${dType}]`);
+        const $table = $context.find(`.${Utils.moduleName}-table[disposition=${disposition}][dType=${dType}]`);
+        return {disposition, dType, $table}
     }
 
     // the add button click event, adds a new line on the associated table
-    private _addButtonClickEvent(ev): void {
-        const $button = $(ev.target);
+    private async _addButtonClickEvent(ev: any): Promise<void> {
+        // because we take the button from ev.target, we need to make sure it's actually the button
+        // and not the span or icon
+        const $button = $(ev.target).closest('button');
+
         const $context = $button?.parent()?.parent(); // the parent form
         if (!$context.length) return;
 
-        const $table = this._getAssociatedTable($button, $context);
+        const {disposition, dType, $table} = this._getAssociatedTable($button, $context);
+        const $tbody = $table.find('tbody');
+        const $rows = $tbody.find(`.${Utils.moduleName}-row`);
+        const lastIndex = $rows.length ? parseInt($rows.last().attr('index')) || 0 : 0;
+
+        const data = {
+            moduleName: Utils.moduleName,
+            index: lastIndex + 1,
+            disposition,
+            type: dType,
+            item: {
+                color: '#000000',
+            }
+        }
+
+        const $newRow = $(await renderTemplate(CONSTANTS.TEMPLATES.TOOLTIP_EDITOR_TABLE_ROW, data));
+        $tbody.append($newRow)
 
 
-        Utils.debug($table);
     }
 
     public activateListeners($html: JQuery<HTMLElement>): void {

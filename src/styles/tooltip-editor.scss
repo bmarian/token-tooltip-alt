@@ -1,10 +1,27 @@
+.#{$module-name}-tooltip-editor-window {
+ & .window-content {
+   overflow-y: hidden;
+ }
+}
+
 .#{$module-name}-form {
+  height: 100%;
   & .#{$module-name}-container {
     &.gm {
       padding-right: 5px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
     }
     &.player {
       padding-left: 5px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
+    }
+    &.form-group {
+      align-items: normal;
+      height: 94%;
     }
   }
 
