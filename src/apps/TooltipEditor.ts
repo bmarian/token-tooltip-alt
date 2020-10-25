@@ -54,7 +54,27 @@ export default class TooltipEditor extends FormApplication {
 
     }
 
+    // get the table associated to a button (same disposition, same dType)
+    private _getAssociatedTable($button: any, $context: any): any {
+        const disposition = $button.attr('disposition');
+        const dType = $button.attr('dType');
+        return $context.find(`.${Utils.moduleName}-table[disposition=${disposition}][dType=${dType}]`);
+    }
+
+    // the add button click event, adds a new line on the associated table
+    private _addButtonClickEvent(ev): void {
+        const $button = $(ev.target);
+        const $context = $button?.parent()?.parent(); // the parent form
+        if (!$context.length) return;
+
+        const $table = this._getAssociatedTable($button, $context);
+
+
+        Utils.debug($table);
+    }
+
     public activateListeners($html: JQuery<HTMLElement>): void {
         super.activateListeners($html);
+        $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
     }
 }

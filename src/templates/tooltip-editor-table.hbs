@@ -2,7 +2,7 @@
     <h2>{{disposition}}</h2>
 
     <div class="form-group">
-        <table class="{{../moduleName}}-table_{{../type}}_{{disposition}}" disposition="{{disposition}}">
+        <table class="{{../moduleName}}-table t_{{../type}} d_{{disposition}}" dType="{{../type}}" disposition="{{disposition}}">
             <thead>
             <tr>
                 <th scope="col" class="{{../moduleName}}-col_color">Color</th>
@@ -22,11 +22,11 @@
         </table>
     </div>
     <div class="form-group">
-        <button type="button" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.add" class="{{../moduleName}}-button add_{{disposition}}">
+        <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.add" class="{{../moduleName}}-button add d_{{disposition}}">
             <i class="fa fa-plus"></i> <span>Add</span>
         </button>
         {{#if (ne @index 0)}}
-            <button type="button" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.clone" class="{{../moduleName}}-footer_button clone_{{disposition}}">
+            <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.clone" class="{{../moduleName}}-button clone d_{{disposition}}">
                 <i class="fas fa-edit"></i> <span>Copy from above</span>
             </button>
         {{/if}}
