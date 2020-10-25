@@ -8,6 +8,7 @@ export default class TooltipManager extends FormApplication {
         return {
             ...super.defaultOptions,
             title: 'Tooltip manager',
+            id: 'tooltip-manager',
             template: CONSTANTS.APPS.TOOLTIP_MANAGER,
             width: CONSTANTS.APPS.TOOLTIP_MANAGER_WIDTH,
 
@@ -236,10 +237,10 @@ export default class TooltipManager extends FormApplication {
         if (!actorType) return;
         const te = new TooltipEditor({actorType}, {
             title: actorType.toUpperCase(),
-            classes: [`${Utils.moduleName}-tooltip-editor-window`]
+            classes: [`${Utils.moduleName}-tooltip-editor-window`],
+            id: `tooltip-editor-${actorType}`,
         });
 
-        // TODO: See if there is an option to not display multiple tooltip editors
         te.render(true);
         Utils.debug(`Opened an editor for: ${actorType}`)
     }

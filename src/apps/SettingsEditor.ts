@@ -35,7 +35,7 @@ export default class SettingsEditor extends FormApplication {
     }
 
     private _prepareSettingsEditorOptions(): Array<{}> {
-        const settingsEditorOptions = Settings.getTooltipEditorSettings();
+        const settingsEditorOptions = [];
         for (let i = 0; i < settingsEditorOptions.length; i++) {
             const setting = settingsEditorOptions[i];
             const value = this._getSetting(setting.key);

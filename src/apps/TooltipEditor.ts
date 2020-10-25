@@ -10,7 +10,6 @@ export default class TooltipEditor extends FormApplication {
             width: CONSTANTS.APPS.TOOLTIP_EDITOR_WIDTH,
 
             resizable: true,
-
             submitOnChange: false,
             closeOnSubmit: true,
             submitOnClose: false,

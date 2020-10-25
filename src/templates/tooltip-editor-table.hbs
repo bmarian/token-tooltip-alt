@@ -16,7 +16,7 @@
 
             <tbody class="{{../moduleName}}-tbody_{{../type}}_{{disposition}}">
             {{#each items}}
-                {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table-row.hbs' index=@index moduleName=../../moduleName disposition=../disposition type=../type item=this}}
+                {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table-row.hbs' index=@index moduleName=../../moduleName disposition=../disposition type=../../type item=this}}
             {{/each}}
             </tbody>
         </table>

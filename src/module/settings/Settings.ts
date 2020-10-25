@@ -72,6 +72,16 @@ class Settings {
             },
         },
         {
+            key: this._settingKeys.DARK_THEME,
+            settings: {
+                name: "Dark theme",
+                hint: "Apply a dark theme for the tooltip.",
+                type: Boolean,
+                config: true,
+                default: false,
+            },
+        },
+        {
             key: this._settingKeys.SHOW_ALL_ON_ALT,
             settings: {
                 name: "Show on <ALT>",
@@ -103,30 +113,6 @@ class Settings {
                 type: Boolean,
                 scope: "world",
                 config: true,
-                restricted: true,
-                default: false,
-            },
-        },
-    ];
-    private _tooltipEditorSettings = [
-        {
-            key: this._settingKeys.DARK_THEME,
-            settings: {
-                name: "Dark theme",
-                hint: "Apply a dark theme for the tooltip.",
-                type: Boolean,
-                scope: "world",
-                restricted: true,
-                default: false,
-            },
-        },
-        {
-            key: this._settingKeys.USE_ACCENT_COLOR_FOR_EVERYTHING,
-            settings: {
-                name: "Use accent color everywhere",
-                hint: "Use the accent color for everything.",
-                type: Boolean,
-                scope: "world",
                 restricted: true,
                 default: false,
             },
@@ -217,15 +203,20 @@ class Settings {
                 default: true,
             },
         },
+        {
+            key: this._settingKeys.USE_ACCENT_COLOR_FOR_EVERYTHING,
+            settings: {
+                type: Boolean,
+                scope: "world",
+                restricted: true,
+                default: false,
+            },
+        },
     ]
 
     // --- GETTERS --- \\
     public getPublicConfigureSettings(): any {
         return this._publicConfigureSettings;
-    }
-
-    public getTooltipEditorSettings(): any {
-        return this._tooltipEditorSettings;
     }
 
     public getHiddenConfigureSettings(): any {
@@ -252,7 +243,6 @@ class Settings {
     public registerSettings(): void {
         const settings = [
             ...this._publicConfigureSettings,
-            ...this._tooltipEditorSettings,
             ...this._hiddenConfigureSettings,
             ...this._oldHiddenConfigureSettings,
         ];
