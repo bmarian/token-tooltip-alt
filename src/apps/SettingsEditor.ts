@@ -33,7 +33,7 @@ export default class SettingsEditor extends FormApplication {
             hostileItems: this._getSetting(CONSTANTS.SETTING_KEYS.HOSTILE_ITEMS) || [],
         };
     }
-    
+
     private _prepareSettingsEditorOptions(): Array<{}> {
         const settingsEditorOptions = Settings.getTooltipEditorSettings();
         for (let i = 0; i < settingsEditorOptions.length; i++) {
@@ -78,7 +78,7 @@ export default class SettingsEditor extends FormApplication {
         };
     }
 
-    private _buildSettingsArray(value: {}, icon: {}, expression: {}, isNumber: {}, color: {} ,arr: Array<{}>): void {
+    private _buildSettingsArray(value: {}, icon: {}, expression: {}, isNumber: {}, color: {}, arr: Array<{}>): void {
         if (!(value && icon && expression)) return;
 
         for (let key in value) {
@@ -108,7 +108,7 @@ export default class SettingsEditor extends FormApplication {
         const settings = expObj['token-tooltip-alt'];
         for (let key in settings) {
             if (!settings.hasOwnProperty(key)) continue;
-            
+
             const v = settings[key];
             this._setSetting(key, v);
         }

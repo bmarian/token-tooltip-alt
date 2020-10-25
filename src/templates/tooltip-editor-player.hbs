@@ -10,7 +10,7 @@
     <div class="form-group">
         <label>Display name</label>
         <div class="form-fields">
-            <select name="player.static.tooltipPosition">
+            <select name="player.static.displayNameInTooltip">
                 {{#each playerSettings.static.tokenDispositions}}
                     <option value="{{this}}" {{#if (eq ../playerSettings.static.displayNameInTooltip this)}}selected{{/if}}>{{this}}</option>
                 {{/each}}

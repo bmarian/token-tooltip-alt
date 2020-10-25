@@ -18,7 +18,7 @@ export default class TooltipManager extends FormApplication {
     }
 
     // generate a default entry for GM items for a token disposition
-    private _generateDefaultSettingsForDisposition(disposition): any {
+    private _generateDefaultSettingsForDisposition(disposition: string): any {
         return {
             disposition,
             items: [],
@@ -234,7 +234,10 @@ export default class TooltipManager extends FormApplication {
         const $this = $(this);
         const actorType = $this.attr('name');
         if (!actorType) return;
-        const te = new TooltipEditor({actorType}, {title: actorType.toUpperCase(), classes: [`${Utils.moduleName}-tooltip-editor-window`]});
+        const te = new TooltipEditor({actorType}, {
+            title: actorType.toUpperCase(),
+            classes: [`${Utils.moduleName}-tooltip-editor-window`]
+        });
 
         // TODO: See if there is an option to not display multiple tooltip editors
         te.render(true);
