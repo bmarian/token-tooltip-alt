@@ -146,6 +146,9 @@ export default class TooltipEditor extends FormApplication {
     
     // adds empty presets for the deleted dispositions
     private _persistEmptyPresets(items: any, dispositions: Array<string>): any {
+        // we need this to keep everything in order, otherwise the empty ones will be last
+        const returnItems = [];
+
         for (let i = 0; i < dispositions.length; i++) {
             const disposition = dispositions[i];
             
@@ -153,14 +156,15 @@ export default class TooltipEditor extends FormApplication {
             for (let j = 0; j < items.length; j++) {
                 const item = items[j];
                 if (item.disposition === disposition) {
+                    returnItems.push(item)
                     add = false;
                     break;
                 }
             }
-            if (add) items.push(this._generateDefaultSettingsForDisposition(disposition));
+            if (add) returnItems.push(this._generateDefaultSettingsForDisposition(disposition));
         }
         
-        return items;
+        return returnItems;
     }
 
     protected async _updateObject(event: Event | JQuery.Event, formData: any): Promise<any> {
