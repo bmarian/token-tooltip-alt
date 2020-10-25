@@ -36,7 +36,7 @@ export default class TooltipManager extends FormApplication {
         const useAccentEverywhere = CONSTANTS.SETTING_KEYS.USE_ACCENT_COLOR_FOR_EVERYTHING;
         const tokenDis = CONSTANTS.SETTING_KEYS.TOKEN_DISPOSITIONS;
 
-        if (!(name in staticSettings)) staticSettings[name] = isPlayer ? tokenDispositions[tokenDispositions.length - 1] : true;
+        if (!(name in staticSettings)) staticSettings[name] = isPlayer ? tokenDispositions?.[0] : true;
         if (!(accentColor in staticSettings)) staticSettings[accentColor] = '#000000';
         if (!(useAccentEverywhere in staticSettings)) staticSettings[useAccentEverywhere] = false;
         staticSettings[tokenDis] = tokenDispositions;
@@ -79,7 +79,7 @@ export default class TooltipManager extends FormApplication {
     private async _generateSettingsListForActorType(actorType): Promise<any> {
         const returnGmItems = [];
         const returnPlayerItems = [];
-        const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS);
+        const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
 
         const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);

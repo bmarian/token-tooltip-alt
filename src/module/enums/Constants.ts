@@ -32,6 +32,7 @@ export const CONSTANTS = {
         TOOLTIP_EDITOR_GM: `modules/${Utils.moduleName}/templates/tooltip-editor-gm.hbs`,
         TOOLTIP_EDITOR_PLAYER: `modules/${Utils.moduleName}/templates/tooltip-editor-player.hbs`,
         TOOLTIP_EDITOR_TABLE: `modules/${Utils.moduleName}/templates/tooltip-editor-table.hbs`,
+        TOOLTIP_EDITOR_TABLE_ROW: `modules/${Utils.moduleName}/templates/tooltip-editor-table-row.hbs`,
     },
 
     APPS: {

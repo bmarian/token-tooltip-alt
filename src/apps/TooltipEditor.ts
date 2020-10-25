@@ -50,7 +50,6 @@ export default class TooltipEditor extends FormApplication {
 
     protected async _updateObject(event: Event | JQuery.Event, formData: any): Promise<any> {
         const expObj = expandObject(formData);
-
         Utils.debug(expObj);
 
     }
