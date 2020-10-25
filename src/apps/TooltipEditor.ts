@@ -89,7 +89,11 @@ export default class TooltipEditor extends FormApplication {
         const $newRow = $(await renderTemplate(CONSTANTS.TEMPLATES.TOOLTIP_EDITOR_TABLE_ROW, data));
         $tbody.append($newRow)
 
-
+        // TODO: Make this... not so bad... maybe...
+        // Future me here... this is not what I was talking about... but It's future future me problem now...
+        $newRow.find(`.${Utils.moduleName}-row_button.delete`).on('click', () => {
+            $tbody.find(`.${Utils.moduleName}-row[index=${lastIndex + 1}]`).remove();
+        });
     }
 
     public activateListeners($html: JQuery<HTMLElement>): void {
