@@ -18,8 +18,8 @@ class SettingsUtil {
     }
 
     // sets a value for a setting
-    public setSetting(key: string, data: any): void {
-        const status = game?.settings?.set(this._moduleName, key, data);
+    public async setSetting(key: string, data: any): Promise<void> {
+        return await game?.settings?.set(this._moduleName, key, data);
     }
 
     // registers a setting
