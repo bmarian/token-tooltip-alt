@@ -206,7 +206,7 @@ class Tooltip {
 
     // TODO
     private _getItemListForDisposition(items: any, disposition: string) {
-        for (let i = 0; i < items.length; i++) {
+        for (let i = 0; i < items?.length; i++) {
             const item = items[i];
             if (item.disposition === disposition) return item.items;
         }
@@ -215,8 +215,9 @@ class Tooltip {
 
     // TODO
     private _getActorDisplayName(staticData: any): string {
-        const tokenName = this._token?.data?.name;
+        if (!staticData) return null;
 
+        const tokenName = this._token?.data?.name;
         if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) return tokenName;
 
         if (!this._tooltipInfo.isGM) {
@@ -242,6 +243,8 @@ class Tooltip {
         const stats = [];
         const staticData = data.static;
         const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData));
+
+        if (!staticData || !itemList.length) return {stats: []};
 
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
