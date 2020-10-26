@@ -125,7 +125,7 @@ class Settings {
                 type: Object,
                 scope: "world",
                 restricted: true,
-                default: [],
+                default: {},
             },
         },
         {
