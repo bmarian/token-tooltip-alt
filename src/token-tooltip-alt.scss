@@ -1,7 +1,9 @@
 $module-name: 'token-tooltip-alt';
 @import "styles/tooltip";
-@import "styles/settings-editor";
+
+// APPS
+@import "styles/tooltip-manager";
+@import "styles/tooltip-editor";
 
 // Themes
-
 @import "styles/tooltip-default";

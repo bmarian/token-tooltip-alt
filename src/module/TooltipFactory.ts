@@ -1,9 +1,11 @@
 import Tooltip from "./Tooltip";
-import Settings from "./Settings";
+import {CONSTANTS, getSystemTheme} from "./enums/Constants";
+import SettingsUtil from "./settings/SettingsUtil";
 
 class TooltipFactory {
     private static _instance: TooltipFactory;
     private _tooltips: Array<Tooltip> = [];
+    private _settingKeys = CONSTANTS.SETTING_KEYS;
 
     private constructor() {
     }
@@ -15,41 +17,39 @@ class TooltipFactory {
 
     // get a value from Settings
     private _getSetting(setting: string): any {
-        return Settings.getSetting(setting);
+        return SettingsUtil.getSetting(setting);
     }
 
     // get the positioning from settings, and if surprise pick a random possible position
     private _getWhere(): string {
-        let where = this._getSetting(Settings.settingKeys.TOOLTIP_POSITION) || 'right';
-        if (where === 'surprise') {
-            where = Settings.tooltipPositions[Math.floor(Math.random() * Settings.tooltipPositions.length)];
-        }
+        let where = this._getSetting(this._settingKeys.TOOLTIP_POSITION) || 'right';
+        const positions = CONSTANTS.TOOLTIP_POSITIONS;
 
-        return where;
+        return where !== 'surprise' ? where : positions[Math.floor(Math.random() * positions.length)];
     }
 
     // create an array of data needed to initialize a tooltip
     private _getTooltipData(token: any): any {
         return [
-            token,                                                              // token
-            this._getSetting(Settings.settingKeys.DARK_THEME) ? 'dark' : '',    // themeClass
-            Settings.getSystemSpecificClass(),                                  // systemClass
-            this._getSetting(Settings.settingKeys.FONT_SIZE) || '1rem',         // fontSize
-            this._getWhere(),                                                   // where
-            'none',                                                             // TODO: animType
-            200,                                                                // animSpeed
-            this._getSetting(Settings.settingKeys.DATA_SOURCE) || '',           // path
-            this._getSetting(Settings.settingKeys.TOOLTIP_VISIBILITY) || 'gm',  // visibility
-            Settings.templatePaths[0],                                          // template
-            $('.game'),                                                    // gameBody
+            token,                                                           // token
+            this._getSetting(this._settingKeys.DARK_THEME) ? 'dark' : '',    // themeClass
+            getSystemTheme(),                                                // systemClass
+            this._getSetting(this._settingKeys.FONT_SIZE) || '1rem',         // fontSize
+            this._getWhere(),                                                // where
+            'none',                                                          // animType
+            200,                                                             // animSpeed
+            this._getSetting(this._settingKeys.DATA_SOURCE) || '',           // path
+            this._getSetting(this._settingKeys.TOOLTIP_VISIBILITY) || 'gm',  // visibility
+            CONSTANTS.TEMPLATES.TOOLTIP,                                     // template
+            $('.game'),                                                 // gameBody
         ];
     }
 
     // get settings for <ALT>
     private _getAltSettings(): any {
         return {
-            showOnAlt: this._getSetting(Settings.settingKeys.SHOW_ALL_ON_ALT),
-            showAllOnAlt: this._getSetting(Settings.settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS),
+            showOnAlt: this._getSetting(this._settingKeys.SHOW_ALL_ON_ALT),
+            showAllOnAlt: this._getSetting(this._settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS),
         }
     }
 
@@ -77,6 +77,17 @@ class TooltipFactory {
         }
     }
 
+    // determines if a token should display a tooltip or not based on the ACTORS settings
+    private _shouldActorHaveTooltip(token: any): boolean {
+        const actorType = token?.actor?.data?.type;
+        const actors = this._getSetting(this._settingKeys.ACTORS);
+        for (let i = 0; i < actors.length; i++) {
+            const actor = actors[i];
+            if (actor.id === actorType) return actor.enable;
+        }
+        return true;
+    }
+
     // removes all the tooltips and destroys the objects
     private _removeTooltips(): void {
         while (this._tooltips.length > 0) {
@@ -86,7 +97,7 @@ class TooltipFactory {
 
     // public hook when hovering over a token (more precise when a token is focused)
     public async hoverToken(token: any, isHovering: boolean): Promise<void> {
-        if (!token?.actor) return;
+        if (!token?.actor || !this._shouldActorHaveTooltip(token)) return;
 
         const isAltPressed = keyboard?.isDown('Alt');
 

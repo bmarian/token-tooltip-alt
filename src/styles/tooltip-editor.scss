@@ -1,23 +1,53 @@
+.#{$module-name}-tooltip-editor-window {
+ & .window-content {
+   overflow-y: hidden;
+ }
+}
+
 .#{$module-name}-form {
+  height: 100%;
+  & .#{$module-name}-container {
+    &.gm {
+      padding-right: 5px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
+    }
+    &.player {
+      padding-left: 5px;
+      padding-right: 3px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 100%;
+    }
+    &.form-group {
+      align-items: normal;
+      height: 94%;
+    }
+  }
+
   & .#{$module-name}-table {
     & thead {
       & tr {
         text-align: center;
-        
+
         // Just making things smaller to leve space for the value field
         & .#{$module-name}-col_icon {
-         width: 100px; 
+          width: 100px;
         }
+
         & .#{$module-name}-col_expression,
-        & .#{$module-name}-col_isNumber{
+        & .#{$module-name}-col_isNumber {
           width: 30px;
         }
+
         & .#{$module-name}-col_delete,
         & .#{$module-name}-col_color {
-         width: 50px; 
+          width: 50px;
         }
       }
     }
+
     & tbody {
       & .#{$module-name}-row_expression,
       & .#{$module-name}-row_isNumber {
@@ -25,7 +55,7 @@
       }
     }
   }
-  
+
   & input[type="color"] {
     width: 50px;
   }

@@ -1,0 +1,44 @@
+<form class="{{moduleName}}-form">
+    <p>
+        For more information, please refer to the
+        <a href="https://github.com/bmarian/token-tooltip-alt/blob/master/README.md">README</a>
+    </p>
+    <div class="form-group">
+        <table class="{{moduleName}}-table">
+            <thead>
+            <tr>
+                <th scope="col" class="{{moduleName}}-col_actor">Actor</th>
+                <th scope="col" class="{{moduleName}}-col_enable">Enable</th>
+                <th scope="col" class="{{moduleName}}-col_custom">Custom</th>
+                <th scope="col" class="{{moduleName}}-col_edit">Edit</th>
+            </tr>
+            </thead>
+            <tbody class="{{moduleName}}-tooltip-manager">
+            {{#each actors}}
+                <tr class="{{../moduleName}}-row" index="{{@index}}">
+                    <td class="{{../moduleName}}-row_id">
+                        <label>
+                            <input type="text" name="{{id}}" value="{{id}}" data-dtype="String" disabled>
+                        </label>
+                    </td>
+                    <td class="{{../moduleName}}-row_enable">
+                        <label>
+                            <input type="checkbox" name="{{id}}.enable" data-dtype="Boolean" {{#if enable}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
+                        </label>
+                    </td>
+                    <td class="{{../moduleName}}-row_custom">
+                        <label>
+                            <input type="checkbox" name="{{id}}.custom" data-dtype="Boolean" {{#if custom}}checked{{/if}} {{#if isDefault}}checked disabled{{/if}}>
+                        </label>
+                    </td>
+                    <td class="{{../moduleName}}-row_edit">
+                        <button class="{{../moduleName}}-row_button edit" name="{{id}}" type="button" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</form>

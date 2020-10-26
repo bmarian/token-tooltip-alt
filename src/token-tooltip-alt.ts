@@ -1,12 +1,13 @@
-import Settings from "./module/Settings";
 import Utils from "./module/Utils";
 import TooltipFactory from "./module/TooltipFactory";
+import {CONSTANTS} from "./module/enums/Constants";
+import Settings from "./module/settings/Settings";
 
 Hooks.once('init', async () => {
     Settings.registerSettings();
     Utils.debug('Settings registered.');
 
-    await loadTemplates(Settings.templatePaths);
+    await loadTemplates(Object.values(CONSTANTS.TEMPLATES));
     Utils.debug('Templates loaded.');
 });
 
