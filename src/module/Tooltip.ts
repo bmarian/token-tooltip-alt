@@ -4,7 +4,6 @@ import {CONSTANTS} from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
 
 class Tooltip {
-    private _tooltipTypes = {FULL: 'full', PARTIAL: 'partial', NONE: 'none'};
     private _reg = {
         // searches if the string is one path
         path: new RegExp(/^([\w_-]+\.)*([\w_-]+)$/),
@@ -19,6 +18,7 @@ class Tooltip {
     }
     private _tooltip = null;
     private _doStringMath = stringMath;
+    private _accentColor = '#000000';
 
     private readonly _token;
     private readonly _data;
@@ -31,11 +31,12 @@ class Tooltip {
     private readonly _gameBody;
     private readonly _visibility;
     private readonly _template;
-    private readonly _forceAccentColor;
-    private readonly _useAccentColor;
     private readonly _settingsKeys;
+    private readonly _appKeys;
     private readonly _exception;
     private readonly _moduleName;
+    private readonly _tooltipInfo;
+    private readonly _tooltipData;
 
     constructor(
         token?: any,
@@ -65,9 +66,11 @@ class Tooltip {
         this._data = path === '' ? token : this._getNestedData(this._token, path);
 
         this._settingsKeys = CONSTANTS.SETTING_KEYS;
-        this._forceAccentColor = this._getSetting(this._settingsKeys.ACCENT_COLOR);
-        this._useAccentColor = this._getSetting(this._settingsKeys.USE_ACCENT_COLOR_FOR_EVERYTHING);
+        this._appKeys = CONSTANTS.APPS;
+
         this._exception = this._getSetting(this._settingsKeys.DONT_SHOW);
+        this._tooltipInfo = this._getTooltipInfo();
+        this._tooltipData = this._getTooltipData();
     }
 
     // get a value from Settings
@@ -126,26 +129,13 @@ class Tooltip {
         return hasNull ? null : convExp;
     }
 
-    // determines what type of tooltip should be shown
-    // * if the user is a gm -> FULL
-    // * if visibility = owned
-    //   ** user is the owner of the token -> FULL
-    // * if visibility = friendly
-    //   ** the token is friendly || user can observe the token -> FULL
-    // * if visibility = all
-    //   ** the token is hostile -> PARTIAL
-    private _tooltipType(): string {
-        if (game?.user?.isGM) return this._tooltipTypes.FULL;
-        if (this._visibility === 'gm') return this._tooltipTypes.NONE;
-        if (this._token?.actor?.owner) return this._tooltipTypes.FULL;
+    // the tooltip type is determined by the type of actor the token is attached to
+    // and if the user isa player or a GM
+    private _getTooltipInfo(): any {
+        const isGM = game?.user?.isGM;
+        const actorType = this._token?.actor?.data?.type;
 
-        const isFriendly = this._token?.data?.disposition === CONST?.TOKEN_DISPOSITIONS?.FRIENDLY;
-        const isObservable = this._token?.actor?.permission === CONST?.ENTITY_PERMISSIONS?.OBSERVER;
-
-        if ((isFriendly || isObservable) && (this._visibility === 'friendly' || this._visibility === 'all')) return this._tooltipTypes.FULL;
-        if (this._visibility === 'all') return this._tooltipTypes.PARTIAL;
-
-        return this._tooltipTypes.NONE;
+        return {isGM, actorType};
     }
 
     // appends stats with only a value
@@ -186,36 +176,94 @@ class Tooltip {
         }
     }
 
-    // generates an array of stats that should be displayed
-    private _getTooltipData(tooltipType: string): any {
-        const stats = [];
-        const isTypeFull = tooltipType === this._tooltipTypes.FULL;
+    // determines if for this type of actor there is custom data, or the default should be used
+    private _getActorData(): any {
+        const defaultType = this._appKeys.TOOLTIP_DEFAULT_ACTOR_ID;
+        const actors = this._getSetting(this._settingsKeys.ACTORS);
+        if (!actors.length) return {};
 
-        const itemList = this._getSetting(isTypeFull ? this._settingsKeys.TOOLTIP_ITEMS : this._settingsKeys.HOSTILE_ITEMS);
+        // determine the actor we are working with
+        let actor = null;
+        for (let i = 0; i < actors.length; i++) {
+            const a = actors[i];
+            if (a.id === this._tooltipInfo.actorType) {
+                actor = a;
+                break;
+            }
+        }
+        if (!actor) return {};
+
+        // determines if we should get the data from the gms settings or from players
+        const settings = this._getSetting(this._tooltipInfo.isGM ? this._settingsKeys.GM_SETTINGS : this._settingsKeys.PLAYER_SETTINGS);
+        // if the actor has custom data we try to get that, if not we use the default
+        return settings?.[actor.custom ? this._tooltipInfo.actorType : defaultType] || {};
+    }
+
+    // TODO
+    private _getActorDisposition(staticData: any): string {
+        return staticData?.tokenDispositions?.reverse()?.[parseInt(this._token?.data?.disposition) + 1];
+    }
+
+    // TODO
+    private _getItemListForDisposition(items: any, disposition: string) {
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            if (item.disposition === disposition) return item.items;
+        }
+        return [];
+    }
+
+    // TODO
+    private _getActorDisplayName(staticData: any): string {
+        const tokenName = this._token?.data?.name;
+
+        if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) return tokenName;
+
+        if (!this._tooltipInfo.isGM) {
+            // here I do some logic that I don't really like but I can't find a good way of doing it
+            const tokenDisposition = parseInt(this._token?.data?.disposition) + 1; // adding a +1 because the numbers start from -1 (hostile)
+            const revDispositions = staticData.dispositions.reverse();
+            const index = revDispositions.indexOf(staticData.displayNameInTooltip);
+
+            // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
+            // tokenDisposition = -1 + 1 (0) <=> HOSTILE
+            // index = indexOf('NEUTRAL') <=> 1
+            // In this case we don't want to show the name so: index > tokenDisposition => NO NAME
+            if (index <= tokenDisposition) return tokenName
+        }
+
+        return null;
+    }
+
+    // generates an array of stats that should be displayed
+    private _getTooltipData(): any {
+        const data = this._getActorData();
+        if (!data) return {stats: []};
+
+        const stats = [];
+        const staticData = data.static;
+        const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData));
 
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
             const value = this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
 
             if (this._exception !== '' && value?.toString() === this._exception) return {stats: []};
-            if (this._useAccentColor) item.color = this._forceAccentColor;
+            if (staticData.useAccentEverywhere) item.color = staticData.accentColor;
 
             this._appendStat(item, value, stats);
         }
 
-        const tokenName = this._getSetting(this._settingsKeys.DISPLAY_NAMES_IN_TOOLTIP) ? this._token?.data?.name : null;
+        const tokenName = this._getActorDisplayName(staticData);
+        this._accentColor = staticData.accentColor;
 
-        if (isTypeFull) Utils.debug({tokenName, data: this._data});
-
+        Utils.debug({tokenName, data: this._data});
         return {moduleName: this._moduleName, stats, tokenName};
     }
 
     // determines what should be shown in the tooltip
     private async _buildTooltipContent(): Promise<HTMLElement> {
-        const type = this._tooltipType();
-        if (type === this._tooltipTypes.NONE) return null;
-
-        const data = this._getTooltipData(type);
+        const data = this._tooltipData;
         if (!data.stats.length) return null;
 
         return renderTemplate(this._template, data)
@@ -253,7 +301,7 @@ class Tooltip {
 
         const position = {
             zIndex: this._token.zIndex,
-            color: this._forceAccentColor,
+            color: this._accentColor,
         };
 
         switch (this._where) {

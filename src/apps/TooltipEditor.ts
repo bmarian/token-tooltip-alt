@@ -156,7 +156,7 @@ export default class TooltipEditor extends FormApplication {
             for (let j = 0; j < items.length; j++) {
                 const item = items[j];
                 if (item.disposition === disposition) {
-                    returnItems.push(item)
+                    returnItems.push(item);
                     add = false;
                     break;
                 }
@@ -184,10 +184,13 @@ export default class TooltipEditor extends FormApplication {
         const playerStatic = player.static;
         playerStatic[tokenDis] = tokenDispositions;
 
+        const gmStatic = gm.static;
+        gmStatic[tokenDis] = tokenDispositions;
+
         // update the settings
         gmSettings[type] = {
             items: this._persistEmptyPresets(gmItems, tokenDispositions),
-            static: gm.static,
+            static: gmStatic,
         };
         playerSettings[type] = {
             items: this._persistEmptyPresets(playerItems, tokenDispositions),
