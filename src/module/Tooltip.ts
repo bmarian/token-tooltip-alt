@@ -214,13 +214,13 @@ class Tooltip {
         if (!this._tooltipInfo.isGM) {
             // here I do some logic that I don't really like but I can't find a good way of doing it
             const tokenDisposition = parseInt(this._token?.data?.disposition) + 1; // adding a +1 because the numbers start from -1 (hostile)
-            const index = staticData.tokenDispositions.indexOf(staticData.displayNameInTooltip);
+            const index = staticData?.tokenDispositions?.indexOf(staticData.displayNameInTooltip);
 
             // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
             // tokenDisposition = -1 + 1 (0) <=> HOSTILE
-            // index = indexOf('FRIENDLY') <=> 0
+            // index = indexOf('FRIENDLY') <=> 2
             // In this case we don't want to show the name so: index > tokenDisposition => NO NAME
-            if (index <= tokenDisposition) return tokenName
+            if (index <= tokenDisposition) return tokenName;
         }
 
         return null;
@@ -232,7 +232,11 @@ class Tooltip {
         if (!data) return {stats: []};
 
         const stats = [];
-        const staticData = data.static;
+        const staticData = {
+            ...data.static,
+            // This is needed to not modify the original object, and also to reverse it only once here
+            tokenDispositions: Utils.clone(data?.static?.tokenDispositions)?.reverse(),
+        };
         const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData?.tokenDispositions));
 
         if (!staticData || !itemList.length) return {stats: []};
