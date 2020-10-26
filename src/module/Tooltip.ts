@@ -222,12 +222,11 @@ class Tooltip {
         if (!this._tooltipInfo.isGM) {
             // here I do some logic that I don't really like but I can't find a good way of doing it
             const tokenDisposition = parseInt(this._token?.data?.disposition) + 1; // adding a +1 because the numbers start from -1 (hostile)
-            const revDispositions = staticData.dispositions.reverse();
-            const index = revDispositions.indexOf(staticData.displayNameInTooltip);
+            const index = staticData.tokenDispositions.indexOf(staticData.displayNameInTooltip);
 
             // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
             // tokenDisposition = -1 + 1 (0) <=> HOSTILE
-            // index = indexOf('NEUTRAL') <=> 1
+            // index = indexOf('FRIENDLY') <=> 0
             // In this case we don't want to show the name so: index > tokenDisposition => NO NAME
             if (index <= tokenDisposition) return tokenName
         }
