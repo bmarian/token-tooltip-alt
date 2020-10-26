@@ -36,7 +36,6 @@ class Tooltip {
     private readonly _exception;
     private readonly _moduleName;
     private readonly _tooltipInfo;
-    private readonly _tooltipData;
 
     constructor(
         token?: any,
@@ -49,7 +48,8 @@ class Tooltip {
         path?: string,
         visibility?: string,
         template?: string,
-        gameBody?: JQuery
+        gameBody?: JQuery,
+        tooltipInfo?: any,
     ) {
         this._token = token;
         this._themeClass = themeClass;
@@ -60,6 +60,7 @@ class Tooltip {
         this._animSpeed = animSpeed;
         this._visibility = visibility;
         this._template = template;
+        this._tooltipInfo = tooltipInfo;
 
         this._gameBody = gameBody;
         this._moduleName = Utils.moduleName;
@@ -69,8 +70,6 @@ class Tooltip {
         this._appKeys = CONSTANTS.APPS;
 
         this._exception = this._getSetting(this._settingsKeys.DONT_SHOW);
-        this._tooltipInfo = this._getTooltipInfo();
-        this._tooltipData = this._getTooltipData();
     }
 
     // get a value from Settings
@@ -127,15 +126,6 @@ class Tooltip {
         });
 
         return hasNull ? null : convExp;
-    }
-
-    // the tooltip type is determined by the type of actor the token is attached to
-    // and if the user isa player or a GM
-    private _getTooltipInfo(): any {
-        const isGM = game?.user?.isGM;
-        const actorType = this._token?.actor?.data?.type;
-
-        return {isGM, actorType};
     }
 
     // appends stats with only a value
@@ -199,12 +189,12 @@ class Tooltip {
         return settings?.[actor.custom ? this._tooltipInfo.actorType : defaultType] || {};
     }
 
-    // TODO
-    private _getActorDisposition(staticData: any): string {
-        return staticData?.tokenDispositions?.reverse()?.[parseInt(this._token?.data?.disposition) + 1];
+    // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
+    private _getActorDisposition(tokenDispositions: Array<string>): string {
+        return tokenDispositions?.[parseInt(this._token?.data?.disposition) + 1];
     }
 
-    // TODO
+    // This returns the itemList for a given disposition
     private _getItemListForDisposition(items: any, disposition: string) {
         for (let i = 0; i < items?.length; i++) {
             const item = items[i];
@@ -213,7 +203,8 @@ class Tooltip {
         return [];
     }
 
-    // TODO
+    // Determines if the tooltip should have the name shown, for the GM this is a simple yes or no answer
+    // for players this gets a little bit complicated
     private _getActorDisplayName(staticData: any): string {
         if (!staticData) return null;
 
@@ -242,7 +233,7 @@ class Tooltip {
 
         const stats = [];
         const staticData = data.static;
-        const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData));
+        const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData?.tokenDispositions));
 
         if (!staticData || !itemList.length) return {stats: []};
 
@@ -257,6 +248,8 @@ class Tooltip {
         }
 
         const tokenName = this._getActorDisplayName(staticData);
+
+        // FIXME: this should not be here I think, but I am sleep deprived and running on beer so what do I know
         this._accentColor = staticData.accentColor;
 
         Utils.debug({tokenName, data: this._data});
@@ -265,7 +258,7 @@ class Tooltip {
 
     // determines what should be shown in the tooltip
     private async _buildTooltipContent(): Promise<HTMLElement> {
-        const data = this._tooltipData;
+        const data = this._getTooltipData();
         if (!data.stats.length) return null;
 
         return renderTemplate(this._template, data)
