@@ -28,6 +28,15 @@ class TooltipFactory {
         return where !== 'surprise' ? where : positions[Math.floor(Math.random() * positions.length)];
     }
 
+    // returns some useful info used in the tooltip,
+    // if the user is a GM, and the actor type
+    private _getTooltipInfo(token: any): any {
+        return {
+            isGM: game?.user?.isGM,
+            actorType: token?.actor?.data?.type
+        };
+    }
+
     // create an array of data needed to initialize a tooltip
     private _getTooltipData(token: any): any {
         return [
@@ -42,6 +51,7 @@ class TooltipFactory {
             this._getSetting(this._settingKeys.TOOLTIP_VISIBILITY) || 'gm',  // visibility
             CONSTANTS.TEMPLATES.TOOLTIP,                                     // template
             $('.game'),                                                 // gameBody
+            this._getTooltipInfo(token),                                     // tooltipInfo
         ];
     }
 

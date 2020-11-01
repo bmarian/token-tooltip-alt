@@ -47,6 +47,10 @@ class Utils {
             this._consoleLog(output);
         }
     }
+
+    public clone(obj: any): any {
+        return JSON.parse(JSON.stringify(obj));
+    }
 }
 
 export default Utils.getInstance(false, true);
