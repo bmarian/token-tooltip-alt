@@ -11,7 +11,7 @@ export default class TooltipEditor extends FormApplication {
 
             resizable: true,
             submitOnChange: false,
-            closeOnSubmit: true,
+            closeOnSubmit: false,
             submitOnClose: false,
         };
     }
@@ -114,16 +114,46 @@ export default class TooltipEditor extends FormApplication {
         Utils.debug({gmSettings, playerSettings});
     }
 
+    // clone the settings from the above table
+    private async _cloneFromAboveClickEvent(ev: any): Promise<void> {
+        const $button = $(ev.target).closest('button');
+        const dType = $button.attr('dType');
+
+        const disposition = $button.attr('disposition');
+        const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
+        const copyIndex = Math.max(tokenDispositions.indexOf(disposition) - 1, 0);
+        const copyFrom = tokenDispositions[copyIndex];
+
+        const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+        const settings = data[this?.object?.actorType];
+        const items = settings.items;
+
+        const from = items.find((i) => i.disposition === copyFrom);
+        const to = items.find((i) => i.disposition === disposition);
+        if (!from || !to) return;
+
+        to.items = from.items;
+
+        // save the new settings
+        await this._setSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, data);
+
+        // rerender the application to make it get the new data
+        this.render();
+
+        Utils.debug({from, to});
+    }
+
     // add button events for the ones generated when the application is opened
     public activateListeners($html: JQuery<HTMLElement>): void {
         super.activateListeners($html);
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
         $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
+        $html.find(`.${Utils.moduleName}-button.clone`).on('click', this._cloneFromAboveClickEvent.bind(this));
     }
 
     // make the final items array (the one inside the tokenType.items)
-    private _extractItemsArray (items: any): any {
+    private _extractItemsArray(items: any): any {
         const {value, icon, expression, isNumber, color} = items;
         if (!(value && icon && expression)) return [];
 
@@ -163,7 +193,7 @@ export default class TooltipEditor extends FormApplication {
             items: [],
         }
     }
-    
+
     // adds empty presets for the deleted dispositions
     private _persistEmptyPresets(items: any, dispositions: Array<string>): any {
         // we need this to keep everything in order, otherwise the empty ones will be last
@@ -171,7 +201,7 @@ export default class TooltipEditor extends FormApplication {
 
         for (let i = 0; i < dispositions.length; i++) {
             const disposition = dispositions[i];
-            
+
             let add = true;
             for (let j = 0; j < items.length; j++) {
                 const item = items[j];
@@ -183,7 +213,7 @@ export default class TooltipEditor extends FormApplication {
             }
             if (add) returnItems.push(this._generateDefaultSettingsForDisposition(disposition));
         }
-        
+
         return returnItems;
     }
 
@@ -220,6 +250,8 @@ export default class TooltipEditor extends FormApplication {
         // save the new settings
         await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
         await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
+
+        ui?.notifications?.info(`Settings updated for ${type}.`);
         Utils.debug({gmSettings, playerSettings});
     }
 }
