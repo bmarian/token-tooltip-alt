@@ -130,7 +130,7 @@ class Tooltip {
 
     // appends stats with only a value
     private _appendSimpleStat(value: any, item: any, stats: Array<any>): void {
-        if (typeof value !== 'string' && isNaN(value)) return;
+        if (value === '' || (typeof value !== 'string' && isNaN(value))) return;
         const v = item.isNumber ? this._extractNumber(value) : value;
         stats.push({value: v, icon: item?.icon, color: item?.color});
     }
