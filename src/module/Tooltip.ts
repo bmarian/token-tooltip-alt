@@ -235,7 +235,7 @@ class Tooltip {
         const staticData = {
             ...data.static,
             // This is needed to not modify the original object, and also to reverse it only once here
-            tokenDispositions: Utils.clone(data?.static?.tokenDispositions)?.reverse(),
+            tokenDispositions: data?.static?.tokenDispositions ? Utils.clone(data?.static?.tokenDispositions)?.reverse() : [],
         };
         const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData?.tokenDispositions));
 

@@ -95,11 +95,31 @@ export default class TooltipEditor extends FormApplication {
         $(this).closest(`.${Utils.moduleName}-row`).remove();
     }
 
+    // the default delete event, just deletes the closest row
+    private async _importFromDefaultClickEvent(): Promise<void> {
+        const type = this?.object?.actorType;
+        const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
+        const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+
+        gmSettings[type] = gmSettings[CONSTANTS.SYSTEM_DEFAULT];
+        playerSettings[type] = playerSettings[CONSTANTS.SYSTEM_DEFAULT];
+
+        // save the new settings
+        await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
+        await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
+
+        // rerender the application to make it get the new data
+        this.render();
+
+        Utils.debug({gmSettings, playerSettings});
+    }
+
     // add button events for the ones generated when the application is opened
     public activateListeners($html: JQuery<HTMLElement>): void {
         super.activateListeners($html);
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
+        $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
     }
 
     // make the final items array (the one inside the tokenType.items)
