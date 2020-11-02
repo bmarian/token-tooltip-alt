@@ -33,7 +33,6 @@ class Tooltip {
     private readonly _template;
     private readonly _settingsKeys;
     private readonly _appKeys;
-    private readonly _exception;
     private readonly _moduleName;
     private readonly _tooltipInfo;
 
@@ -69,7 +68,6 @@ class Tooltip {
         this._settingsKeys = CONSTANTS.SETTING_KEYS;
         this._appKeys = CONSTANTS.APPS;
 
-        this._exception = this._getSetting(this._settingsKeys.DONT_SHOW);
     }
 
     // get a value from Settings
@@ -251,7 +249,6 @@ class Tooltip {
             const item = itemList[i];
             const value = this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
 
-            if (this._exception !== '' && value?.toString() === this._exception) return {stats: []};
             if (staticData.useAccentEverywhere) item.color = staticData.accentColor;
 
             this._appendStat(item, value, stats);

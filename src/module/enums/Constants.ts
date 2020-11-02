@@ -13,7 +13,6 @@ export const CONSTANTS = {
         TOKEN_DISPOSITIONS: 'tokenDispositions',
         TOOLTIP_POSITION: 'tooltipPosition',
         DARK_THEME: 'darkTheme',
-        DONT_SHOW: 'dontShow',
         DATA_SOURCE: 'dataSource',
         GM_SETTINGS: 'gmSettings',
         PLAYER_SETTINGS: 'playerSettings',
