@@ -44,7 +44,7 @@ class TooltipFactory {
             token,                                                           // token
             this._getSetting(this._settingKeys.DARK_THEME) ? 'dark' : '',    // themeClass
             getSystemTheme(),                                                // systemClass
-            this._getSetting(this._settingKeys.FONT_SIZE) || '1rem',         // fontSize
+            parseFloat(this._getSetting(this._settingKeys.FONT_SIZE)) || 1,  // fontSize
             this._getWhere(),                                                // where
             'none',                                                          // animType
             200,                                                             // animSpeed

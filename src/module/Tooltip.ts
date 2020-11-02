@@ -284,7 +284,7 @@ class Tooltip {
     // should only be called by _createTooltip()
     private _createContainer(): void {
         this._tooltip = $(`<div class="${this._moduleName}-tooltip-container ${this._systemClass} ${this._themeClass}"></div>`);
-        this._tooltip.css({fontSize: this._fontSize});
+        this._tooltip.css({fontSize: `${this._fontSize}rem`});
     }
 
     // appends the tooltip's container to the body

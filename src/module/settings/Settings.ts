@@ -40,9 +40,14 @@ class Settings {
             settings: {
                 name: "Font size",
                 hint: "Customize the tooltip's font size (e.g. 1.2rem | 15px).",
-                type: String,
+                type: Number,
                 config: true,
-                default: '1rem',
+                range: {
+                    min: 1,
+                    step: 0.1,
+                    max: 2.5,
+                },
+                default: 1.2,
             },
         },
         {
