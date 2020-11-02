@@ -14,8 +14,6 @@ You can also hold ALT to see the tooltips for all tokens on the map.
 - Click `Install Module`
 - And search for Token Tooltip Alt
 
-Manual Install: https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/src/module.json
-
 # How to use
 A few options are available for this module
 - `Tooltip visibility` :
