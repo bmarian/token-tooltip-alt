@@ -8,7 +8,7 @@ class Tooltip {
         // searches if the string is one path
         path: new RegExp(/^([\w_-]+\.)*([\w_-]+)$/),
         // searches for all the paths in a string
-        paths: new RegExp(/\[([\w_-]+\.)*([\w_-]+)\]/g),
+        paths: new RegExp(/<([\w_-]+\.)*([\w_-]+)>/g),
         // determines if the string is a number
         number: new RegExp(/\d+/),
         // searches for all the paths inside {}
