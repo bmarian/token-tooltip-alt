@@ -19,6 +19,7 @@ export const CONSTANTS = {
         PLAYER_SETTINGS: 'playerSettings',
         TOOLTIP_MANAGER: 'tooltipManager',
         ACTORS: 'actors',
+        CLIPBOARD: 'clipboard',
 
         // old settings
         TOOLTIP_ITEMS: 'tooltipItems',

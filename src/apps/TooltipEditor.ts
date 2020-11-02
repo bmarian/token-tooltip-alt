@@ -114,21 +114,6 @@ export default class TooltipEditor extends FormApplication {
         Utils.debug({gmSettings, playerSettings});
     }
 
-    // handle the clipboard copy event to make sure it covers other browsers too
-    private _handleClipboardCopy(text: string): void {
-        // FIXME: find a solution for people that are using older browsers
-        navigator?.clipboard?.writeText(text)?.then(() => Utils.debug({text}))?.catch((err) => Utils.debug(err));
-
-        // const copyEvent = new ClipboardEvent('copy');
-        // copyEvent.clipboardData.items.add(text, 'text/plain');
-        // document.dispatchEvent(copyEvent);
-    }
-
-    private _handleClipboardPaste(cb): void {
-        // FIXME: find a solution for people that are using older browsers
-        navigator?.clipboard?.readText()?.then(cb);
-    }
-
     // clone the settings from the above table
     private _copyToClipboard(ev: any): void {
         const $button = $(ev.target).closest('button');
@@ -141,13 +126,12 @@ export default class TooltipEditor extends FormApplication {
         const settings = data[this?.object?.actorType];
         const items = settings.items;
         const from = items.find((i) => i.disposition === disposition);
-        const clipBoardData = JSON.stringify(from?.items);
 
-        this._handleClipboardCopy(clipBoardData);
+        this._setSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD, from?.items).then(() => Utils.debug(from?.items));
     }
 
     // clone the settings from the above table
-    private _pasteFromClipboard(ev: any): void {
+    private async _pasteFromClipboard(ev: any): Promise<void> {
         const $button = $(ev.target).closest('button');
         const dType = $button.attr('dType');
         const disposition = $button.attr('disposition');
@@ -157,25 +141,17 @@ export default class TooltipEditor extends FormApplication {
         const items = settings.items;
         const to = items.find((i) => i.disposition === disposition);
 
-        const form = this;
-        const callback = async (text: string) => {
-            try {
-                const clipBoardData = JSON.parse(text);
-                if (!clipBoardData || !clipBoardData.length) return;
-                to.items = clipBoardData;
+        const clipboardData = this._getSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD);
+        if (!clipboardData || !clipboardData.length) return;
 
-                await form._setSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, data);
+        to.items = clipboardData;
 
-                // render the form to save the new data
-                form.render();
+        await this._setSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, data);
 
-                Utils.debug({clipBoardData});
-            } catch (err) {
-                Utils.debug(err);
-            }
-        };
+        // render the form to save the new data
+        this.render();
 
-        this._handleClipboardPaste(callback);
+        Utils.debug({clipboardData});
     }
 
     // add button events for the ones generated when the application is opened

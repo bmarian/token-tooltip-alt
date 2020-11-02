@@ -146,6 +146,13 @@ class Settings {
                 default: [],
             },
         },
+        {
+            key: this._settingKeys.CLIPBOARD,
+            settings: {
+                type: Object,
+                default: [],
+            },
+        },
     ];
     // this is a list with all the old settings before v2.0.0
     private _oldHiddenConfigureSettings = [
