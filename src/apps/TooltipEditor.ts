@@ -265,6 +265,7 @@ export default class TooltipEditor extends FormApplication {
         await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
         await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
 
+        ui?.notifications?.info(`Settings updated for ${type}.`);
         Utils.debug({gmSettings, playerSettings});
     }
 }
