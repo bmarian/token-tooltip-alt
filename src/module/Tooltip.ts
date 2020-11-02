@@ -1,5 +1,5 @@
 import Utils from "./Utils";
-import stringMath from "../lib/MathEngine";
+import {doMath} from "../lib/MathEngine";
 import {CONSTANTS} from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
 
@@ -8,7 +8,7 @@ class Tooltip {
         // searches if the string is one path
         path: new RegExp(/^([\w_-]+\.)*([\w_-]+)$/),
         // searches for all the paths in a string
-        paths: new RegExp(/([\w_-]+\.)*([\w_-]+)/g),
+        paths: new RegExp(/\[([\w_-]+\.)*([\w_-]+)\]/g),
         // determines if the string is a number
         number: new RegExp(/\d+/),
         // searches for all the paths inside {}
@@ -17,7 +17,7 @@ class Tooltip {
         minus: new RegExp(/-/),
     }
     private _tooltip = null;
-    private _doStringMath = stringMath;
+    private _doStringMath = doMath;
     private _accentColor = '#000000';
 
     private readonly _token;
@@ -103,8 +103,9 @@ class Tooltip {
     private _getOperationData(data: any, operation: string): any {
         const t = this;
         const convOp = operation.replace(this._reg.paths, (dataPath: string) => {
-            if (t._reg.number.test(dataPath) || t._reg.minus.test(dataPath)) return dataPath;
-            return t._extractNumber(t._getNestedData(this._data, dataPath));
+            const dp = dataPath.substring(1, dataPath.length - 1);
+            if (t._reg.number.test(dp) || t._reg.minus.test(dp)) return dp;
+            return t._extractNumber(t._getNestedData(this._data, dp));
         });
         return this._doStringMath(convOp);
     }
@@ -120,6 +121,11 @@ class Tooltip {
             if (value === null) {
                 hasNull = true;
                 return '';
+            }
+
+            if (typeof value === 'object') {
+                const entries = value?.entries;
+                return entries && entries.reduce((e, v) => e + v + ' ', '');
             }
 
             return value;
