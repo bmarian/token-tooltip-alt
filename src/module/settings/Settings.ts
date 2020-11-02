@@ -149,15 +149,6 @@ class Settings {
     // this is a list with all the old settings before v2.0.0
     private _oldHiddenConfigureSettings = [
         {
-            key: this._settingKeys.PORTED,
-            settings: {
-                type: Boolean,
-                scope: "world",
-                restricted: true,
-                default: false,
-            },
-        },
-        {
             key: this._settingKeys.TOOLTIP_ITEMS,
             settings: {
                 type: Object,
@@ -173,42 +164,6 @@ class Settings {
                 scope: "world",
                 restricted: true,
                 default: [],
-            },
-        },
-        {
-            key: this._settingKeys.TOOLTIP_VISIBILITY,
-            settings: {
-                type: String,
-                scope: "world",
-                restricted: true,
-                default: "gm",
-            },
-        },
-        {
-            key: this._settingKeys.ACCENT_COLOR,
-            settings: {
-                type: String,
-                scope: "world",
-                restricted: true,
-                default: '#000000',
-            },
-        },
-        {
-            key: this._settingKeys.DISPLAY_NAMES_IN_TOOLTIP,
-            settings: {
-                type: Boolean,
-                scope: "world",
-                restricted: true,
-                default: true,
-            },
-        },
-        {
-            key: this._settingKeys.USE_ACCENT_COLOR_FOR_EVERYTHING,
-            settings: {
-                type: Boolean,
-                scope: "world",
-                restricted: true,
-                default: false,
             },
         },
     ]
