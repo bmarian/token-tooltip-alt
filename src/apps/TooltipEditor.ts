@@ -114,33 +114,68 @@ export default class TooltipEditor extends FormApplication {
         Utils.debug({gmSettings, playerSettings});
     }
 
+    // handle the clipboard copy event to make sure it covers other browsers too
+    private _handleClipboardCopy(text: string): void {
+        // FIXME: find a solution for people that are using older browsers
+        navigator?.clipboard?.writeText(text)?.then(() => Utils.debug({text}))?.catch((err) => Utils.debug(err));
+
+        // const copyEvent = new ClipboardEvent('copy');
+        // copyEvent.clipboardData.items.add(text, 'text/plain');
+        // document.dispatchEvent(copyEvent);
+    }
+
+    private _handleClipboardPaste(cb): void {
+        // FIXME: find a solution for people that are using older browsers
+        navigator?.clipboard?.readText()?.then(cb);
+    }
+
     // clone the settings from the above table
-    private async _cloneFromAboveClickEvent(ev: any): Promise<void> {
+    private _copyToClipboard(ev: any): void {
         const $button = $(ev.target).closest('button');
         const dType = $button.attr('dType');
-
         const disposition = $button.attr('disposition');
-        const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
-        const copyIndex = Math.max(tokenDispositions.indexOf(disposition) - 1, 0);
-        const copyFrom = tokenDispositions[copyIndex];
+
+        // save the data first because we take it from the object in the backend
+        this.render();
+        const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+        const settings = data[this?.object?.actorType];
+        const items = settings.items;
+        const from = items.find((i) => i.disposition === disposition);
+        const clipBoardData = JSON.stringify(from?.items);
+
+        this._handleClipboardCopy(clipBoardData);
+    }
+
+    // clone the settings from the above table
+    private _pasteFromClipboard(ev: any): void {
+        const $button = $(ev.target).closest('button');
+        const dType = $button.attr('dType');
+        const disposition = $button.attr('disposition');
 
         const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
         const settings = data[this?.object?.actorType];
         const items = settings.items;
-
-        const from = items.find((i) => i.disposition === copyFrom);
         const to = items.find((i) => i.disposition === disposition);
-        if (!from || !to) return;
 
-        to.items = from.items;
+        const form = this;
+        const callback = async (text: string) => {
+            try {
+                const clipBoardData = JSON.parse(text);
+                if (!clipBoardData || !clipBoardData.length) return;
+                to.items = clipBoardData;
 
-        // save the new settings
-        await this._setSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, data);
+                await form._setSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, data);
 
-        // rerender the application to make it get the new data
-        this.render();
+                // render the form to save the new data
+                form.render();
 
-        Utils.debug({from, to});
+                Utils.debug({clipBoardData});
+            } catch (err) {
+                Utils.debug(err);
+            }
+        };
+
+        this._handleClipboardPaste(callback);
     }
 
     // add button events for the ones generated when the application is opened
@@ -149,7 +184,8 @@ export default class TooltipEditor extends FormApplication {
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
         $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
-        $html.find(`.${Utils.moduleName}-button.clone`).on('click', this._cloneFromAboveClickEvent.bind(this));
+        $html.find(`.${Utils.moduleName}-button.copy`).on('click', this._copyToClipboard.bind(this));
+        $html.find(`.${Utils.moduleName}-button.paste`).on('click', this._pasteFromClipboard.bind(this));
     }
 
     // make the final items array (the one inside the tokenType.items)
