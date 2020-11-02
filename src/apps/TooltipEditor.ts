@@ -121,13 +121,15 @@ export default class TooltipEditor extends FormApplication {
         const disposition = $button.attr('disposition');
 
         // save the data first because we take it from the object in the backend
-        this.render();
-        const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
-        const settings = data[this?.object?.actorType];
-        const items = settings.items;
-        const from = items.find((i) => i.disposition === disposition);
+        // @ts-ignore
+        this.submit({}).then(() => {
+            const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+            const settings = data[this?.object?.actorType];
+            const items = settings.items;
+            const from = items.find((i) => i.disposition === disposition);
 
-        this._setSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD, from?.items).then(() => Utils.debug(from?.items));
+            this._setSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD, from?.items).then(() => Utils.debug(from?.items));
+        });
     }
 
     // clone the settings from the above table
@@ -155,7 +157,7 @@ export default class TooltipEditor extends FormApplication {
     }
 
     // add button events for the ones generated when the application is opened
-    public activateListeners($html: JQuery<HTMLElement>): void {
+    public activateListeners($html: JQuery): void {
         super.activateListeners($html);
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
@@ -263,7 +265,6 @@ export default class TooltipEditor extends FormApplication {
         await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
         await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
 
-        ui?.notifications?.info(`Settings updated for ${type}.`);
         Utils.debug({gmSettings, playerSettings});
     }
 }
