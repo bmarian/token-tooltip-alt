@@ -49,7 +49,6 @@ class TooltipFactory {
             'none',                                                          // animType
             200,                                                             // animSpeed
             this._getSetting(this._settingKeys.DATA_SOURCE) || '',           // path
-            this._getSetting(this._settingKeys.TOOLTIP_VISIBILITY) || 'gm',  // visibility
             CONSTANTS.TEMPLATES.TOOLTIP,                                     // template
             $('.game'),                                                 // gameBody
             this._getTooltipInfo(token),                                     // tooltipInfo

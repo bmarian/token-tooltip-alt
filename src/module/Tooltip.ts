@@ -29,7 +29,6 @@ class Tooltip {
     private readonly _animType;
     private readonly _animSpeed;
     private readonly _gameBody;
-    private readonly _visibility;
     private readonly _template;
     private readonly _settingsKeys;
     private readonly _appKeys;
@@ -45,7 +44,6 @@ class Tooltip {
         animType?: string,
         animSpeed?: number,
         path?: string,
-        visibility?: string,
         template?: string,
         gameBody?: JQuery,
         tooltipInfo?: any,
@@ -57,7 +55,6 @@ class Tooltip {
         this._where = where;
         this._animType = animType;
         this._animSpeed = animSpeed;
-        this._visibility = visibility;
         this._template = template;
         this._tooltipInfo = tooltipInfo;
 
