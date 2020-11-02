@@ -1,6 +1,7 @@
 import Tooltip from "./Tooltip";
 import {CONSTANTS, getSystemTheme} from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
+import Utils from "./Utils";
 
 class TooltipFactory {
     private static _instance: TooltipFactory;
@@ -43,7 +44,7 @@ class TooltipFactory {
             token,                                                           // token
             this._getSetting(this._settingKeys.DARK_THEME) ? 'dark' : '',    // themeClass
             getSystemTheme(),                                                // systemClass
-            this._getSetting(this._settingKeys.FONT_SIZE) || '1rem',         // fontSize
+            parseFloat(this._getSetting(this._settingKeys.FONT_SIZE)) || 1,  // fontSize
             this._getWhere(),                                                // where
             'none',                                                          // animType
             200,                                                             // animSpeed
@@ -89,6 +90,9 @@ class TooltipFactory {
 
     // determines if a token should display a tooltip or not based on the ACTORS settings
     private _shouldActorHaveTooltip(token: any): boolean {
+        const noTooltip = token.getFlag(Utils.moduleName, 'noTooltip');
+        if (noTooltip) return false;
+
         const actorType = token?.actor?.data?.type;
         const actors = this._getSetting(this._settingKeys.ACTORS);
         for (let i = 0; i < actors.length; i++) {

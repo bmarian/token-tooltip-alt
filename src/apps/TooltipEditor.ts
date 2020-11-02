@@ -115,41 +115,55 @@ export default class TooltipEditor extends FormApplication {
     }
 
     // clone the settings from the above table
-    private async _cloneFromAboveClickEvent(ev: any): Promise<void> {
+    private _copyToClipboard(ev: any): void {
         const $button = $(ev.target).closest('button');
         const dType = $button.attr('dType');
-
         const disposition = $button.attr('disposition');
-        const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
-        const copyIndex = Math.max(tokenDispositions.indexOf(disposition) - 1, 0);
-        const copyFrom = tokenDispositions[copyIndex];
+
+        // save the data first because we take it from the object in the backend
+        // @ts-ignore
+        this.submit({}).then(() => {
+            const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+            const settings = data[this?.object?.actorType];
+            const items = settings.items;
+            const from = items.find((i) => i.disposition === disposition);
+
+            this._setSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD, from?.items).then(() => Utils.debug(from?.items));
+        });
+    }
+
+    // clone the settings from the above table
+    private async _pasteFromClipboard(ev: any): Promise<void> {
+        const $button = $(ev.target).closest('button');
+        const dType = $button.attr('dType');
+        const disposition = $button.attr('disposition');
 
         const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
         const settings = data[this?.object?.actorType];
         const items = settings.items;
-
-        const from = items.find((i) => i.disposition === copyFrom);
         const to = items.find((i) => i.disposition === disposition);
-        if (!from || !to) return;
 
-        to.items = from.items;
+        const clipboardData = this._getSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD);
+        if (!clipboardData || !clipboardData.length) return;
 
-        // save the new settings
+        to.items = clipboardData;
+
         await this._setSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, data);
 
-        // rerender the application to make it get the new data
+        // render the form to save the new data
         this.render();
 
-        Utils.debug({from, to});
+        Utils.debug({clipboardData});
     }
 
     // add button events for the ones generated when the application is opened
-    public activateListeners($html: JQuery<HTMLElement>): void {
+    public activateListeners($html: JQuery): void {
         super.activateListeners($html);
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
         $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
-        $html.find(`.${Utils.moduleName}-button.clone`).on('click', this._cloneFromAboveClickEvent.bind(this));
+        $html.find(`.${Utils.moduleName}-button.copy`).on('click', this._copyToClipboard.bind(this));
+        $html.find(`.${Utils.moduleName}-button.paste`).on('click', this._pasteFromClipboard.bind(this));
     }
 
     // make the final items array (the one inside the tokenType.items)

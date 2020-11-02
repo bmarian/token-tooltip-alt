@@ -59,4 +59,11 @@
   & input[type="color"] {
     width: 50px;
   }
+
+  & .#{$module-name}-button {
+    &.copy,
+    &.paste {
+      flex: 0.5;
+    }
+  }
 }

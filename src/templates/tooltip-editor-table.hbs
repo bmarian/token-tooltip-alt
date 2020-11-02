@@ -25,10 +25,11 @@
         <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.add" class="{{../moduleName}}-button add d_{{disposition}}">
             <i class="fa fa-plus"></i> <span>Add</span>
         </button>
-        {{#if (ne @index 0)}}
-            <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.clone" class="{{../moduleName}}-button clone d_{{disposition}}">
-                <i class="fas fa-edit"></i> <span>Copy from above</span>
-            </button>
-        {{/if}}
+        <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.copy" class="{{../moduleName}}-button copy d_{{disposition}}">
+            <i class="fas fa-clipboard"></i> <span>Copy</span>
+        </button>
+        <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.paste" class="{{../moduleName}}-button paste d_{{disposition}}">
+            <i class="fas fa-paste"></i> <span>Paste</span>
+        </button>
     </div>
 {{/each}}

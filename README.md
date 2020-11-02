@@ -14,97 +14,53 @@ You can also hold ALT to see the tooltips for all tokens on the map.
 - Click `Install Module`
 - And search for Token Tooltip Alt
 
-Manual Install: https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/src/module.json
-
 # How to use
-A few options are available for this module
-- `Tooltip visibility` :
 
-`Gm only` - only the GM will see tooltips
+## Game settings
 
-`Owned tokens` - the players will see tooltips for the tokens they own
+![game-settings](https://i.imgur.com/c8QRbIR.png)
 
-`Friendly tokens` - the players will see tooltips for all the tokens they own and all the tokens that are marked as friendly
+- `Tooltip placement`: Self-descriptive, chose where the tooltip should be shown.
+- `Font size`: You can change the font size to a value between 1 - 2.5 rem. **(Configurable by players)**
+- `Data source`: This is an advanced feature, with this you chose how deep into the token object the search for values start.
+- `Show all tooltips on ALT`: If true, when pressing ALT you will see a tooltip for every visible token on the scene.
+- `Dark theme`: If true, will show the tooltips with a dark theme. **(Configurable by players)**
+- `Show on <ALT>`: If true, when pressing ALT \*every visible token on the screen will display a tooltip.
+- `Show all on <ALT>`: If true, when pressing ALT \*every token on the screen will display a tooltip.
+- `Debug output`: If true, will display some useful debugging information in the console.
 
-`All tokens` - the players will see tooltips for all the tokens they own, all the friendly tokens, and the first 2 fields for the hostile tokens
-- `Tooltip position`: Self-descriptive, chose where the tooltip should be shown
-- `Data source`: This is an advanced feature, with this you chose how deep into the token object the search for values start. (I don't know how to explain this better, take a look at the `Tracking a flag` example.)
-- `Don't show`: This option can be used to specify a value (e.g. -99), if any of the tracked values are equal to this no tooltip will be shown for that token. If left blank the tooltip will follow the normal rules.
-- `Show all tooltips on ALT`: If true, when pressing ALT you will see a tooltip for every visible token on the scene
-- `Show tooltips for hidden tokens on ALT`: If this is true you when pressing alt you will see tooltips for all tokens on the scene
-- `Display token name`: Display the token name in the tooltip
-- `Debug output`: Gives you some debug output in the console, might be useful when hovering over a token to see the structure of the data object  
-- `Font size`: You can change the font size to anything you want (e.g. 1.2rem/15px)
-- `Tooltip editor`: You can customize what you see in the tooltip there
+## Token configuration
 
-#### Friendly/Hostile tokens
-`Color` - Allows you to change the color for every icon, if nothing is set it will default to black (`#000000`) 
+![token-config](https://i.imgur.com/yyoHdEb.png)
 
-`Value` - can be found double right-clicking on a token -> resources tab -> go through the attributes possible for bars, you can use anything from there
+An option is available in the `Resources` tab of the token configuration. `No tooltip`, if true that specific token will not display a tooltip.
 
-`Icon` - You can use any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery) (this is the icon db used by Foundry), so just get any icon name from their website and add 'fa-' in front (e.g. the icon is called heart so fa-heart)
+## Tooltip manager
 
-`Exp` - Marks if the row has an expression. You can write anything in a custom expression, the only thing that matters is to have the attributes you want to show inside `{}` (e.g. `{attributes.hp}`)
+![tooltip-manager](https://i.imgur.com/8BcTPTY.png)
 
-`Nr` - Forces only the number from a string to be shown (e.g. dnd5e: `{attributes.speed.value}` -> 30 ft. but you want to show only 30, this option will help with that)
+This section displays all the available actor types, from here you can decide if they should display a tooltip, by checking the enable checkbox. 
 
-#### Hostile tokens 
-This is what players would see for hostile tokens if your Tooltip visibility is set to All tokens
+If the custom checkbox is not checked, the actor type will use the **default settings**.
 
-#### Display token name
-Display the token name in the tooltip 
+## Tooltip editor
 
-#### Dark theme 
-Provides a dark theme for the tooltip
+![tooltip-editor](https://i.imgur.com/nuc9OpY.png)
 
-#### Use accent color everywhere
-If set to true the tooltip will only use the accent color for everything
+This section is divided into two. The settings for the GM, and the settings for the PLAYER, so you could have full control over what players see versus what the gm sees.
 
-#### Font size
-You can change the font size to anything you want (e.g. 1.2rem/15px)
+### Settings
+- `Display name`:
+	- GM: If true, will display the name of the token in the tooltip.
+	- PLAYER: You can choose which token will display the name based on the disposition. (e.g. if set to NEUTRAL -> FRIENDLY and NEUTRAL tokens will display tooltips)
+- `Use accent color everywhere`: If true, instead of the colores set for every icon, the accent color will be used.
+- `Accent color`:  The border and title color.
 
-#### Accent color
-Set an accent color, used for the border
+### Tables
+You can have a different configuration for every token disposition.
 
-![custom](https://i.imgur.com/clVu89L.png)
-
-# Examples
-
-#### Getting what you want from the data
-There are two ways:
-- The _I don't like the console_ method, where you double right-clicking on a token -> resources tab -> and go through the attributes and chose what you want
-
-![token-config](https://i.imgur.com/c0h1bOY.png)
-
-- And the _I like me some console_, where you enable the `Debug output` option, and every time you hover over a token you will get the object from where I pull data
-
-![console-config](https://i.imgur.com/Vi6rFkn.png)
-
-#### You want to only show a value, not the entire string
-Just check the `Nr` checkbox, this will try to pull out a number from the string
-
-![professional-underlines](https://i.imgur.com/mEL6G9a.png)
-
-#### Show custom formulas
-Let's say you don't want to show your players the actual hp of a monster, but you still want to show them how much dmg they've done, 
-you can use a formula `{attributes.hp.max - attributes.hp.value}`
-
-![broken-heart](https://i.imgur.com/72aRZIL.png)
-
-This uses [string-math](https://github.com/devrafalko/string-math) so whatever works there should work here.
-
-#### Can I have multiple formulas?
-Of course! Use as many as you like, go wild!
-
-![multiple-formulas](https://i.imgur.com/I26dsGs.png)
-
-#### Make a different tooltip for the enemies
-
-![enemy](https://i.imgur.com/MGHA6UZ.png)
-
-#### Tracking a flag
-Flags are usually located in `token.data.flags`. To access them and other values we set the `Data source` to empty. 
-This means we are starting the search from the token object. Let's say we want to track the stealth rolls added by [Conditional Visibility](https://foundryvtt.com/packages/conditional-visibility/).
-It will look something like this: `data.flags.conditional-visibility._ste`, ugly I know, but the effect it's pretty nice.
-
-![flag-tracking](https://i.imgur.com/uFpA5xz.gif)
+- `Color`: Allows you to change the color for this item's icon.
+- `Value`: can be found double right-clicking on a token -> resources tab -> go through the attributes possible for bars, you can use anything from there.
+- `Icon`: You can use any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery). (e.g. the icon is called heart so fa-heart)
+- `Exp`: Marks the item as an expression. The engine behind this is [Math.js](https://mathjs.org/docs/expressions/index.html), please read the documentation to see what you can do with it. (e.g. `{hpv=<attributes.hp.value>; hpm=<attributes.hp.max>; hpv <= 0 ? "DEAD" : hpv < hpm/2 ? "HURT" : "HEALTY"}`, this example will show a different status depending on the ammount of HP a token has, any `<atribute>` will be replaced with a token atribute, everything else is handaled by Math.js.
+- `Nr`: Forces only the number from a string to be shown. (e.g. dnd5e: `attributes.speed.value` -> 30 ft. but you want to show only 30, this option will help with that)

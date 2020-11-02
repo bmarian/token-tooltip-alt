@@ -1,5 +1,5 @@
 import Utils from "./Utils";
-import stringMath from "../lib/MathEngine";
+import {doMath} from "../lib/MathEngine";
 import {CONSTANTS} from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
 
@@ -8,7 +8,7 @@ class Tooltip {
         // searches if the string is one path
         path: new RegExp(/^([\w_-]+\.)*([\w_-]+)$/),
         // searches for all the paths in a string
-        paths: new RegExp(/([\w_-]+\.)*([\w_-]+)/g),
+        paths: new RegExp(/<([\w_-]+\.)*([\w_-]+)>/g),
         // determines if the string is a number
         number: new RegExp(/\d+/),
         // searches for all the paths inside {}
@@ -17,7 +17,7 @@ class Tooltip {
         minus: new RegExp(/-/),
     }
     private _tooltip = null;
-    private _doStringMath = stringMath;
+    private _doStringMath = doMath;
     private _accentColor = '#000000';
 
     private readonly _token;
@@ -33,7 +33,6 @@ class Tooltip {
     private readonly _template;
     private readonly _settingsKeys;
     private readonly _appKeys;
-    private readonly _exception;
     private readonly _moduleName;
     private readonly _tooltipInfo;
 
@@ -69,7 +68,6 @@ class Tooltip {
         this._settingsKeys = CONSTANTS.SETTING_KEYS;
         this._appKeys = CONSTANTS.APPS;
 
-        this._exception = this._getSetting(this._settingsKeys.DONT_SHOW);
     }
 
     // get a value from Settings
@@ -103,8 +101,9 @@ class Tooltip {
     private _getOperationData(data: any, operation: string): any {
         const t = this;
         const convOp = operation.replace(this._reg.paths, (dataPath: string) => {
-            if (t._reg.number.test(dataPath) || t._reg.minus.test(dataPath)) return dataPath;
-            return t._extractNumber(t._getNestedData(this._data, dataPath));
+            const dp = dataPath.substring(1, dataPath.length - 1);
+            if (t._reg.number.test(dp) || t._reg.minus.test(dp)) return dp;
+            return t._extractNumber(t._getNestedData(this._data, dp));
         });
         return this._doStringMath(convOp);
     }
@@ -120,6 +119,11 @@ class Tooltip {
             if (value === null) {
                 hasNull = true;
                 return '';
+            }
+
+            if (typeof value === 'object') {
+                const entries = value?.entries;
+                return entries && entries.reduce((e, v) => e + v + ' ', '');
             }
 
             return value;
@@ -245,7 +249,6 @@ class Tooltip {
             const item = itemList[i];
             const value = this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
 
-            if (this._exception !== '' && value?.toString() === this._exception) return {stats: []};
             if (staticData.useAccentEverywhere) item.color = staticData.accentColor;
 
             this._appendStat(item, value, stats);
@@ -281,7 +284,7 @@ class Tooltip {
     // should only be called by _createTooltip()
     private _createContainer(): void {
         this._tooltip = $(`<div class="${this._moduleName}-tooltip-container ${this._systemClass} ${this._themeClass}"></div>`);
-        this._tooltip.css({fontSize: this._fontSize});
+        this._tooltip.css({fontSize: `${this._fontSize}rem`});
     }
 
     // appends the tooltip's container to the body

@@ -40,9 +40,14 @@ class Settings {
             settings: {
                 name: "Font size",
                 hint: "Customize the tooltip's font size (e.g. 1.2rem | 15px).",
-                type: String,
+                type: Number,
                 config: true,
-                default: '1rem',
+                range: {
+                    min: 1,
+                    step: 0.1,
+                    max: 2.5,
+                },
+                default: 1.2,
             },
         },
         {
@@ -56,19 +61,6 @@ class Settings {
                 config: true,
                 restricted: true,
                 default: 'actor.data.data',
-            },
-        },
-        {
-            key: this._settingKeys.DONT_SHOW,
-            settings: {
-                name: "Exception",
-                hint: "If one of the tracked values is equal to this one, that token will not display a tooltip. " +
-                    "Leave blank if you want a tooltip for every token.",
-                type: String,
-                scope: "world",
-                config: true,
-                restricted: true,
-                default: '',
             },
         },
         {
@@ -143,6 +135,13 @@ class Settings {
                 type: Object,
                 scope: "world",
                 restricted: true,
+                default: [],
+            },
+        },
+        {
+            key: this._settingKeys.CLIPBOARD,
+            settings: {
+                type: Object,
                 default: [],
             },
         },
