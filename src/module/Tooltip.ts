@@ -404,7 +404,7 @@ class Tooltip {
     public hide(): void {
         switch (this._animType) {
             case 'none': {
-                // this._destroyTooltip();
+                this._destroyTooltip();
                 break;
             }
             case 'fade': {
