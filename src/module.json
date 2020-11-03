@@ -23,7 +23,7 @@
     }
   ],
   "url": "https://github.com/bmarian/token-tooltip-alt",
-  "manifest": "https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/package/module-v2.0.3.json",
+  "manifest": "https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/src/module.json",
   "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v2.0.3/token-tooltip-alt-v2.0.3.zip",
   "changelog": "https://github.com/bmarian/token-tooltip-alt/releases"
 }
