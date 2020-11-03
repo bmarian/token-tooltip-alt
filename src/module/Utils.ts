@@ -48,6 +48,10 @@ class Utils {
         }
     }
 
+    public randomColorPicker(): string {
+        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+    }
+
     public clone(obj: any): any {
         return JSON.parse(JSON.stringify(obj));
     }

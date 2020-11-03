@@ -2,10 +2,16 @@
     {{#if tokenName}}
         <h4 class="{{moduleName}}-tooltip-item title"><span>{{tokenName}}</span></h4>
     {{/if}}
-    {{#each stats}}
-        <div class="{{../moduleName}}-tooltip-item">
-            <i class="fas {{icon}}" style="color: {{color}};"></i>
-            <span>{{value}}</span>
-        </div>
-    {{/each}}
+    <div class="{{moduleName}}-tooltip-items">
+        {{#each stats}}
+            <div class="{{../moduleName}}-tooltip-column">
+                {{#each this}}
+                    <div class="{{../../moduleName}}-tooltip-item">
+                        <i class="fas {{icon}}" style="color: {{color}};"></i>
+                        <span>{{value}}</span>
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
+    </div>
 </div>

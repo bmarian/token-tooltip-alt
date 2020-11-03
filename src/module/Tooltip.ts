@@ -34,6 +34,7 @@ class Tooltip {
     private readonly _appKeys;
     private readonly _moduleName;
     private readonly _tooltipInfo;
+    private readonly _maxRows;
 
     constructor(
         token?: any,
@@ -65,6 +66,7 @@ class Tooltip {
         this._settingsKeys = CONSTANTS.SETTING_KEYS;
         this._appKeys = CONSTANTS.APPS;
 
+        this._maxRows = this._getSetting(this._settingsKeys.MAX_ROWS) || 5;
     }
 
     // get a value from Settings
@@ -260,12 +262,30 @@ class Tooltip {
         return {moduleName: this._moduleName, stats, tokenName};
     }
 
+    // break the rows into columns
+    private _breakInColumns(stats: Array<any>): Array<Array<any>> {
+        if (stats.length <= this._maxRows) return [stats];
+
+        const colStats = [];
+        for (let i = 0; i < stats.length; i += this._maxRows) {
+            colStats.push(stats.slice(i, i + this._maxRows));
+        }
+
+        return colStats;
+    }
+
     // determines what should be shown in the tooltip
     private async _buildTooltipContent(): Promise<HTMLElement> {
         const data = this._getTooltipData();
         if (!data.stats.length) return null;
 
-        return renderTemplate(this._template, data)
+        const templateData = {
+            ...data,
+            stats: this._breakInColumns(data.stats)
+        };
+
+        Utils.debug(templateData);
+        return renderTemplate(this._template, templateData)
     }
 
     // populates the tooltip container with the build content, and returns if the tooltip has content

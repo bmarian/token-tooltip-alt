@@ -38,7 +38,7 @@ export default class TooltipManager extends FormApplication {
         const tokenDis = CONSTANTS.SETTING_KEYS.TOKEN_DISPOSITIONS;
 
         if (!(name in staticSettings)) staticSettings[name] = isPlayer ? tokenDispositions?.[0] : true;
-        if (!(accentColor in staticSettings)) staticSettings[accentColor] = '#000000';
+        if (!(accentColor in staticSettings)) staticSettings[accentColor] = Utils.randomColorPicker();
         if (!(useAccentEverywhere in staticSettings)) staticSettings[useAccentEverywhere] = false;
         staticSettings[tokenDis] = tokenDispositions;
     }

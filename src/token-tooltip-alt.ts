@@ -26,8 +26,6 @@ Hooks.on('renderTokenHUD', () => {
     TooltipFactory.removeTooltips();
 });
 Hooks.on('deleteToken', TooltipFactory.removeTooltips.bind(TooltipFactory));
-
-
 Hooks.on('renderTokenConfig', (tokenConfig: TokenConfig, $tokenConfig: JQuery, options: any): void => {
     const $resources = $tokenConfig.find('.tab[data-tab="resources"]');
     const noTooltip = tokenConfig.object.getFlag(Utils.moduleName, 'noTooltip');

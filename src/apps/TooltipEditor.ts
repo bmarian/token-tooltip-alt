@@ -75,7 +75,7 @@ export default class TooltipEditor extends FormApplication {
             disposition,
             type: dType,
             item: {
-                color: '#000000',
+                color: Utils.randomColorPicker(),
             }
         }
 

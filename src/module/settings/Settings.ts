@@ -39,7 +39,7 @@ class Settings {
             key: this._settingKeys.FONT_SIZE,
             settings: {
                 name: "Font size",
-                hint: "Customize the tooltip's font size (e.g. 1.2rem | 15px).",
+                hint: "Customize the tooltip's font size between 1 and 2.5 rem.",
                 type: Number,
                 config: true,
                 range: {
@@ -48,6 +48,21 @@ class Settings {
                     max: 2.5,
                 },
                 default: 1.2,
+            },
+        },
+        {
+            key: this._settingKeys.MAX_ROWS,
+            settings: {
+                name: "Max rows",
+                hint: "The maximum number of rows/columns.",
+                type: Number,
+                config: true,
+                range: {
+                    min: 1,
+                    step: 1,
+                    max: 20,
+                },
+                default: 5,
             },
         },
         {

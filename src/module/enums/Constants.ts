@@ -8,6 +8,7 @@ export const CONSTANTS = {
         DISPLAY_NAMES_IN_TOOLTIP: 'displayNameInTooltip',
         DEBUG_OUTPUT: 'debugOutput',
         FONT_SIZE: 'fontSize',
+        MAX_ROWS: 'maxRows',
         USE_ACCENT_COLOR_FOR_EVERYTHING: 'useAccentColorForEverything',
         ACCENT_COLOR: 'accentColor',
         TOKEN_DISPOSITIONS: 'tokenDispositions',
