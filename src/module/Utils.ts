@@ -49,7 +49,7 @@ class Utils {
     }
 
     public randomColorPicker(): string {
-        return '#' + (Math.random() * 0xFFFFFF << 0).toString(16);
+        return `#${Math.round((Math.random() * 0xFFFFFF)).toString(16).padStart(6, '0')}`;
     }
 
     public clone(obj: any): any {
