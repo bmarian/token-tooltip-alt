@@ -1,4 +1,5 @@
 .#{$module-name}-tooltip-container {
+  pointer-events: none;
   &.hidden {
     display: none;
   }

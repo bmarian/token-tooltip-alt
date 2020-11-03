@@ -346,6 +346,11 @@ class Tooltip {
                 position['left'] = tokenWT.tx - padding;
                 break;
             }
+            case 'overlay': {
+                position['top'] = tokenWT.ty - padding;
+                position['left'] = tokenWT.tx - padding;
+                break;
+            }
         }
 
         return position;
