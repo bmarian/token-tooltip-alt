@@ -166,6 +166,14 @@ export default class TooltipEditor extends FormApplication {
             $(tbody).find('tr').each((index, tr) => {
                const $tr = $(tr);
                $tr.attr('index', index);
+
+               $tr.find('input').each((_0, input) => {
+                   const $input = $(input);
+                   const name = $input.attr('name');
+
+                   const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
+                   $input.attr('name', newName);
+               });
             });
         }
 
