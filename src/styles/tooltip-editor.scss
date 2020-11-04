@@ -50,8 +50,17 @@
 
     & tbody {
       & .#{$module-name}-row_expression,
-      & .#{$module-name}-row_isNumber {
+      & .#{$module-name}-row_isNumber,
+      & .#{$module-name}-row_sort {
         text-align: center;
+      }
+
+      & .#{$module-name}-row_sort {
+        & .#{$module-name}-sort-handler {
+          & i {
+            cursor: grab;
+          }
+        }
       }
     }
   }

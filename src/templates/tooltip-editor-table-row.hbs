@@ -1,5 +1,8 @@
 <tr class="{{moduleName}}-row" index="{{index}}">
     <!-- name example: type = gm, disposition = neutral => gm.items.neutral.color.1 -->
+    <td class="{{moduleName}}-row_sort">
+        <span class="{{moduleName}}-sort-handler"><i class="fa fa-bars"></i></span>
+    </td>
     <td class="{{moduleName}}-row_color">
         <input type="color" name="{{type}}.items.{{disposition}}.color.{{index}}" value="{{item.color}}" data-dtype="String">
     </td>
