@@ -52,7 +52,7 @@ export const CONSTANTS = {
         'default': 'default',
     },
 
-    TOOLTIP_POSITIONS: ["top", "right", "bottom", "left"],
+    TOOLTIP_POSITIONS: ["top", "right", "bottom", "left", "overlay"],
 };
 
 export const getSystemTheme = (): any => {

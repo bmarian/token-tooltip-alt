@@ -1,6 +1,7 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
 import {CONSTANTS} from "../module/enums/Constants";
 import Utils from "../module/Utils";
+import "../lib/sortable.min.js";
 
 export default class TooltipEditor extends FormApplication {
     static get defaultOptions(): any {
@@ -159,6 +160,35 @@ export default class TooltipEditor extends FormApplication {
     // add button events for the ones generated when the application is opened
     public activateListeners($html: JQuery): void {
         super.activateListeners($html);
+
+        // sortable end event, we need to redraw the table inputs
+        const dragOverHandler = (tbody) => (evt) => {
+            $(tbody).find('tr').each((index, tr) => {
+               const $tr = $(tr);
+               $tr.attr('index', index);
+
+               $tr.find('input').each((_0, input) => {
+                   const $input = $(input);
+                   const name = $input.attr('name');
+
+                   const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
+                   $input.attr('name', newName);
+               });
+            });
+        }
+
+        // add sortable handlers
+        $html.find(`.${Utils.moduleName}-table tbody`).each((index, tbody) => {
+            const dragOverHandlerWithBody = dragOverHandler(tbody);
+            // @ts-ignore
+            new Sortable(tbody, {
+                scroll: true,
+                handle: `.${Utils.moduleName}-sort-handler`,
+                draggable: `.${Utils.moduleName}-row`,
+                animation: 150,
+                onEnd: dragOverHandlerWithBody,
+            });
+        });
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
         $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));

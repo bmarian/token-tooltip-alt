@@ -31,6 +31,7 @@ class Settings {
                     "right": "Right",
                     "bottom": "Bottom",
                     "left": "Left",
+                    "overlay": "Overlay",
                     "surprise": "Surprise me"
                 }
             },
