@@ -45,21 +45,12 @@ export default class TooltipManager extends FormApplication {
 
     // check if no defaults are present for a disposition and creates them
     private _createDefaultSettings(entitySettings: Array<any>, tokenDispositions: Array<string>): void {
-        let add;
-
         for (let i = 0; i < tokenDispositions.length; i++) {
             const tokenDisposition = tokenDispositions[i];
-            add = true;
 
-            for (let j = 0; j < entitySettings.length; j++) {
-                const entitySetting = entitySettings[j];
-                if (tokenDisposition === entitySetting.disposition) {
-                    add = false;
-                    break;
-                }
+            if (entitySettings?.[i]?.disposition !== tokenDisposition) {
+                entitySettings.splice(i, 0, this._generateDefaultSettingsForDisposition(tokenDisposition));
             }
-
-            if (add) entitySettings.push(this._generateDefaultSettingsForDisposition(tokenDisposition));
         }
     }
 
@@ -81,6 +72,8 @@ export default class TooltipManager extends FormApplication {
         const returnGmItems = [];
         const returnPlayerItems = [];
         const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
+        const gmDispositions = Utils.clone(tokenDispositions);
+        const playerDispositions = [CONSTANTS.APPS.OWNED_DISPOSITION, ...Utils.clone(tokenDispositions)];
 
         const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
@@ -98,14 +91,14 @@ export default class TooltipManager extends FormApplication {
         const playerStatic = playerSettingsForType.static || {};
 
         // verify/create the values for items
-        this._createDefaultSettings(gmItems, tokenDispositions);
-        this._createDefaultSettings(playerItems, tokenDispositions);
-        this._removeDeprecatedSettings(gmItems, tokenDispositions, returnGmItems);
-        this._removeDeprecatedSettings(playerItems, tokenDispositions, returnPlayerItems);
+        this._createDefaultSettings(gmItems, gmDispositions);
+        this._createDefaultSettings(playerItems, playerDispositions);
+        this._removeDeprecatedSettings(gmItems, gmDispositions, returnGmItems);
+        this._removeDeprecatedSettings(playerItems, playerDispositions, returnPlayerItems);
 
         // verify/create the values for static
-        this._createDefaultStatics(gmStatic, false, tokenDispositions);
-        this._createDefaultStatics(playerStatic, true, tokenDispositions);
+        this._createDefaultStatics(gmStatic, false, gmDispositions);
+        this._createDefaultStatics(playerStatic, true, playerDispositions);
 
         // set the new values
         gmSettingsForType.items = returnGmItems;

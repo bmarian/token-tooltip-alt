@@ -273,6 +273,9 @@ export default class TooltipEditor extends FormApplication {
 
         // re-add the tokenDispositions to the players static settings
         const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
+        const gmDispositions = Utils.clone(tokenDispositions);
+        const playerDispositions = [CONSTANTS.APPS.OWNED_DISPOSITION, ...Utils.clone(tokenDispositions)];
+
         const tokenDis = CONSTANTS.SETTING_KEYS.TOKEN_DISPOSITIONS;
         const playerStatic = player.static;
         playerStatic[tokenDis] = tokenDispositions;
@@ -282,11 +285,11 @@ export default class TooltipEditor extends FormApplication {
 
         // update the settings
         gmSettings[type] = {
-            items: this._persistEmptyPresets(gmItems, tokenDispositions),
+            items: this._persistEmptyPresets(gmItems, gmDispositions),
             static: gmStatic,
         };
         playerSettings[type] = {
-            items: this._persistEmptyPresets(playerItems, tokenDispositions),
+            items: this._persistEmptyPresets(playerItems, playerDispositions),
             static: playerStatic,
         };
 

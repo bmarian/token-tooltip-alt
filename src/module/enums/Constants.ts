@@ -45,6 +45,7 @@ export const CONSTANTS = {
         TOOLTIP_EDITOR_WIDTH: 1200,
 
         TOOLTIP_DEFAULT_ACTOR_ID: 'default',
+        OWNED_DISPOSITION: 'OWNED',
     },
 
     SYSTEM_DEFAULT: 'default',
