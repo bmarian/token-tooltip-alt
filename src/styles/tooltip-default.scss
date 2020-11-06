@@ -2,19 +2,18 @@
   &.default {
     background: url("../../ui/parchment.jpg") repeat;
 
-    & .#{$module-name}-tooltip-content {
 
-      & .#{$module-name}-tooltip-item {
-        &.title {
-          border-bottom: 1px solid;
-          & span {
-            color: black;
-          }
-        }
+    & .#{$module-name}-tooltip-item {
+      &.title {
+        border-bottom: 1px solid;
 
         & span {
           color: black;
         }
+      }
+
+      & span {
+        color: black;
       }
     }
 
@@ -22,22 +21,21 @@
       background: url("../../ui/denim075.png") repeat;
       box-shadow: 0 0 20px #000;
 
-      & .#{$module-name}-tooltip-content {
 
-        & .#{$module-name}-tooltip-item {
-          &.title {
-            border-bottom: 2px solid;
-
-            & span {
-              color: white;
-            }
-          }
+      & .#{$module-name}-tooltip-item {
+        &.title {
+          border-bottom: 2px solid;
 
           & span {
             color: white;
           }
         }
+
+        & span {
+          color: white;
+        }
       }
+
     }
   }
 }

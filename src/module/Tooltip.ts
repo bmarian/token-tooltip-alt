@@ -194,7 +194,12 @@ class Tooltip {
 
     // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
     private _getActorDisposition(tokenDispositions: Array<string>): string {
-        return tokenDispositions?.[parseInt(this._token?.data?.disposition) + 1];
+        const dispositionsWithoutOwned = tokenDispositions.filter(d => d !== CONSTANTS.APPS.OWNED_DISPOSITION);
+        const disposition = dispositionsWithoutOwned?.[parseInt(this._token?.data?.disposition) + 1];
+
+        if (this._tooltipInfo.isGM) return disposition;
+
+        return this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? CONSTANTS.APPS.OWNED_DISPOSITION : disposition;
     }
 
     // This returns the itemList for a given disposition

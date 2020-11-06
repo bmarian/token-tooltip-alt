@@ -1,11 +1,12 @@
 .#{$module-name}-tooltip-editor-window {
- & .window-content {
-   overflow-y: hidden;
- }
+  & .window-content {
+    overflow-y: hidden;
+  }
 }
 
 .#{$module-name}-form {
   height: 100%;
+
   & .#{$module-name}-container {
     &.gm {
       padding-right: 5px;
@@ -13,6 +14,7 @@
       overflow-x: hidden;
       height: 100%;
     }
+
     &.player {
       padding-left: 5px;
       padding-right: 3px;
@@ -20,6 +22,7 @@
       overflow-x: hidden;
       height: 100%;
     }
+
     &.form-group {
       align-items: normal;
       height: 94%;
@@ -30,21 +33,21 @@
     & thead {
       & tr {
         text-align: center;
+      }
 
-        // Just making things smaller to leve space for the value field
-        & .#{$module-name}-col_icon {
-          width: 100px;
-        }
+      // Just making things smaller to leve space for the value field
+      & .#{$module-name}-col_icon {
+        width: 100px;
+      }
 
-        & .#{$module-name}-col_expression,
-        & .#{$module-name}-col_isNumber {
-          width: 30px;
-        }
+      & .#{$module-name}-col_expression,
+      & .#{$module-name}-col_isNumber {
+        width: 30px;
+      }
 
-        & .#{$module-name}-col_delete,
-        & .#{$module-name}-col_color {
-          width: 50px;
-        }
+      & .#{$module-name}-col_delete,
+      & .#{$module-name}-col_color {
+        width: 50px;
       }
     }
 
@@ -55,11 +58,9 @@
         text-align: center;
       }
 
-      & .#{$module-name}-row_sort {
-        & .#{$module-name}-sort-handler {
-          & i {
-            cursor: grab;
-          }
+      & .#{$module-name}-sort-handler {
+        & i {
+          cursor: grab;
         }
       }
     }

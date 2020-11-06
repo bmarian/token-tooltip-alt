@@ -2,6 +2,7 @@
   &.hidden {
     display: none;
   }
+
   pointer-events: none;
   background: white;
 
@@ -13,36 +14,39 @@
 
   border: 2px solid;
   border-radius: 5px;
+}
 
-  & .#{$module-name}-tooltip-content {
-    display: flex;
-    flex-direction: column;
-    & .#{$module-name}-tooltip-items {
-      display: flex;
-      flex-direction: row;
-      & .#{$module-name}-tooltip-column {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        & .#{$module-name}-tooltip-item {
-          display: flex;
-          flex-direction: row;
-          justify-content: left;
-          align-items: center;
+.#{$module-name}-tooltip-content {
+  display: flex;
+  flex-direction: column;
+}
 
-          & i {
-            width: 30px;
-            padding-right: 5px;
-            text-align: center;
-            flex: 1;
-          }
+.#{$module-name}-tooltip-items {
+  display: flex;
+  flex-direction: row;
+}
 
-          & span {
-            word-break: break-word;
-            flex: 5;
-          }
-        }
-      }
-    }
+.#{$module-name}-tooltip-column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.#{$module-name}-tooltip-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+
+  & i {
+    min-width: 1.5ch;
+    padding-right: 5px;
+    text-align: center;
+    flex: 1;
+  }
+
+  & span {
+    word-break: break-word;
+    flex: 5;
   }
 }

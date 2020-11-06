@@ -2,7 +2,7 @@
   "name": "token-tooltip-alt",
   "title": "Token Tooltip Alt",
   "description": "A module that adds a tooltip next to the currently hovered token to show some useful information for players and DMs.",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "author": "bmarian",
   "esmodules": ["token-tooltip-alt.js"],
   "styles": ["token-tooltip-alt.css"],
@@ -13,6 +13,11 @@
       "name": "_mathjs",
       "type": "module",
       "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/mathjs-lib/master/module.json"
+    },
+    {
+      "name": "_sortablejs",
+      "type": "module",
+      "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
     }
   ],
   "languages": [
@@ -24,6 +29,6 @@
   ],
   "url": "https://github.com/bmarian/token-tooltip-alt",
   "manifest": "https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/src/module.json",
-  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v2.0.4/token-tooltip-alt-v2.0.4.zip",
+  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v2.0.5/token-tooltip-alt-v2.0.5.zip",
   "changelog": "https://github.com/bmarian/token-tooltip-alt/releases"
 }
