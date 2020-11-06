@@ -278,10 +278,10 @@ export default class TooltipEditor extends FormApplication {
 
         const tokenDis = CONSTANTS.SETTING_KEYS.TOKEN_DISPOSITIONS;
         const playerStatic = player.static;
-        playerStatic[tokenDis] = tokenDispositions;
+        playerStatic[tokenDis] = gmDispositions;
 
         const gmStatic = gm.static;
-        gmStatic[tokenDis] = tokenDispositions;
+        gmStatic[tokenDis] = playerDispositions;
 
         // update the settings
         gmSettings[type] = {
