@@ -1,7 +1,6 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
 import {CONSTANTS} from "../module/enums/Constants";
 import Utils from "../module/Utils";
-import "../lib/sortable.min.js";
 
 export default class TooltipEditor extends FormApplication {
     static get defaultOptions(): any {

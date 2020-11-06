@@ -13,6 +13,11 @@
       "name": "_mathjs",
       "type": "module",
       "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/mathjs-lib/master/module.json"
+    },
+    {
+      "name": "_sortablejs",
+      "type": "module",
+      "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
     }
   ],
   "languages": [
