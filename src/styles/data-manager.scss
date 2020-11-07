@@ -1,0 +1,10 @@
+.#{$module-name}-data-manager-window {
+  & .#{$module-name}-textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    &.import {
+      height: 87%;
+    }
+  }
+}
