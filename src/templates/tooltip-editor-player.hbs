@@ -11,6 +11,7 @@
         <label>Display name</label>
         <div class="form-fields">
             <select name="player.static.displayNameInTooltip">
+                <option value="NONE" {{#if (eq playerSettings.static.displayNameInTooltip 'NONE')}}selected{{/if}}>NONE</option>
                 {{#each playerSettings.static.tokenDispositions}}
                     <option value="{{this}}" {{#if (eq ../playerSettings.static.displayNameInTooltip this)}}selected{{/if}}>{{this}}</option>
                 {{/each}}

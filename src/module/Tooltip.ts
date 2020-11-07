@@ -194,12 +194,12 @@ class Tooltip {
 
     // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
     private _getActorDisposition(tokenDispositions: Array<string>): string {
-        const dispositionsWithoutOwned = tokenDispositions.filter(d => d !== CONSTANTS.APPS.OWNED_DISPOSITION);
+        const dispositionsWithoutOwned = tokenDispositions.filter(d => d !== this._appKeys.OWNED_DISPOSITION);
         const disposition = dispositionsWithoutOwned?.[parseInt(this._token?.data?.disposition) + 1];
 
         if (this._tooltipInfo.isGM) return disposition;
 
-        return this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? CONSTANTS.APPS.OWNED_DISPOSITION : disposition;
+        return this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? this._appKeys.OWNED_DISPOSITION : disposition;
     }
 
     // This returns the itemList for a given disposition
@@ -223,6 +223,13 @@ class Tooltip {
             // here I do some logic that I don't really like but I can't find a good way of doing it
             const tokenDisposition = parseInt(this._token?.data?.disposition) + 1; // adding a +1 because the numbers start from -1 (hostile)
             const index = staticData?.tokenDispositions?.indexOf(staticData.displayNameInTooltip);
+
+            // Fix for NONE and OWNED
+            if (index === -1) {
+                if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
+                return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
+                    && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
+            }
 
             // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
             // tokenDisposition = -1 + 1 (0) <=> HOSTILE
