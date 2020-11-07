@@ -39,11 +39,13 @@ An option is available in the `Resources` tab of the token configuration. `No to
 
 ## Tooltip manager
 
-![tooltip-manager](https://i.imgur.com/8BcTPTY.png)
+![tooltip-manager](https://i.imgur.com/VVcf4PF.png)
 
 This section displays all the available actor types, from here you can decide if they should display a tooltip, by checking the enable checkbox. 
 
 If the custom checkbox is not checked, the actor type will use the **default settings**.
+
+Here you can also **import**/**export** settings for **Tooltip editor**.
 
 ## Tooltip editor
 
