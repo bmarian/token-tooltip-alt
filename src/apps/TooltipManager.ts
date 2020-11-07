@@ -2,6 +2,7 @@ import SettingsUtil from "../module/settings/SettingsUtil";
 import {CONSTANTS} from "../module/enums/Constants";
 import Utils from "../module/Utils";
 import TooltipEditor from "./TooltipEditor";
+import DataManager from "./DataManager";
 
 export default class TooltipManager extends FormApplication {
     static get defaultOptions(): any {
@@ -235,12 +236,22 @@ export default class TooltipManager extends FormApplication {
         });
 
         te.render(true);
-        Utils.debug(`Opened an editor for: ${actorType}`)
+        Utils.debug(`Opened an editor for: ${actorType}.`)
+    }
+
+    private _openDataManager(ev): void {
+        const type = $(ev.target).closest('button').attr('name');
+        const dm = new DataManager({type});
+
+        dm.render(true);
+        Utils.debug('Opened a data manager window.');
     }
 
     // adds the events for the open editor buttons
     public activateListeners($html: JQuery<HTMLElement>): void {
         super.activateListeners($html);
         $html.find(`.${Utils.moduleName}-row_button.edit`).on('click', this._openTooltipEditor)
+        $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._openDataManager)
+        $html.find(`.${Utils.moduleName}-footer_button.export`).on('click', this._openDataManager)
     }
 }
