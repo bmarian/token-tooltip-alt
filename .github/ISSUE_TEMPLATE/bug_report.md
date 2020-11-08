@@ -23,6 +23,7 @@ If applicable, add screenshots to help explain your problem.
 **Please complete the following information:**
  - OS: [e.g. Windows]
  - Browser: [e.g. chrome, safari]
+ - Game version [e.g. 0.7.6]
  - Game system and version: [e.g. dnd5e v0.99]
 
 **Additional context**
