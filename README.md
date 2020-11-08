@@ -9,8 +9,6 @@
 A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.
 You can also hold ALT to see the tooltips for all tokens on the map.
 
-<a href='https://ko-fi.com/O4O72IHXC' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi4.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-
 # Installation
 - Go in the `Add-on Modules` section
 - Click `Install Module`
