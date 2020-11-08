@@ -7,7 +7,7 @@
   "esmodules": ["token-tooltip-alt.js"],
   "styles": ["token-tooltip-alt.css"],
   "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "0.7.5",
+  "compatibleCoreVersion": "0.8.0",
   "dependencies": [
     {
       "name": "_mathjs",
