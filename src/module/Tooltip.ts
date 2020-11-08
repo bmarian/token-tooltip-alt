@@ -122,7 +122,7 @@ class Tooltip {
 
             if (typeof value === 'object') {
                 const entries = value?.entries;
-                return entries && entries.reduce((e, v) => e + v + ' ', '');
+                return (entries && entries.length) && entries.reduce((e, v) => e + v + ' ', '')?.slice(0, -1);
             }
 
             return value;
