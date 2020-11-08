@@ -40,6 +40,9 @@
 
   & i {
     min-width: 1.5ch;
+    @supports (-moz-appearance:none) {
+      min-width: 2.7ch;
+    }
     padding-right: 5px;
     text-align: center;
     flex: 1;
