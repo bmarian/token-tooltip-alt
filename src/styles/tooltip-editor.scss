@@ -1,6 +1,8 @@
 .#{$module-name}-tooltip-editor-window {
   & .window-content {
-    overflow-y: hidden;
+    @supports not (-moz-appearance:none) {
+      overflow-y: hidden;
+    }
   }
 }
 
@@ -8,24 +10,27 @@
   height: 100%;
 
   & .#{$module-name}-container {
+    &.gm,
+    &.player {
+      overflow-x: hidden;
+      @supports not (-moz-appearance:none) {
+        overflow-y: auto;
+        height: 100%;
+      }
+    }
+
     &.gm {
       padding-right: 5px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      height: 100%;
     }
 
     &.player {
       padding-left: 5px;
       padding-right: 3px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      height: 100%;
     }
 
     &.form-group {
       align-items: normal;
-      height: 94%;
+      height: calc(100% - 40px);
     }
   }
 

@@ -71,7 +71,7 @@
 
 
 
-  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "GM",
+  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "Player",
   "token-tooltip-alt.tooltipEditorPlayer.settingsHeader": "Settings",
   "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.name": "Display name",
   "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.hint": "Display the token's name in the tooltip depending on the disposition.",
