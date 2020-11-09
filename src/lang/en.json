@@ -49,6 +49,14 @@
 
 
 
+
+  "token-tooltip-alt.tooltipEditor.col.color": "Color",
+  "token-tooltip-alt.tooltipEditor.col.icon": "Icon",
+  "token-tooltip-alt.tooltipEditor.col.value": "Value",
+  "token-tooltip-alt.tooltipEditor.col.expression": "Exp",
+  "token-tooltip-alt.tooltipEditor.col.isNumber": "Nr",
+  "token-tooltip-alt.tooltipEditor.col.delete": "Delete",
+
   "token-tooltip-alt.tooltipEditorGm.gmHeader": "GM",
   "token-tooltip-alt.tooltipEditorGm.settingsHeader": "Settings",
   "token-tooltip-alt.tooltipEditorGm.settings.displayName.name": "Display name",
