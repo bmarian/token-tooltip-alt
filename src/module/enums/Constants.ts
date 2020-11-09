@@ -29,7 +29,6 @@ export const CONSTANTS = {
 
     TEMPLATES: {
         TOOLTIP: `modules/${Utils.moduleName}/templates/tooltip.hbs`,
-        SETTINGS_EDITOR_ROW: `modules/${Utils.moduleName}/templates/settings-editor-row.hbs`,
         TOOLTIP_EDITOR_GM: `modules/${Utils.moduleName}/templates/tooltip-editor-gm.hbs`,
         TOOLTIP_EDITOR_PLAYER: `modules/${Utils.moduleName}/templates/tooltip-editor-player.hbs`,
         TOOLTIP_EDITOR_TABLE: `modules/${Utils.moduleName}/templates/tooltip-editor-table.hbs`,
@@ -38,7 +37,9 @@ export const CONSTANTS = {
 
     APPS: {
         TOOLTIP_MANAGER: `modules/${Utils.moduleName}/templates/tooltip-manager.hbs`,
+        DATA_MANAGER: `modules/${Utils.moduleName}/templates/data-manager.hbs`,
         TOOLTIP_MANAGER_WIDTH: 500,
+        DATA_MANAGER_HEIGHT: 300,
 
         TOOLTIP_EDITOR: `modules/${Utils.moduleName}/templates/tooltip-editor.hbs`,
         TOOLTIP_EDITOR_ROW: `modules/${Utils.moduleName}/templates/tooltip-editor-row.hbs`,
@@ -46,6 +47,7 @@ export const CONSTANTS = {
 
         TOOLTIP_DEFAULT_ACTOR_ID: 'default',
         OWNED_DISPOSITION: 'OWNED',
+        NONE_DISPOSITION: 'NONE',
     },
 
     SYSTEM_DEFAULT: 'default',

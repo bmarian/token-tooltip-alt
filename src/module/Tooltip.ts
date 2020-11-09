@@ -29,6 +29,7 @@ class Tooltip {
     private readonly _animType;
     private readonly _animSpeed;
     private readonly _gameBody;
+    private readonly _canvas;
     private readonly _template;
     private readonly _settingsKeys;
     private readonly _appKeys;
@@ -47,6 +48,7 @@ class Tooltip {
         path?: string,
         template?: string,
         gameBody?: JQuery,
+        canvas?: JQuery,
         tooltipInfo?: any,
     ) {
         this._token = token;
@@ -60,6 +62,7 @@ class Tooltip {
         this._tooltipInfo = tooltipInfo;
 
         this._gameBody = gameBody;
+        this._canvas = canvas;
         this._moduleName = Utils.moduleName;
         this._data = path === '' ? token : this._getNestedData(this._token, path);
 
@@ -122,7 +125,7 @@ class Tooltip {
 
             if (typeof value === 'object') {
                 const entries = value?.entries;
-                return entries && entries.reduce((e, v) => e + v + ' ', '');
+                return entries && entries.reduce((e, v) => e + v + ' ', '')?.slice(0, -1);
             }
 
             return value;
@@ -194,12 +197,12 @@ class Tooltip {
 
     // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
     private _getActorDisposition(tokenDispositions: Array<string>): string {
-        const dispositionsWithoutOwned = tokenDispositions.filter(d => d !== CONSTANTS.APPS.OWNED_DISPOSITION);
+        const dispositionsWithoutOwned = tokenDispositions.filter(d => d !== this._appKeys.OWNED_DISPOSITION);
         const disposition = dispositionsWithoutOwned?.[parseInt(this._token?.data?.disposition) + 1];
 
         if (this._tooltipInfo.isGM) return disposition;
 
-        return this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? CONSTANTS.APPS.OWNED_DISPOSITION : disposition;
+        return this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? this._appKeys.OWNED_DISPOSITION : disposition;
     }
 
     // This returns the itemList for a given disposition
@@ -223,6 +226,13 @@ class Tooltip {
             // here I do some logic that I don't really like but I can't find a good way of doing it
             const tokenDisposition = parseInt(this._token?.data?.disposition) + 1; // adding a +1 because the numbers start from -1 (hostile)
             const index = staticData?.tokenDispositions?.indexOf(staticData.displayNameInTooltip);
+
+            // Fix for NONE and OWNED
+            if (index === -1) {
+                if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
+                return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
+                    && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
+            }
 
             // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
             // tokenDisposition = -1 + 1 (0) <=> HOSTILE
@@ -354,6 +364,14 @@ class Tooltip {
             case 'overlay': {
                 position['top'] = tokenWT.ty - padding;
                 position['left'] = tokenWT.tx - padding;
+                break;
+            }
+            case 'doubleSurprise': {
+                const w = this._canvas.width() - this._tooltip.width();
+                const h = this._canvas.height() - this._tooltip.height();
+
+                position['top'] = Math.floor(Math.random() * h);
+                position['left'] = Math.floor(Math.random() * w);
                 break;
             }
         }

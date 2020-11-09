@@ -1,0 +1,13 @@
+<form class="{{moduleName}}-form">
+    <textarea class="{{moduleName}}-textarea {{#if isImport}}import{{/if}}"
+              name="data"
+              {{#if (eq isImport false)}}readonly{{/if}}>{{settings}}</textarea>
+
+    {{#if isImport}}
+        <footer class="{{moduleName}}-footer sheet-footer flexrow">
+            <button type="submit" name="submit" class="{{moduleName}}-footer_button submit">
+                <i class="fa fa-check"></i> <span>{{localize 'token-tooltip-alt.buttons.import'}}</span>
+            </button>
+        </footer>
+    {{/if}}
+</form>

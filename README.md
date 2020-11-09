@@ -1,15 +1,13 @@
-# If you are coming from v1.0.2 please follow the [README.md](./macros/README.md)
+# If you are coming from v1.0.2 please follow the [CONVERT OLD SETTINGS](./macros/README.md)
 
 # Token Tooltip Alt
 ![Downloads](https://img.shields.io/github/downloads/bmarian/token-tooltip-alt/total?style=for-the-badge)
 ![License](https://img.shields.io/github/license/bmarian/token-tooltip-alt?style=for-the-badge)
 ![GitHub Latest Release](https://img.shields.io/github/release/bmarian/token-tooltip-alt?style=for-the-badge)
-![Foundry Version](https://img.shields.io/badge/FoundryVTT-0.7.5-blueviolet?style=for-the-badge)
+![Foundry Version](https://img.shields.io/badge/FoundryVTT-0.7.6-blueviolet?style=for-the-badge)
 
 A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.
 You can also hold ALT to see the tooltips for all tokens on the map.
-
-<a href='https://ko-fi.com/O4O72IHXC' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi4.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 # Installation
 - Go in the `Add-on Modules` section
@@ -39,11 +37,13 @@ An option is available in the `Resources` tab of the token configuration. `No to
 
 ## Tooltip manager
 
-![tooltip-manager](https://i.imgur.com/8BcTPTY.png)
+![tooltip-manager](https://i.imgur.com/VVcf4PF.png)
 
 This section displays all the available actor types, from here you can decide if they should display a tooltip, by checking the enable checkbox. 
 
 If the custom checkbox is not checked, the actor type will use the **default settings**.
+
+Here you can also **import**/**export** settings for **Tooltip editor**.
 
 ## Tooltip editor
 

@@ -1,16 +1,16 @@
 <form class="{{moduleName}}-form">
     <p>
-        For more information, please refer to the
+        {{localize 'token-tooltip-alt.tooltipManager.infoMessage'}}
         <a href="https://github.com/bmarian/token-tooltip-alt/blob/master/README.md">README</a>
     </p>
     <div class="form-group">
         <table class="{{moduleName}}-table">
             <thead>
             <tr>
-                <th scope="col" class="{{moduleName}}-col_actor">Actor</th>
-                <th scope="col" class="{{moduleName}}-col_enable">Enable</th>
-                <th scope="col" class="{{moduleName}}-col_custom">Custom</th>
-                <th scope="col" class="{{moduleName}}-col_edit">Edit</th>
+                <th scope="col" class="{{moduleName}}-col_actor">{{localize 'token-tooltip-alt.tooltipManager.col.actor'}}</th>
+                <th scope="col" class="{{moduleName}}-col_enable">{{localize 'token-tooltip-alt.tooltipManager.col.enable'}}</th>
+                <th scope="col" class="{{moduleName}}-col_custom">{{localize 'token-tooltip-alt.tooltipManager.col.custom'}}</th>
+                <th scope="col" class="{{moduleName}}-col_edit">{{localize 'token-tooltip-alt.tooltipManager.col.edit'}}</th>
             </tr>
             </thead>
             <tbody class="{{moduleName}}-tooltip-manager">
@@ -32,7 +32,7 @@
                         </label>
                     </td>
                     <td class="{{../moduleName}}-row_edit">
-                        <button class="{{../moduleName}}-row_button edit" name="{{id}}" type="button" title="Edit">
+                        <button class="{{../moduleName}}-row_button edit" name="{{id}}" type="button" title="{{localize 'token-tooltip-alt.tooltipManager.col.edit'}}">
                             <i class="fas fa-edit"></i>
                         </button>
                     </td>
@@ -41,14 +41,13 @@
             </tbody>
         </table>
     </div>
-    <!-- TODO Footer buttons -->
-<!--    <footer class="{{moduleName}}-footer sheet-footer flexrow">-->
-<!--        <button type="button" name="import" class="{{moduleName}}-footer_button import">-->
-<!--            <i class="fa fa-file-import"></i> <span>Import</span>-->
-<!--        </button>-->
+    <footer class="{{moduleName}}-footer sheet-footer flexrow">
+        <button type="button" name="import" class="{{moduleName}}-footer_button import">
+            <i class="fa fa-file-import"></i> <span>{{localize 'token-tooltip-alt.buttons.import'}}</span>
+        </button>
 
-<!--        <button type="button" name="export" class="{{moduleName}}-footer_button export">-->
-<!--            <i class="fas fa-file-export"></i> <span>Export</span>-->
-<!--        </button>-->
-<!--    </footer>-->
+        <button type="button" name="export" class="{{moduleName}}-footer_button export">
+            <i class="fas fa-file-export"></i> <span>{{localize 'token-tooltip-alt.buttons.export'}}</span>
+        </button>
+    </footer>
 </form>

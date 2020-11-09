@@ -1,6 +1,7 @@
 import {CONSTANTS} from "../enums/Constants";
 import SettingsUtil from "./SettingsUtil";
 import TooltipManager from "../../apps/TooltipManager";
+import Utils from "../Utils";
 
 class Settings {
     private static _instance: Settings;
@@ -19,28 +20,27 @@ class Settings {
         {
             key: this._settingKeys.TOOLTIP_POSITION,
             settings: {
-                name: "Tooltip placement",
-                hint: "Determine the tooltip's position.",
+                name: Utils.i18n('settings.TOOLTIP_POSITION.name'),
+                hint: Utils.i18n('settings.TOOLTIP_POSITION.hint'),
                 type: String,
-                scope: "world",
                 config: true,
-                restricted: true,
                 default: "right",
                 choices: {
-                    "top": "Top",
-                    "right": "Right",
-                    "bottom": "Bottom",
-                    "left": "Left",
-                    "overlay": "Overlay",
-                    "surprise": "Surprise me"
+                    "top": Utils.i18n('settings.TOOLTIP_POSITION.choices.top'),
+                    "right": Utils.i18n('settings.TOOLTIP_POSITION.choices.right'),
+                    "bottom": Utils.i18n('settings.TOOLTIP_POSITION.choices.bottom'),
+                    "left": Utils.i18n('settings.TOOLTIP_POSITION.choices.left'),
+                    "overlay": Utils.i18n('settings.TOOLTIP_POSITION.choices.overlay'),
+                    "surprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.surprise'),
+                    "doubleSurprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.doubleSurprise'),
                 }
             },
         },
         {
             key: this._settingKeys.FONT_SIZE,
             settings: {
-                name: "Font size",
-                hint: "Customize the tooltip's font size between 1 and 2.5 rem.",
+                name: Utils.i18n('settings.FONT_SIZE.name'),
+                hint: Utils.i18n('settings.FONT_SIZE.hint'),
                 type: Number,
                 config: true,
                 range: {
@@ -54,8 +54,8 @@ class Settings {
         {
             key: this._settingKeys.MAX_ROWS,
             settings: {
-                name: "Max rows",
-                hint: "The maximum number of rows/columns.",
+                name: Utils.i18n('settings.MAX_ROWS.name'),
+                hint: Utils.i18n('settings.MAX_ROWS.hint'),
                 type: Number,
                 config: true,
                 range: {
@@ -69,9 +69,8 @@ class Settings {
         {
             key: this._settingKeys.DATA_SOURCE,
             settings: {
-                name: "Data source",
-                hint: "This is an advanced feature, please don't change it if you don't know what you are doing. " +
-                    "This will determine from where the tooltip data is pulled.",
+                name: Utils.i18n('settings.DATA_SOURCE.name'),
+                hint: Utils.i18n('settings.DATA_SOURCE.hint'),
                 type: String,
                 scope: "world",
                 config: true,
@@ -82,8 +81,8 @@ class Settings {
         {
             key: this._settingKeys.DARK_THEME,
             settings: {
-                name: "Dark theme",
-                hint: "Apply a dark theme for the tooltip.",
+                name: Utils.i18n('settings.DARK_THEME.name'),
+                hint: Utils.i18n('settings.DARK_THEME.hint'),
                 type: Boolean,
                 config: true,
                 default: false,
@@ -92,8 +91,8 @@ class Settings {
         {
             key: this._settingKeys.SHOW_ALL_ON_ALT,
             settings: {
-                name: "Show on <ALT>",
-                hint: "Display a tooltip for every visible token on the scene.",
+                name: Utils.i18n('settings.SHOW_ALL_ON_ALT.name'),
+                hint: Utils.i18n('settings.SHOW_ALL_ON_ALT.hint'),
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -104,8 +103,8 @@ class Settings {
         {
             key: this._settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS,
             settings: {
-                name: "Show all on <ALT>",
-                hint: "Display a tooltips for every token on the scene. Dose nothing if 'Show on <ALT>' is set to false.",
+                name: Utils.i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name'),
+                hint: Utils.i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint'),
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -116,8 +115,8 @@ class Settings {
         {
             key: this._settingKeys.DEBUG_OUTPUT,
             settings: {
-                name: "Debug output",
-                hint: "Display some useful debug information in the console.",
+                name: Utils.i18n('settings.DEBUG_OUTPUT.name'),
+                hint: Utils.i18n('settings.DEBUG_OUTPUT.hint'),
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -201,8 +200,8 @@ class Settings {
 
     private _registerTooltipManager(): void {
         SettingsUtil.registerMenu(CONSTANTS.SETTING_KEYS.TOOLTIP_MANAGER, {
-            name: 'Tooltip manager',
-            label: 'Tooltip manager',
+            name: Utils.i18n('settings.TOOLTIP_MANAGER.name'),
+            label: Utils.i18n('settings.TOOLTIP_MANAGER.label'),
             icon: 'fas fa-edit',
             type: TooltipManager,
             restricted: true,
@@ -221,4 +220,4 @@ class Settings {
     }
 }
 
-export default Settings.getInstance();
+export default Settings;

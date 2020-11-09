@@ -4,7 +4,8 @@ import {CONSTANTS} from "./module/enums/Constants";
 import Settings from "./module/settings/Settings";
 
 Hooks.once('init', async () => {
-    Settings.registerSettings();
+    const settings = Settings.getInstance();
+    settings.registerSettings();
     Utils.debug('Settings registered.');
 
     await loadTemplates(Object.values(CONSTANTS.TEMPLATES));
