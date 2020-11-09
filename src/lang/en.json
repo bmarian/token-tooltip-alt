@@ -14,5 +14,23 @@
   "token-tooltip-alt.settings.FONT_SIZE.hint": "Customize the tooltip's font size between 1 and 2.5 rem.",
 
   "token-tooltip-alt.settings.MAX_ROWS.name": "Max rows",
-  "token-tooltip-alt.settings.MAX_ROWS.hint": "The maximum number of rows/columns."
+  "token-tooltip-alt.settings.MAX_ROWS.hint": "The maximum number of rows/columns.",
+
+  "token-tooltip-alt.settings.DATA_SOURCE.name": "Data source",
+  "token-tooltip-alt.settings.DATA_SOURCE.hint": "This is an advanced feature, please don't change it if you don't know what you are doing. This will determine from where the tooltip data is pulled.",
+
+  "token-tooltip-alt.settings.DARK_THEME.name": "Dark theme",
+  "token-tooltip-alt.settings.DARK_THEME.hint": "Apply a dark theme for the tooltip.",
+
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.name": "Show on <ALT>",
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.hint": "Display a tooltip for every visible token on the scene.",
+
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name": "Show all on <ALT>",
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint": "Display a tooltips for every token on the scene. Dose nothing if 'Show on <ALT>' is set to false.",
+
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.name": "Debug output",
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.hint": "Display some useful debug information in the console.",
+
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.name": "Tooltip manager",
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.label": "Tooltip manager"
 }

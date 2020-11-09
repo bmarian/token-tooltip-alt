@@ -70,9 +70,8 @@ class Settings {
         {
             key: this._settingKeys.DATA_SOURCE,
             settings: {
-                name: "Data source",
-                hint: "This is an advanced feature, please don't change it if you don't know what you are doing. " +
-                    "This will determine from where the tooltip data is pulled.",
+                name: Utils.i18n('settings.DATA_SOURCE.name'),
+                hint: Utils.i18n('settings.DATA_SOURCE.hint'),
                 type: String,
                 scope: "world",
                 config: true,
@@ -83,8 +82,8 @@ class Settings {
         {
             key: this._settingKeys.DARK_THEME,
             settings: {
-                name: "Dark theme",
-                hint: "Apply a dark theme for the tooltip.",
+                name: Utils.i18n('settings.DARK_THEME.name'),
+                hint: Utils.i18n('settings.DARK_THEME.hint'),
                 type: Boolean,
                 config: true,
                 default: false,
@@ -93,8 +92,8 @@ class Settings {
         {
             key: this._settingKeys.SHOW_ALL_ON_ALT,
             settings: {
-                name: "Show on <ALT>",
-                hint: "Display a tooltip for every visible token on the scene.",
+                name: Utils.i18n('settings.SHOW_ALL_ON_ALT.name'),
+                hint: Utils.i18n('settings.SHOW_ALL_ON_ALT.hint'),
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -105,8 +104,8 @@ class Settings {
         {
             key: this._settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS,
             settings: {
-                name: "Show all on <ALT>",
-                hint: "Display a tooltips for every token on the scene. Dose nothing if 'Show on <ALT>' is set to false.",
+                name: Utils.i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name'),
+                hint: Utils.i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint'),
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -117,8 +116,8 @@ class Settings {
         {
             key: this._settingKeys.DEBUG_OUTPUT,
             settings: {
-                name: "Debug output",
-                hint: "Display some useful debug information in the console.",
+                name: Utils.i18n('settings.DEBUG_OUTPUT.name'),
+                hint: Utils.i18n('settings.DEBUG_OUTPUT.hint'),
                 type: Boolean,
                 scope: "world",
                 config: true,
@@ -202,8 +201,8 @@ class Settings {
 
     private _registerTooltipManager(): void {
         SettingsUtil.registerMenu(CONSTANTS.SETTING_KEYS.TOOLTIP_MANAGER, {
-            name: 'Tooltip manager',
-            label: 'Tooltip manager',
+            name: Utils.i18n('settings.TOOLTIP_MANAGER.name'),
+            label: Utils.i18n('settings.TOOLTIP_MANAGER.label'),
             icon: 'fas fa-edit',
             type: TooltipManager,
             restricted: true,
