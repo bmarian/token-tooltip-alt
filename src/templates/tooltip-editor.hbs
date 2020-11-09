@@ -10,12 +10,12 @@
     <!-- Footer buttons -->
     <footer class="{{moduleName}}-footer sheet-footer flexrow">
         <button type="submit" name="submit" class="{{moduleName}}-footer_button submit">
-            <i class="fa fa-check"></i> <span>Save</span>
+            <i class="fa fa-check"></i> <span>{{localize 'token-tooltip-alt.buttons.save'}}</span>
         </button>
 
         {{#if (eq isDefault false)}}
             <button type="button" name="import" class="{{moduleName}}-footer_button import">
-                <i class="fas fa-edit"></i> <span>Import from default</span>
+                <i class="fas fa-edit"></i> <span>{{localize 'token-tooltip-alt.buttons.importFromDefault'}}</span>
             </button>
         {{/if}}
     </footer>

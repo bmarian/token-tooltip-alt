@@ -1,35 +1,35 @@
 <div class="{{moduleName}}-container gm">
-    <h1>GM</h1>
+    <h1>{{localize 'token-tooltip-alt.tooltipEditorGm.gmHeader'}}</h1>
 
     <!-- Generates the tables of items -->
     {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table.hbs' settings=gmSettings.items type='gm'}}
 
-    <h1>Settings</h1>
+    <h1>{{localize 'token-tooltip-alt.tooltipEditorGm.settingsHeader'}}</h1>
 
     <!-- Display name in tooltip -->
     <div class="form-group">
-        <label>Display name</label>
+        <label>{{localize 'token-tooltip-alt.tooltipEditorGm.settings.displayName.name'}}</label>
         <div class="form-fields">
             <input type="checkbox" name="gm.static.displayNameInTooltip" data-dtype="Boolean" {{#if gmSettings.static.displayNameInTooltip}}checked{{/if}}>
         </div>
-        <p class="notes">Display the token's name in the tooltip.</p>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorGm.settings.displayName.hint'}}</p>
     </div>
 
     <!-- Use accent color everywhere -->
     <div class="form-group">
-        <label>Use accent color everywhere</label>
+        <label>{{localize 'token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.name'}}</label>
         <div class="form-fields">
             <input type="checkbox" name="gm.static.useAccentEverywhere" data-dtype="Boolean" {{#if gmSettings.static.useAccentEverywhere}}checked{{/if}}>
         </div>
-        <p class="notes">Use the accent color everywhere instead of the custom colors.</p>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.hint'}}</p>
     </div>
 
     <!-- Accent color -->
     <div class="form-group">
-        <label>Accent color</label>
+        <label>{{localize 'token-tooltip-alt.tooltipEditorGm.settings.accentColor.name'}}</label>
         <div class="form-fields">
             <input type="color" name="gm.static.accentColor" data-dtype="String" value="{{gmSettings.static.accentColor}}">
         </div>
-        <p class="notes">Set an accent color for the border and title.</p>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorGm.settings.accentColor.hint'}}</p>
     </div>
 </div>

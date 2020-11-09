@@ -29,6 +29,7 @@ class Tooltip {
     private readonly _animType;
     private readonly _animSpeed;
     private readonly _gameBody;
+    private readonly _canvas;
     private readonly _template;
     private readonly _settingsKeys;
     private readonly _appKeys;
@@ -47,6 +48,7 @@ class Tooltip {
         path?: string,
         template?: string,
         gameBody?: JQuery,
+        canvas?: JQuery,
         tooltipInfo?: any,
     ) {
         this._token = token;
@@ -60,6 +62,7 @@ class Tooltip {
         this._tooltipInfo = tooltipInfo;
 
         this._gameBody = gameBody;
+        this._canvas = canvas;
         this._moduleName = Utils.moduleName;
         this._data = path === '' ? token : this._getNestedData(this._token, path);
 
@@ -361,6 +364,14 @@ class Tooltip {
             case 'overlay': {
                 position['top'] = tokenWT.ty - padding;
                 position['left'] = tokenWT.tx - padding;
+                break;
+            }
+            case 'doubleSurprise': {
+                const w = this._canvas.width() - this._tooltip.width();
+                const h = this._canvas.height() - this._tooltip.height();
+
+                position['top'] = Math.floor(Math.random() * h);
+                position['left'] = Math.floor(Math.random() * w);
                 break;
             }
         }

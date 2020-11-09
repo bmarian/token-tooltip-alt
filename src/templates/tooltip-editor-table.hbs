@@ -6,12 +6,12 @@
             <thead>
             <tr>
                 <th scope="col" class="{{../moduleName}}-col_sort_column"></th>
-                <th scope="col" class="{{../moduleName}}-col_color">Color</th>
-                <th scope="col" class="{{../moduleName}}-col_icon">Icon</th>
-                <th scope="col" class="{{../moduleName}}-col_value">Value</th>
-                <th scope="col" class="{{../moduleName}}-col_expression">Exp</th>
-                <th scope="col" class="{{../moduleName}}-col_isNumber">Nr</th>
-                <th scope="col" class="{{../moduleName}}-col_delete">Delete</th>
+                <th scope="col" class="{{../moduleName}}-col_color">{{localize 'token-tooltip-alt.tooltipEditor.col.color'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_icon">{{localize 'token-tooltip-alt.tooltipEditor.col.icon'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_value">{{localize 'token-tooltip-alt.tooltipEditor.col.value'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_expression">{{localize 'token-tooltip-alt.tooltipEditor.col.expression'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_isNumber">{{localize 'token-tooltip-alt.tooltipEditor.col.isNumber'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_delete">{{localize 'token-tooltip-alt.tooltipEditor.col.delete'}}</th>
             </tr>
             </thead>
 
@@ -24,13 +24,13 @@
     </div>
     <div class="form-group">
         <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.add" class="{{../moduleName}}-button add d_{{disposition}}">
-            <i class="fa fa-plus"></i> <span>Add</span>
+            <i class="fa fa-plus"></i> <span>{{localize 'token-tooltip-alt.buttons.add'}}</span>
         </button>
         <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.copy" class="{{../moduleName}}-button copy d_{{disposition}}">
-            <i class="fas fa-clipboard"></i> <span>Copy</span>
+            <i class="fas fa-clipboard"></i> <span>{{localize 'token-tooltip-alt.buttons.copy'}}</span>
         </button>
         <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.paste" class="{{../moduleName}}-button paste d_{{disposition}}">
-            <i class="fas fa-paste"></i> <span>Paste</span>
+            <i class="fas fa-paste"></i> <span>{{localize 'token-tooltip-alt.buttons.paste'}}</span>
         </button>
     </div>
 {{/each}}

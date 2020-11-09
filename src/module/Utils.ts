@@ -55,6 +55,10 @@ class Utils {
     public clone(obj: any): any {
         return JSON.parse(JSON.stringify(obj));
     }
+
+    public i18n(path: string): string {
+        return game.i18n.localize(`${this.moduleName}.${path}`);
+    }
 }
 
 export default Utils.getInstance(false, true);

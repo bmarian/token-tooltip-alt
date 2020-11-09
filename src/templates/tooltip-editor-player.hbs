@@ -1,14 +1,14 @@
 <div class="{{moduleName}}-container player">
-    <h1>Player</h1>
+    <h1>{{localize 'token-tooltip-alt.tooltipEditorPlayer.playerHeader'}}</h1>
 
     <!-- Generates the tables of items -->
     {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table.hbs' settings=playerSettings.items type='player'}}
 
-    <h1>Settings</h1>
+    <h1>{{localize 'token-tooltip-alt.tooltipEditorPlayer.settingsHeader'}}</h1>
 
     <!-- Display name in tooltip depending on the disposition -->
     <div class="form-group">
-        <label>Display name</label>
+        <label>{{localize 'token-tooltip-alt.tooltipEditorPlayer.settings.displayName.name'}}</label>
         <div class="form-fields">
             <select name="player.static.displayNameInTooltip">
                 <option value="NONE" {{#if (eq playerSettings.static.displayNameInTooltip 'NONE')}}selected{{/if}}>NONE</option>
@@ -17,24 +17,24 @@
                 {{/each}}
             </select>
         </div>
-        <p class="notes">Display the token's name in the tooltip depending on the disposition.</p>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorPlayer.settings.displayName.hint'}}</p>
     </div>
 
     <!-- Use accent color everywhere -->
     <div class="form-group">
-        <label>Use accent color everywhere</label>
+        <label>{{localize 'token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.name'}}</label>
         <div class="form-fields">
             <input type="checkbox" name="player.static.useAccentEverywhere" data-dtype="Boolean" {{#if playerSettings.static.useAccentEverywhere}}checked{{/if}}>
         </div>
-        <p class="notes">Use the accent color everywhere instead of the custom colors.</p>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.hint'}}</p>
     </div>
 
     <!-- Accent color -->
     <div class="form-group">
-        <label>Accent color</label>
+        <label>{{localize 'token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.name'}}</label>
         <div class="form-fields">
             <input type="color" name="player.static.accentColor" data-dtype="String" value="{{playerSettings.static.accentColor}}">
         </div>
-        <p class="notes">Set an accent color for the border and title.</p>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.hint'}}</p>
     </div>
 </div>
