@@ -23,9 +23,7 @@ class Settings {
                 name: Utils.i18n('settings.TOOLTIP_POSITION.name'),
                 hint: Utils.i18n('settings.TOOLTIP_POSITION.hint'),
                 type: String,
-                scope: "world",
                 config: true,
-                restricted: true,
                 default: "right",
                 choices: {
                     "top": Utils.i18n('settings.TOOLTIP_POSITION.choices.top'),
@@ -34,6 +32,7 @@ class Settings {
                     "left": Utils.i18n('settings.TOOLTIP_POSITION.choices.left'),
                     "overlay": Utils.i18n('settings.TOOLTIP_POSITION.choices.overlay'),
                     "surprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.surprise'),
+                    "doubleSurprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.doubleSurprise'),
                 }
             },
         },

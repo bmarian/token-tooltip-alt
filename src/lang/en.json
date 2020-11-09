@@ -9,6 +9,7 @@
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.left": "Left",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.overlay": "Overlay",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.surprise": "Surprise me",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.doubleSurprise": "Double surprise me",
 
   "token-tooltip-alt.settings.FONT_SIZE.name": "Font size",
   "token-tooltip-alt.settings.FONT_SIZE.hint": "Customize the tooltip's font size between 1 and 2.5 rem.",
