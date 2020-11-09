@@ -1,3 +1,18 @@
 {
+  "token-tooltip-alt.TokenTooltipAlt": "Token Tooltip Alt",
 
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.name": "Tooltip placement",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.hint": "Determine the tooltip's position.",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.top": "Top",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.right": "Right",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.bottom": "Bottom",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.left": "Left",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.overlay": "Overlay",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.surprise": "Surprise me",
+
+  "token-tooltip-alt.settings.FONT_SIZE.name": "Font size",
+  "token-tooltip-alt.settings.FONT_SIZE.hint": "Customize the tooltip's font size between 1 and 2.5 rem.",
+
+  "token-tooltip-alt.settings.MAX_ROWS.name": "Max rows",
+  "token-tooltip-alt.settings.MAX_ROWS.hint": "The maximum number of rows/columns."
 }

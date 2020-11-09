@@ -1,6 +1,7 @@
 import {CONSTANTS} from "../enums/Constants";
 import SettingsUtil from "./SettingsUtil";
 import TooltipManager from "../../apps/TooltipManager";
+import Utils from "../Utils";
 
 class Settings {
     private static _instance: Settings;
@@ -19,28 +20,28 @@ class Settings {
         {
             key: this._settingKeys.TOOLTIP_POSITION,
             settings: {
-                name: "Tooltip placement",
-                hint: "Determine the tooltip's position.",
+                name: Utils.i18n('settings.TOOLTIP_POSITION.name'),
+                hint: Utils.i18n('settings.TOOLTIP_POSITION.hint'),
                 type: String,
                 scope: "world",
                 config: true,
                 restricted: true,
                 default: "right",
                 choices: {
-                    "top": "Top",
-                    "right": "Right",
-                    "bottom": "Bottom",
-                    "left": "Left",
-                    "overlay": "Overlay",
-                    "surprise": "Surprise me"
+                    "top": Utils.i18n('settings.TOOLTIP_POSITION.choices.top'),
+                    "right": Utils.i18n('settings.TOOLTIP_POSITION.choices.right'),
+                    "bottom": Utils.i18n('settings.TOOLTIP_POSITION.choices.bottom'),
+                    "left": Utils.i18n('settings.TOOLTIP_POSITION.choices.left'),
+                    "overlay": Utils.i18n('settings.TOOLTIP_POSITION.choices.overlay'),
+                    "surprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.surprise'),
                 }
             },
         },
         {
             key: this._settingKeys.FONT_SIZE,
             settings: {
-                name: "Font size",
-                hint: "Customize the tooltip's font size between 1 and 2.5 rem.",
+                name: Utils.i18n('settings.FONT_SIZE.name'),
+                hint: Utils.i18n('settings.FONT_SIZE.hint'),
                 type: Number,
                 config: true,
                 range: {
@@ -54,8 +55,8 @@ class Settings {
         {
             key: this._settingKeys.MAX_ROWS,
             settings: {
-                name: "Max rows",
-                hint: "The maximum number of rows/columns.",
+                name: Utils.i18n('settings.MAX_ROWS.name'),
+                hint: Utils.i18n('settings.MAX_ROWS.hint'),
                 type: Number,
                 config: true,
                 range: {
@@ -221,4 +222,4 @@ class Settings {
     }
 }
 
-export default Settings.getInstance();
+export default Settings;
