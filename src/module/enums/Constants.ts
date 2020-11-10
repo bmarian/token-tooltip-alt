@@ -43,7 +43,7 @@ export const CONSTANTS = {
 
         TOOLTIP_EDITOR: `modules/${Utils.moduleName}/templates/tooltip-editor.hbs`,
         TOOLTIP_EDITOR_ROW: `modules/${Utils.moduleName}/templates/tooltip-editor-row.hbs`,
-        TOOLTIP_EDITOR_WIDTH: 1200,
+        TOOLTIP_EDITOR_WIDTH: 600,
 
         TOOLTIP_DEFAULT_ACTOR_ID: 'default',
         OWNED_DISPOSITION: 'OWNED',
