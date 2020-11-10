@@ -105,7 +105,7 @@ class Tooltip {
         const convOp = operation.replace(this._reg.paths, (dataPath: string) => {
             const dp = dataPath.substring(1, dataPath.length - 1);
             if (t._reg.number.test(dp) || t._reg.minus.test(dp)) return dp;
-            return t._extractNumber(t._getNestedData(this._data, dp));
+            return t._getNestedData(this._data, dp);
         });
         return this._doStringMath(convOp);
     }
