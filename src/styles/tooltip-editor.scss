@@ -1,37 +1,34 @@
 .#{$module-name}-tooltip-editor-window {
-  & .window-content {
-    @supports not (-moz-appearance:none) {
-      overflow-y: hidden;
-    }
+
+  & .flexcol {
+    height: 100%;
   }
-}
+  & .content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+  & .sheet-footer {
+    flex: 0;
+  }
 
-.#{$module-name}-form {
-  height: 100%;
+  & .content {
+    border-top: 1px solid #b5b3a4;
+  }
 
-  & .#{$module-name}-container {
-    &.gm,
-    &.player {
-      overflow-x: hidden;
-      @supports not (-moz-appearance:none) {
-        overflow-y: auto;
-        height: 100%;
-      }
-    }
+  & .#{$module-name}-footer_button {
+    height: 34px;
+  }
 
-    &.gm {
-      padding-right: 5px;
-    }
+  & .tabs {
+    flex: 0 0 32px;
+    line-height: 32px;
+    font-size: 16px;
+    border-bottom: 1px solid #000;
+  }
 
-    &.player {
-      padding-left: 5px;
-      padding-right: 3px;
-    }
-
-    &.form-group {
-      align-items: normal;
-      height: calc(100% - 40px);
-    }
+  & input[type="color"] {
+    width: 50px;
   }
 
   & .#{$module-name}-table {
@@ -39,40 +36,37 @@
       & tr {
         text-align: center;
       }
-
-      // Just making things smaller to leve space for the value field
-      & .#{$module-name}-col_icon {
-        width: 100px;
-      }
-
-      & .#{$module-name}-col_expression,
-      & .#{$module-name}-col_isNumber {
-        width: 30px;
-      }
-
-      & .#{$module-name}-col_delete,
-      & .#{$module-name}-col_color {
-        width: 50px;
-      }
-    }
-
-    & tbody {
-      & .#{$module-name}-row_expression,
-      & .#{$module-name}-row_isNumber,
-      & .#{$module-name}-row_sort {
-        text-align: center;
-      }
-
-      & .#{$module-name}-sort-handler {
-        & i {
-          cursor: grab;
-        }
-      }
     }
   }
 
-  & input[type="color"] {
+  & .#{$module-name}-col_icon {
+    width: 100px;
+  }
+
+  & .#{$module-name}-col_expression,
+  & .#{$module-name}-col_isNumber,
+  & .#{$module-name}-col_sort_column {
+    width: 30px;
+  }
+
+  & .#{$module-name}-col_delete {
     width: 50px;
+  }
+
+  & .#{$module-name}-col_color {
+    width: 52px;
+  }
+
+  & .#{$module-name}-row_expression,
+  & .#{$module-name}-row_isNumber,
+  & .#{$module-name}-row_sort {
+    text-align: center;
+  }
+
+  & .#{$module-name}-sort-handler {
+    & i {
+      cursor: grab;
+    }
   }
 
   & .#{$module-name}-button {
@@ -81,4 +75,5 @@
       flex: 0.5;
     }
   }
+
 }

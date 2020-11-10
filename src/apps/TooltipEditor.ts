@@ -13,6 +13,13 @@ export default class TooltipEditor extends FormApplication {
             submitOnChange: false,
             closeOnSubmit: false,
             submitOnClose: false,
+            tabs: [
+                {
+                    contentSelector: 'form',
+                    navSelector: '.tabs',
+                    initial: 'gm'
+                }
+            ],
         };
     }
 

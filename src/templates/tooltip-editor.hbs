@@ -1,14 +1,23 @@
-<form class="{{moduleName}}-form">
-    <div class="{{moduleName}}-container form-group">
-        <!-- Left side of the screen reserved for GM settings -->
-        {{> 'modules/token-tooltip-alt/templates/tooltip-editor-gm.hbs' this}}
+<form class="flexcol">
 
-        <!-- Right side of the screen reserved for Player settings -->
-        {{> 'modules/token-tooltip-alt/templates/tooltip-editor-player.hbs' this}}
-    </div>
+    <nav class="sheet-tabs tabs" data-group="user-types">
+        <a class="item" data-tab="gm"><i class="fas fa-book-reader"></i> {{localize 'token-tooltip-alt.tooltipEditorGm.gmHeader'}}</a>
+        <a class="item" data-tab="player"><i class="fas fa-users"></i> {{localize 'token-tooltip-alt.tooltipEditorPlayer.playerHeader'}}</a>
+    </nav>
 
-    <!-- Footer buttons -->
-    <footer class="{{moduleName}}-footer sheet-footer flexrow">
+    <section class="content">
+        <div class="tab" data-group="user-types" data-tab="gm">
+            <!-- Left side of the screen reserved for GM settings -->
+            {{> 'modules/token-tooltip-alt/templates/tooltip-editor-gm.hbs' this}}
+        </div>
+
+        <div class="tab" data-group="user-types" data-tab="player">
+            <!-- Right side of the screen reserved for Player settings -->
+            {{> 'modules/token-tooltip-alt/templates/tooltip-editor-player.hbs' this}}
+        </div>
+    </section>
+
+    <footer class="sheet-footer flexrow">
         <button type="submit" name="submit" class="{{moduleName}}-footer_button submit">
             <i class="fa fa-check"></i> <span>{{localize 'token-tooltip-alt.buttons.save'}}</span>
         </button>
