@@ -47,7 +47,7 @@ Here you can also **import**/**export** settings for **Tooltip editor**.
 
 ## Tooltip editor
 
-![tooltip-editor](https://i.imgur.com/nuc9OpY.png)
+![tooltip-editor](https://i.imgur.com/6q1KyBR.png)
 
 This section is divided into two. The settings for the GM, and the settings for the PLAYER, so you could have full control over what players see versus what the gm sees.
 
