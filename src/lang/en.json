@@ -11,7 +11,6 @@
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.bottom": "Bottom",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.left": "Left",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.overlay": "Overlay",
-  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.isometric": "Isometric",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.surprise": "Surprise me",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.doubleSurprise": "Surprise me harder",
 
@@ -27,6 +26,8 @@
   "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.hint": "Display a tooltip for every visible token on the scene.",
   "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name": "Show all on <ALT>",
   "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint": "Display a tooltips for every token on the scene. Dose nothing if 'Show on <ALT>' is set to false.",
+  "token-tooltip-alt.settings.ISOMETRIC.name": "WIP: Isometric tooltips",
+  "token-tooltip-alt.settings.ISOMETRIC.hint": "Use isometric tooltips if on an isometric map.",
   "token-tooltip-alt.settings.DEBUG_OUTPUT.name": "Debug output",
   "token-tooltip-alt.settings.DEBUG_OUTPUT.hint": "Display some useful debug information in the console.",
   "token-tooltip-alt.settings.TOOLTIP_MANAGER.name": "Tooltip manager",

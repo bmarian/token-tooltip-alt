@@ -363,6 +363,15 @@ class Tooltip {
                 position['left'] = tokenWT.tx - padding;
                 break;
             }
+            case 'isometric': {
+                const cW = this._tooltip.width();
+                const cH = this._tooltip.height();
+
+                position['top'] = tokenWT.ty - 5;
+                position['left'] = tokenWT.tx - cW + 60;
+                position['transform'] = 'rotateX(54deg) rotateY(-2deg) rotateZ(-44deg)';
+                break;
+            }
             case 'doubleSurprise': {
                 const canvas = $('#board');
                 const w = canvas.width() - this._tooltip.width();

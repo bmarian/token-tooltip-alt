@@ -31,7 +31,6 @@ class Settings {
                     "bottom": Utils.i18n('settings.TOOLTIP_POSITION.choices.bottom'),
                     "left": Utils.i18n('settings.TOOLTIP_POSITION.choices.left'),
                     "overlay": Utils.i18n('settings.TOOLTIP_POSITION.choices.overlay'),
-                    "isometric": Utils.i18n('settings.TOOLTIP_POSITION.choices.isometric'),
                     "surprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.surprise'),
                     "doubleSurprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.doubleSurprise'),
                 }
@@ -114,6 +113,18 @@ class Settings {
             },
         },
         {
+            key: this._settingKeys.ISOMETRIC,
+            settings: {
+                name: Utils.i18n('settings.ISOMETRIC.name'),
+                hint: Utils.i18n('settings.ISOMETRIC.hint'),
+                type: Boolean,
+                scope: "world",
+                config: true,
+                restricted: true,
+                default: false,
+            },
+        },
+        {
             key: this._settingKeys.DEBUG_OUTPUT,
             settings: {
                 name: Utils.i18n('settings.DEBUG_OUTPUT.name'),
@@ -122,7 +133,7 @@ class Settings {
                 scope: "world",
                 config: true,
                 restricted: true,
-                default: false,
+                default: true,
             },
         },
     ];
