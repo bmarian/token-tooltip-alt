@@ -51,7 +51,6 @@ class TooltipFactory {
             this._getSetting(this._settingKeys.DATA_SOURCE) || '',           // path
             CONSTANTS.TEMPLATES.TOOLTIP,                                     // template
             $('.game'),                                                 // gameBody
-            $('#board'),                                                // canvas
             this._getTooltipInfo(token),                                     // tooltipInfo
         ];
     }

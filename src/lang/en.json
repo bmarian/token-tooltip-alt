@@ -11,6 +11,7 @@
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.bottom": "Bottom",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.left": "Left",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.overlay": "Overlay",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.isometric": "Isometric",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.surprise": "Surprise me",
   "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.doubleSurprise": "Surprise me harder",
 

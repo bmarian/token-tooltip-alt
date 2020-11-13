@@ -31,6 +31,7 @@ class Settings {
                     "bottom": Utils.i18n('settings.TOOLTIP_POSITION.choices.bottom'),
                     "left": Utils.i18n('settings.TOOLTIP_POSITION.choices.left'),
                     "overlay": Utils.i18n('settings.TOOLTIP_POSITION.choices.overlay'),
+                    "isometric": Utils.i18n('settings.TOOLTIP_POSITION.choices.isometric'),
                     "surprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.surprise'),
                     "doubleSurprise": Utils.i18n('settings.TOOLTIP_POSITION.choices.doubleSurprise'),
                 }
