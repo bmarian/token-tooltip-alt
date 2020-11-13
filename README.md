@@ -1,5 +1,3 @@
-# If you are coming from v1.0.2 please follow the [CONVERT OLD SETTINGS](./macros/README.md)
-
 # Token Tooltip Alt
 ![Downloads](https://img.shields.io/github/downloads/bmarian/token-tooltip-alt/total?style=for-the-badge)
 ![License](https://img.shields.io/github/license/bmarian/token-tooltip-alt?style=for-the-badge)
