@@ -23,13 +23,16 @@ class TooltipFactory {
 
     // get the positioning from settings, and if surprise pick a random possible position
     private _getWhere(): string {
-        let where = this._getSetting(this._settingKeys.TOOLTIP_POSITION) || 'right';
+        const where = this._getSetting(this._settingKeys.TOOLTIP_POSITION) || 'right';
+        const isIsometricActive = game?.modules?.get("grape_juice-isometrics")?.active;
 
-        // @ts-ignore
-        const isIsometricMap = game?.scenes?.viewed?.getFlag('grape_juice-isometrics', 'is_isometric');
-        const isIsometric = this._getSetting(this._settingKeys.ISOMETRIC);
+        if (isIsometricActive) {
+            // @ts-ignore
+            const isIsometricMap = game?.scenes?.viewed?.getFlag('grape_juice-isometrics', 'is_isometric');
+            const isIsometric = this._getSetting(this._settingKeys.ISOMETRIC);
 
-        if (isIsometric && isIsometricMap) return this._settingKeys.ISOMETRIC;
+            if (isIsometric && isIsometricMap) return this._settingKeys.ISOMETRIC;
+        }
 
         const positions = CONSTANTS.TOOLTIP_POSITIONS;
         return where !== 'surprise' ? where : positions[Math.floor(Math.random() * positions.length)];
