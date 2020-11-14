@@ -26,6 +26,8 @@
   "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.hint": "Muestra un globo en cada uno de los iconos visibles presentes en la escena.",
   "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name": "Mostrar todos con <ALT>",
   "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint": "Muestra un globo en cada uno de los iconos presentes en la escena. No tendrá efecto si no se activa 'Mostrar con <ALT>'.",
+  "token-tooltip-alt.settings.ISOMETRIC.name": "Experimental: Globos isométricos",
+  "token-tooltip-alt.settings.ISOMETRIC.hint": "Utiliza globols adaptados para mapas isométricos.",
   "token-tooltip-alt.settings.DEBUG_OUTPUT.name": "Mensajes de depuración",
   "token-tooltip-alt.settings.DEBUG_OUTPUT.hint": "Muestra información útil de depuración en la consola.",
   "token-tooltip-alt.settings.TOOLTIP_MANAGER.name": "Gestor de Globos",
