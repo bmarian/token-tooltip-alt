@@ -1,4 +1,7 @@
 {
+  "I18N.LANGUAGE": "English",
+  "I18N.MAINTAINERS": "bmarian",
+
   "token-tooltip-alt.TokenTooltipAlt": "Token Tooltip Alt",
 
   "token-tooltip-alt.settings.TOOLTIP_POSITION.name": "Tooltip placement",
@@ -23,6 +26,8 @@
   "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.hint": "Display a tooltip for every visible token on the scene.",
   "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name": "Show all on <ALT>",
   "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint": "Display a tooltips for every token on the scene. Dose nothing if 'Show on <ALT>' is set to false.",
+  "token-tooltip-alt.settings.ISOMETRIC.name": "WIP: Isometric tooltips",
+  "token-tooltip-alt.settings.ISOMETRIC.hint": "Use isometric tooltips if on an isometric map.",
   "token-tooltip-alt.settings.DEBUG_OUTPUT.name": "Debug output",
   "token-tooltip-alt.settings.DEBUG_OUTPUT.hint": "Display some useful debug information in the console.",
   "token-tooltip-alt.settings.TOOLTIP_MANAGER.name": "Tooltip manager",
@@ -68,7 +73,7 @@
 
 
 
-  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "GM",
+  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "Player",
   "token-tooltip-alt.tooltipEditorPlayer.settingsHeader": "Settings",
   "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.name": "Display name",
   "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.hint": "Display the token's name in the tooltip depending on the disposition.",
