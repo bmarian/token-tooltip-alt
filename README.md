@@ -2,7 +2,7 @@
 ![Downloads](https://img.shields.io/github/downloads/bmarian/token-tooltip-alt/total?style=for-the-badge)
 ![License](https://img.shields.io/github/license/bmarian/token-tooltip-alt?style=for-the-badge)
 ![GitHub Latest Release](https://img.shields.io/github/release/bmarian/token-tooltip-alt?style=for-the-badge)
-![Foundry Version](https://img.shields.io/badge/FoundryVTT-0.7.6-blueviolet?style=for-the-badge)
+![Foundry Version](https://img.shields.io/badge/FoundryVTT-0.7.7-blueviolet?style=for-the-badge)
 
 A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.
 You can also hold ALT to see the tooltips for all tokens on the map.
