@@ -294,9 +294,11 @@ class Tooltip {
         const data = this._getTooltipData();
         if (!data.stats.length) return null;
 
+        const columns = this._breakInColumns(data.stats);
         const templateData = {
             ...data,
-            stats: this._breakInColumns(data.stats)
+            stats: columns,
+            numberOfColumns: columns.length,
         };
 
         Utils.debug(templateData);

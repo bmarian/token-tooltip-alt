@@ -2,7 +2,7 @@
     {{#if tokenName}}
         <h4 class="{{moduleName}}-tooltip-item title"><span>{{tokenName}}</span></h4>
     {{/if}}
-    <div class="{{moduleName}}-tooltip-items">
+    <div class="{{moduleName}}-tooltip-items" style="grid-template-columns: repeat({{numberOfColumns}}, auto)">
         {{#each stats}}
             <div class="{{../moduleName}}-tooltip-column">
                 {{#each this}}
