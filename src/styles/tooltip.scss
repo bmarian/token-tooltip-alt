@@ -27,7 +27,7 @@
 .#{$module-name}-tooltip-item {
  &:not(.title) {
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: 1.4rem auto;
   grid-gap: 0.5rem;
   align-items: center;
  }
