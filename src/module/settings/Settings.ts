@@ -113,6 +113,18 @@ class Settings {
             },
         },
         {
+            key: this._settingKeys.ISOMETRIC,
+            settings: {
+                name: Utils.i18n('settings.ISOMETRIC.name'),
+                hint: Utils.i18n('settings.ISOMETRIC.hint'),
+                type: Boolean,
+                scope: "world",
+                config: true,
+                restricted: true,
+                default: false,
+            },
+        },
+        {
             key: this._settingKeys.DEBUG_OUTPUT,
             settings: {
                 name: Utils.i18n('settings.DEBUG_OUTPUT.name'),
@@ -121,7 +133,7 @@ class Settings {
                 scope: "world",
                 config: true,
                 restricted: true,
-                default: false,
+                default: true,
             },
         },
     ];

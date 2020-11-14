@@ -20,6 +20,7 @@ export const CONSTANTS = {
         TOOLTIP_MANAGER: 'tooltipManager',
         ACTORS: 'actors',
         CLIPBOARD: 'clipboard',
+        ISOMETRIC: 'isometric',
 
         // old settings
         TOOLTIP_ITEMS: 'tooltipItems',
