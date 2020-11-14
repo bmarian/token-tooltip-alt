@@ -133,7 +133,7 @@ class Settings {
                 scope: "world",
                 config: true,
                 restricted: true,
-                default: true,
+                default: false,
             },
         },
     ];
