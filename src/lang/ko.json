@@ -1,0 +1,84 @@
+{
+  "I18N.LANGUAGE": "Korean",
+  "I18N.MAINTAINERS": "KLO",
+
+  "token-tooltip-alt.TokenTooltipAlt": "Token Tooltip Alt",
+
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.name": "툴팁 배치",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.hint": "툴팁의 위치를 지정한다.",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.top": "위",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.right": "오른쪽",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.bottom": "아래",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.left": "왼쪽",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.overlay": "오버레이",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.surprise": "깜짝",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.doubleSurprise": "겁나 깜짝",
+
+  "token-tooltip-alt.settings.FONT_SIZE.name": "글꼴 크기",
+  "token-tooltip-alt.settings.FONT_SIZE.hint": "툴팁의 글꼴 크기를 1에서 2.5 rem 사이로 지정할 수 있다.",
+  "token-tooltip-alt.settings.MAX_ROWS.name": "최대 열",
+  "token-tooltip-alt.settings.MAX_ROWS.hint": "열의 최대 수",
+  "token-tooltip-alt.settings.DATA_SOURCE.name": "데이터 소스",
+  "token-tooltip-alt.settings.DATA_SOURCE.hint": "이것은 고급 기능이며 어떻게 할 지 모른다면 손대지 마십시오. 툴팁 데이터가 어디에서부터 끌어와지는지를 결정합니다.",
+  "token-tooltip-alt.settings.DARK_THEME.name": "어두운 테마",
+  "token-tooltip-alt.settings.DARK_THEME.hint": "툴팁에 어두운 테마 적용.",
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.name": "<ALT>로 보이기",
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.hint": "씬에 표시되는 모든 토큰에 대한 툴팁을 표시한다.",
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name": "<ALT>로 모두 표시",
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint": "씬의 모든 토큰에 대한 툴팁을 표시한다. 'Alt로 보이기'가 비활성화 되어 있으면 손대지 말 것.",
+  "token-tooltip-alt.settings.ISOMETRIC.name": "WIP: 등축도(Isometric) 툴팁",
+  "token-tooltip-alt.settings.ISOMETRIC.hint": "등축도 맵에서 등축도적 툴팁을 사용한다.",
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.name": "디버그 출력",
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.hint": "콘솔에 유용한 디버그 정보를 표시한다.",
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.name": "툴팁 관리자",
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.label": "툴팁 관리자",
+
+
+
+  "token-tooltip-alt.buttons.import": "가져오기",
+  "token-tooltip-alt.buttons.export": "내보내기",
+  "token-tooltip-alt.buttons.save": "저장",
+  "token-tooltip-alt.buttons.importFromDefault": "기본값 가져오기",
+  "token-tooltip-alt.buttons.add": "추가",
+  "token-tooltip-alt.buttons.copy": "복사",
+  "token-tooltip-alt.buttons.paste": "붙여넣기",
+
+
+
+  "token-tooltip-alt.tooltipManager.infoMessage": "자세한 내용은 다음을 참조할 것. ",
+
+  "token-tooltip-alt.tooltipManager.col.actor": "액터",
+  "token-tooltip-alt.tooltipManager.col.enable": "활성화",
+  "token-tooltip-alt.tooltipManager.col.custom": "커스텀",
+  "token-tooltip-alt.tooltipManager.col.edit": "수정",
+
+
+
+
+  "token-tooltip-alt.tooltipEditor.col.color": "색상",
+  "token-tooltip-alt.tooltipEditor.col.icon": "아이콘",
+  "token-tooltip-alt.tooltipEditor.col.value": "값",
+  "token-tooltip-alt.tooltipEditor.col.expression": "Exp",
+  "token-tooltip-alt.tooltipEditor.col.isNumber": "Nr",
+  "token-tooltip-alt.tooltipEditor.col.delete": "삭제",
+
+  "token-tooltip-alt.tooltipEditorGm.gmHeader": "GM",
+  "token-tooltip-alt.tooltipEditorGm.settingsHeader": "설정",
+  "token-tooltip-alt.tooltipEditorGm.settings.displayName.name": "이름 표시",
+  "token-tooltip-alt.tooltipEditorGm.settings.displayName.hint": "툴팁에 토큰의 이름을 표시한다.",
+  "token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.name": "모든 곳에 강조 색 사용",
+  "token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.hint": "사용자 지정 색 대신 모든 곳에 강조 색을 사용한다.",
+  "token-tooltip-alt.tooltipEditorGm.settings.accentColor.name": "강조색",
+  "token-tooltip-alt.tooltipEditorGm.settings.accentColor.hint": "제목과 외곽에 강조 색을 설정한다.",
+
+
+
+  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "플레이어",
+  "token-tooltip-alt.tooltipEditorPlayer.settingsHeader": "설정",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.name": "이름 표시",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.hint": "배치에 따라 툴팁에 토큰의 이름을 표시한다.",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.name": "모든 곳에 강조 색 사용",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.hint": "사용자 지정 색 대신 모든 곳에 강조 색을 사용한다.",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.name": "강조색",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.hint": "제목과 외곽에 강조 색을 설정한다."
+}
