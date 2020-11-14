@@ -24,9 +24,15 @@
   max-width: 10rem;
 }
 
-.#{$module-name}-tooltip-item:not(.title) {
+.#{$module-name}-tooltip-item {
+ &:not(.title) {
   display: grid;
   grid-template-columns: min-content auto;
   grid-gap: 0.5rem;
   align-items: center;
+ }
+
+  & span {
+    word-break: break-word;
+  }
 }
