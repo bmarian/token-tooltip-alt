@@ -367,13 +367,10 @@ class Tooltip {
             }
             case 'isometric': {
                 const cW = this._tooltip.width();
-                const x = tokenWT.tx - cW;
-                const y = tokenWT.ty;
+                position['top'] = tokenWT.ty;
+                position['left'] = tokenWT.tx - cW;
 
-                position['left'] = x;
-                position['top'] = y;
-
-                position['transform'] = 'rotateX(54deg) rotateY(-2deg) rotateZ(-44deg) translateX(60px) translateY(35px)';
+                position['transform'] = 'rotateX(54deg) rotateY(-2deg) rotateZ(-44deg)';
                 break;
             }
             case 'doubleSurprise': {
