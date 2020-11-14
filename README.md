@@ -1,5 +1,3 @@
-# If you are coming from v1.0.2 please follow the [CONVERT OLD SETTINGS](./macros/README.md)
-
 # Token Tooltip Alt
 ![Downloads](https://img.shields.io/github/downloads/bmarian/token-tooltip-alt/total?style=for-the-badge)
 ![License](https://img.shields.io/github/license/bmarian/token-tooltip-alt?style=for-the-badge)
@@ -20,13 +18,14 @@ You can also hold ALT to see the tooltips for all tokens on the map.
 
 ![game-settings](https://i.imgur.com/c8QRbIR.png)
 
-- `Tooltip placement`: Self-descriptive, chose where the tooltip should be shown.
+- `Tooltip placement`: Self-descriptive, chose where the tooltip should be shown. **(Configurable by players)**
 - `Font size`: You can change the font size to a value between 1 - 2.5 rem. **(Configurable by players)**
 - `Data source`: This is an advanced feature, with this you chose how deep into the token object the search for values start.
 - `Show all tooltips on ALT`: If true, when pressing ALT you will see a tooltip for every visible token on the scene.
 - `Dark theme`: If true, will show the tooltips with a dark theme. **(Configurable by players)**
 - `Show on <ALT>`: If true, when pressing ALT \*every visible token on the screen will display a tooltip.
 - `Show all on <ALT>`: If true, when pressing ALT \*every token on the screen will display a tooltip.
+- `Isometric tooltips`: If true, and you are on an isometric map it will position the tooltip in front of the token with an isometric perspective.
 - `Debug output`: If true, will display some useful debugging information in the console.
 
 ## Token configuration
