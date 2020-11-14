@@ -73,7 +73,7 @@
 
 
 
-  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "GM",
+  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "Jugador",
   "token-tooltip-alt.tooltipEditorPlayer.settingsHeader": "Ajustes",
   "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.name": "Mostrar nombre",
   "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.hint": "Muestra el nombre del icono en el globo dependiendo de la disposición.",
