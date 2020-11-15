@@ -15,6 +15,8 @@ class Tooltip {
         expressions: new RegExp(/{([^}]*)}/g),
         // determines if the string is a -
         minus: new RegExp(/-/),
+        // check if its a font awesome icon
+        faIcon: new RegExp(/^[\w\-]+$/),
     }
     private _tooltip = null;
     private _doStringMath = doMath;
@@ -131,11 +133,18 @@ class Tooltip {
         return hasNull ? null : convExp;
     }
 
+    // checks what type of icon it is:
+    // * font awesome icon
+    // * url
+    private _getIconData(icon: string): {} {
+        return {icon, iconType: icon ? this._reg.faIcon.test(icon.trim()) : true, iconSize: this._fontSize};
+    }
+
     // appends stats with only a value
     private _appendSimpleStat(value: any, item: any, stats: Array<any>): void {
         if (value === '' || (typeof value !== 'string' && isNaN(value))) return;
         const v = item.isNumber ? this._extractNumber(value) : value;
-        stats.push({value: v, icon: item?.icon, color: item?.color});
+        stats.push({value: v, color: item?.color, ...this._getIconData(item?.icon)});
     }
 
     // appends object stats (they need to have a fixed structure)
@@ -146,7 +155,7 @@ class Tooltip {
         const temp = values.temp > 0 ? `(${values.temp})` : '';
         const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
         const value = `${values.value}${temp}/${values.max}${tempmax}`;
-        stats.push({value, icon: item?.icon, color: item?.color});
+        stats.push({value, color: item?.color, ...this._getIconData(item?.icon)});
     }
 
     // appends to a stats array a structure for stats
@@ -228,7 +237,7 @@ class Tooltip {
             if (index === -1) {
                 if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
                 return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
-                    && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
+                && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
             }
 
             // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]

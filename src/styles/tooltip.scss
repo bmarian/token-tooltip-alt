@@ -27,10 +27,13 @@
 .#{$module-name}-tooltip-item {
  &:not(.title) {
   display: grid;
-  grid-template-columns: 1.4rem auto;
   grid-gap: 0.5rem;
   align-items: center;
  }
+
+  & img {
+    border: none;
+  }
 
   & span {
     word-break: break-word;
