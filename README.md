@@ -62,6 +62,6 @@ You can have a different configuration for every token disposition.
 
 - `Color`: Allows you to change the color for this item's icon.
 - `Value`: can be found double right-clicking on a token -> resources tab -> go through the attributes possible for bars, you can use anything from there.
-- `Icon`: You can use any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery). (e.g. the icon is called heart so fa-heart)
+- `Icon`: You can use any url/path to an icon, or any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery) (e.g. the icon is called heart you have to write it as fa-heart).
 - `Exp`: Marks the item as an expression. The engine behind this is [Math.js](https://mathjs.org/docs/expressions/index.html), please read the documentation to see what you can do with it. (e.g. [EXPEXAMPLES.md](./EXPEXAMPLES.md))
 - `Nr`: Forces only the number from a string to be shown. (e.g. dnd5e: `attributes.speed.value` -> 30 ft. but you want to show only 30, this option will help with that)
