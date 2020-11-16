@@ -16,7 +16,7 @@ class Tooltip {
         // determines if the string is a -
         minus: new RegExp(/-/),
         // check if its a font awesome icon
-        faIcon: new RegExp(/^[\w\-]+$/),
+        faIcon: new RegExp(/^[\w\- ]+$/),
     }
     private _tooltip = null;
     private _doStringMath = doMath;
