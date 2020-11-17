@@ -16,10 +16,11 @@ You can also hold ALT to see the tooltips for all tokens on the map.
 
 ## Game settings
 
-![game-settings](https://i.imgur.com/c8QRbIR.png)
+![game-settings](https://i.imgur.com/oGUegIm.png)
 
 - `Tooltip placement`: Self-descriptive, chose where the tooltip should be shown. **(Configurable by players)**
 - `Font size`: You can change the font size to a value between 1 - 2.5 rem. **(Configurable by players)**
+- `Max rows`: Determins how many rows should be in a column. **(Configurable by players)**
 - `Data source`: This is an advanced feature, with this you chose how deep into the token object the search for values start.
 - `Show all tooltips on ALT`: If true, when pressing ALT you will see a tooltip for every visible token on the scene.
 - `Dark theme`: If true, will show the tooltips with a dark theme. **(Configurable by players)**
