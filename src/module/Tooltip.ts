@@ -135,18 +135,16 @@ class Tooltip {
 
     private _evalFunction(data: any, funString: string): any {
         const userFun = new Function(`
+            const {token, data, context, utils} = arguments[0];
+            
             try {
-                const data = arguments[0],
-                      tooltip = arguments[1];
                 ${funString}
             } catch (err) {
-                const utils = arguments[2];
-                utils.debug(err);
-                
+                utils.debug(err);    
                 return '';
             }
         `);
-        return userFun(data, this, Utils);
+        return userFun({token: this._token, data: data, context: this, utils: Utils});
     }
 
     // checks what type of icon it is:
