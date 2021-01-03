@@ -170,16 +170,16 @@ export default class TooltipEditor extends FormApplication {
         // sortable end event, we need to redraw the table inputs
         const dragOverHandler = (tbody) => (evt) => {
             $(tbody).find('tr').each((index, tr) => {
-               const $tr = $(tr);
-               $tr.attr('index', index);
+                const $tr = $(tr);
+                $tr.attr('index', index);
 
-               $tr.find('input').each((_0, input) => {
-                   const $input = $(input);
-                   const name = $input.attr('name');
+                $tr.find('input').each((_0, input) => {
+                    const $input = $(input);
+                    const name = $input.attr('name');
 
-                   const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
-                   $input.attr('name', newName);
-               });
+                    const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
+                    $input.attr('name', newName);
+                });
             });
         }
 
@@ -204,7 +204,7 @@ export default class TooltipEditor extends FormApplication {
 
     // make the final items array (the one inside the tokenType.items)
     private _extractItemsArray(items: any): any {
-        const {value, icon, expression, isNumber, color} = items;
+        const {value, icon, isFunction, expression, isNumber, color} = items;
         if (!(value && icon && expression)) return [];
 
         const returnArray = [];
@@ -214,10 +214,11 @@ export default class TooltipEditor extends FormApplication {
             if (!v) continue;
 
             const i = icon[key];
+            const f = isFunction[key];
             const e = expression[key];
             const n = isNumber[key];
             const c = color[key];
-            returnArray.push({value: v, icon: i, expression: e, isNumber: n, color: c});
+            returnArray.push({value: v, icon: i, isFunction: f, expression: e, isNumber: n, color: c});
         }
 
         return returnArray;
