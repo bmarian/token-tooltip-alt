@@ -134,16 +134,11 @@ class Tooltip {
     }
 
     private _evalFunction(data: any, funString: string): any {
-        const userFun = new Function(`
-            const {token, data, context, utils} = arguments[0];
-            
-            try {
-                ${funString}
-            } catch (err) {
-                utils.debug(err);    
-                return '';
-            }
-        `);
+        const userFunStr = 'const {token, data, context, utils} = arguments[0];'
+            + 'try {\n'
+            + funString
+            + '\n} catch (err) { utils.debug(err); return ""; }';
+        const userFun = new Function(userFunStr);
         return userFun({token: this._token, data: data, context: this, utils: Utils});
     }
 

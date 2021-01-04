@@ -3,11 +3,13 @@
   & .flexcol {
     height: 100%;
   }
+
   & .content {
     overflow-x: hidden;
     overflow-y: auto;
     padding-right: 5px;
   }
+
   & .sheet-footer {
     flex: 0;
   }
@@ -76,6 +78,42 @@
     &.paste {
       flex: 0.5;
     }
+
+    &.add,
+    &.copy,
+    &.paste {
+      min-width: 80px;
+    }
   }
 
+  & .#{$module-name}-row_tracked-value {
+    display: grid;
+    align-items: end;
+    grid-template-columns: auto 30px;
+    column-gap: 0.3rem;
+    padding: 0.35em 0;
+
+    & textarea {
+      min-height: 26px;
+      height: 26px;
+      resize: none;
+
+      overflow: -moz-scrollbars-none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    & button {
+      background: none;
+      border: none;
+      line-height: 26px;
+
+      &:focus,
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
 }
