@@ -95,11 +95,19 @@ export default class TooltipEditor extends FormApplication {
         $newRow.find(`.${Utils.moduleName}-row_button.delete`).on('click', () => {
             $tbody.find(`.${Utils.moduleName}-row[index=${lastIndex + 1}]`).remove();
         });
+
+        $newRow.find(`.${Utils.moduleName}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
     }
 
     // the default delete event, just deletes the closest row
     private _deleteButtonClickEvent(): void {
         $(this).closest(`.${Utils.moduleName}-row`).remove();
+    }
+
+    // opens the advanced editor
+    private _openAdvancedEditor(): void {
+        // TODO: Implement this
+        const $this = $(this);
     }
 
     // the default delete event, just deletes the closest row
@@ -180,6 +188,14 @@ export default class TooltipEditor extends FormApplication {
                     const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
                     $input.attr('name', newName);
                 });
+
+                $tr.find('textarea').each((_0, textarea) => {
+                    const $textarea = $(textarea);
+                    const name = $textarea.attr('name');
+
+                    const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
+                    $textarea.attr('name', newName);
+                });
             });
         }
 
@@ -197,6 +213,7 @@ export default class TooltipEditor extends FormApplication {
         });
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
+        $html.find(`.${Utils.moduleName}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
         $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-button.copy`).on('click', this._copyToClipboard.bind(this));
         $html.find(`.${Utils.moduleName}-button.paste`).on('click', this._pasteFromClipboard.bind(this));
