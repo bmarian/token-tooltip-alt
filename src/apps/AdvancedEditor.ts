@@ -52,11 +52,12 @@ export default class AdvancedEditor extends FormApplication {
     public activateListeners($html: JQuery): void {
         super.activateListeners($html);
 
-        const advancedEditor = $html.find('.advanced-editor')[0];
-        if (!advancedEditor) return;
+        const $advancedEditor = $html.find('.advanced-editor');
+        if (!$advancedEditor) return;
 
+        $advancedEditor.val(this._getTarget()?.val());
         // @ts-ignore
-        this._advancedEditor = CodeMirror.fromTextArea(advancedEditor, {
+        this._advancedEditor = CodeMirror.fromTextArea($advancedEditor[0], {
             mode: 'javascript',
             inputStyle: 'contenteditable',
 

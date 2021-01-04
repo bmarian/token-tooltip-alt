@@ -224,6 +224,15 @@ export default class TooltipEditor extends FormApplication {
         $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-button.copy`).on('click', this._copyToClipboard.bind(this));
         $html.find(`.${Utils.moduleName}-button.paste`).on('click', this._pasteFromClipboard.bind(this));
+
+        const settingsList = this._getSettingLists();
+        $html.find(`.${Utils.moduleName}-row_tracked-value textarea`).each((_0, textarea) => {
+            const $textarea = $(textarea);
+            const [type, _1, disposition, _2, index] = $textarea.attr('name').split('.'); // e.g. gm.items.HOSTILE.value.0
+            const settings = type === 'gm' ? settingsList.gmSettings : settingsList.playerSettings;
+            const value = settings.items.find(i => i.disposition === disposition).items[index]?.value;
+            $textarea.val(value);
+        });
     }
 
     // make the final items array (the one inside the tokenType.items)
