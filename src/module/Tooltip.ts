@@ -133,6 +133,15 @@ class Tooltip {
         return hasNull ? null : convExp;
     }
 
+    private _evalFunction(data: any, funString: string): any {
+        const userFunStr = 'const {token, data, context, utils} = arguments[0];'
+            + 'try {\n'
+            + funString
+            + '\n} catch (err) { utils.debug(err); return ""; }';
+        const userFun = new Function(userFunStr);
+        return userFun({token: this._token, data: data, context: this, utils: Utils});
+    }
+
     // checks what type of icon it is:
     // * font awesome icon
     // * url
@@ -267,7 +276,9 @@ class Tooltip {
 
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
-            const value = this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
+            const value = item?.isFunction
+                ? this._evalFunction(this._data, item.value)
+                : this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
 
             if (staticData.useAccentEverywhere) item.color = staticData.accentColor;
 

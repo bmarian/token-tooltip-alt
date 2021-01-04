@@ -5,6 +5,11 @@ $module-name: 'token-tooltip-alt';
 @import "styles/tooltip-manager";
 @import "styles/tooltip-editor";
 @import "styles/data-manager";
+@import "styles/advanced-editor";
 
 // Themes
 @import "styles/tooltip-default";
+
+// Lib
+
+@import "lib/codemirror/lib/codemirror";

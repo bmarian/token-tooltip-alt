@@ -10,7 +10,13 @@
         <input type="text" name="{{type}}.items.{{disposition}}.icon.{{index}}" value="{{item.icon}}" data-dtype="String">
     </td>
     <td class="{{moduleName}}-row_tracked-value">
-        <input type="text" name="{{type}}.items.{{disposition}}.value.{{index}}" value="{{item.value}}" data-dtype="String">
+        <textarea name="{{type}}.items.{{disposition}}.value.{{index}}" data-dtype="String">{{item.value}}</textarea>
+        <button type="button" class="{{moduleName}}-row_button advanced-editor">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+    </td>
+    <td class="{{moduleName}}-row_isFunction">
+        <input type="checkbox" name="{{type}}.items.{{disposition}}.isFunction.{{index}}" data-dtype="Boolean" {{#if item.isFunction}}checked{{/if}}>
     </td>
     <td class="{{moduleName}}-row_expression">
         <input type="checkbox" name="{{type}}.items.{{disposition}}.expression.{{index}}" data-dtype="Boolean" {{#if item.expression}}checked{{/if}}>

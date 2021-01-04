@@ -1,6 +1,7 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
 import {CONSTANTS} from "../module/enums/Constants";
 import Utils from "../module/Utils";
+import AdvancedEditor from "./AdvancedEditor";
 
 export default class TooltipEditor extends FormApplication {
     static get defaultOptions(): any {
@@ -95,11 +96,25 @@ export default class TooltipEditor extends FormApplication {
         $newRow.find(`.${Utils.moduleName}-row_button.delete`).on('click', () => {
             $tbody.find(`.${Utils.moduleName}-row[index=${lastIndex + 1}]`).remove();
         });
+
+        $newRow.find(`.${Utils.moduleName}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
     }
 
     // the default delete event, just deletes the closest row
     private _deleteButtonClickEvent(): void {
         $(this).closest(`.${Utils.moduleName}-row`).remove();
+    }
+
+    // opens the advanced editor
+    private _openAdvancedEditor(): void {
+        const $this = $(this);
+        const target = $this.parent().find('textarea');
+        if (!target) return;
+
+        const te = new AdvancedEditor({target});
+        te.render(true);
+
+        Utils.debug(`Opened an advanced editor for: ${target.attr('name')}.`)
     }
 
     // the default delete event, just deletes the closest row
@@ -170,16 +185,24 @@ export default class TooltipEditor extends FormApplication {
         // sortable end event, we need to redraw the table inputs
         const dragOverHandler = (tbody) => (evt) => {
             $(tbody).find('tr').each((index, tr) => {
-               const $tr = $(tr);
-               $tr.attr('index', index);
+                const $tr = $(tr);
+                $tr.attr('index', index);
 
-               $tr.find('input').each((_0, input) => {
-                   const $input = $(input);
-                   const name = $input.attr('name');
+                $tr.find('input').each((_0, input) => {
+                    const $input = $(input);
+                    const name = $input.attr('name');
 
-                   const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
-                   $input.attr('name', newName);
-               });
+                    const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
+                    $input.attr('name', newName);
+                });
+
+                $tr.find('textarea').each((_0, textarea) => {
+                    const $textarea = $(textarea);
+                    const name = $textarea.attr('name');
+
+                    const newName = name.substr(0, name.lastIndexOf('.') + 1) + index;
+                    $textarea.attr('name', newName);
+                });
             });
         }
 
@@ -197,6 +220,7 @@ export default class TooltipEditor extends FormApplication {
         });
         $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
+        $html.find(`.${Utils.moduleName}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
         $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
         $html.find(`.${Utils.moduleName}-button.copy`).on('click', this._copyToClipboard.bind(this));
         $html.find(`.${Utils.moduleName}-button.paste`).on('click', this._pasteFromClipboard.bind(this));
@@ -204,7 +228,7 @@ export default class TooltipEditor extends FormApplication {
 
     // make the final items array (the one inside the tokenType.items)
     private _extractItemsArray(items: any): any {
-        const {value, icon, expression, isNumber, color} = items;
+        const {value, icon, isFunction, expression, isNumber, color} = items;
         if (!(value && icon && expression)) return [];
 
         const returnArray = [];
@@ -214,10 +238,11 @@ export default class TooltipEditor extends FormApplication {
             if (!v) continue;
 
             const i = icon[key];
+            const f = isFunction[key];
             const e = expression[key];
             const n = isNumber[key];
             const c = color[key];
-            returnArray.push({value: v, icon: i, expression: e, isNumber: n, color: c});
+            returnArray.push({value: v, icon: i, isFunction: f, expression: e, isNumber: n, color: c});
         }
 
         return returnArray;

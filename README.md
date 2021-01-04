@@ -46,7 +46,7 @@ Here you can also **import**/**export** settings for **Tooltip editor**.
 
 ## Tooltip editor
 
-![tooltip-editor](https://i.imgur.com/6q1KyBR.png)
+![tooltip-editor](https://i.imgur.com/Up0w5GQ.png)
 
 This section is divided into two. The settings for the GM, and the settings for the PLAYER, so you could have full control over what players see versus what the gm sees.
 
@@ -61,7 +61,25 @@ This section is divided into two. The settings for the GM, and the settings for 
 You can have a different configuration for every token disposition.
 
 - `Color`: Allows you to change the color for this item's icon.
-- `Value`: can be found double right-clicking on a token -> resources tab -> go through the attributes possible for bars, you can use anything from there.
 - `Icon`: You can use any url/path to an icon, or any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery) (e.g. the icon is called heart you have to write it as fa-heart).
-- `Exp`: Marks the item as an expression. The engine behind this is [Math.js](https://mathjs.org/docs/expressions/index.html), please read the documentation to see what you can do with it. (e.g. [EXPEXAMPLES.md](./EXPEXAMPLES.md))
+- `Value`: can be found double right-clicking on a token -> resources tab -> go through the attributes possible for bars, you can use anything from there.
+- `Fun`: Marks the item as a JavaScript function (e.g. [FUN_EXPEXAMPLES.md](./FUN_EXPEXAMPLES.md)), here is how the function will look:
+```js
+/**
+ * @param {Token} token - the currently hovered token
+ * @param {*} data - the same data available for every line
+ * @param {Tooltip} context - the tooltip from where this function is executed
+ * @param {Utils} utils - my Utils class, used mostly for debugging
+ * @return {string}
+ */
+function anonymous(token, data, context, utils) {
+	try {
+		/* your code will be here */
+	} catch (err) {
+		utils.debug(err);
+		return '';
+	}
+}
+```
+- `Exp`: Marks the item as an expression. The engine behind this is [Math.js](https://mathjs.org/docs/expressions/index.html), please read the documentation to see what you can do with it. (e.g. [EXP_EXPEXAMPLES.md](./EXP_EXPEXAMPLES.md))
 - `Nr`: Forces only the number from a string to be shown. (e.g. dnd5e: `attributes.speed.value` -> 30 ft. but you want to show only 30, this option will help with that)

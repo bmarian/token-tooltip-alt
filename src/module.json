@@ -2,10 +2,18 @@
   "name": "token-tooltip-alt",
   "title": "Token Tooltip Alt",
   "description": "A module that adds a tooltip next to the currently hovered token to show some useful information for players and DMs.",
-  "version": "2.0.18",
+  "version": "2.1.0",
   "author": "bmarian",
-  "esmodules": ["token-tooltip-alt.js"],
-  "styles": ["token-tooltip-alt.css"],
+  "esmodules": [
+    "token-tooltip-alt.js"
+  ],
+  "styles": [
+    "token-tooltip-alt.css"
+  ],
+  "scripts": [
+    "./lib/codemirror/lib/codemirror.js",
+    "./lib/codemirror/mode/javascript/javascript.js"
+  ],
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "0.8.0",
   "dependencies": [
@@ -44,6 +52,6 @@
   ],
   "url": "https://github.com/bmarian/token-tooltip-alt",
   "manifest": "https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/src/module.json",
-  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v2.0.18/token-tooltip-alt-v2.0.18.zip",
+  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v2.1.0/token-tooltip-alt-v2.1.0.zip",
   "changelog": "https://github.com/bmarian/token-tooltip-alt/releases"
 }
