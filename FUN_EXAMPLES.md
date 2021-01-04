@@ -18,4 +18,18 @@ window.TTASpamLimit = token.data.actorId;
 }
 return '';
 ```
-![]()
+
+![](https://i.imgur.com/GPCQfOz.gif)
+
+### Showing all the speed values in a single item
+```js
+const movs = JSON.parse(JSON.stringify(data.attributes.movement));
+delete movs.hover;
+delete movs.units;
+
+return Object.entries(movs).reduce((acc, [key, value]) => {
+  return acc + value !== 0 ? `${key[0].toUpperCase()}:${value}` : '';
+}, '');
+```
+
+![](https://i.imgur.com/pzTQcIr.png)
