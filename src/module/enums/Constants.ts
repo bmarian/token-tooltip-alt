@@ -49,6 +49,10 @@ export const CONSTANTS = {
         TOOLTIP_DEFAULT_ACTOR_ID: 'default',
         OWNED_DISPOSITION: 'OWNED',
         NONE_DISPOSITION: 'NONE',
+
+        ADVANCED_EDITOR: `modules/${Utils.moduleName}/templates/advanced-editor.hbs`,
+        ADVANCED_EDITOR_WIDTH: 600,
+        ADVANCED_EDITOR_HEIGHT: 700,
     },
 
     SYSTEM_DEFAULT: 'default',

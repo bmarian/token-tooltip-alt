@@ -1,6 +1,7 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
 import {CONSTANTS} from "../module/enums/Constants";
 import Utils from "../module/Utils";
+import AdvancedEditor from "./AdvancedEditor";
 
 export default class TooltipEditor extends FormApplication {
     static get defaultOptions(): any {
@@ -106,8 +107,14 @@ export default class TooltipEditor extends FormApplication {
 
     // opens the advanced editor
     private _openAdvancedEditor(): void {
-        // TODO: Implement this
         const $this = $(this);
+        const target = $this.parent().find('textarea');
+        if (!target) return;
+
+        const te = new AdvancedEditor({target});
+        te.render(true);
+
+        Utils.debug(`Opened an advanced editor for: ${target.attr('name')}.`)
     }
 
     // the default delete event, just deletes the closest row

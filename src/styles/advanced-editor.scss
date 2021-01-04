@@ -1,0 +1,19 @@
+.#{$module-name}-advanced-editor-window {
+
+  & .CodeMirror {
+    height: 95%;
+    cursor: text;
+    background: url(../ui/parchment.jpg) repeat;
+    box-shadow: 0 0 12px -6px #00000070 inset;
+  }
+
+  & .CodeMirror-gutters {
+    background-color: #DCDACE;
+    box-shadow: 0 0 5px 0 #0000005c;
+  }
+
+  & .advanced-editor {
+    font-family: 'Courier New', Courier, monospace;
+    height: 95%;
+  }
+}
