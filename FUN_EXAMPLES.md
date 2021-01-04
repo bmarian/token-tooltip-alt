@@ -19,7 +19,7 @@ window.TTASpamLimit = token.data.actorId;
 return '';
 ```
 
-![](https://i.imgur.com/GPCQfOz.gif)
+![](https://i.imgur.com/QlTmTEv.gif)
 
 ### Showing all the speed values in a single item
 ```js
