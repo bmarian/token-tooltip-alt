@@ -8,14 +8,33 @@ A collection of examples made by me or others that might give you an idea of how
 For this one, you need the [foundryvtt-confetti](https://github.com/ElfFriend-DnD/foundryvtt-confetti) module.
 
 ```js
-window.TTASpamLimit = window.TTASpamLimit || '';
-const confetti = window?.confetti;
-const dead = data.attributes.hp.value === 0;
-const spam = window.TTASpamLimit === token.data.actorId;
-if (dead && confetti && !spam) {
-confetti.shootConfetti(confetti.getShootConfettiProps(1));
-window.TTASpamLimit = token.data.actorId;
+// check if the enamy is dead
+const hp = data.actor?.data?.data?.attributes?.hp?.value;
+if (hp > 0) return '';
+
+// check if we already triggered confetti
+window.TTAPlayerHostileConfettiRunning = window.TTAPlayerHostileConfettiRunning || false;
+if (window.TTAPlayerHostileConfettiRunning) return '';
+
+// this uses the foundryvtt-confetti module
+const confetti = () => {
+  const confettiInst = window.confetti;
+  if (!confettiInst) return '';
+  
+  const strength = confettiInst.confettiStrength.med;
+  const props = confettiInst.getShootConfettiProps(strength);
+  confettiInst.handleShootConfetti(props);
 }
+confetti();
+
+// mark that we used confetti
+window.TTAPlayerHostileConfettiRunning = true;
+
+// add a time to reset the confetti limit after 3s
+window.TTAPlayerHostileConfettiTimeout = setTimeout(() => {
+  window.TTAPlayerHostileConfettiRunning = false;
+}, 3000);
+
 return '';
 ```
 
