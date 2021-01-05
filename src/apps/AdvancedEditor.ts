@@ -59,11 +59,12 @@ export default class AdvancedEditor extends FormApplication {
         $advancedEditor.val(this._getTarget()?.val());
         // @ts-ignore
         this._advancedEditor = CodeMirror.fromTextArea($advancedEditor[0], {
+            // @ts-ignore
+            ...CodeMirror.userSettings,
             mode: 'javascript',
             inputStyle: 'contenteditable',
 
             lineNumbers: true,
-            smartIndent: true,
             autofocus: true
         });
     }

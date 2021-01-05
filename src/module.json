@@ -10,10 +10,6 @@
   "styles": [
     "token-tooltip-alt.css"
   ],
-  "scripts": [
-    "./lib/codemirror/lib/codemirror.js",
-    "./lib/codemirror/mode/javascript/javascript.js"
-  ],
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "0.8.0",
   "dependencies": [
@@ -26,6 +22,11 @@
       "name": "_sortablejs",
       "type": "module",
       "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
+    },
+    {
+      "name": "_CodeMirror",
+      "type": "module",
+      "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/codemirror-lib/master/module.json"
     }
   ],
   "languages": [
