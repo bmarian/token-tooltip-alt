@@ -1,7 +1,7 @@
 .#{$module-name}-advanced-editor-window {
 
   & .CodeMirror {
-    height: 95%;
+    height: 100%;
     cursor: text;
     background: url(../ui/parchment.jpg) repeat;
     box-shadow: 0 0 12px -6px #00000070 inset;
@@ -14,6 +14,6 @@
 
   & .advanced-editor {
     font-family: 'Courier New', Courier, monospace;
-    height: 95%;
+    height: 100%;
   }
 }
