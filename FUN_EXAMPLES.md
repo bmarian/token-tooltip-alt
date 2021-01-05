@@ -31,7 +31,7 @@ confetti();
 window.TTAPlayerHostileConfettiRunning = true;
 
 // add a time to reset the confetti limit after 3s
-window.TTAPlayerHostileConfettiTimeout = setTimeout(() => {
+setTimeout(() => {
   window.TTAPlayerHostileConfettiRunning = false;
 }, 3000);
 
