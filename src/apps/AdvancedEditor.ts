@@ -13,6 +13,7 @@ export default class AdvancedEditor extends FormApplication {
             height: CONSTANTS.APPS.ADVANCED_EDITOR_HEIGHT,
             classes: [`${Utils.moduleName}-advanced-editor-window`],
 
+            resizable: true,
             closeOnSubmit: true,
             submitOnClose: true,
         };
