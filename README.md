@@ -63,16 +63,16 @@ You can have a different configuration for every token disposition.
 - `Color`: Allows you to change the color for this item's icon.
 - `Icon`: You can use any url/path to an icon, or any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery) (e.g. the icon is called heart you have to write it as fa-heart).
 - `Value`: can be found double right-clicking on a token -> resources tab -> go through the attributes possible for bars, you can use anything from there.
-- `Fun`: Marks the item as a JavaScript function (e.g. [FUN_EXPEXAMPLES.md](./FUN_EXPEXAMPLES.md)), here is how the function will look:
+- `Fun`: Marks the item as a JavaScript function (e.g. [FUN_EXAMPLES.md](./FUN_EXAMPLES.md)), here is how the function will look:
 ```js
 /**
  * @param {Token} token - the currently hovered token
  * @param {*} data - the same data available for every line
- * @param {Tooltip} context - the tooltip from where this function is executed
+ * @param {Tooltip} tooltip - the tooltip from where this function is executed
  * @param {Utils} utils - my Utils class, used mostly for debugging
  * @return {string}
  */
-function anonymous(token, data, context, utils) {
+function anonymous(token, data, tooltip, utils) {
 	try {
 		/* your code will be here */
 	} catch (err) {

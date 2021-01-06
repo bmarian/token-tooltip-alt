@@ -3,13 +3,21 @@ A collection of examples made by me or others that might give you an idea of how
 
 # dnd5e
 
-### Show confetti if the enemy is dead
+### Running code after the tooltip is rendered
 
-For this one, you need the [foundryvtt-confetti](https://github.com/ElfFriend-DnD/foundryvtt-confetti) module.
+```js
+tooltip.renderingFinished.then((html) => {
+    /* YOUR CODE HERE */
+});
+
+return '';
+```
+
+### Show [confetti](https://github.com/ElfFriend-DnD/foundryvtt-confetti) if the enemy is dead
 
 ```js
 // check if the enamy is dead
-const hp = data.actor?.data?.data?.attributes?.hp?.value;
+const hp = data.attributes?.hp?.value;
 if (hp > 0) return '';
 
 // check if we already triggered confetti
@@ -39,16 +47,3 @@ return '';
 ```
 
 ![](https://i.imgur.com/QlTmTEv.gif)
-
-### Showing all the speed values in a single item
-```js
-const movs = JSON.parse(JSON.stringify(data.attributes.movement));
-delete movs.hover;
-delete movs.units;
-
-return Object.entries(movs).reduce((acc, [key, value]) => {
-  return acc + value !== 0 ? `${key[0].toUpperCase()}:${value}` : '';
-}, '');
-```
-
-![](https://i.imgur.com/pzTQcIr.png)

@@ -1,10 +1,14 @@
 .#{$module-name}-data-manager-window {
-  & .#{$module-name}-textarea {
-    width: 100%;
+  & .#{$module-name}-data-manager-section {
+    height: 620px;
+  }
+
+  & .data-manager {
+    font-family: 'Courier New', Courier, monospace;
     height: 100%;
-    resize: none;
-    &.import {
-      height: 87%;
-    }
+  }
+
+  & .CodeMirror {
+    height: 100%;
   }
 }

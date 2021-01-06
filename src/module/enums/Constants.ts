@@ -38,9 +38,11 @@ export const CONSTANTS = {
 
     APPS: {
         TOOLTIP_MANAGER: `modules/${Utils.moduleName}/templates/tooltip-manager.hbs`,
-        DATA_MANAGER: `modules/${Utils.moduleName}/templates/data-manager.hbs`,
         TOOLTIP_MANAGER_WIDTH: 500,
-        DATA_MANAGER_HEIGHT: 300,
+
+        DATA_MANAGER: `modules/${Utils.moduleName}/templates/data-manager.hbs`,
+        DATA_MANAGER_WIDTH: 600,
+        DATA_MANAGER_HEIGHT: 700,
 
         TOOLTIP_EDITOR: `modules/${Utils.moduleName}/templates/tooltip-editor.hbs`,
         TOOLTIP_EDITOR_ROW: `modules/${Utils.moduleName}/templates/tooltip-editor-row.hbs`,

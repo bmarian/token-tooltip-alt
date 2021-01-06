@@ -1,7 +1,7 @@
 <form class="{{moduleName}}-form">
-    <textarea class="{{moduleName}}-textarea {{#if isImport}}import{{/if}}"
-              name="data"
-              {{#if (eq isImport false)}}readonly{{/if}}>{{settings}}</textarea>
+    <section class="{{moduleName}}-data-manager-section">
+        <textarea class="{{moduleName}}-textarea data-manager {{#if isImport}}import{{/if}}" name="data"></textarea>
+    </section>
 
     {{#if isImport}}
         <footer class="{{moduleName}}-footer sheet-footer flexrow">

@@ -50,17 +50,17 @@ class TooltipFactory {
     // create an array of data needed to initialize a tooltip
     private _getTooltipData(token: any): any {
         return [
-            token,                                                           // token
-            this._getSetting(this._settingKeys.DARK_THEME) ? 'dark' : '',    // themeClass
-            getSystemTheme(),                                                // systemClass
-            parseFloat(this._getSetting(this._settingKeys.FONT_SIZE)) || 1,  // fontSize
-            this._getWhere(),                                                // where
-            'none',                                                          // animType
-            200,                                                             // animSpeed
-            this._getSetting(this._settingKeys.DATA_SOURCE) || '',           // path
-            CONSTANTS.TEMPLATES.TOOLTIP,                                     // template
-            $('.game'),                                                 // gameBody
-            this._getTooltipInfo(token),                                     // tooltipInfo
+            token,                                                                  // token
+            this._getSetting(this._settingKeys.DARK_THEME) ? 'dark' : 'light',      // themeClass
+            getSystemTheme(),                                                       // systemClass
+            parseFloat(this._getSetting(this._settingKeys.FONT_SIZE)) || 1,         // fontSize
+        this._getWhere(),                                                           // where
+            'none',                                                                 // animType
+            200,                                                                    // animSpeed
+            this._getSetting(this._settingKeys.DATA_SOURCE) || '',                  // path
+            CONSTANTS.TEMPLATES.TOOLTIP,                                            // template
+            $('.game'),                                                         // gameBody
+            this._getTooltipInfo(token),                                            // tooltipInfo
         ];
     }
 

@@ -1,16 +1,17 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
 import {CONSTANTS} from "../module/enums/Constants";
 import Utils from "../module/Utils";
-import TooltipEditor from "./TooltipEditor";
 
 export default class DataManager extends FormApplication {
+    private _advancedEditor = null;
+
     static get defaultOptions(): any {
         return {
             ...super.defaultOptions,
             title: 'Data Manager',
             id: 'data-manager',
             template: CONSTANTS.APPS.DATA_MANAGER,
-            width: CONSTANTS.APPS.TOOLTIP_MANAGER_WIDTH,
+            width: CONSTANTS.APPS.DATA_MANAGER_WIDTH,
             height: CONSTANTS.APPS.DATA_MANAGER_HEIGHT,
             classes: [`${Utils.moduleName}-data-manager-window`],
 
@@ -39,7 +40,7 @@ export default class DataManager extends FormApplication {
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
 
         const data = {gmSettings, playerSettings}
-        return JSON.stringify(data);
+        return JSON.stringify(data, null, 2);
     }
 
     // returns an empty string for import and the stringified data object if export
@@ -52,8 +53,13 @@ export default class DataManager extends FormApplication {
         return {
             moduleName: Utils.moduleName,
             isImport: this._isImport(),
-            settings: this._getSettings(),
         };
+    }
+
+    public _getSubmitData(...args) {
+        if (this._advancedEditor) this._advancedEditor.save();
+        // @ts-ignore
+        return super._getSubmitData(...args);
     }
 
     protected async _updateObject(event: Event | JQuery.Event, formData: any): Promise<any> {
@@ -71,5 +77,27 @@ export default class DataManager extends FormApplication {
         } catch (err) {
             Utils.debug(`Error on importing: ${err}`);
         }
+    }
+
+    public activateListeners($html: JQuery): void {
+        super.activateListeners($html);
+
+        const $dataManager = $html.find('.data-manager');
+        if (!$dataManager) return;
+
+        const settings = this._getSettings();
+        $dataManager.val(settings);
+
+        // @ts-ignore
+        this._advancedEditor = CodeMirror.fromTextArea($dataManager[0], {
+            // @ts-ignore
+            ...CodeMirror.userSettings,
+            mode: 'javascript',
+            inputStyle: 'contenteditable',
+
+            lineNumbers: true,
+            autofocus: this._isImport(),
+            readOnly: !this._isImport()
+        });
     }
 }

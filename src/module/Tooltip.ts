@@ -2,6 +2,7 @@ import Utils from "./Utils";
 import {doMath} from "../lib/MathEngine";
 import {CONSTANTS} from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
+import DeferredPromise from "../lib/DeferredPromise";
 
 class Tooltip {
     private _reg = {
@@ -38,6 +39,9 @@ class Tooltip {
     private readonly _tooltipInfo;
     private readonly _maxRows;
 
+    public renderingFinished;
+    public renderingResolved;
+
     constructor(
         token?: any,
         themeClass?: string,
@@ -69,6 +73,10 @@ class Tooltip {
         this._appKeys = CONSTANTS.APPS;
 
         this._maxRows = this._getSetting(this._settingsKeys.MAX_ROWS) || 5;
+
+        const promise = new DeferredPromise();
+        this.renderingFinished = promise.promise;
+        this.renderingResolved = promise.resolve;
     }
 
     // get a value from Settings
@@ -134,12 +142,12 @@ class Tooltip {
     }
 
     private _evalFunction(data: any, funString: string): any {
-        const userFunStr = 'const {token, data, context, utils} = arguments[0];'
+        const userFunStr = 'const {token, data, tooltip, utils} = arguments[0];'
             + 'try {\n'
             + funString
             + '\n} catch (err) { utils.debug(err); return ""; }';
         const userFun = new Function(userFunStr);
-        return userFun({token: this._token, data: data, context: this, utils: Utils});
+        return userFun({token: this._token, data: data, tooltip: this, utils: Utils});
     }
 
     // checks what type of icon it is:
@@ -444,11 +452,17 @@ class Tooltip {
     // then play an animation to show it
     public show(): void {
         const t = this;
+        const animationCompleteCb = () => t.renderingResolved(t._tooltip);
+
         this._createTooltip().then(() => {
             switch (t._animType) {
                 case 'fade': {
                     t._tooltip.css({opacity: 0});
-                    t._tooltip.animate({opacity: 1}, this._animSpeed);
+                    t._tooltip.animate({opacity: 1}, this._animSpeed, animationCompleteCb);
+                    break;
+                }
+                default: {
+                    animationCompleteCb();
                     break;
                 }
             }
