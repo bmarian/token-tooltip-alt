@@ -6,7 +6,7 @@ A collection of examples made by me or others that might give you an idea of how
 ### Running code after the tooltip is rendered
 
 ```js
-tooltip.renderingFinished.then((html) => {
+tooltip.renderingFinished.then(($html) => {
     /* YOUR CODE HERE */
 });
 
