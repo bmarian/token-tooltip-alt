@@ -17,7 +17,7 @@ return '';
 
 ```js
 // check if the enamy is dead
-const hp = data.attributes?.hp?.value;
+const hp = data.attributes.hp.value;
 if (hp > 0) return '';
 
 // check if we already triggered confetti
