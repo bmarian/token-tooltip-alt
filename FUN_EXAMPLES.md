@@ -9,7 +9,7 @@ For this one, you need the [foundryvtt-confetti](https://github.com/ElfFriend-Dn
 
 ```js
 // check if the enamy is dead
-const hp = data.actor?.data?.data?.attributes?.hp?.value;
+const hp = data.attributes?.hp?.value;
 if (hp > 0) return '';
 
 // check if we already triggered confetti

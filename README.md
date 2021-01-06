@@ -68,11 +68,11 @@ You can have a different configuration for every token disposition.
 /**
  * @param {Token} token - the currently hovered token
  * @param {*} data - the same data available for every line
- * @param {Tooltip} context - the tooltip from where this function is executed
+ * @param {Tooltip} tooltip - the tooltip from where this function is executed
  * @param {Utils} utils - my Utils class, used mostly for debugging
  * @return {string}
  */
-function anonymous(token, data, context, utils) {
+function anonymous(token, data, tooltip, utils) {
 	try {
 		/* your code will be here */
 	} catch (err) {
