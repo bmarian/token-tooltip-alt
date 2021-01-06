@@ -59,6 +59,7 @@
   "token-tooltip-alt.tooltipEditor.col.icon": "Icono",
   "token-tooltip-alt.tooltipEditor.col.value": "Valor",
   "token-tooltip-alt.tooltipEditor.col.expression": "Exp",
+  "token-tooltip-alt.tooltipEditor.col.isFunction": "Fun",
   "token-tooltip-alt.tooltipEditor.col.isNumber": "Núm",
   "token-tooltip-alt.tooltipEditor.col.delete": "Borrar",
 
