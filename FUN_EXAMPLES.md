@@ -13,9 +13,7 @@ tooltip.renderingFinished.then((html) => {
 return '';
 ```
 
-### Show confetti if the enemy is dead
-
-For this one, you need the [foundryvtt-confetti](https://github.com/ElfFriend-DnD/foundryvtt-confetti) module.
+### Show [confetti](https://github.com/ElfFriend-DnD/foundryvtt-confetti) if the enemy is dead
 
 ```js
 // check if the enamy is dead
