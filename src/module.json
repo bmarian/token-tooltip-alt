@@ -2,10 +2,22 @@
   "name": "token-tooltip-alt",
   "title": "Token Tooltip Alt",
   "description": "A module that adds a tooltip next to the currently hovered token to show some useful information for players and DMs.",
-  "version": "2.0.13",
+  "version": "2.1.4",
+  "manifestPlusVersion": "1.0.0",
   "author": "bmarian",
-  "esmodules": ["token-tooltip-alt.js"],
-  "styles": ["token-tooltip-alt.css"],
+  "authors": [
+    {
+      "name": "bmarian",
+      "discord": "Marian#8010",
+      "url": "https://github.com/bmarian"
+    }
+  ],
+  "esmodules": [
+    "token-tooltip-alt.js"
+  ],
+  "styles": [
+    "token-tooltip-alt.css"
+  ],
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "0.8.0",
   "dependencies": [
@@ -18,6 +30,11 @@
       "name": "_sortablejs",
       "type": "module",
       "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
+    },
+    {
+      "name": "_CodeMirror",
+      "type": "module",
+      "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/codemirror-lib/master/module.json"
     }
   ],
   "languages": [
@@ -35,10 +52,21 @@
       "lang": "ko",
       "name": "Korean",
       "path": "lang/ko.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
     }
   ],
   "url": "https://github.com/bmarian/token-tooltip-alt",
   "manifest": "https://raw.githubusercontent.com/bmarian/token-tooltip-alt/master/src/module.json",
-  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v2.0.13/token-tooltip-alt-v2.0.13.zip",
-  "changelog": "https://github.com/bmarian/token-tooltip-alt/releases"
+  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/v2.1.4/token-tooltip-alt-v2.1.4.zip",
+  "changelog": "https://github.com/bmarian/token-tooltip-alt/releases",
+  "media": [
+    {
+      "type" : "icon",
+      "url" : "https://i.imgur.com/V3n665D.png"
+    }
+  ]
 }

@@ -6,8 +6,12 @@
         {{#each stats}}
             <div class="{{../moduleName}}-tooltip-column">
                 {{#each this}}
-                    <div class="{{../../moduleName}}-tooltip-item">
-                        <i class="fas {{icon}}" style="color: {{color}};"></i>
+                    <div class="{{../../moduleName}}-tooltip-item" style="grid-template-columns: {{iconSize}}rem auto;">
+                        {{#if iconType}}
+                            <i class="fas {{icon}}" style="color: {{color}};"></i>
+                        {{else}}
+                            <img src="{{icon}}" alt="">
+                        {{/if}}
                         <span>{{value}}</span>
                     </div>
                 {{/each}}

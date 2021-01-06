@@ -2,6 +2,7 @@ import Utils from "./Utils";
 import {doMath} from "../lib/MathEngine";
 import {CONSTANTS} from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
+import DeferredPromise from "../lib/DeferredPromise";
 
 class Tooltip {
     private _reg = {
@@ -10,11 +11,13 @@ class Tooltip {
         // searches for all the paths in a string
         paths: new RegExp(/<([\w_-]+\.)*([\w_-]+)>/g),
         // determines if the string is a number
-        number: new RegExp(/\d+/),
+        number: new RegExp(/^\d+$/),
         // searches for all the paths inside {}
         expressions: new RegExp(/{([^}]*)}/g),
         // determines if the string is a -
         minus: new RegExp(/-/),
+        // check if its a font awesome icon
+        faIcon: new RegExp(/^[\w\- ]+$/),
     }
     private _tooltip = null;
     private _doStringMath = doMath;
@@ -35,6 +38,9 @@ class Tooltip {
     private readonly _moduleName;
     private readonly _tooltipInfo;
     private readonly _maxRows;
+
+    public renderingFinished;
+    public renderingResolved;
 
     constructor(
         token?: any,
@@ -67,6 +73,10 @@ class Tooltip {
         this._appKeys = CONSTANTS.APPS;
 
         this._maxRows = this._getSetting(this._settingsKeys.MAX_ROWS) || 5;
+
+        const promise = new DeferredPromise();
+        this.renderingFinished = promise.promise;
+        this.renderingResolved = promise.resolve;
     }
 
     // get a value from Settings
@@ -131,11 +141,27 @@ class Tooltip {
         return hasNull ? null : convExp;
     }
 
+    private _evalFunction(data: any, funString: string): any {
+        const userFunStr = 'const {token, data, tooltip, utils} = arguments[0];'
+            + 'try {\n'
+            + funString
+            + '\n} catch (err) { utils.debug(err); return ""; }';
+        const userFun = new Function(userFunStr);
+        return userFun({token: this._token, data: data, tooltip: this, utils: Utils});
+    }
+
+    // checks what type of icon it is:
+    // * font awesome icon
+    // * url
+    private _getIconData(icon: string): {} {
+        return {icon, iconType: icon ? this._reg.faIcon.test(icon.trim()) : true, iconSize: this._fontSize};
+    }
+
     // appends stats with only a value
     private _appendSimpleStat(value: any, item: any, stats: Array<any>): void {
         if (value === '' || (typeof value !== 'string' && isNaN(value))) return;
         const v = item.isNumber ? this._extractNumber(value) : value;
-        stats.push({value: v, icon: item?.icon, color: item?.color});
+        stats.push({value: v, color: item?.color, ...this._getIconData(item?.icon)});
     }
 
     // appends object stats (they need to have a fixed structure)
@@ -146,7 +172,7 @@ class Tooltip {
         const temp = values.temp > 0 ? `(${values.temp})` : '';
         const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
         const value = `${values.value}${temp}/${values.max}${tempmax}`;
-        stats.push({value, icon: item?.icon, color: item?.color});
+        stats.push({value, color: item?.color, ...this._getIconData(item?.icon)});
     }
 
     // appends to a stats array a structure for stats
@@ -228,7 +254,7 @@ class Tooltip {
             if (index === -1) {
                 if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
                 return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
-                    && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
+                && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
             }
 
             // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
@@ -258,7 +284,9 @@ class Tooltip {
 
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
-            const value = this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
+            const value = item?.isFunction
+                ? this._evalFunction(this._data, item.value)
+                : this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
 
             if (staticData.useAccentEverywhere) item.color = staticData.accentColor;
 
@@ -424,11 +452,17 @@ class Tooltip {
     // then play an animation to show it
     public show(): void {
         const t = this;
+        const animationCompleteCb = () => t.renderingResolved(t._tooltip);
+
         this._createTooltip().then(() => {
             switch (t._animType) {
                 case 'fade': {
                     t._tooltip.css({opacity: 0});
-                    t._tooltip.animate({opacity: 1}, this._animSpeed);
+                    t._tooltip.animate({opacity: 1}, this._animSpeed, animationCompleteCb);
+                    break;
+                }
+                default: {
+                    animationCompleteCb();
                     break;
                 }
             }

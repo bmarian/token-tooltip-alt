@@ -54,3 +54,34 @@ hp <= 0 ? "Dead" : hp == 1 & hpm > 2 ? "Are you kidding me?" : hp < hpm/2 ? "Wou
 ```
 
 ![](https://i.imgur.com/uwAGn3n.png)
+
+
+### Show remaining spell slots
+
+```
+{ 
+s1 = <spells.spell1.value>;
+s2 = <spells.spell2.value>;
+s3 = <spells.spell3.value>;
+s4 = <spells.spell4.value>;
+s5 = <spells.spell5.value>;
+s6 = <spells.spell6.value>;
+s7 = <spells.spell7.value>;
+s8 = <spells.spell8.value>;
+s9 = <spells.spell9.value>;
+
+s1 = s1 > 0 ? concat('[1:', string(s1), ']') : '';
+s2 = s2 > 0 ? concat(' [2:', string(s2), ']') : '';
+s3 = s3 > 0 ? concat(' [3:', string(s3), ']') : '';
+s4 = s4 > 0 ? concat(' [4:', string(s4), ']') : '';
+s5 = s5 > 0 ? concat(' [5:', string(s5), ']') : '';
+s6 = s6 > 0 ? concat(' [6:', string(s6), ']') : '';
+s7 = s7 > 0 ? concat(' [7:', string(s7), ']') : '';
+s8 = s8 > 0 ? concat(' [8:', string(s8), ']') : '';
+s9 = s9 > 0 ? concat(' [9:', string(s9), ']') : '';
+
+concat(s1, s2, s3, s4, s5, s6, s7, s8, s9)
+}
+```
+
+![](https://i.imgur.com/tXdbPpL.png)
