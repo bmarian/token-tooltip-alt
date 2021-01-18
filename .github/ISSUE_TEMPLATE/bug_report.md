@@ -33,5 +33,5 @@ Add any other context about the problem here.
 Please provide an export of your settings, found by going into the `Tooltip manger` and clicking `Export`.
 
 ```
-your export text should go here
+your export text should go here, please minify them :) (https://www.cleancss.com/json-minify/)
 ```
