@@ -1,5 +1,5 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
-import {CONSTANTS} from "../module/enums/Constants";
+import { CONSTANTS } from "../module/enums/Constants";
 import Utils from "../module/Utils";
 import TooltipEditor from "./TooltipEditor";
 import DataManager from "./DataManager";
@@ -112,7 +112,7 @@ export default class TooltipManager extends FormApplication {
         await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
         await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
 
-        Utils.debug({gmSettings: gmSettingsForType, playerSettings: playerSettingsForType});
+        Utils.debug({ gmSettings: gmSettingsForType, playerSettings: playerSettingsForType });
     }
 
     // get a value from Settings
@@ -229,7 +229,7 @@ export default class TooltipManager extends FormApplication {
         const $this = $(this);
         const actorType = $this.attr('name');
         if (!actorType) return;
-        const te = new TooltipEditor({actorType}, {
+        const te = new TooltipEditor({ actorType }, {
             title: actorType.toUpperCase(),
             classes: [`${Utils.moduleName}-tooltip-editor-window`],
             id: `tooltip-editor-${actorType}`,
@@ -241,7 +241,7 @@ export default class TooltipManager extends FormApplication {
 
     private _openDataManager(ev): void {
         const type = $(ev.target).closest('button').attr('name');
-        const dm = new DataManager({type});
+        const dm = new DataManager({ type });
 
         dm.render(true);
         Utils.debug('Opened a data manager window.');

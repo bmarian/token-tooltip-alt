@@ -1,5 +1,5 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
-import {CONSTANTS} from "../module/enums/Constants";
+import { CONSTANTS } from "../module/enums/Constants";
 import Utils from "../module/Utils";
 
 export default class DataManager extends FormApplication {
@@ -39,7 +39,7 @@ export default class DataManager extends FormApplication {
         const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
 
-        const data = {gmSettings, playerSettings}
+        const data = { gmSettings, playerSettings }
         return JSON.stringify(data, null, 2);
     }
 

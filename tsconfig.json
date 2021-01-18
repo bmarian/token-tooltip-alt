@@ -7,6 +7,9 @@
 			"ES2017",
 			"ESNext"
 		],
-		"types": ["foundry-pc-types"]
+		"types": [
+			"foundry-pc-types",
+			"jquery"
+		]
 	}
 }

@@ -10,4 +10,4 @@ const doMath = (eq: string): any => {
     }
 };
 
-export {doMath};
+export { doMath };

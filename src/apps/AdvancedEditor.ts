@@ -1,4 +1,4 @@
-import {CONSTANTS} from "../module/enums/Constants";
+import { CONSTANTS } from "../module/enums/Constants";
 import Utils from "../module/Utils";
 
 export default class AdvancedEditor extends FormApplication {

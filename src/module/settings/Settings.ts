@@ -1,4 +1,4 @@
-import {CONSTANTS} from "../enums/Constants";
+import { CONSTANTS } from "../enums/Constants";
 import SettingsUtil from "./SettingsUtil";
 import TooltipManager from "../../apps/TooltipManager";
 import Utils from "../Utils";

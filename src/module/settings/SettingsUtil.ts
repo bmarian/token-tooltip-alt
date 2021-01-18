@@ -36,7 +36,7 @@ class SettingsUtil {
     }
 
     // registers a menu
-    public registerMenu(key: string, data: any):void {
+    public registerMenu(key: string, data: any): void {
         game?.settings?.registerMenu(this._moduleName, key, data);
     }
 

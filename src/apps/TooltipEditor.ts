@@ -1,5 +1,5 @@
 import SettingsUtil from "../module/settings/SettingsUtil";
-import {CONSTANTS} from "../module/enums/Constants";
+import { CONSTANTS } from "../module/enums/Constants";
 import Utils from "../module/Utils";
 import AdvancedEditor from "./AdvancedEditor";
 
@@ -31,7 +31,7 @@ export default class TooltipEditor extends FormApplication {
         const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS)[type] || {};
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS)[type] || {};
 
-        return {gmSettings, playerSettings, isDefault: type === CONSTANTS.APPS.TOOLTIP_DEFAULT_ACTOR_ID};
+        return { gmSettings, playerSettings, isDefault: type === CONSTANTS.APPS.TOOLTIP_DEFAULT_ACTOR_ID };
     }
 
     // get a value from Settings
@@ -46,7 +46,7 @@ export default class TooltipEditor extends FormApplication {
 
     // returns the data used by the tooltip-editor.hbs template
     public getData(options?: {}): any {
-        const {gmSettings, playerSettings, isDefault} = this._getSettingLists();
+        const { gmSettings, playerSettings, isDefault } = this._getSettingLists();
         return {
             moduleName: Utils.moduleName,
             gmSettings,
@@ -60,7 +60,7 @@ export default class TooltipEditor extends FormApplication {
         const disposition = $button.attr('disposition');
         const dType = $button.attr('dType');
         const $table = $context.find(`.${Utils.moduleName}-table[disposition=${disposition}][dType=${dType}]`);
-        return {disposition, dType, $table}
+        return { disposition, dType, $table }
     }
 
     // the add button click event, adds a new line on the associated table
@@ -72,7 +72,7 @@ export default class TooltipEditor extends FormApplication {
         const $context = $button?.parent()?.parent(); // the parent form
         if (!$context.length) return;
 
-        const {disposition, dType, $table} = this._getAssociatedTable($button, $context);
+        const { disposition, dType, $table } = this._getAssociatedTable($button, $context);
         const $tbody = $table.find('tbody');
         const $rows = $tbody.find(`.${Utils.moduleName}-row`);
         const lastIndex = $rows.length ? parseInt($rows.last().attr('index')) || 0 : 0;
@@ -111,7 +111,7 @@ export default class TooltipEditor extends FormApplication {
         const target = $this.parent().find('textarea');
         if (!target) return;
 
-        const te = new AdvancedEditor({target});
+        const te = new AdvancedEditor({ target });
         te.render(true);
 
         Utils.debug(`Opened an advanced editor for: ${target.attr('name')}.`)
@@ -133,7 +133,7 @@ export default class TooltipEditor extends FormApplication {
         // rerender the application to make it get the new data
         this.render();
 
-        Utils.debug({gmSettings, playerSettings});
+        Utils.debug({ gmSettings, playerSettings });
     }
 
     // clone the settings from the above table
@@ -175,7 +175,7 @@ export default class TooltipEditor extends FormApplication {
         // render the form to save the new data
         this.render();
 
-        Utils.debug({clipboardData});
+        Utils.debug({ clipboardData });
     }
 
     // add button events for the ones generated when the application is opened
@@ -237,7 +237,7 @@ export default class TooltipEditor extends FormApplication {
 
     // make the final items array (the one inside the tokenType.items)
     private _extractItemsArray(items: any): any {
-        const {value, icon, isFunction, expression, isNumber, color} = items;
+        const { value, icon, isFunction, expression, isNumber, color } = items;
         if (!(value && icon && expression)) return [];
 
         const returnArray = [];
@@ -251,7 +251,7 @@ export default class TooltipEditor extends FormApplication {
             const e = expression[key];
             const n = isNumber[key];
             const c = color[key];
-            returnArray.push({value: v, icon: i, isFunction: f, expression: e, isNumber: n, color: c});
+            returnArray.push({ value: v, icon: i, isFunction: f, expression: e, isNumber: n, color: c });
         }
 
         return returnArray;
@@ -264,7 +264,7 @@ export default class TooltipEditor extends FormApplication {
             if (!items.hasOwnProperty(key)) continue;
 
             const itemsForDisposition = items[key];
-            returnItems.push({disposition: key, items: this._extractItemsArray(itemsForDisposition)});
+            returnItems.push({ disposition: key, items: this._extractItemsArray(itemsForDisposition) });
         }
 
         return returnItems;
@@ -308,7 +308,7 @@ export default class TooltipEditor extends FormApplication {
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
 
         // build the items arrays
-        const {gm, player} = expObj;
+        const { gm, player } = expObj;
         const gmItems = this._buildSettingsArray(gm.items);
         const playerItems = this._buildSettingsArray(player.items);
 
@@ -339,6 +339,6 @@ export default class TooltipEditor extends FormApplication {
         await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
 
         ui?.notifications?.info(`Settings updated for ${type}.`);
-        Utils.debug({gmSettings, playerSettings});
+        Utils.debug({ gmSettings, playerSettings });
     }
 }

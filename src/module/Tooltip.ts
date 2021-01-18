@@ -1,6 +1,6 @@
 import Utils from "./Utils";
-import {doMath} from "../lib/MathEngine";
-import {CONSTANTS} from "./enums/Constants";
+import { doMath } from "../lib/MathEngine";
+import { CONSTANTS } from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
 import DeferredPromise from "../lib/DeferredPromise";
 
@@ -147,21 +147,21 @@ class Tooltip {
             + funString
             + '\n} catch (err) { utils.debug(err); return ""; }';
         const userFun = new Function(userFunStr);
-        return userFun({token: this._token, data: data, tooltip: this, utils: Utils});
+        return userFun({ token: this._token, data: data, tooltip: this, utils: Utils });
     }
 
     // checks what type of icon it is:
     // * font awesome icon
     // * url
     private _getIconData(icon: string): {} {
-        return {icon, iconType: icon ? this._reg.faIcon.test(icon.trim()) : true, iconSize: this._fontSize};
+        return { icon, iconType: icon ? this._reg.faIcon.test(icon.trim()) : true, iconSize: this._fontSize };
     }
 
     // appends stats with only a value
     private _appendSimpleStat(value: any, item: any, stats: Array<any>): void {
         if (value === '' || (typeof value !== 'string' && isNaN(value))) return;
         const v = item.isNumber ? this._extractNumber(value) : value;
-        stats.push({value: v, color: item?.color, ...this._getIconData(item?.icon)});
+        stats.push({ value: v, color: item?.color, ...this._getIconData(item?.icon) });
     }
 
     // appends object stats (they need to have a fixed structure)
@@ -172,7 +172,7 @@ class Tooltip {
         const temp = values.temp > 0 ? `(${values.temp})` : '';
         const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
         const value = `${values.value}${temp}/${values.max}${tempmax}`;
-        stats.push({value, color: item?.color, ...this._getIconData(item?.icon)});
+        stats.push({ value, color: item?.color, ...this._getIconData(item?.icon) });
     }
 
     // appends to a stats array a structure for stats
@@ -254,7 +254,7 @@ class Tooltip {
             if (index === -1) {
                 if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
                 return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
-                && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
+                    && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
             }
 
             // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
@@ -270,7 +270,7 @@ class Tooltip {
     // generates an array of stats that should be displayed
     private _getTooltipData(): any {
         const data = this._getActorData();
-        if (!data) return {stats: []};
+        if (!data) return { stats: [] };
 
         const stats = [];
         const staticData = {
@@ -280,7 +280,7 @@ class Tooltip {
         };
         const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData?.tokenDispositions));
 
-        if (!staticData || !itemList.length) return {stats: []};
+        if (!staticData || !itemList.length) return { stats: [] };
 
         for (let i = 0; i < itemList.length; i++) {
             const item = itemList[i];
@@ -298,8 +298,8 @@ class Tooltip {
         // FIXME: this should not be here I think, but I am sleep deprived and running on beer so what do I know
         this._accentColor = staticData.accentColor;
 
-        Utils.debug({tokenName, data: this._data});
-        return {moduleName: this._moduleName, stats, tokenName};
+        Utils.debug({ tokenName, data: this._data });
+        return { moduleName: this._moduleName, stats, tokenName };
     }
 
     // break the rows into columns
@@ -343,7 +343,7 @@ class Tooltip {
     // should only be called by _createTooltip()
     private _createContainer(): void {
         this._tooltip = $(`<div class="${this._moduleName}-tooltip-container ${this._systemClass} ${this._themeClass}"></div>`);
-        this._tooltip.css({fontSize: `${this._fontSize}rem`});
+        this._tooltip.css({ fontSize: `${this._fontSize}rem` });
     }
 
     // appends the tooltip's container to the body
@@ -457,8 +457,8 @@ class Tooltip {
         this._createTooltip().then(() => {
             switch (t._animType) {
                 case 'fade': {
-                    t._tooltip.css({opacity: 0});
-                    t._tooltip.animate({opacity: 1}, this._animSpeed, animationCompleteCb);
+                    t._tooltip.css({ opacity: 0 });
+                    t._tooltip.animate({ opacity: 1 }, this._animSpeed, animationCompleteCb);
                     break;
                 }
                 default: {
@@ -478,7 +478,7 @@ class Tooltip {
                 break;
             }
             case 'fade': {
-                this._tooltip.animate({opacity: 0}, this._animSpeed, this._destroyTooltip);
+                this._tooltip.animate({ opacity: 0 }, this._animSpeed, this._destroyTooltip);
                 break;
             }
         }

@@ -16,6 +16,7 @@
     "archiver": "^5.0.2",
     "chalk": "^4.1.0",
     "foundry-pc-types": "gitlab:foundry-projects/foundry-pc/foundry-pc-types",
+    "@types/jquery": "^3.5.5",
     "fs-extra": "^9.0.1",
     "gulp": "^4.0.2",
     "gulp-git": "^2.10.1",

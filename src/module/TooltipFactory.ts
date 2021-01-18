@@ -1,5 +1,5 @@
 import Tooltip from "./Tooltip";
-import {CONSTANTS, getSystemTheme} from "./enums/Constants";
+import { CONSTANTS, getSystemTheme } from "./enums/Constants";
 import SettingsUtil from "./settings/SettingsUtil";
 import Utils from "./Utils";
 
@@ -54,12 +54,12 @@ class TooltipFactory {
             this._getSetting(this._settingKeys.DARK_THEME) ? 'dark' : 'light',      // themeClass
             getSystemTheme(),                                                       // systemClass
             parseFloat(this._getSetting(this._settingKeys.FONT_SIZE)) || 1,         // fontSize
-        this._getWhere(),                                                           // where
+            this._getWhere(),                                                       // where
             'none',                                                                 // animType
             200,                                                                    // animSpeed
             this._getSetting(this._settingKeys.DATA_SOURCE) || '',                  // path
             CONSTANTS.TEMPLATES.TOOLTIP,                                            // template
-            $('.game'),                                                         // gameBody
+            $('.game'),                                                             // gameBody
             this._getTooltipInfo(token),                                            // tooltipInfo
         ];
     }
