@@ -32,6 +32,7 @@ export default class DataManager extends FormApplication {
 
     // determines the type of data manager
     private _isImport(): boolean {
+        // @ts-ignore
         return this?.object?.type === 'import';
     }
 

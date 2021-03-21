@@ -27,6 +27,7 @@ export default class TooltipEditor extends FormApplication {
     // returns the settings for the current actor type opened
     // and a boolean if it is the default type
     private _getSettingLists(): any {
+        // @ts-ignore
         const type = this?.object?.actorType;
         const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS)[type] || {};
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS)[type] || {};
@@ -119,6 +120,7 @@ export default class TooltipEditor extends FormApplication {
 
     // the default delete event, just deletes the closest row
     private async _importFromDefaultClickEvent(): Promise<void> {
+        // @ts-ignore
         const type = this?.object?.actorType;
         const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
@@ -146,6 +148,7 @@ export default class TooltipEditor extends FormApplication {
         // @ts-ignore
         this.submit({}).then(() => {
             const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+            // @ts-ignore
             const settings = data[this?.object?.actorType];
             const items = settings.items;
             const from = items.find((i) => i.disposition === disposition);
@@ -161,6 +164,7 @@ export default class TooltipEditor extends FormApplication {
         const disposition = $button.attr('disposition');
 
         const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+        // @ts-ignore
         const settings = data[this?.object?.actorType];
         const items = settings.items;
         const to = items.find((i) => i.disposition === disposition);
@@ -303,6 +307,7 @@ export default class TooltipEditor extends FormApplication {
 
     protected async _updateObject(event: Event | JQuery.Event, formData: any): Promise<any> {
         const expObj = expandObject(formData);
+        // @ts-ignore
         const type = this?.object?.actorType;
         const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
         const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);

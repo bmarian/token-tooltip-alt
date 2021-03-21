@@ -29,6 +29,7 @@ Hooks.on('renderTokenHUD', () => {
 Hooks.on('deleteToken', TooltipFactory.removeTooltips.bind(TooltipFactory));
 Hooks.on('renderTokenConfig', (tokenConfig: TokenConfig, $tokenConfig: JQuery, options: any): void => {
     const $resources = $tokenConfig.find('.tab[data-tab="resources"]');
+    // @ts-ignore
     const noTooltip = tokenConfig.object.getFlag(Utils.moduleName, 'noTooltip');
 
     const $noTooltipCheckbox = $(`
@@ -42,6 +43,7 @@ Hooks.on('renderTokenConfig', (tokenConfig: TokenConfig, $tokenConfig: JQuery, o
     $noTooltipCheckbox.on('change', (ev) => {
         // @ts-ignore
         const isChecked = ev?.target?.checked || false;
+        // @ts-ignore
         tokenConfig.object.setFlag(Utils.moduleName, 'noTooltip', isChecked);
     });
 });
