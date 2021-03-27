@@ -1,0 +1,159 @@
+.token-tooltip-alt-tooltip-container {
+  pointer-events: none;
+  background: white;
+  position: absolute;
+  width: auto;
+  padding: 5px;
+  border: 2px solid;
+  border-radius: 5px;
+}
+.token-tooltip-alt-tooltip-container.hidden {
+  display: none;
+}
+
+.token-tooltip-alt-tooltip-items {
+  display: grid;
+  column-gap: 0.5rem;
+}
+
+.token-tooltip-alt-tooltip-column {
+  max-width: 10rem;
+}
+
+.token-tooltip-alt-tooltip-item:not(.title) {
+  display: grid;
+  grid-gap: 0.5rem;
+  align-items: center;
+}
+.token-tooltip-alt-tooltip-item img {
+  border: none;
+}
+.token-tooltip-alt-tooltip-item span {
+  word-break: break-word;
+}
+
+.token-tooltip-alt-tooltip-manager .token-tooltip-alt-row_enable, .token-tooltip-alt-tooltip-manager .token-tooltip-alt-row_custom {
+  text-align: center;
+}
+
+.token-tooltip-alt-tooltip-editor-window .flexcol {
+  height: 100%;
+}
+.token-tooltip-alt-tooltip-editor-window .content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+.token-tooltip-alt-tooltip-editor-window .sheet-footer {
+  flex: 0;
+}
+.token-tooltip-alt-tooltip-editor-window .content {
+  border-top: 1px solid #b5b3a4;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-footer_button {
+  height: 34px;
+}
+.token-tooltip-alt-tooltip-editor-window .tabs {
+  flex: 0 0 32px;
+  line-height: 32px;
+  font-size: 16px;
+  border-bottom: 1px solid #000;
+}
+.token-tooltip-alt-tooltip-editor-window input[type=color] {
+  width: 50px;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-table thead tr {
+  text-align: center;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-col_icon {
+  width: 100px;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-col_expression, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-col_isFunction, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-col_isNumber, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-col_sort_column {
+  width: 30px;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-col_delete {
+  width: 50px;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-col_color {
+  width: 52px;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_expression, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_isFunction, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_isNumber, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_sort {
+  text-align: center;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-sort-handler i {
+  cursor: grab;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-button.copy, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-button.paste {
+  flex: 0.5;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-button.add, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-button.copy, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-button.paste {
+  min-width: 80px;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_tracked-value {
+  display: grid;
+  align-items: end;
+  grid-template-columns: auto 30px;
+  column-gap: 0.3rem;
+  padding: 0.35em 0;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_tracked-value textarea {
+  min-height: 26px;
+  height: 26px;
+  resize: none;
+  overflow: -moz-scrollbars-none;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_tracked-value textarea::-webkit-scrollbar {
+  display: none;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_tracked-value .advanced-editor {
+  background: none;
+  border: none;
+  line-height: 26px;
+}
+.token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_tracked-value .advanced-editor:focus, .token-tooltip-alt-tooltip-editor-window .token-tooltip-alt-row_tracked-value .advanced-editor:hover {
+  box-shadow: none;
+}
+
+.token-tooltip-alt-data-manager-window .token-tooltip-alt-data-manager-section {
+  height: 620px;
+}
+.token-tooltip-alt-data-manager-window .data-manager {
+  font-family: "Courier New", Courier, monospace;
+  height: 100%;
+}
+.token-tooltip-alt-data-manager-window .CodeMirror {
+  height: 100%;
+}
+
+.token-tooltip-alt-advanced-editor-window .advanced-editor {
+  font-family: "Courier New", Courier, monospace;
+  height: 100%;
+}
+.token-tooltip-alt-advanced-editor-window .CodeMirror {
+  height: 100%;
+}
+
+.token-tooltip-alt-tooltip-container.default {
+  background: url("../../../ui/parchment.jpg") repeat;
+}
+.token-tooltip-alt-tooltip-container.default .token-tooltip-alt-tooltip-item.title {
+  border-bottom: 1px solid;
+}
+.token-tooltip-alt-tooltip-container.default .token-tooltip-alt-tooltip-item span {
+  color: black;
+}
+.token-tooltip-alt-tooltip-container.default.dark {
+  background: url("../../../ui/denim075.png") repeat;
+  box-shadow: 0 0 20px #000;
+}
+.token-tooltip-alt-tooltip-container.default.dark .token-tooltip-alt-tooltip-item.title {
+  border-bottom: 2px solid;
+}
+.token-tooltip-alt-tooltip-container.default.dark .token-tooltip-alt-tooltip-item.title span {
+  color: white;
+}
+.token-tooltip-alt-tooltip-container.default.dark .token-tooltip-alt-tooltip-item span {
+  color: white;
+}
+
+/*# sourceMappingURL=token-tooltip-alt.css.map */

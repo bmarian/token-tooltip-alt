@@ -1,0 +1,41 @@
+.#{$module-name}-tooltip-container {
+  &.hidden {
+    display: none;
+  }
+
+  pointer-events: none;
+  background: white;
+
+  position: absolute;
+  width: auto;
+
+  padding: 5px;
+
+  border: 2px solid;
+  border-radius: 5px;
+}
+
+.#{$module-name}-tooltip-items {
+  display: grid;
+  column-gap: 0.5rem;
+}
+
+.#{$module-name}-tooltip-column {
+  max-width: 10rem;
+}
+
+.#{$module-name}-tooltip-item {
+ &:not(.title) {
+  display: grid;
+  grid-gap: 0.5rem;
+  align-items: center;
+ }
+
+  & img {
+    border: none;
+  }
+
+  & span {
+    word-break: break-word;
+  }
+}

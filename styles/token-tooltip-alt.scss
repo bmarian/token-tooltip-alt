@@ -1,0 +1,11 @@
+$module-name: 'token-tooltip-alt';
+@import "tooltip";
+
+// APPS
+@import "tooltip-manager";
+@import "tooltip-editor";
+@import "data-manager";
+@import "advanced-editor";
+
+// Themes
+@import "tooltip-default";

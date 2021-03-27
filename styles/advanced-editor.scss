@@ -1,0 +1,10 @@
+.#{$module-name}-advanced-editor-window {
+  & .advanced-editor {
+    font-family: 'Courier New', Courier, monospace;
+    height: 100%;
+  }
+
+  & .CodeMirror {
+    height: 100%;
+  }
+}

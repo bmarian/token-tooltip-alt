@@ -1,0 +1,119 @@
+.#{$module-name}-tooltip-editor-window {
+
+  & .flexcol {
+    height: 100%;
+  }
+
+  & .content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+
+  & .sheet-footer {
+    flex: 0;
+  }
+
+  & .content {
+    border-top: 1px solid #b5b3a4;
+  }
+
+  & .#{$module-name}-footer_button {
+    height: 34px;
+  }
+
+  & .tabs {
+    flex: 0 0 32px;
+    line-height: 32px;
+    font-size: 16px;
+    border-bottom: 1px solid #000;
+  }
+
+  & input[type="color"] {
+    width: 50px;
+  }
+
+  & .#{$module-name}-table {
+    & thead {
+      & tr {
+        text-align: center;
+      }
+    }
+  }
+
+  & .#{$module-name}-col_icon {
+    width: 100px;
+  }
+
+  & .#{$module-name}-col_expression,
+  & .#{$module-name}-col_isFunction,
+  & .#{$module-name}-col_isNumber,
+  & .#{$module-name}-col_sort_column {
+    width: 30px;
+  }
+
+  & .#{$module-name}-col_delete {
+    width: 50px;
+  }
+
+  & .#{$module-name}-col_color {
+    width: 52px;
+  }
+
+  & .#{$module-name}-row_expression,
+  & .#{$module-name}-row_isFunction,
+  & .#{$module-name}-row_isNumber,
+  & .#{$module-name}-row_sort {
+    text-align: center;
+  }
+
+  & .#{$module-name}-sort-handler {
+    & i {
+      cursor: grab;
+    }
+  }
+
+  & .#{$module-name}-button {
+    &.copy,
+    &.paste {
+      flex: 0.5;
+    }
+
+    &.add,
+    &.copy,
+    &.paste {
+      min-width: 80px;
+    }
+  }
+
+  & .#{$module-name}-row_tracked-value {
+    display: grid;
+    align-items: end;
+    grid-template-columns: auto 30px;
+    column-gap: 0.3rem;
+    padding: 0.35em 0;
+
+    & textarea {
+      min-height: 26px;
+      height: 26px;
+      resize: none;
+
+      overflow: -moz-scrollbars-none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    & .advanced-editor {
+      background: none;
+      border: none;
+      line-height: 26px;
+
+      &:focus,
+      &:hover {
+        box-shadow: none;
+      }
+    }
+  }
+}

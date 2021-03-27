@@ -1,0 +1,84 @@
+{
+  "I18N.LANGUAGE": "Japanese",
+  "I18N.MAINTAINERS": "touge",
+
+  "token-tooltip-alt.TokenTooltipAlt": "Token Tooltip Alt",
+
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.name": "ツールチップの位置",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.hint": "ツールチップの表示位置を指定します。",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.top": "上",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.right": "右",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.bottom": "下",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.left": "左",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.overlay": "真上",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.surprise": "ランダム",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.doubleSurprise": "すごいランダム",
+
+  "token-tooltip-alt.settings.FONT_SIZE.name": "フォントサイズ",
+  "token-tooltip-alt.settings.FONT_SIZE.hint": "ツールチップのフォントサイズを調整します（1～2.5 rem）。",
+  "token-tooltip-alt.settings.MAX_ROWS.name": "最大行数",
+  "token-tooltip-alt.settings.MAX_ROWS.hint": "行と列の最大数を指定します。",
+  "token-tooltip-alt.settings.DATA_SOURCE.name": "データソース",
+  "token-tooltip-alt.settings.DATA_SOURCE.hint": "これは高度な機能なので、分からない場合は変更しないでください。表示するデータをどこから取得するかを指定します。",
+  "token-tooltip-alt.settings.DARK_THEME.name": "ダークテーマ",
+  "token-tooltip-alt.settings.DARK_THEME.hint": "ツールチップにダークテーマを適用します。",
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.name": "Altキーで表示する",
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.hint": "シーン上で可視化されているすべてのトークンのツールチップを表示します。",
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name": "Altキーですべて表示する",
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint": "シーン上のすべてのトークンのツールチップを表示します。“Altキーで表示する”がオフの場合はなに起こりません。",
+  "token-tooltip-alt.settings.ISOMETRIC.name": "作業中：アイソメトリック ツールチップ",
+  "token-tooltip-alt.settings.ISOMETRIC.hint": "アイソメトリック マップを使用している場合のツールチップの位置を調整します。",
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.name": "デバッグ出力",
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.hint": "便利なデバッグ情報をコンソールに出力します。",
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.name": "ツールチップ マネージャー",
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.label": "ツールチップ マネージャー",
+
+
+
+  "token-tooltip-alt.buttons.import": "インポート",
+  "token-tooltip-alt.buttons.export": "エクスポート",
+  "token-tooltip-alt.buttons.save": "保存",
+  "token-tooltip-alt.buttons.importFromDefault": "デフォルトからインポート",
+  "token-tooltip-alt.buttons.add": "追加",
+  "token-tooltip-alt.buttons.copy": "コピー",
+  "token-tooltip-alt.buttons.paste": "貼付",
+
+
+
+  "token-tooltip-alt.tooltipManager.infoMessage": "詳しくは次のリンク先を参照してください：",
+
+  "token-tooltip-alt.tooltipManager.col.actor": "アクター",
+  "token-tooltip-alt.tooltipManager.col.enable": "有効",
+  "token-tooltip-alt.tooltipManager.col.custom": "カスタム",
+  "token-tooltip-alt.tooltipManager.col.edit": "編集",
+
+
+
+
+  "token-tooltip-alt.tooltipEditor.col.color": "色",
+  "token-tooltip-alt.tooltipEditor.col.icon": "アイコン",
+  "token-tooltip-alt.tooltipEditor.col.value": "値",
+  "token-tooltip-alt.tooltipEditor.col.expression": "Exp",
+  "token-tooltip-alt.tooltipEditor.col.isNumber": "Nr",
+  "token-tooltip-alt.tooltipEditor.col.delete": "削除",
+
+  "token-tooltip-alt.tooltipEditorGm.gmHeader": "GM",
+  "token-tooltip-alt.tooltipEditorGm.settingsHeader": "詳細設定",
+  "token-tooltip-alt.tooltipEditorGm.settings.displayName.name": "名前の表示",
+  "token-tooltip-alt.tooltipEditorGm.settings.displayName.hint": "ツールチップにトークン名を表示します。",
+  "token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.name": "アクセントカラーを常に使用する",
+  "token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.hint": "個別に設定した色でなく、アクセントカラーに設定した色をすべてに適用します。",
+  "token-tooltip-alt.tooltipEditorGm.settings.accentColor.name": "アクセントカラー",
+  "token-tooltip-alt.tooltipEditorGm.settings.accentColor.hint": "縁とタイトルに用いられる色を指定します。",
+
+
+
+  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "プレイヤー",
+  "token-tooltip-alt.tooltipEditorPlayer.settingsHeader": "詳細設定",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.name": "名前の表示",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.hint": "ツールチップにトークン名を表示する（もっとも下位の）性質を指定します。",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.name": "アクセントカラーを常に使用する",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.hint": "個別に設定した色でなく、アクセントカラーに設定した色をすべてに適用します。",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.name": "アクセントカラー",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.hint": "縁とタイトルに用いられる色を指定します。"
+}

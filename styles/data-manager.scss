@@ -1,0 +1,14 @@
+.#{$module-name}-data-manager-window {
+  & .#{$module-name}-data-manager-section {
+    height: 620px;
+  }
+
+  & .data-manager {
+    font-family: 'Courier New', Courier, monospace;
+    height: 100%;
+  }
+
+  & .CodeMirror {
+    height: 100%;
+  }
+}

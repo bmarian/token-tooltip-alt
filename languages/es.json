@@ -1,0 +1,85 @@
+{
+  "I18N.LANGUAGE": "Español",
+  "I18N.MAINTAINERS": "@Viriato139ac#0342",
+
+  "token-tooltip-alt.TokenTooltipAlt": "Token Tooltip Alt",
+
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.name": "Localización del Globo",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.hint": "Determina la posición de los globos de información.",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.top": "Arriba",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.right": "Derecha",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.bottom": "Abajo",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.left": "Izquierda",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.overlay": "Superposición",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.surprise": "Sorpréndeme",
+  "token-tooltip-alt.settings.TOOLTIP_POSITION.choices.doubleSurprise": "Sorpréndeme aún más",
+
+  "token-tooltip-alt.settings.FONT_SIZE.name": "Tamaño de la fuente",
+  "token-tooltip-alt.settings.FONT_SIZE.hint": "Personaliza el tamaño de la fuente que se usa en el globo entre 1 y 2.5 unidades rem.",
+  "token-tooltip-alt.settings.MAX_ROWS.name": "Filas máximas",
+  "token-tooltip-alt.settings.MAX_ROWS.hint": "Número máximo de filas/columnas.",
+  "token-tooltip-alt.settings.DATA_SOURCE.name": "Fuente de datos",
+  "token-tooltip-alt.settings.DATA_SOURCE.hint": "Característica avanzada, por favor, no la cambie a menos que sepa lo que está haciendo. Determinará de dónde se sacan los datos del globo.",
+  "token-tooltip-alt.settings.DARK_THEME.name": "Tema oscuro",
+  "token-tooltip-alt.settings.DARK_THEME.hint": "Habilita en al globo el tema oscuro.",
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.name": "Mostrar con <ALT>",
+  "token-tooltip-alt.settings.SHOW_ALL_ON_ALT.hint": "Muestra un globo en cada uno de los iconos visibles presentes en la escena.",
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name": "Mostrar todos con <ALT>",
+  "token-tooltip-alt.settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint": "Muestra un globo en cada uno de los iconos presentes en la escena. No tendrá efecto si no se activa 'Mostrar con <ALT>'.",
+  "token-tooltip-alt.settings.ISOMETRIC.name": "Experimental: Globos isométricos",
+  "token-tooltip-alt.settings.ISOMETRIC.hint": "Utiliza globols adaptados para mapas isométricos.",
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.name": "Mensajes de depuración",
+  "token-tooltip-alt.settings.DEBUG_OUTPUT.hint": "Muestra información útil de depuración en la consola.",
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.name": "Gestor de Globos",
+  "token-tooltip-alt.settings.TOOLTIP_MANAGER.label": "Gestor de Globos",
+
+
+
+  "token-tooltip-alt.buttons.import": "Importar",
+  "token-tooltip-alt.buttons.export": "Exportar",
+  "token-tooltip-alt.buttons.save": "Guardar",
+  "token-tooltip-alt.buttons.importFromDefault": "Valores por defecto",
+  "token-tooltip-alt.buttons.add": "Añadir",
+  "token-tooltip-alt.buttons.copy": "Copiar",
+  "token-tooltip-alt.buttons.paste": "Pegar",
+
+
+
+  "token-tooltip-alt.tooltipManager.infoMessage": "Para obtener más información, consulte ",
+
+  "token-tooltip-alt.tooltipManager.col.actor": "Actor",
+  "token-tooltip-alt.tooltipManager.col.enable": "Activar",
+  "token-tooltip-alt.tooltipManager.col.custom": "Personalizar",
+  "token-tooltip-alt.tooltipManager.col.edit": "Editar",
+
+
+
+
+  "token-tooltip-alt.tooltipEditor.col.color": "Color",
+  "token-tooltip-alt.tooltipEditor.col.icon": "Icono",
+  "token-tooltip-alt.tooltipEditor.col.value": "Valor",
+  "token-tooltip-alt.tooltipEditor.col.expression": "Exp",
+  "token-tooltip-alt.tooltipEditor.col.isFunction": "Fun",
+  "token-tooltip-alt.tooltipEditor.col.isNumber": "Núm",
+  "token-tooltip-alt.tooltipEditor.col.delete": "Borrar",
+
+  "token-tooltip-alt.tooltipEditorGm.gmHeader": "GM",
+  "token-tooltip-alt.tooltipEditorGm.settingsHeader": "Ajustes",
+  "token-tooltip-alt.tooltipEditorGm.settings.displayName.name": "Mostrar nombre",
+  "token-tooltip-alt.tooltipEditorGm.settings.displayName.hint": "Muestra el nombre del icono en el globo.",
+  "token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.name": "Usar siempre colores acentuados",
+  "token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.hint": "Usa siempre colores acentuados en lugar de los colores personalizados.",
+  "token-tooltip-alt.tooltipEditorGm.settings.accentColor.name": "Color acentuado",
+  "token-tooltip-alt.tooltipEditorGm.settings.accentColor.hint": "Especifique un color acentuado tanto para el marco como para el título.",
+
+
+
+  "token-tooltip-alt.tooltipEditorPlayer.playerHeader": "Jugador",
+  "token-tooltip-alt.tooltipEditorPlayer.settingsHeader": "Ajustes",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.name": "Mostrar nombre",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.displayName.hint": "Muestra el nombre del icono en el globo dependiendo de la disposición.",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.name": "Usar siempre colores acentuados",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.useAccentEverywhere.hint": "Usa siempre colores acentuados en lugar de los colores personalizados.",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.name": "Color acentuado",
+  "token-tooltip-alt.tooltipEditorPlayer.settings.accentColor.hint": "Especifique un color acentuado tanto para el marco como para el título."
+}
