@@ -27,7 +27,6 @@ export default class TooltipEditor extends FormApplication {
   // returns the settings for the current actor type opened
   // and a boolean if it is the default type
   _getSettingLists() {
-    // @ts-ignore
     const type = this?.object?.actorType;
     const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS)[type] || {};
     const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS)[type] || {};
@@ -111,7 +110,6 @@ export default class TooltipEditor extends FormApplication {
 
   // the default delete event, just deletes the closest row
   async _importFromDefaultClickEvent() {
-    // @ts-ignore
     const type = this?.object?.actorType;
     const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
     const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
@@ -131,10 +129,8 @@ export default class TooltipEditor extends FormApplication {
     const dType = $button.attr('dType');
     const disposition = $button.attr('disposition');
     // save the data first because we take it from the object in the backend
-    // @ts-ignore
     this.submit({}).then(() => {
       const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
-      // @ts-ignore
       const settings = data[this?.object?.actorType];
       const { items } = settings;
       const from = items.find((i) => i.disposition === disposition);
@@ -148,7 +144,6 @@ export default class TooltipEditor extends FormApplication {
     const dType = $button.attr('dType');
     const disposition = $button.attr('disposition');
     const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
-    // @ts-ignore
     const settings = data[this?.object?.actorType];
     const { items } = settings;
     const to = items.find((i) => i.disposition === disposition);
@@ -186,7 +181,6 @@ export default class TooltipEditor extends FormApplication {
     // add sortable handlers
     $html.find(`.${Utils.moduleName}-table tbody`).each((index, tbody) => {
       const dragOverHandlerWithBody = dragOverHandler(tbody);
-      // @ts-ignore
       new Sortable(tbody, {
         scroll: true,
         handle: `.${Utils.moduleName}-sort-handler`,
@@ -204,7 +198,6 @@ export default class TooltipEditor extends FormApplication {
     const settingsList = this._getSettingLists();
     $html.find(`.${Utils.moduleName}-row_tracked-value textarea`).each((_0, textarea) => {
       const $textarea = $(textarea);
-      // eslint-disable-next-line no-unused-vars
       const [type, _1, disposition, _2, index] = $textarea.attr('name').split('.'); // e.g. gm.items.HOSTILE.value.0
       const settings = type === 'gm' ? settingsList.gmSettings : settingsList.playerSettings;
       const value = settings.items.find((i) => i.disposition === disposition).items[index]?.value;
@@ -276,7 +269,6 @@ export default class TooltipEditor extends FormApplication {
 
   async _updateObject(event, formData) {
     const expObj = expandObject(formData);
-    // @ts-ignore
     const type = this?.object?.actorType;
     const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
     const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);

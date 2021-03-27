@@ -28,7 +28,6 @@ export default class AdvancedEditor extends FormApplication {
      * @private
      */
   _getTarget() {
-    // @ts-ignore
     return this?.object?.target;
   }
 

@@ -34,7 +34,6 @@ export default class DataManager extends FormApplication {
 
   // determines the type of data manager
   _isImport() {
-    // @ts-ignore
     return this?.object?.type === 'import';
   }
 
@@ -61,7 +60,6 @@ export default class DataManager extends FormApplication {
 
   _getSubmitData(...args) {
     if (this._advancedEditor) { this._advancedEditor.save(); }
-    // @ts-ignore
     return super._getSubmitData(...args);
   }
 
@@ -86,9 +84,7 @@ export default class DataManager extends FormApplication {
     if (!$dataManager) { return; }
     const settings = this._getSettings();
     $dataManager.val(settings);
-    // @ts-ignore
     this._advancedEditor = CodeMirror.fromTextArea($dataManager[0], {
-      // @ts-ignore
       ...CodeMirror.userSettings,
       mode: 'javascript',
       inputStyle: 'contenteditable',

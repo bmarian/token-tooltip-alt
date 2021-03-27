@@ -24,7 +24,6 @@ class TooltipFactory {
     const where = this._getSetting(this._settingKeys.TOOLTIP_POSITION) || 'right';
     const isIsometricActive = game?.modules?.get('grape_juice-isometrics')?.active;
     if (isIsometricActive) {
-      // @ts-ignore
       const isIsometricMap = game?.scenes?.viewed?.getFlag('grape_juice-isometrics', 'is_isometric');
       const isIsometric = this._getSetting(this._settingKeys.ISOMETRIC);
       if (isIsometric && isIsometricMap) { return this._settingKeys.ISOMETRIC; }
