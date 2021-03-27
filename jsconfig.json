@@ -2,7 +2,9 @@
     "typeAcquisition": {
         "include": [
             "jquery",
-            "foundry-pc-types"
+            "foundry-pc-types",
+            "sortablejs",
+            "mathjs"
         ]
     }
 }
