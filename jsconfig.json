@@ -4,7 +4,8 @@
             "jquery",
             "foundry-pc-types",
             "sortablejs",
-            "mathjs"
+            "mathjs",
+            "codemirror"
         ]
     }
 }

@@ -73,7 +73,7 @@ export default class TooltipEditor extends FormApplication {
     const { disposition, dType, $table } = this._getAssociatedTable($button, $context);
     const $tbody = $table.find('tbody');
     const $rows = $tbody.find(`.${Utils.moduleName}-row`);
-    const lastIndex = $rows.length ? parseInt($rows.last().attr('index')) || 0 : 0;
+    const lastIndex = $rows.length ? parseInt($rows.last().attr('index'), 10) || 0 : 0;
     const data = {
       moduleName: Utils.moduleName,
       index: lastIndex + 1,
@@ -165,7 +165,7 @@ export default class TooltipEditor extends FormApplication {
   activateListeners($html) {
     super.activateListeners($html);
     // sortable end event, we need to redraw the table inputs
-    const dragOverHandler = (tbody) => (evt) => {
+    const dragOverHandler = (tbody) => () => {
       $(tbody).find('tr').each((index, tr) => {
         const $tr = $(tr);
         $tr.attr('index', index);
@@ -204,6 +204,7 @@ export default class TooltipEditor extends FormApplication {
     const settingsList = this._getSettingLists();
     $html.find(`.${Utils.moduleName}-row_tracked-value textarea`).each((_0, textarea) => {
       const $textarea = $(textarea);
+      // eslint-disable-next-line no-unused-vars
       const [type, _1, disposition, _2, index] = $textarea.attr('name').split('.'); // e.g. gm.items.HOSTILE.value.0
       const settings = type === 'gm' ? settingsList.gmSettings : settingsList.playerSettings;
       const value = settings.items.find((i) => i.disposition === disposition).items[index]?.value;

@@ -51,6 +51,7 @@ export default class DataManager extends FormApplication {
   }
 
   // returns the data used by the tooltip-manager.hbs template
+  // eslint-disable-next-line no-unused-vars
   async getData(options) {
     return {
       moduleName: Utils.moduleName,

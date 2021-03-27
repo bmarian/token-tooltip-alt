@@ -55,7 +55,7 @@ class Tooltip {
     const paths = path.split('.');
     if (!paths.length) { return null; }
     let res = data;
-    for (let i = 0; i < paths.length; i++) {
+    for (let i = 0; i < paths.length; i += 1) {
       if (res === undefined) { return null; }
       res = res?.[paths[i]];
     }
@@ -65,7 +65,7 @@ class Tooltip {
   // converts a string to a number if possible
   _extractNumber(value) {
     const parsedValue = parseFloat(value);
-    return isNaN(parsedValue) ? null : parsedValue;
+    return Number.isNaN(parsedValue) ? null : parsedValue;
   }
 
   // extracts data from an operation
@@ -104,6 +104,8 @@ class Tooltip {
             + 'try {\n'}${
       funString
     }\n} catch (err) { utils.debug(err); return ""; }`;
+
+    // eslint-disable-next-line no-new-func
     const userFun = new Function(userFunStr);
     return userFun({
       token: this._token, data, tooltip: this, utils: Utils,
@@ -119,7 +121,7 @@ class Tooltip {
 
   // appends stats with only a value
   _appendSimpleStat(value, item, stats) {
-    if (value === '' || (typeof value !== 'string' && isNaN(value))) { return; }
+    if (value === '' || (typeof value !== 'string' && Number.isNaN(value))) { return; }
     const v = item.isNumber ? this._extractNumber(value) : value;
     stats.push({ value: v, color: item?.color, ...this._getIconData(item?.icon) });
   }
@@ -127,7 +129,7 @@ class Tooltip {
   // appends object stats (they need to have a fixed structure)
   // {value, max} and optional {temp, tempmax}
   _appendObjectStat(values, item, stats) {
-    if (isNaN(values.value) || isNaN(values.max) || values.value === null || values.max === null) { return; }
+    if (Number.isNaN(values.value) || Number.isNaN(values.max) || values.value === null || values.max === null) { return; }
     const temp = values.temp > 0 ? `(${values.temp})` : '';
     const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
     const value = `${values.value}${temp}/${values.max}${tempmax}`;
@@ -156,7 +158,7 @@ class Tooltip {
     if (!actors.length) { return {}; }
     // determine the actor we are working with
     let actor = null;
-    for (let i = 0; i < actors.length; i++) {
+    for (let i = 0; i < actors.length; i += 1) {
       const a = actors[i];
       if (a.id === this._tooltipInfo.actorType) {
         actor = a;
@@ -173,14 +175,14 @@ class Tooltip {
   // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
   _getActorDisposition(tokenDispositions) {
     const dispositionsWithoutOwned = tokenDispositions.filter((d) => d !== this._appKeys.OWNED_DISPOSITION);
-    const disposition = dispositionsWithoutOwned?.[parseInt(this._token?.data?.disposition) + 1];
+    const disposition = dispositionsWithoutOwned?.[parseInt(this._token?.data?.disposition, 10) + 1];
     if (this._tooltipInfo.isGM) { return disposition; }
     return this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? this._appKeys.OWNED_DISPOSITION : disposition;
   }
 
   // This returns the itemList for a given disposition
   _getItemListForDisposition(items, disposition) {
-    for (let i = 0; i < items?.length; i++) {
+    for (let i = 0; i < items?.length; i += 1) {
       const item = items[i];
       if (item.disposition === disposition) { return item.items; }
     }
@@ -195,7 +197,7 @@ class Tooltip {
     if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) { return tokenName; }
     if (!this._tooltipInfo.isGM) {
       // here I do some logic that I don't really like but I can't find a good way of doing it
-      const tokenDisposition = parseInt(this._token?.data?.disposition) + 1; // adding a +1 because the numbers start from -1 (hostile)
+      const tokenDisposition = parseInt(this._token?.data?.disposition, 10) + 1; // adding a +1 because the numbers start from -1 (hostile)
       const index = staticData?.tokenDispositions?.indexOf(staticData.displayNameInTooltip);
       // Fix for NONE and OWNED
       if (index === -1) {
@@ -224,7 +226,7 @@ class Tooltip {
     };
     const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData?.tokenDispositions));
     if (!staticData || !itemList.length) { return { stats: [] }; }
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < itemList.length; i += 1) {
       const item = itemList[i];
       const value = item?.isFunction
         ? this._evalFunction(this._data, item.value)
@@ -295,7 +297,8 @@ class Tooltip {
       color: this._accentColor,
     };
     switch (this._where) {
-      case 'right': {
+      case 'right':
+      default: {
         position.top = tokenWT.ty - padding;
         position.left = tokenWT.tx + (this._token.w * tokenWT.a) + padding;
         break;
@@ -394,12 +397,13 @@ class Tooltip {
   // then destroy the tooltip
   hide() {
     switch (this._animType) {
-      case 'none': {
-        this._destroyTooltip();
-        break;
-      }
       case 'fade': {
         this._tooltip.animate({ opacity: 0 }, this._animSpeed, this._destroyTooltip);
+        break;
+      }
+      case 'none':
+      default: {
+        this._destroyTooltip();
         break;
       }
     }

@@ -32,6 +32,7 @@ export default class AdvancedEditor extends FormApplication {
     return this?.object?.target;
   }
 
+  // eslint-disable-next-line no-unused-vars
   async getData(options) {
     return {
       moduleName: Utils.moduleName,
@@ -41,7 +42,6 @@ export default class AdvancedEditor extends FormApplication {
 
   _getSubmitData(...args) {
     if (this._advancedEditor) { this._advancedEditor.save(); }
-    // @ts-ignore
     return super._getSubmitData(...args);
   }
 
@@ -56,9 +56,7 @@ export default class AdvancedEditor extends FormApplication {
     const $advancedEditor = $html.find('.advanced-editor');
     if (!$advancedEditor) { return; }
     $advancedEditor.val(this._getTarget()?.val());
-    // @ts-ignore
     this._advancedEditor = CodeMirror.fromTextArea($advancedEditor[0], {
-      // @ts-ignore
       ...CodeMirror.userSettings,
       mode: 'javascript',
       inputStyle: 'contenteditable',
