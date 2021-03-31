@@ -5,7 +5,8 @@
             "foundry-pc-types",
             "sortablejs",
             "mathjs",
-            "codemirror"
+            "codemirror",
+            "lodash"
         ]
     }
 }

@@ -16,6 +16,7 @@ Hooks.once('canvasInit', () => {
     if (ev.key === 'Alt') { TooltipFactory.removeTooltips(); }
   });
 });
+
 Hooks.on('hoverToken', TooltipFactory.hoverToken.bind(TooltipFactory));
 Hooks.on('preUpdateToken', TooltipFactory.removeTooltips.bind(TooltipFactory));
 Hooks.on('canvasPan', TooltipFactory.removeTooltips.bind(TooltipFactory));

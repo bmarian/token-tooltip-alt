@@ -22,10 +22,10 @@ class Utils {
     console.groupEnd();
   }
 
-  debug(output, doTrace) {
+  debug(output, doTrace = true) {
     const isDebugOptionTrue = game?.settings?.get(this.moduleName, 'debugOutput');
     if (!(this._debugging || isDebugOptionTrue)) { return; }
-    if (this._trace && doTrace !== false) {
+    if (this._trace && !doTrace) {
       this._consoleTrace(output);
     } else {
       this._consoleLog(output);
