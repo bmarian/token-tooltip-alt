@@ -1,9 +1,9 @@
-import { TTAConstants } from '../TTAConstants/TTAConstants.js';
-import SettingsUtil from './SettingsUtil.js';
-import TooltipManager from '../apps/TooltipManager.js';
-import { i18n } from '../TTAUtils/TTAUtils.js';
+import { TTAConstants } from '../../TTAConstants/TTAConstants.js';
+import TooltipManager from '../../apps/TooltipManager.js';
+import { i18n } from '../../TTAUtils/TTAUtils.js';
+import { registerMenu, registerSettings } from './TTASettingsUtils.js';
 
-class Settings {
+class TTASettings {
   constructor() {
     this._settingKeys = TTAConstants.SETTING_KEYS;
     this._publicConfigureSettings = [
@@ -187,8 +187,8 @@ class Settings {
   }
 
   static getInstance() {
-    if (!Settings._instance) { Settings._instance = new Settings(); }
-    return Settings._instance;
+    if (!TTASettings._instance) { TTASettings._instance = new TTASettings(); }
+    return TTASettings._instance;
   }
 
   // --- GETTERS --- \\
@@ -206,7 +206,7 @@ class Settings {
 
   // --- GETTERS --- \\
   _registerTooltipManager() {
-    SettingsUtil.registerMenu(TTAConstants.SETTING_KEYS.TOOLTIP_MANAGER, {
+    registerMenu(TTAConstants.SETTING_KEYS.TOOLTIP_MANAGER, {
       name: i18n('settings.TOOLTIP_MANAGER.name'),
       label: i18n('settings.TOOLTIP_MANAGER.label'),
       icon: 'fas fa-edit',
@@ -223,7 +223,7 @@ class Settings {
       ...this._oldHiddenConfigureSettings,
     ];
     this._registerTooltipManager();
-    SettingsUtil.registerSettings(settings);
+    registerSettings(settings);
   }
 }
-export default Settings;
+export default TTASettings;

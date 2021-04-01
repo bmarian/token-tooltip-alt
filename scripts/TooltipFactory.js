@@ -1,6 +1,6 @@
 import Tooltip from './Tooltip.js';
 import { TTAConstants, getSystemTheme } from './TTAConstants/TTAConstants.js';
-import SettingsUtil from './settings/SettingsUtil.js';
+import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
 import { MODULE_NAME } from './TTAUtils/TTAUtils.js';
 
 class TooltipFactory {
@@ -14,9 +14,9 @@ class TooltipFactory {
     return TooltipFactory._instance;
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   _getSetting(setting) {
-    return SettingsUtil.getSetting(setting);
+    return getSetting(setting);
   }
 
   // get the positioning from settings, and if surprise pick a random possible position

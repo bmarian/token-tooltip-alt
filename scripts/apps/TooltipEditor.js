@@ -1,4 +1,4 @@
-import SettingsUtil from '../settings/SettingsUtil.js';
+import { getSetting, setSettingSync } from '../TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
 import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import AdvancedEditor from './AdvancedEditor.js';
 import {
@@ -34,14 +34,14 @@ export default class TooltipEditor extends FormApplication {
     return { gmSettings, playerSettings, isDefault: type === TTAConstants.APPS.TOOLTIP_DEFAULT_ACTOR_ID };
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   _getSetting(key) {
-    return SettingsUtil.getSetting(key);
+    return getSetting(key);
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   async _setSetting(key, value) {
-    return await SettingsUtil.setSetting(key, value);
+    return setSettingSync(key, value);
   }
 
   // returns the data used by the tooltip-editor.hbs template

@@ -1,6 +1,6 @@
-import SettingsUtil from '../settings/SettingsUtil.js';
 import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import { debug, MODULE_NAME } from '../TTAUtils/TTAUtils.js';
+import { getSetting, setSettingSync } from '../TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
 
 export default class DataManager extends FormApplication {
   constructor() {
@@ -22,14 +22,14 @@ export default class DataManager extends FormApplication {
     };
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   _getSetting(key) {
-    return SettingsUtil.getSetting(key);
+    return getSetting(key);
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   async _setSetting(key, value) {
-    return await SettingsUtil.setSetting(key, value);
+    return setSettingSync(key, value);
   }
 
   // determines the type of data manager

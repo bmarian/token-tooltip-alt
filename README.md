@@ -50,7 +50,7 @@ Here you can also **import**/**export** settings for **Tooltip editor**.
 
 This section is divided into two. The settings for the GM, and the settings for the PLAYER, so you could have full control over what players see versus what the gm sees.
 
-### Settings
+### TTASettings
 - `Display name`:
 	- GM: If true, will display the name of the token in the tooltip.
 	- PLAYER: You can choose which token will display the name based on the disposition. (e.g. if set to NEUTRAL -> FRIENDLY and NEUTRAL tokens will display tooltips)

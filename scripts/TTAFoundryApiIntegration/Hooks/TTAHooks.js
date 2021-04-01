@@ -1,7 +1,7 @@
-import Settings from '../settings/Settings.js';
-import { TTAConstants } from '../TTAConstants/TTAConstants.js';
-import { debug, htmlToElement, MODULE_NAME } from '../TTAUtils/TTAUtils.js';
-import TooltipFactory from '../TooltipFactory.js';
+import TTASettings from '../Settings/TTASettings.js';
+import { TTAConstants } from '../../TTAConstants/TTAConstants.js';
+import { debug, htmlToElement, MODULE_NAME } from '../../TTAUtils/TTAUtils.js';
+import TooltipFactory from '../../TooltipFactory.js';
 
 /**
  * Adds a hook handler
@@ -29,10 +29,10 @@ const HOOK_TYPE = {
 const hookHandlers = {
   initHookHandler() {
     return addHookHandler('init', HOOK_TYPE.ONCE, async () => {
-      const settings = Settings.getInstance();
+      const settings = TTASettings.getInstance();
       settings.registerSettings();
 
-      debug('Settings registered.');
+      debug('TTASettings registered.');
       await loadTemplates(Object.values(TTAConstants.TEMPLATES));
       debug('Templates loaded.');
     });

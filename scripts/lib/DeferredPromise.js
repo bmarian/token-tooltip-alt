@@ -1,4 +1,4 @@
-class DeferredPromise {
+export default class DeferredPromise {
   constructor() {
     this.promise = new Promise((resolve, reject) => {
       this.resolve = resolve;
@@ -6,4 +6,3 @@ class DeferredPromise {
     });
   }
 }
-export default DeferredPromise;

@@ -1,7 +1,7 @@
 import doMath from './lib/MathEngine.js';
 import DeferredPromise from './lib/DeferredPromise.js';
 import { TTAConstants } from './TTAConstants/TTAConstants.js';
-import SettingsUtil from './settings/SettingsUtil.js';
+import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
 import { clone, debug, MODULE_NAME } from './TTAUtils/TTAUtils.js';
 
 class Tooltip {
@@ -43,9 +43,9 @@ class Tooltip {
     this.renderingResolved = promise.resolve;
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   _getSetting(key) {
-    return SettingsUtil.getSetting(key);
+    return getSetting(key);
   }
 
   // extracts data from an object, and a string path,

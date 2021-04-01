@@ -1,4 +1,4 @@
-import SettingsUtil from '../settings/SettingsUtil.js';
+import { getSetting, setSettingSync } from '../TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
 import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import TooltipEditor from './TooltipEditor.js';
 import DataManager from './DataManager.js';
@@ -104,14 +104,14 @@ export default class TooltipManager extends FormApplication {
     debug({ gmSettings: gmSettingsForType, playerSettings: playerSettingsForType });
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   _getSetting(key) {
-    return SettingsUtil.getSetting(key);
+    return getSetting(key);
   }
 
-  // get a value from Settings
+  // get a value from TTASettings
   async _setSetting(key, value) {
-    return await SettingsUtil.setSetting(key, value);
+    return setSettingSync(key, value);
   }
 
   // generate a preset for a newly added system actor
