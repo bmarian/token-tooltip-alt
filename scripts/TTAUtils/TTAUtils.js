@@ -1,5 +1,3 @@
-import _ from '../lib/TTALodash.js';
-
 const CONSTANTS = {
   MODULE_NAME: 'token-tooltip-alt',
   MODULE_TITLE: 'Token Tooltip Alt',
@@ -15,11 +13,11 @@ const CONSTANTS = {
  * @return {*[]}
  */
 function consoleOutput(output) {
-  return _.flatten([
+  return [
     `%c${CONSTANTS.MODULE_TITLE} %c|`,
-    CONSTANTS.CONSOLE_COLORS,
-    output,
-  ]);
+    ...CONSTANTS.CONSOLE_COLORS,
+    ...output,
+  ];
 }
 
 /* eslint-disable no-console */
@@ -50,7 +48,7 @@ function consoleTrace(output) {
  * @param {string} output
  */
 function debug(...output) {
-  const isDebugOptionTrue = game.settings.get(this.moduleName, 'debugOutput');
+  const isDebugOptionTrue = game.settings.get(CONSTANTS.MODULE_NAME, 'debugOutput');
   if (!(CONSTANTS.DEBUG || isDebugOptionTrue)) return;
 
   if (CONSTANTS.TRACE) consoleTrace(output); else consoleLog(output);
@@ -63,7 +61,7 @@ function debug(...output) {
  * @return {*}
  */
 function clone(obj) {
-  return _.cloneDeep(obj);
+  return JSON.parse(JSON.stringify(obj));
 }
 
 /**
@@ -73,7 +71,7 @@ function clone(obj) {
  * @return {string}
  */
 function i18n(path) {
-  return game.i18n.localize(`${this.moduleName}.${path}`);
+  return game.i18n.localize(`${CONSTANTS.MODULE_NAME}.${path}`);
 }
 
 /**
@@ -85,6 +83,18 @@ function generateRandomColor() {
   return `#${Math.round((Math.random() * 0xFFFFFF)).toString(16).padStart(6, '0')}`;
 }
 
+/**
+ * Creates a new html element from a given string
+ *
+ * @param {String} html representing a single element
+ * @return {Node}
+ */
+function htmlToElement(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html.trim();
+  return template.content.firstChild;
+}
+
 export default {
   MODULE_NAME: CONSTANTS.MODULE_NAME,
   MODULE_TITLE: CONSTANTS.MODULE_TITLE,
@@ -92,4 +102,5 @@ export default {
   clone,
   i18n,
   generateRandomColor,
+  htmlToElement,
 };

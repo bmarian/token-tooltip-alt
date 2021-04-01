@@ -53,7 +53,7 @@ class TooltipFactory {
       200,
       this._getSetting(this._settingKeys.DATA_SOURCE) || '',
       CONSTANTS.TEMPLATES.TOOLTIP,
-      $('.game'),
+      $('body.game'),
       this._getTooltipInfo(token),
     ];
   }

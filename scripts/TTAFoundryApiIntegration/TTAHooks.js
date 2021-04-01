@@ -1,8 +1,8 @@
-import Settings from '../settings/Settings';
-import { CONSTANTS } from '../enums/Constants';
-import _ from '../lib/TTALodash.js';
+import Settings from '../settings/Settings.js';
+import { CONSTANTS } from '../enums/Constants.js';
 import TTAUtils from '../TTAUtils/TTAUtils.js';
-import TooltipFactory from '../TooltipFactory';
+import TooltipFactory from '../TooltipFactory.js';
+import Utils from '../Utils.js';
 
 /**
  * Adds a hook handler
@@ -44,7 +44,7 @@ const hookHandlers = {
     });
   },
   hoverTokenHandler() {
-    return addHookHandler('canvasInit', HOOK_TYPE.ONCE, TooltipFactory.hoverToken.bind(TooltipFactory));
+    return addHookHandler('hoverToken', HOOK_TYPE.ON, TooltipFactory.hoverToken.bind(TooltipFactory));
   },
   removeTooltipHandlers() {
     ['preUpdateToken', 'canvasPan', 'deleteToken'].forEach((hook) => {
@@ -57,10 +57,28 @@ const hookHandlers = {
       TooltipFactory.removeTooltips();
     });
   },
+  renderTokenConfigHandler() {
+    return addHookHandler('renderTokenConfig', HOOK_TYPE.ON, (tokenConfig, $tokenConfig) => {
+      const tokenConfigElement = $tokenConfig[0];
+      const resources = tokenConfigElement.querySelector('.tab[data-tab="resources"]');
+      const noTooltip = tokenConfig.object.getFlag(Utils.moduleName, 'noTooltip');
+      const noTooltipCheckboxElement = TTAUtils.htmlToElement(`
+        <div class="form-group">
+            <label>No tooltip</label>
+            <input type="checkbox" name="${Utils.moduleName}-no-tooltip" data-dtype="Boolean" ${noTooltip && 'checked'}>
+        </div>`);
+      resources.append(noTooltipCheckboxElement);
+
+      noTooltipCheckboxElement.addEventListener('change', (ev) => {
+        const isChecked = ev?.target?.checked || false;
+        return tokenConfig.object.setFlag(Utils.moduleName, 'noTooltip', isChecked);
+      });
+    });
+  },
 };
 
 function registerHandlers() {
-  _.mapValues(hookHandlers, (handlers) => handlers());
+  Object.values(hookHandlers).map((handlers) => handlers());
 }
 
 export default { registerHandlers };
