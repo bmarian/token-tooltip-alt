@@ -163,27 +163,6 @@ class TTASettings {
         },
       },
     ];
-    // this is a list with all the old settings before v2.0.0
-    this._oldHiddenConfigureSettings = [
-      {
-        key: this._settingKeys.TOOLTIP_ITEMS,
-        settings: {
-          type: Object,
-          scope: 'world',
-          restricted: true,
-          default: [],
-        },
-      },
-      {
-        key: this._settingKeys.HOSTILE_ITEMS,
-        settings: {
-          type: Object,
-          scope: 'world',
-          restricted: true,
-          default: [],
-        },
-      },
-    ];
   }
 
   static getInstance() {
@@ -198,10 +177,6 @@ class TTASettings {
 
   getHiddenConfigureSettings() {
     return this._hiddenConfigureSettings;
-  }
-
-  getOldHiddenConfigureSettings() {
-    return this._oldHiddenConfigureSettings;
   }
 
   // --- GETTERS --- \\
@@ -220,7 +195,6 @@ class TTASettings {
     const settings = [
       ...this._publicConfigureSettings,
       ...this._hiddenConfigureSettings,
-      ...this._oldHiddenConfigureSettings,
     ];
     this._registerTooltipManager();
     registerSettings(settings);

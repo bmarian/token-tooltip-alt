@@ -1,6 +1,6 @@
 import { MODULE_NAME } from '../TTAUtils/TTAUtils.js';
 
-export const TTAConstants = {
+const TTAConstants = {
   SETTING_KEYS: {
     TOOLTIP_VISIBILITY: 'tooltipVisibility',
     SHOW_ALL_ON_ALT: 'showAllOnAlt',
@@ -21,10 +21,6 @@ export const TTAConstants = {
     ACTORS: 'actors',
     CLIPBOARD: 'clipboard',
     ISOMETRIC: 'isometric',
-    // old settings
-    TOOLTIP_ITEMS: 'tooltipItems',
-    HOSTILE_ITEMS: 'hostileItems',
-    PORTED: 'ported',
   },
   TEMPLATES: {
     TOOLTIP: `modules/${MODULE_NAME}/templates/tooltip.hbs`,
@@ -56,7 +52,12 @@ export const TTAConstants = {
   TOOLTIP_POSITIONS: ['top', 'right', 'bottom', 'left', 'overlay'],
 };
 
-export const getSystemTheme = () => {
+function getSystemTheme() {
   const system = game.system.id;
   return TTAConstants.SYSTEM_DEFAULT_THEMES[system] || TTAConstants.SYSTEM_DEFAULT_THEMES[TTAConstants.SYSTEM_DEFAULT];
+}
+
+export {
+  TTAConstants,
+  getSystemTheme,
 };
