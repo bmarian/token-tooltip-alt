@@ -4,7 +4,6 @@
 ![Downloads](https://img.shields.io/github/downloads/bmarian/token-tooltip-alt/latest/total?style=for-the-badge)
 
 A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.
-You can also hold ALT to see the tooltips for all tokens on the map.
 
 # Installation
 - Go in the `Add-on Modules` section
