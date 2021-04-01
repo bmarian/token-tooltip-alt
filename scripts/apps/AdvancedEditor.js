@@ -1,5 +1,5 @@
-import { CONSTANTS } from '../enums/Constants.js';
-import Utils from '../Utils.js';
+import { TTAConstants } from '../TTAConstants/TTAConstants.js';
+import { debug, MODULE_NAME } from '../TTAUtils/TTAUtils.js';
 
 export default class AdvancedEditor extends FormApplication {
   constructor() {
@@ -11,10 +11,10 @@ export default class AdvancedEditor extends FormApplication {
     return {
       ...super.defaultOptions,
       title: 'Advanced editor',
-      template: CONSTANTS.APPS.ADVANCED_EDITOR,
-      width: CONSTANTS.APPS.ADVANCED_EDITOR_WIDTH,
-      height: CONSTANTS.APPS.ADVANCED_EDITOR_HEIGHT,
-      classes: [`${Utils.moduleName}-advanced-editor-window`],
+      template: TTAConstants.APPS.ADVANCED_EDITOR,
+      width: TTAConstants.APPS.ADVANCED_EDITOR_WIDTH,
+      height: TTAConstants.APPS.ADVANCED_EDITOR_HEIGHT,
+      classes: [`${MODULE_NAME}-advanced-editor-window`],
       resizable: true,
       closeOnSubmit: true,
       submitOnClose: true,
@@ -34,7 +34,7 @@ export default class AdvancedEditor extends FormApplication {
   // eslint-disable-next-line no-unused-vars
   async getData(options) {
     return {
-      moduleName: Utils.moduleName,
+      moduleName: MODULE_NAME,
       value: this._getTarget()?.val(),
     };
   }
@@ -47,7 +47,7 @@ export default class AdvancedEditor extends FormApplication {
   async _updateObject(event, formData) {
     const stringData = formData.value;
     this._getTarget()?.val(stringData);
-    Utils.debug(`Updated ${this._getTarget()?.attr('name')}, with:\n${stringData}`);
+    debug(`Updated ${this._getTarget()?.attr('name')}, with:\n${stringData}`);
   }
 
   activateListeners($html) {

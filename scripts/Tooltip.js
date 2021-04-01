@@ -1,8 +1,8 @@
-import Utils from './Utils.js';
 import doMath from './lib/MathEngine.js';
 import DeferredPromise from './lib/DeferredPromise.js';
-import { CONSTANTS } from './enums/Constants.js';
+import { TTAConstants } from './TTAConstants/TTAConstants.js';
 import SettingsUtil from './settings/SettingsUtil.js';
+import { clone, debug, MODULE_NAME } from './TTAUtils/TTAUtils.js';
 
 class Tooltip {
   constructor(token, themeClass, systemClass, fontSize, where, animType, animSpeed, path, template, gameBody, tooltipInfo) {
@@ -33,10 +33,10 @@ class Tooltip {
     this._template = template;
     this._tooltipInfo = tooltipInfo;
     this._gameBody = gameBody;
-    this._moduleName = Utils.moduleName;
+    this._moduleName = MODULE_NAME;
     this._data = path === '' ? token : this._getNestedData(this._token, path);
-    this._settingsKeys = CONSTANTS.SETTING_KEYS;
-    this._appKeys = CONSTANTS.APPS;
+    this._settingsKeys = TTAConstants.SETTING_KEYS;
+    this._appKeys = TTAConstants.APPS;
     this._maxRows = this._getSetting(this._settingsKeys.MAX_ROWS) || 5;
     const promise = new DeferredPromise();
     this.renderingFinished = promise.promise;
@@ -108,7 +108,7 @@ class Tooltip {
     // eslint-disable-next-line no-new-func
     const userFun = new Function(userFunStr);
     return userFun({
-      token: this._token, data, tooltip: this, utils: Utils,
+      token: this._token, data, tooltip: this, utils: { debug },
     });
   }
 
@@ -222,7 +222,7 @@ class Tooltip {
     const staticData = {
       ...data.static,
       // This is needed to not modify the original object, and also to reverse it only once here
-      tokenDispositions: data?.static?.tokenDispositions ? Utils.clone(data?.static?.tokenDispositions)?.reverse() : [],
+      tokenDispositions: data?.static?.tokenDispositions ? clone(data?.static?.tokenDispositions)?.reverse() : [],
     };
     const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData?.tokenDispositions));
     if (!staticData || !itemList.length) { return { stats: [] }; }
@@ -237,7 +237,7 @@ class Tooltip {
     const tokenName = this._getActorDisplayName(staticData);
     // FIXME: this should not be here I think, but I am sleep deprived and running on beer so what do I know
     this._accentColor = staticData.accentColor;
-    Utils.debug({ tokenName, data: this._data });
+    debug({ tokenName, data: this._data });
     return { moduleName: this._moduleName, stats, tokenName };
   }
 
@@ -261,7 +261,7 @@ class Tooltip {
       stats: columns,
       numberOfColumns: columns.length,
     };
-    Utils.debug(templateData);
+    debug(templateData);
     return renderTemplate(this._template, templateData);
   }
 

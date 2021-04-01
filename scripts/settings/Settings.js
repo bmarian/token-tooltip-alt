@@ -1,36 +1,36 @@
-import { CONSTANTS } from '../enums/Constants.js';
+import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import SettingsUtil from './SettingsUtil.js';
 import TooltipManager from '../apps/TooltipManager.js';
-import Utils from '../Utils.js';
+import { i18n } from '../TTAUtils/TTAUtils.js';
 
 class Settings {
   constructor() {
-    this._settingKeys = CONSTANTS.SETTING_KEYS;
+    this._settingKeys = TTAConstants.SETTING_KEYS;
     this._publicConfigureSettings = [
       {
         key: this._settingKeys.TOOLTIP_POSITION,
         settings: {
-          name: Utils.i18n('settings.TOOLTIP_POSITION.name'),
-          hint: Utils.i18n('settings.TOOLTIP_POSITION.hint'),
+          name: i18n('settings.TOOLTIP_POSITION.name'),
+          hint: i18n('settings.TOOLTIP_POSITION.hint'),
           type: String,
           config: true,
           default: 'right',
           choices: {
-            top: Utils.i18n('settings.TOOLTIP_POSITION.choices.top'),
-            right: Utils.i18n('settings.TOOLTIP_POSITION.choices.right'),
-            bottom: Utils.i18n('settings.TOOLTIP_POSITION.choices.bottom'),
-            left: Utils.i18n('settings.TOOLTIP_POSITION.choices.left'),
-            overlay: Utils.i18n('settings.TOOLTIP_POSITION.choices.overlay'),
-            surprise: Utils.i18n('settings.TOOLTIP_POSITION.choices.surprise'),
-            doubleSurprise: Utils.i18n('settings.TOOLTIP_POSITION.choices.doubleSurprise'),
+            top: i18n('settings.TOOLTIP_POSITION.choices.top'),
+            right: i18n('settings.TOOLTIP_POSITION.choices.right'),
+            bottom: i18n('settings.TOOLTIP_POSITION.choices.bottom'),
+            left: i18n('settings.TOOLTIP_POSITION.choices.left'),
+            overlay: i18n('settings.TOOLTIP_POSITION.choices.overlay'),
+            surprise: i18n('settings.TOOLTIP_POSITION.choices.surprise'),
+            doubleSurprise: i18n('settings.TOOLTIP_POSITION.choices.doubleSurprise'),
           },
         },
       },
       {
         key: this._settingKeys.FONT_SIZE,
         settings: {
-          name: Utils.i18n('settings.FONT_SIZE.name'),
-          hint: Utils.i18n('settings.FONT_SIZE.hint'),
+          name: i18n('settings.FONT_SIZE.name'),
+          hint: i18n('settings.FONT_SIZE.hint'),
           type: Number,
           config: true,
           range: {
@@ -44,8 +44,8 @@ class Settings {
       {
         key: this._settingKeys.MAX_ROWS,
         settings: {
-          name: Utils.i18n('settings.MAX_ROWS.name'),
-          hint: Utils.i18n('settings.MAX_ROWS.hint'),
+          name: i18n('settings.MAX_ROWS.name'),
+          hint: i18n('settings.MAX_ROWS.hint'),
           type: Number,
           config: true,
           range: {
@@ -59,8 +59,8 @@ class Settings {
       {
         key: this._settingKeys.DATA_SOURCE,
         settings: {
-          name: Utils.i18n('settings.DATA_SOURCE.name'),
-          hint: Utils.i18n('settings.DATA_SOURCE.hint'),
+          name: i18n('settings.DATA_SOURCE.name'),
+          hint: i18n('settings.DATA_SOURCE.hint'),
           type: String,
           scope: 'world',
           config: true,
@@ -71,8 +71,8 @@ class Settings {
       {
         key: this._settingKeys.DARK_THEME,
         settings: {
-          name: Utils.i18n('settings.DARK_THEME.name'),
-          hint: Utils.i18n('settings.DARK_THEME.hint'),
+          name: i18n('settings.DARK_THEME.name'),
+          hint: i18n('settings.DARK_THEME.hint'),
           type: Boolean,
           config: true,
           default: false,
@@ -81,8 +81,8 @@ class Settings {
       {
         key: this._settingKeys.SHOW_ALL_ON_ALT,
         settings: {
-          name: Utils.i18n('settings.SHOW_ALL_ON_ALT.name'),
-          hint: Utils.i18n('settings.SHOW_ALL_ON_ALT.hint'),
+          name: i18n('settings.SHOW_ALL_ON_ALT.name'),
+          hint: i18n('settings.SHOW_ALL_ON_ALT.hint'),
           type: Boolean,
           scope: 'world',
           config: true,
@@ -93,8 +93,8 @@ class Settings {
       {
         key: this._settingKeys.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS,
         settings: {
-          name: Utils.i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name'),
-          hint: Utils.i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint'),
+          name: i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.name'),
+          hint: i18n('settings.SHOW_TOOLTIP_FOR_HIDDEN_TOKENS.hint'),
           type: Boolean,
           scope: 'world',
           config: true,
@@ -105,8 +105,8 @@ class Settings {
       {
         key: this._settingKeys.ISOMETRIC,
         settings: {
-          name: Utils.i18n('settings.ISOMETRIC.name'),
-          hint: Utils.i18n('settings.ISOMETRIC.hint'),
+          name: i18n('settings.ISOMETRIC.name'),
+          hint: i18n('settings.ISOMETRIC.hint'),
           type: Boolean,
           scope: 'world',
           config: true,
@@ -117,8 +117,8 @@ class Settings {
       {
         key: this._settingKeys.DEBUG_OUTPUT,
         settings: {
-          name: Utils.i18n('settings.DEBUG_OUTPUT.name'),
-          hint: Utils.i18n('settings.DEBUG_OUTPUT.hint'),
+          name: i18n('settings.DEBUG_OUTPUT.name'),
+          hint: i18n('settings.DEBUG_OUTPUT.hint'),
           type: Boolean,
           scope: 'world',
           config: true,
@@ -206,9 +206,9 @@ class Settings {
 
   // --- GETTERS --- \\
   _registerTooltipManager() {
-    SettingsUtil.registerMenu(CONSTANTS.SETTING_KEYS.TOOLTIP_MANAGER, {
-      name: Utils.i18n('settings.TOOLTIP_MANAGER.name'),
-      label: Utils.i18n('settings.TOOLTIP_MANAGER.label'),
+    SettingsUtil.registerMenu(TTAConstants.SETTING_KEYS.TOOLTIP_MANAGER, {
+      name: i18n('settings.TOOLTIP_MANAGER.name'),
+      label: i18n('settings.TOOLTIP_MANAGER.label'),
       icon: 'fas fa-edit',
       type: TooltipManager,
       restricted: true,

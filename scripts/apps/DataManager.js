@@ -1,6 +1,6 @@
 import SettingsUtil from '../settings/SettingsUtil.js';
-import { CONSTANTS } from '../enums/Constants.js';
-import Utils from '../Utils.js';
+import { TTAConstants } from '../TTAConstants/TTAConstants.js';
+import { debug, MODULE_NAME } from '../TTAUtils/TTAUtils.js';
 
 export default class DataManager extends FormApplication {
   constructor() {
@@ -13,10 +13,10 @@ export default class DataManager extends FormApplication {
       ...super.defaultOptions,
       title: 'Data Manager',
       id: 'data-manager',
-      template: CONSTANTS.APPS.DATA_MANAGER,
-      width: CONSTANTS.APPS.DATA_MANAGER_WIDTH,
-      height: CONSTANTS.APPS.DATA_MANAGER_HEIGHT,
-      classes: [`${Utils.moduleName}-data-manager-window`],
+      template: TTAConstants.APPS.DATA_MANAGER,
+      width: TTAConstants.APPS.DATA_MANAGER_WIDTH,
+      height: TTAConstants.APPS.DATA_MANAGER_HEIGHT,
+      classes: [`${MODULE_NAME}-data-manager-window`],
       closeOnSubmit: true,
       submitOnClose: false,
     };
@@ -38,8 +38,8 @@ export default class DataManager extends FormApplication {
   }
 
   _exportData() {
-    const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
-    const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+    const gmSettings = this._getSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS);
+    const playerSettings = this._getSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS);
     const data = { gmSettings, playerSettings };
     return JSON.stringify(data, null, 2);
   }
@@ -53,7 +53,7 @@ export default class DataManager extends FormApplication {
   // eslint-disable-next-line no-unused-vars
   async getData(options) {
     return {
-      moduleName: Utils.moduleName,
+      moduleName: MODULE_NAME,
       isImport: this._isImport(),
     };
   }
@@ -70,11 +70,11 @@ export default class DataManager extends FormApplication {
       const { gmSettings } = data;
       const { playerSettings } = data;
       if (!gmSettings || !playerSettings) { return; }
-      await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
-      await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
-      Utils.debug(data);
+      await this._setSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS, gmSettings);
+      await this._setSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
+      debug(data);
     } catch (err) {
-      Utils.debug(`Error on importing: ${err}`);
+      debug(`Error on importing: ${err}`);
     }
   }
 

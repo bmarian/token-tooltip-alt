@@ -1,12 +1,12 @@
 import Tooltip from './Tooltip.js';
-import { CONSTANTS, getSystemTheme } from './enums/Constants.js';
+import { TTAConstants, getSystemTheme } from './TTAConstants/TTAConstants.js';
 import SettingsUtil from './settings/SettingsUtil.js';
-import Utils from './Utils.js';
+import {MODULE_NAME} from "./TTAUtils/TTAUtils.js";
 
 class TooltipFactory {
   constructor() {
     this._tooltips = [];
-    this._settingKeys = CONSTANTS.SETTING_KEYS;
+    this._settingKeys = TTAConstants.SETTING_KEYS;
   }
 
   static getInstance() {
@@ -28,7 +28,7 @@ class TooltipFactory {
       const isIsometric = this._getSetting(this._settingKeys.ISOMETRIC);
       if (isIsometric && isIsometricMap) { return this._settingKeys.ISOMETRIC; }
     }
-    const positions = CONSTANTS.TOOLTIP_POSITIONS;
+    const positions = TTAConstants.TOOLTIP_POSITIONS;
     return where !== 'surprise' ? where : positions[Math.floor(Math.random() * positions.length)];
   }
 
@@ -52,7 +52,7 @@ class TooltipFactory {
       'none',
       200,
       this._getSetting(this._settingKeys.DATA_SOURCE) || '',
-      CONSTANTS.TEMPLATES.TOOLTIP,
+      TTAConstants.TEMPLATES.TOOLTIP,
       $('body.game'),
       this._getTooltipInfo(token),
     ];
@@ -91,7 +91,7 @@ class TooltipFactory {
 
   // determines if a token should display a tooltip or not based on the ACTORS settings
   _shouldActorHaveTooltip(token) {
-    const noTooltip = token.getFlag(Utils.moduleName, 'noTooltip');
+    const noTooltip = token.getFlag(MODULE_NAME, 'noTooltip');
     if (noTooltip) { return false; }
     const actorType = token?.actor?.data?.type;
     const actors = this._getSetting(this._settingKeys.ACTORS);

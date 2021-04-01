@@ -1,8 +1,8 @@
-import Utils from '../Utils.js';
+import { MODULE_NAME } from '../TTAUtils/TTAUtils.js';
 
 class SettingsUtil {
   constructor() {
-    this._moduleName = Utils.moduleName;
+    this._moduleName = MODULE_NAME;
   }
 
   static getInstance() {
@@ -12,17 +12,17 @@ class SettingsUtil {
 
   // gets the value of a setting
   getSetting(key) {
-    return game?.settings?.get(this._moduleName, key);
+    return game.settings.get(this._moduleName, key);
   }
 
   // sets a value for a setting
   async setSetting(key, data) {
-    return await game?.settings?.set(this._moduleName, key, data);
+    return await game.settings.set(MODULE_NAME, key, data);
   }
 
   // registers a setting
   _registerSetting(key, data) {
-    game?.settings?.register(this._moduleName, key, data);
+    game.settings.register(MODULE_NAME, key, data);
   }
 
   // registers an array of settings

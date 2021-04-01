@@ -1,8 +1,7 @@
 import Settings from '../settings/Settings.js';
-import { CONSTANTS } from '../enums/Constants.js';
-import TTAUtils from '../TTAUtils/TTAUtils.js';
+import { TTAConstants } from '../TTAConstants/TTAConstants.js';
+import { debug, htmlToElement, MODULE_NAME } from '../TTAUtils/TTAUtils.js';
 import TooltipFactory from '../TooltipFactory.js';
-import Utils from '../Utils.js';
 
 /**
  * Adds a hook handler
@@ -24,15 +23,18 @@ const HOOK_TYPE = {
   OFF: 'off',
 };
 
+/**
+ * @type {{renderTokenConfigHandler(): *, hoverTokenHandler(): *, initHookHandler(): *, removeTooltipHandlers(): *, canvasInitHandler(): *}}
+ */
 const hookHandlers = {
   initHookHandler() {
     return addHookHandler('init', HOOK_TYPE.ONCE, async () => {
       const settings = Settings.getInstance();
       settings.registerSettings();
 
-      TTAUtils.debug('Settings registered.');
-      await loadTemplates(Object.values(CONSTANTS.TEMPLATES));
-      TTAUtils.debug('Templates loaded.');
+      debug('Settings registered.');
+      await loadTemplates(Object.values(TTAConstants.TEMPLATES));
+      debug('Templates loaded.');
     });
   },
   canvasInitHandler() {
@@ -61,24 +63,24 @@ const hookHandlers = {
     return addHookHandler('renderTokenConfig', HOOK_TYPE.ON, (tokenConfig, $tokenConfig) => {
       const tokenConfigElement = $tokenConfig[0];
       const resources = tokenConfigElement.querySelector('.tab[data-tab="resources"]');
-      const noTooltip = tokenConfig.object.getFlag(Utils.moduleName, 'noTooltip');
-      const noTooltipCheckboxElement = TTAUtils.htmlToElement(`
+      const noTooltip = tokenConfig.object.getFlag(MODULE_NAME, 'noTooltip');
+      const noTooltipCheckboxElement = htmlToElement(`
         <div class="form-group">
             <label>No tooltip</label>
-            <input type="checkbox" name="${Utils.moduleName}-no-tooltip" data-dtype="Boolean" ${noTooltip && 'checked'}>
+            <input type="checkbox" name="${MODULE_NAME}-no-tooltip" data-dtype="Boolean" ${noTooltip && 'checked'}>
         </div>`);
       resources.append(noTooltipCheckboxElement);
 
       noTooltipCheckboxElement.addEventListener('change', (ev) => {
         const isChecked = ev?.target?.checked || false;
-        return tokenConfig.object.setFlag(Utils.moduleName, 'noTooltip', isChecked);
+        return tokenConfig.object.setFlag(MODULE_NAME, 'noTooltip', isChecked);
       });
     });
   },
 };
 
 function registerHandlers() {
-  Object.values(hookHandlers).map((handlers) => handlers());
+  Object.values(hookHandlers).forEach((handlers) => handlers());
 }
 
-export default { registerHandlers };
+export { registerHandlers };

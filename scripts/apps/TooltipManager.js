@@ -1,8 +1,10 @@
 import SettingsUtil from '../settings/SettingsUtil.js';
-import { CONSTANTS } from '../enums/Constants.js';
-import Utils from '../Utils.js';
+import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import TooltipEditor from './TooltipEditor.js';
 import DataManager from './DataManager.js';
+import {
+  debug, clone, generateRandomColor, MODULE_NAME,
+} from '../TTAUtils/TTAUtils.js';
 
 export default class TooltipManager extends FormApplication {
   static get defaultOptions() {
@@ -10,8 +12,8 @@ export default class TooltipManager extends FormApplication {
       ...super.defaultOptions,
       title: 'Tooltip manager',
       id: 'tooltip-manager',
-      template: CONSTANTS.APPS.TOOLTIP_MANAGER,
-      width: CONSTANTS.APPS.TOOLTIP_MANAGER_WIDTH,
+      template: TTAConstants.APPS.TOOLTIP_MANAGER,
+      width: TTAConstants.APPS.TOOLTIP_MANAGER_WIDTH,
       submitOnChange: true,
       closeOnSubmit: false,
       submitOnClose: false,
@@ -32,12 +34,12 @@ export default class TooltipManager extends FormApplication {
   // use accent color for everything - false
   // token dispositions - always adding the latest one
   _createDefaultStatics(staticSettings, isPlayer, tokenDispositions) {
-    const name = CONSTANTS.SETTING_KEYS.DISPLAY_NAMES_IN_TOOLTIP;
-    const accentColor = CONSTANTS.SETTING_KEYS.ACCENT_COLOR;
-    const useAccentEverywhere = CONSTANTS.SETTING_KEYS.USE_ACCENT_COLOR_FOR_EVERYTHING;
-    const tokenDis = CONSTANTS.SETTING_KEYS.TOKEN_DISPOSITIONS;
+    const name = TTAConstants.SETTING_KEYS.DISPLAY_NAMES_IN_TOOLTIP;
+    const accentColor = TTAConstants.SETTING_KEYS.ACCENT_COLOR;
+    const useAccentEverywhere = TTAConstants.SETTING_KEYS.USE_ACCENT_COLOR_FOR_EVERYTHING;
+    const tokenDis = TTAConstants.SETTING_KEYS.TOKEN_DISPOSITIONS;
     if (!(name in staticSettings)) staticSettings[name] = isPlayer ? tokenDispositions?.[0] : true;
-    if (!(accentColor in staticSettings)) staticSettings[accentColor] = Utils.randomColorPicker();
+    if (!(accentColor in staticSettings)) staticSettings[accentColor] = generateRandomColor();
     if (!(useAccentEverywhere in staticSettings)) staticSettings[useAccentEverywhere] = false;
     staticSettings[tokenDis] = tokenDispositions;
   }
@@ -69,10 +71,10 @@ export default class TooltipManager extends FormApplication {
     const returnGmItems = [];
     const returnPlayerItems = [];
     const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
-    const gmDispositions = Utils.clone(tokenDispositions);
-    const playerDispositions = [CONSTANTS.APPS.OWNED_DISPOSITION, ...Utils.clone(tokenDispositions)];
-    const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
-    const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+    const gmDispositions = clone(tokenDispositions);
+    const playerDispositions = [TTAConstants.APPS.OWNED_DISPOSITION, ...clone(tokenDispositions)];
+    const gmSettings = this._getSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS);
+    const playerSettings = this._getSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS);
     // get the settings for the current actorType
     const gmSettingsForType = gmSettings[actorType] || {};
     const playerSettingsForType = playerSettings[actorType] || {};
@@ -97,9 +99,9 @@ export default class TooltipManager extends FormApplication {
     playerSettingsForType.static = playerStatic;
     gmSettings[actorType] = gmSettingsForType;
     playerSettings[actorType] = playerSettingsForType;
-    await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
-    await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
-    Utils.debug({ gmSettings: gmSettingsForType, playerSettings: playerSettingsForType });
+    await this._setSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS, gmSettings);
+    await this._setSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
+    debug({ gmSettings: gmSettingsForType, playerSettings: playerSettingsForType });
   }
 
   // get a value from Settings
@@ -125,7 +127,7 @@ export default class TooltipManager extends FormApplication {
   // game.settings.set('token-tooltip-alt', 'actors', [])
   async _getActorsList() {
     const systemActors = game?.system?.entityTypes?.Actor || [];
-    const actors = this._getSetting(CONSTANTS.SETTING_KEYS.ACTORS);
+    const actors = this._getSetting(TTAConstants.SETTING_KEYS.ACTORS);
     const returnActors = [];
     if (!systemActors.length) return returnActors;
     const check = actors.length > 0;
@@ -133,7 +135,7 @@ export default class TooltipManager extends FormApplication {
     // happen only the first time this menu is opened
     if (!check) {
       const defaultActor = {
-        ...this._actorPreset(CONSTANTS.APPS.TOOLTIP_DEFAULT_ACTOR_ID),
+        ...this._actorPreset(TTAConstants.APPS.TOOLTIP_DEFAULT_ACTOR_ID),
         isDefault: true,
       };
       actors.push(defaultActor);
@@ -160,13 +162,13 @@ export default class TooltipManager extends FormApplication {
     // tooltips from that one
     for (let i = 0; i < actors.length; i++) {
       const actor = actors[i];
-      if (actor.id !== CONSTANTS.APPS.TOOLTIP_DEFAULT_ACTOR_ID && (actor.removed || !systemActors.includes(actor.id))) actor.removed = true;
+      if (actor.id !== TTAConstants.APPS.TOOLTIP_DEFAULT_ACTOR_ID && (actor.removed || !systemActors.includes(actor.id))) actor.removed = true;
       else {
         await this._generateSettingsListForActorType(actor.id);
         returnActors.push(actor);
       }
     }
-    await this._setSetting(CONSTANTS.SETTING_KEYS.ACTORS, returnActors);
+    await this._setSetting(TTAConstants.SETTING_KEYS.ACTORS, returnActors);
     return returnActors;
   }
 
@@ -174,7 +176,7 @@ export default class TooltipManager extends FormApplication {
   async getData(options) {
     const actorList = await this._getActorsList();
     return {
-      moduleName: Utils.moduleName,
+      moduleName: MODULE_NAME,
       actors: actorList,
     };
   }
@@ -185,7 +187,7 @@ export default class TooltipManager extends FormApplication {
   // to keep the UX nice
   async _updateObject(event, formData) {
     const expObj = expandObject(formData);
-    const actors = this._getSetting(CONSTANTS.SETTING_KEYS.ACTORS);
+    const actors = this._getSetting(TTAConstants.SETTING_KEYS.ACTORS);
     for (const key in expObj) {
       if (!expObj.hasOwnProperty(key)) continue;
       const values = expObj[key];
@@ -197,8 +199,8 @@ export default class TooltipManager extends FormApplication {
         }
       }
     }
-    Utils.debug(actors);
-    await this._setSetting(CONSTANTS.SETTING_KEYS.ACTORS, actors);
+    debug(actors);
+    await this._setSetting(TTAConstants.SETTING_KEYS.ACTORS, actors);
   }
 
   // the click event for the edit buttons
@@ -208,25 +210,25 @@ export default class TooltipManager extends FormApplication {
     if (!actorType) return;
     const te = new TooltipEditor({ actorType }, {
       title: actorType.toUpperCase(),
-      classes: [`${Utils.moduleName}-tooltip-editor-window`],
+      classes: [`${MODULE_NAME}-tooltip-editor-window`],
       id: `tooltip-editor-${actorType}`,
     });
     te.render(true);
-    Utils.debug(`Opened an editor for: ${actorType}.`);
+    debug(`Opened an editor for: ${actorType}.`);
   }
 
   _openDataManager(ev) {
     const type = $(ev.target).closest('button').attr('name');
     const dm = new DataManager({ type });
     dm.render(true);
-    Utils.debug('Opened a data manager window.');
+    debug('Opened a data manager window.');
   }
 
   // adds the events for the open editor buttons
   activateListeners($html) {
     super.activateListeners($html);
-    $html.find(`.${Utils.moduleName}-row_button.edit`).on('click', this._openTooltipEditor);
-    $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._openDataManager);
-    $html.find(`.${Utils.moduleName}-footer_button.export`).on('click', this._openDataManager);
+    $html.find(`.${MODULE_NAME}-row_button.edit`).on('click', this._openTooltipEditor);
+    $html.find(`.${MODULE_NAME}-footer_button.import`).on('click', this._openDataManager);
+    $html.find(`.${MODULE_NAME}-footer_button.export`).on('click', this._openDataManager);
   }
 }

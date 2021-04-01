@@ -16,6 +16,7 @@
         "max-len": "off",
         "no-underscore-dangle": "off",
         "class-methods-use-this": "off",
-        "prefer-rest-params": "off"
+        "prefer-rest-params": "off",
+        "import/prefer-default-export": "off"
     }
 }

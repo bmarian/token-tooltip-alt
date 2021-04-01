@@ -3,7 +3,7 @@ declare const VTT: string;
 declare const WEBSITE_URL: string;
 
 /**
- * The global CONSTANTS object
+ * The global TTAConstants object
  */
 declare const CONST: {
 	vtt: 'Foundry VTT';

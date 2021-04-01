@@ -1,15 +1,16 @@
 import SettingsUtil from '../settings/SettingsUtil.js';
-import { CONSTANTS } from '../enums/Constants.js';
-import Utils from '../Utils.js';
-
+import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import AdvancedEditor from './AdvancedEditor.js';
+import {
+  clone, debug, generateRandomColor, MODULE_NAME,
+} from '../TTAUtils/TTAUtils.js';
 
 export default class TooltipEditor extends FormApplication {
   static get defaultOptions() {
     return {
       ...super.defaultOptions,
-      template: CONSTANTS.APPS.TOOLTIP_EDITOR,
-      width: CONSTANTS.APPS.TOOLTIP_EDITOR_WIDTH,
+      template: TTAConstants.APPS.TOOLTIP_EDITOR,
+      width: TTAConstants.APPS.TOOLTIP_EDITOR_WIDTH,
       resizable: true,
       submitOnChange: false,
       closeOnSubmit: false,
@@ -28,9 +29,9 @@ export default class TooltipEditor extends FormApplication {
   // and a boolean if it is the default type
   _getSettingLists() {
     const type = this?.object?.actorType;
-    const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS)[type] || {};
-    const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS)[type] || {};
-    return { gmSettings, playerSettings, isDefault: type === CONSTANTS.APPS.TOOLTIP_DEFAULT_ACTOR_ID };
+    const gmSettings = this._getSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS)[type] || {};
+    const playerSettings = this._getSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS)[type] || {};
+    return { gmSettings, playerSettings, isDefault: type === TTAConstants.APPS.TOOLTIP_DEFAULT_ACTOR_ID };
   }
 
   // get a value from Settings
@@ -47,7 +48,7 @@ export default class TooltipEditor extends FormApplication {
   getData(options) {
     const { gmSettings, playerSettings, isDefault } = this._getSettingLists();
     return {
-      moduleName: Utils.moduleName,
+      moduleName: MODULE_NAME,
       gmSettings,
       playerSettings,
       isDefault,
@@ -58,7 +59,7 @@ export default class TooltipEditor extends FormApplication {
   _getAssociatedTable($button, $context) {
     const disposition = $button.attr('disposition');
     const dType = $button.attr('dType');
-    const $table = $context.find(`.${Utils.moduleName}-table[disposition=${disposition}][dType=${dType}]`);
+    const $table = $context.find(`.${MODULE_NAME}-table[disposition=${disposition}][dType=${dType}]`);
     return { disposition, dType, $table };
   }
 
@@ -71,31 +72,31 @@ export default class TooltipEditor extends FormApplication {
     if (!$context.length) { return; }
     const { disposition, dType, $table } = this._getAssociatedTable($button, $context);
     const $tbody = $table.find('tbody');
-    const $rows = $tbody.find(`.${Utils.moduleName}-row`);
+    const $rows = $tbody.find(`.${MODULE_NAME}-row`);
     const lastIndex = $rows.length ? parseInt($rows.last().attr('index'), 10) || 0 : 0;
     const data = {
-      moduleName: Utils.moduleName,
+      moduleName: MODULE_NAME,
       index: lastIndex + 1,
       disposition,
       type: dType,
       item: {
-        color: Utils.randomColorPicker(),
+        color: generateRandomColor(),
       },
     };
-    const $newRow = $(await renderTemplate(CONSTANTS.TEMPLATES.TOOLTIP_EDITOR_TABLE_ROW, data));
+    const $newRow = $(await renderTemplate(TTAConstants.TEMPLATES.TOOLTIP_EDITOR_TABLE_ROW, data));
     $tbody.append($newRow);
     // Make this... not shit... maybe...
     // Future me here... this is not what I was talking about... but It's future future me problem now...
     // Future future me... I ended up just copy pasting this from the old settings
-    $newRow.find(`.${Utils.moduleName}-row_button.delete`).on('click', () => {
-      $tbody.find(`.${Utils.moduleName}-row[index=${lastIndex + 1}]`).remove();
+    $newRow.find(`.${MODULE_NAME}-row_button.delete`).on('click', () => {
+      $tbody.find(`.${MODULE_NAME}-row[index=${lastIndex + 1}]`).remove();
     });
-    $newRow.find(`.${Utils.moduleName}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
+    $newRow.find(`.${MODULE_NAME}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
   }
 
   // the default delete event, just deletes the closest row
   _deleteButtonClickEvent() {
-    $(this).closest(`.${Utils.moduleName}-row`).remove();
+    $(this).closest(`.${MODULE_NAME}-row`).remove();
   }
 
   // opens the advanced editor
@@ -105,22 +106,22 @@ export default class TooltipEditor extends FormApplication {
     if (!target) { return; }
     const te = new AdvancedEditor({ target });
     te.render(true);
-    Utils.debug(`Opened an advanced editor for: ${target.attr('name')}.`);
+    debug(`Opened an advanced editor for: ${target.attr('name')}.`);
   }
 
   // the default delete event, just deletes the closest row
   async _importFromDefaultClickEvent() {
     const type = this?.object?.actorType;
-    const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
-    const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
-    gmSettings[type] = gmSettings[CONSTANTS.SYSTEM_DEFAULT];
-    playerSettings[type] = playerSettings[CONSTANTS.SYSTEM_DEFAULT];
+    const gmSettings = this._getSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS);
+    const playerSettings = this._getSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS);
+    gmSettings[type] = gmSettings[TTAConstants.SYSTEM_DEFAULT];
+    playerSettings[type] = playerSettings[TTAConstants.SYSTEM_DEFAULT];
     // save the new settings
-    await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
-    await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
+    await this._setSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS, gmSettings);
+    await this._setSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
     // rerender the application to make it get the new data
     this.render();
-    Utils.debug({ gmSettings, playerSettings });
+    debug({ gmSettings, playerSettings });
   }
 
   // clone the settings from the above table
@@ -130,11 +131,11 @@ export default class TooltipEditor extends FormApplication {
     const disposition = $button.attr('disposition');
     // save the data first because we take it from the object in the backend
     this.submit({}).then(() => {
-      const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+      const data = this._getSetting(dType === 'gm' ? TTAConstants.SETTING_KEYS.GM_SETTINGS : TTAConstants.SETTING_KEYS.PLAYER_SETTINGS);
       const settings = data[this?.object?.actorType];
       const { items } = settings;
       const from = items.find((i) => i.disposition === disposition);
-      this._setSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD, from?.items).then(() => Utils.debug(from?.items));
+      this._setSetting(TTAConstants.SETTING_KEYS.CLIPBOARD, from?.items).then(() => debug(from?.items));
     });
   }
 
@@ -143,17 +144,17 @@ export default class TooltipEditor extends FormApplication {
     const $button = $(ev.target).closest('button');
     const dType = $button.attr('dType');
     const disposition = $button.attr('disposition');
-    const data = this._getSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+    const data = this._getSetting(dType === 'gm' ? TTAConstants.SETTING_KEYS.GM_SETTINGS : TTAConstants.SETTING_KEYS.PLAYER_SETTINGS);
     const settings = data[this?.object?.actorType];
     const { items } = settings;
     const to = items.find((i) => i.disposition === disposition);
-    const clipboardData = this._getSetting(CONSTANTS.SETTING_KEYS.CLIPBOARD);
+    const clipboardData = this._getSetting(TTAConstants.SETTING_KEYS.CLIPBOARD);
     if (!clipboardData || !clipboardData.length) { return; }
     to.items = clipboardData;
-    await this._setSetting(dType === 'gm' ? CONSTANTS.SETTING_KEYS.GM_SETTINGS : CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, data);
+    await this._setSetting(dType === 'gm' ? TTAConstants.SETTING_KEYS.GM_SETTINGS : TTAConstants.SETTING_KEYS.PLAYER_SETTINGS, data);
     // render the form to save the new data
     this.render();
-    Utils.debug({ clipboardData });
+    debug({ clipboardData });
   }
 
   // add button events for the ones generated when the application is opened
@@ -179,24 +180,24 @@ export default class TooltipEditor extends FormApplication {
       });
     };
     // add sortable handlers
-    $html.find(`.${Utils.moduleName}-table tbody`).each((index, tbody) => {
+    $html.find(`.${MODULE_NAME}-table tbody`).each((index, tbody) => {
       const dragOverHandlerWithBody = dragOverHandler(tbody);
       new Sortable(tbody, {
         scroll: true,
-        handle: `.${Utils.moduleName}-sort-handler`,
-        draggable: `.${Utils.moduleName}-row`,
+        handle: `.${MODULE_NAME}-sort-handler`,
+        draggable: `.${MODULE_NAME}-row`,
         animation: 150,
         onEnd: dragOverHandlerWithBody,
       });
     });
-    $html.find(`.${Utils.moduleName}-button.add`).on('click', this._addButtonClickEvent.bind(this));
-    $html.find(`.${Utils.moduleName}-row_button.delete`).on('click', this._deleteButtonClickEvent);
-    $html.find(`.${Utils.moduleName}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
-    $html.find(`.${Utils.moduleName}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
-    $html.find(`.${Utils.moduleName}-button.copy`).on('click', this._copyToClipboard.bind(this));
-    $html.find(`.${Utils.moduleName}-button.paste`).on('click', this._pasteFromClipboard.bind(this));
+    $html.find(`.${MODULE_NAME}-button.add`).on('click', this._addButtonClickEvent.bind(this));
+    $html.find(`.${MODULE_NAME}-row_button.delete`).on('click', this._deleteButtonClickEvent);
+    $html.find(`.${MODULE_NAME}-row_button.advanced-editor`).on('click', this._openAdvancedEditor);
+    $html.find(`.${MODULE_NAME}-footer_button.import`).on('click', this._importFromDefaultClickEvent.bind(this));
+    $html.find(`.${MODULE_NAME}-button.copy`).on('click', this._copyToClipboard.bind(this));
+    $html.find(`.${MODULE_NAME}-button.paste`).on('click', this._pasteFromClipboard.bind(this));
     const settingsList = this._getSettingLists();
-    $html.find(`.${Utils.moduleName}-row_tracked-value textarea`).each((_0, textarea) => {
+    $html.find(`.${MODULE_NAME}-row_tracked-value textarea`).each((_0, textarea) => {
       const $textarea = $(textarea);
       const [type, _1, disposition, _2, index] = $textarea.attr('name').split('.'); // e.g. gm.items.HOSTILE.value.0
       const settings = type === 'gm' ? settingsList.gmSettings : settingsList.playerSettings;
@@ -270,17 +271,17 @@ export default class TooltipEditor extends FormApplication {
   async _updateObject(event, formData) {
     const expObj = expandObject(formData);
     const type = this?.object?.actorType;
-    const gmSettings = this._getSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS);
-    const playerSettings = this._getSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS);
+    const gmSettings = this._getSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS);
+    const playerSettings = this._getSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS);
     // build the items arrays
     const { gm, player } = expObj;
     const gmItems = this._buildSettingsArray(gm.items);
     const playerItems = this._buildSettingsArray(player.items);
     // re-add the tokenDispositions to the players static settings
     const tokenDispositions = Object.keys(CONST?.TOKEN_DISPOSITIONS)?.reverse();
-    const gmDispositions = Utils.clone(tokenDispositions);
-    const playerDispositions = [CONSTANTS.APPS.OWNED_DISPOSITION, ...Utils.clone(tokenDispositions)];
-    const tokenDis = CONSTANTS.SETTING_KEYS.TOKEN_DISPOSITIONS;
+    const gmDispositions = clone(tokenDispositions);
+    const playerDispositions = [TTAConstants.APPS.OWNED_DISPOSITION, ...clone(tokenDispositions)];
+    const tokenDis = TTAConstants.SETTING_KEYS.TOKEN_DISPOSITIONS;
     const playerStatic = player.static;
     playerStatic[tokenDis] = gmDispositions;
     const gmStatic = gm.static;
@@ -295,9 +296,9 @@ export default class TooltipEditor extends FormApplication {
       static: playerStatic,
     };
     // save the new settings
-    await this._setSetting(CONSTANTS.SETTING_KEYS.GM_SETTINGS, gmSettings);
-    await this._setSetting(CONSTANTS.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
+    await this._setSetting(TTAConstants.SETTING_KEYS.GM_SETTINGS, gmSettings);
+    await this._setSetting(TTAConstants.SETTING_KEYS.PLAYER_SETTINGS, playerSettings);
     ui?.notifications?.info(`Settings updated for ${type}.`);
-    Utils.debug({ gmSettings, playerSettings });
+    debug({ gmSettings, playerSettings });
   }
 }

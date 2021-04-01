@@ -1,10 +1,8 @@
-const CONSTANTS = {
-  MODULE_NAME: 'token-tooltip-alt',
-  MODULE_TITLE: 'Token Tooltip Alt',
-  DEBUG: false,
-  TRACE: true,
-  CONSOLE_COLORS: ['background: #222; color: #bada55', 'color: #fff'],
-};
+const MODULE_NAME = 'token-tooltip-alt';
+const MODULE_TITLE = 'Token Tooltip Alt';
+const DEBUG = false;
+const TRACE = true;
+const CONSOLE_COLORS = ['background: #222; color: #bada55', 'color: #fff'];
 
 /**
  * Generates the console output
@@ -14,8 +12,8 @@ const CONSTANTS = {
  */
 function consoleOutput(output) {
   return [
-    `%c${CONSTANTS.MODULE_TITLE} %c|`,
-    ...CONSTANTS.CONSOLE_COLORS,
+    `%c${MODULE_TITLE} %c|`,
+    ...CONSOLE_COLORS,
     ...output,
   ];
 }
@@ -24,7 +22,7 @@ function consoleOutput(output) {
 /**
  * console.log the output with the module styling
  *
- * @param {string[]} output
+ * @param {*[]} output
  */
 function consoleLog(output) {
   console.log(...consoleOutput(output));
@@ -33,7 +31,7 @@ function consoleLog(output) {
 /**
  * Groups the output with a console.trace
  *
- * @param {string[]} output
+ * @param {*[]} output
  */
 function consoleTrace(output) {
   console.groupCollapsed(...consoleOutput(output));
@@ -45,13 +43,13 @@ function consoleTrace(output) {
 /**
  * console.log or
  *
- * @param {string} output
+ * @param {*} output
  */
 function debug(...output) {
-  const isDebugOptionTrue = game.settings.get(CONSTANTS.MODULE_NAME, 'debugOutput');
-  if (!(CONSTANTS.DEBUG || isDebugOptionTrue)) return;
+  const isDebugOptionTrue = game.settings.get(MODULE_NAME, 'debugOutput');
+  if (!(DEBUG || isDebugOptionTrue)) return;
 
-  if (CONSTANTS.TRACE) consoleTrace(output); else consoleLog(output);
+  if (TRACE) consoleTrace(output); else consoleLog(output);
 }
 
 /**
@@ -71,7 +69,7 @@ function clone(obj) {
  * @return {string}
  */
 function i18n(path) {
-  return game.i18n.localize(`${CONSTANTS.MODULE_NAME}.${path}`);
+  return game.i18n.localize(`${MODULE_NAME}.${path}`);
 }
 
 /**
@@ -95,12 +93,12 @@ function htmlToElement(html) {
   return template.content.firstChild;
 }
 
-export default {
-  MODULE_NAME: CONSTANTS.MODULE_NAME,
-  MODULE_TITLE: CONSTANTS.MODULE_TITLE,
+export {
   debug,
   clone,
   i18n,
   generateRandomColor,
   htmlToElement,
+  MODULE_NAME,
+  MODULE_TITLE,
 };

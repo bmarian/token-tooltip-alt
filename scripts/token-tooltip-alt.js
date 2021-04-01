@@ -1,3 +1,3 @@
-import TTAHooks from './TTAFoundryApiIntegration/TTAHooks.js';
+import { registerHandlers } from './TTAFoundryApiIntegration/TTAHooks.js';
 
-TTAHooks.registerHandlers();
+registerHandlers();
