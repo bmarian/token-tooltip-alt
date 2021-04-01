@@ -1,0 +1,33 @@
+<div class="{{moduleName}}-container gm">
+    <!-- Generates the tables of items -->
+    {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table.hbs' settings=gmSettings.items type='gm'}}
+
+    <h1>{{localize 'token-tooltip-alt.tooltipEditorGm.settingsHeader'}}</h1>
+
+    <!-- Display name in tooltip -->
+    <div class="form-group">
+        <label>{{localize 'token-tooltip-alt.tooltipEditorGm.settings.displayName.name'}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="gm.static.displayNameInTooltip" data-dtype="Boolean" {{#if gmSettings.static.displayNameInTooltip}}checked{{/if}}>
+        </div>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorGm.settings.displayName.hint'}}</p>
+    </div>
+
+    <!-- Use accent color everywhere -->
+    <div class="form-group">
+        <label>{{localize 'token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.name'}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="gm.static.useAccentEverywhere" data-dtype="Boolean" {{#if gmSettings.static.useAccentEverywhere}}checked{{/if}}>
+        </div>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorGm.settings.useAccentEverywhere.hint'}}</p>
+    </div>
+
+    <!-- Accent color -->
+    <div class="form-group">
+        <label>{{localize 'token-tooltip-alt.tooltipEditorGm.settings.accentColor.name'}}</label>
+        <div class="form-fields">
+            <input type="color" name="gm.static.accentColor" data-dtype="String" value="{{gmSettings.static.accentColor}}">
+        </div>
+        <p class="notes">{{localize 'token-tooltip-alt.tooltipEditorGm.settings.accentColor.hint'}}</p>
+    </div>
+</div>

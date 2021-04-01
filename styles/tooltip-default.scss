@@ -1,0 +1,37 @@
+.#{$module-name}-tooltip-container {
+  &.default {
+    background: url("../../../ui/parchment.jpg") repeat;
+
+
+    & .#{$module-name}-tooltip-item {
+      &.title {
+        border-bottom: 1px solid;
+      }
+
+      & span {
+        color: black;
+      }
+    }
+
+    &.dark {
+      background: url("../../../ui/denim075.png") repeat;
+      box-shadow: 0 0 20px #000;
+
+
+      & .#{$module-name}-tooltip-item {
+        &.title {
+          border-bottom: 2px solid;
+
+          & span {
+            color: white;
+          }
+        }
+
+        & span {
+          color: white;
+        }
+      }
+
+    }
+  }
+}

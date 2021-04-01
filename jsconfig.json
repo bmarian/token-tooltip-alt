@@ -1,0 +1,12 @@
+{
+    "typeAcquisition": {
+        "include": [
+            "jquery",
+            "foundry-pc-types",
+            "sortablejs",
+            "mathjs",
+            "codemirror",
+            "lodash"
+        ]
+    }
+}

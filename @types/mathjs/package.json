@@ -1,0 +1,76 @@
+{
+  "_from": "@types/mathjs",
+  "_id": "@types/mathjs@6.0.11",
+  "_inBundle": false,
+  "_integrity": "sha512-q9B8ZreO41L38iTY76bCZEtAqzeRs4mNIOZpZ1sLSlcYgvgfFrnf8y8qfmas0tVWrsODjmQbQJFD6RJJJCqJbQ==",
+  "_location": "/@types/mathjs",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@types/mathjs",
+    "name": "@types/mathjs",
+    "escapedName": "@types%2fmathjs",
+    "scope": "@types",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/mathjs/-/mathjs-6.0.11.tgz",
+  "_shasum": "bf24c1ed875252274008d2c373bad07e0348adfb",
+  "_spec": "@types/mathjs",
+  "_where": "C:\\Users\\Marian\\Desktop\\New folder",
+  "bugs": {
+    "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Ilya Shestakov",
+      "url": "https://github.com/siavol"
+    },
+    {
+      "name": "Andy Patterson",
+      "url": "https://github.com/andnp"
+    },
+    {
+      "name": "Brad Besserman",
+      "url": "https://github.com/bradbesserman"
+    },
+    {
+      "name": "Pawel Krol",
+      "url": "https://github.com/pawkrol"
+    },
+    {
+      "name": "Charlee Li",
+      "url": "https://github.com/charlee"
+    },
+    {
+      "name": "Mark Wiemer",
+      "url": "https://github.com/mark-wiemer"
+    }
+  ],
+  "dependencies": {
+    "decimal.js": "^10.0.0"
+  },
+  "deprecated": false,
+  "description": "TypeScript definitions for mathjs",
+  "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped#readme",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/mathjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "directory": "types/mathjs"
+  },
+  "scripts": {},
+  "typeScriptVersion": "3.4",
+  "types": "index.d.ts",
+  "typesPublisherContentHash": "331252ea6ef36a07e6214ea5dabc70139aa8ce787c2d318a724efe500c8e4500",
+  "version": "6.0.11"
+}

@@ -1,31 +1,26 @@
 {
-  "private": true,
   "name": "token-tooltip-alt",
-  "version": "2.1.4",
-  "description": "",
-  "scripts": {
-    "package": "gulp package",
-    "build": "gulp build && gulp link",
-    "build:watch": "gulp watch",
-    "clean": "gulp clean && gulp link --clean",
-    "update": "npm install --save-dev gitlab:foundry-projects/foundry-pc/foundry-pc-types"
+  "version": "3.0.0",
+  "description": "A module that adds a tooltip next to the currently hovered token to show some useful information for players and DMs.",
+  "main": "module.json",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmarian/token-tooltip-alt.git"
   },
-  "author": "",
-  "license": "",
+  "author": {
+    "name": "bmarian",
+    "discord": "Marian#8010",
+    "url": "https://github.com/bmarian"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bmarian/token-tooltip-alt/issues"
+  },
+  "homepage": "https://github.com/bmarian/token-tooltip-alt#readme",
   "devDependencies": {
-    "archiver": "^5.0.2",
-    "chalk": "^4.1.0",
-    "foundry-pc-types": "gitlab:foundry-projects/foundry-pc/foundry-pc-types",
-    "@types/jquery": "^3.5.5",
-    "fs-extra": "^9.0.1",
-    "gulp": "^4.0.2",
-    "gulp-git": "^2.10.1",
-    "gulp-less": "^4.0.1",
-    "gulp-sass": "^4.1.0",
-    "gulp-typescript": "^6.0.0-alpha.1",
-    "json-stringify-pretty-compact": "^2.0.0",
-    "sass": "^1.26.11",
-    "typescript": "^4.0.3",
-    "yargs": "^16.0.3"
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }

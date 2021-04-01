@@ -1,0 +1,31 @@
+<form class="flexcol">
+
+    <nav class="sheet-tabs tabs" data-group="user-types">
+        <a class="item" data-tab="gm"><i class="fas fa-book-reader"></i> {{localize 'token-tooltip-alt.tooltipEditorGm.gmHeader'}}</a>
+        <a class="item" data-tab="player"><i class="fas fa-users"></i> {{localize 'token-tooltip-alt.tooltipEditorPlayer.playerHeader'}}</a>
+    </nav>
+
+    <section class="content">
+        <div class="tab" data-group="user-types" data-tab="gm">
+            <!-- Left side of the screen reserved for GM settings -->
+            {{> 'modules/token-tooltip-alt/templates/tooltip-editor-gm.hbs' this}}
+        </div>
+
+        <div class="tab" data-group="user-types" data-tab="player">
+            <!-- Right side of the screen reserved for Player settings -->
+            {{> 'modules/token-tooltip-alt/templates/tooltip-editor-player.hbs' this}}
+        </div>
+    </section>
+
+    <footer class="sheet-footer flexrow">
+        <button type="submit" name="submit" class="{{moduleName}}-footer_button submit">
+            <i class="fa fa-check"></i> <span>{{localize 'token-tooltip-alt.buttons.save'}}</span>
+        </button>
+
+        {{#if (eq isDefault false)}}
+            <button type="button" name="import" class="{{moduleName}}-footer_button import">
+                <i class="fas fa-edit"></i> <span>{{localize 'token-tooltip-alt.buttons.importFromDefault'}}</span>
+            </button>
+        {{/if}}
+    </footer>
+</form>

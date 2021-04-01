@@ -1,0 +1,30 @@
+<tr class="{{moduleName}}-row" index="{{index}}">
+    <!-- name example: type = gm, disposition = neutral => gm.items.neutral.color.1 -->
+    <td class="{{moduleName}}-row_sort">
+        <span class="{{moduleName}}-sort-handler"><i class="fa fa-bars"></i></span>
+    </td>
+    <td class="{{moduleName}}-row_color">
+        <input type="color" name="{{type}}.items.{{disposition}}.color.{{index}}" value="{{item.color}}" data-dtype="String">
+    </td>
+    <td class="{{moduleName}}-row_icon">
+        <input type="text" name="{{type}}.items.{{disposition}}.icon.{{index}}" value="{{item.icon}}" data-dtype="String">
+    </td>
+    <td class="{{moduleName}}-row_tracked-value">
+        <textarea name="{{type}}.items.{{disposition}}.value.{{index}}" data-dtype="String"></textarea>
+        <button type="button" class="{{moduleName}}-row_button advanced-editor">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+    </td>
+    <td class="{{moduleName}}-row_isFunction">
+        <input type="checkbox" name="{{type}}.items.{{disposition}}.isFunction.{{index}}" data-dtype="Boolean" {{#if item.isFunction}}checked{{/if}}>
+    </td>
+    <td class="{{moduleName}}-row_expression">
+        <input type="checkbox" name="{{type}}.items.{{disposition}}.expression.{{index}}" data-dtype="Boolean" {{#if item.expression}}checked{{/if}}>
+    </td>
+    <td class="{{moduleName}}-row_isNumber">
+        <input type="checkbox" name="{{type}}.items.{{disposition}}.isNumber.{{index}}" data-dtype="Boolean" {{#if item.isNumber}}checked{{/if}}>
+    </td>
+    <td class="{{moduleName}}-row_delete">
+        <button class="{{moduleName}}-row_button delete {{type}}.items.{{disposition}}" type="button" title="Delete"><i class="fa fa-trash"></i></button>
+    </td>
+</tr>

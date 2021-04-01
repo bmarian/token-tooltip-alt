@@ -1,0 +1,37 @@
+{{#each settings}}
+    <h2>{{disposition}}</h2>
+
+    <div class="form-group">
+        <table class="{{../moduleName}}-table t_{{../type}} d_{{disposition}}" dType="{{../type}}" disposition="{{disposition}}">
+            <thead>
+            <tr>
+                <th scope="col" class="{{../moduleName}}-col_sort_column"></th>
+                <th scope="col" class="{{../moduleName}}-col_color">{{localize 'token-tooltip-alt.tooltipEditor.col.color'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_icon">{{localize 'token-tooltip-alt.tooltipEditor.col.icon'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_value">{{localize 'token-tooltip-alt.tooltipEditor.col.value'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_isFunction">{{localize 'token-tooltip-alt.tooltipEditor.col.isFunction'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_expression">{{localize 'token-tooltip-alt.tooltipEditor.col.expression'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_isNumber">{{localize 'token-tooltip-alt.tooltipEditor.col.isNumber'}}</th>
+                <th scope="col" class="{{../moduleName}}-col_delete">{{localize 'token-tooltip-alt.tooltipEditor.col.delete'}}</th>
+            </tr>
+            </thead>
+
+            <tbody class="{{../moduleName}}-tbody_{{../type}}_{{disposition}}">
+            {{#each items}}
+                {{> 'modules/token-tooltip-alt/templates/tooltip-editor-table-row.hbs' index=@index moduleName=../../moduleName disposition=../disposition type=../../type item=this}}
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group">
+        <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.add" class="{{../moduleName}}-button add d_{{disposition}}">
+            <i class="fa fa-plus"></i> <span>{{localize 'token-tooltip-alt.buttons.add'}}</span>
+        </button>
+        <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.copy" class="{{../moduleName}}-button copy d_{{disposition}}">
+            <i class="fas fa-clipboard"></i> <span>{{localize 'token-tooltip-alt.buttons.copy'}}</span>
+        </button>
+        <button type="button" dType="{{../type}}" disposition="{{disposition}}" name="{{../type}}.items.{{disposition}}.paste" class="{{../moduleName}}-button paste d_{{disposition}}">
+            <i class="fas fa-paste"></i> <span>{{localize 'token-tooltip-alt.buttons.paste'}}</span>
+        </button>
+    </div>
+{{/each}}
