@@ -54,7 +54,8 @@ const TTAConstants = {
 
 function getSystemTheme() {
   const system = game.system.id;
-  return TTAConstants.SYSTEM_DEFAULT_THEMES[system] || TTAConstants.SYSTEM_DEFAULT_THEMES[TTAConstants.SYSTEM_DEFAULT];
+  return TTAConstants.SYSTEM_DEFAULT_THEMES[system]
+    || TTAConstants.SYSTEM_DEFAULT_THEMES[TTAConstants.SYSTEM_DEFAULT];
 }
 
 export {

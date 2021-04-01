@@ -104,12 +104,12 @@ export default class TooltipManager extends FormApplication {
     debug({ gmSettings: gmSettingsForType, playerSettings: playerSettingsForType });
   }
 
-  // get a value from TTASettings
+  // get a value from Settings
   _getSetting(key) {
     return getSetting(key);
   }
 
-  // get a value from TTASettings
+  // get a value from Settings
   async _setSetting(key, value) {
     return setSettingSync(key, value);
   }

@@ -14,7 +14,7 @@ class TooltipFactory {
     return TooltipFactory._instance;
   }
 
-  // get a value from TTASettings
+  // get a value from Settings
   _getSetting(setting) {
     return getSetting(setting);
   }
@@ -22,12 +22,6 @@ class TooltipFactory {
   // get the positioning from settings, and if surprise pick a random possible position
   _getWhere() {
     const where = this._getSetting(this._settingKeys.TOOLTIP_POSITION) || 'right';
-    const isIsometricActive = game?.modules?.get('grape_juice-isometrics')?.active;
-    if (isIsometricActive) {
-      const isIsometricMap = game?.scenes?.viewed?.getFlag('grape_juice-isometrics', 'is_isometric');
-      const isIsometric = this._getSetting(this._settingKeys.ISOMETRIC);
-      if (isIsometric && isIsometricMap) { return this._settingKeys.ISOMETRIC; }
-    }
     const positions = TTAConstants.TOOLTIP_POSITIONS;
     return where !== 'surprise' ? where : positions[Math.floor(Math.random() * positions.length)];
   }

@@ -1,4 +1,4 @@
-import TTASettings from '../Settings/TTASettings.js';
+import { initSettings } from '../Settings/TTASettings.js';
 import { TTAConstants } from '../../TTAConstants/TTAConstants.js';
 import { debug, htmlToElement, MODULE_NAME } from '../../TTAUtils/TTAUtils.js';
 import TooltipFactory from '../../TooltipFactory.js';
@@ -24,15 +24,20 @@ const HOOK_TYPE = {
 };
 
 /**
- * @type {{renderTokenConfigHandler(): *, hoverTokenHandler(): *, initHookHandler(): *, removeTooltipHandlers(): *, canvasInitHandler(): *}}
+ * @type {{
+ * renderTokenConfigHandler(): *,
+ * hoverTokenHandler(): *,
+ * initHookHandler(): *,
+ * removeTooltipHandlers(): void,
+ * canvasInitHandler(): *
+ * }}
  */
 const hookHandlers = {
   initHookHandler() {
     return addHookHandler('init', HOOK_TYPE.ONCE, async () => {
-      const settings = TTASettings.getInstance();
-      settings.registerSettings();
+      initSettings();
 
-      debug('TTASettings registered.');
+      debug('Settings registered.');
       await loadTemplates(Object.values(TTAConstants.TEMPLATES));
       debug('Templates loaded.');
     });

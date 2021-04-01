@@ -34,12 +34,12 @@ export default class TooltipEditor extends FormApplication {
     return { gmSettings, playerSettings, isDefault: type === TTAConstants.APPS.TOOLTIP_DEFAULT_ACTOR_ID };
   }
 
-  // get a value from TTASettings
+  // get a value from Settings
   _getSetting(key) {
     return getSetting(key);
   }
 
-  // get a value from TTASettings
+  // get a value from Settings
   async _setSetting(key, value) {
     return setSettingSync(key, value);
   }

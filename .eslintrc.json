@@ -13,7 +13,6 @@
     "rules": {
         "import/extensions": "off",
         "no-undef": "off",
-        "max-len": "off",
         "no-underscore-dangle": "off",
         "class-methods-use-this": "off",
         "prefer-rest-params": "off",

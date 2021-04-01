@@ -43,7 +43,7 @@ class Tooltip {
     this.renderingResolved = promise.resolve;
   }
 
-  // get a value from TTASettings
+  // get a value from Settings
   _getSetting(key) {
     return getSetting(key);
   }
