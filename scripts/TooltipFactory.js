@@ -1,7 +1,7 @@
 import Tooltip from './Tooltip.js';
 import { TTAConstants, getSystemTheme } from './TTAConstants/TTAConstants.js';
 import SettingsUtil from './settings/SettingsUtil.js';
-import {MODULE_NAME} from "./TTAUtils/TTAUtils.js";
+import { MODULE_NAME } from './TTAUtils/TTAUtils.js';
 
 class TooltipFactory {
   constructor() {
