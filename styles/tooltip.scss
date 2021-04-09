@@ -22,20 +22,20 @@
 
 .#{$module-name}-tooltip-column {
   max-width: 10rem;
-}
+  grid-template-columns: auto auto;
+  align-self: start;
 
-.#{$module-name}-tooltip-item {
- &:not(.title) {
-  display: grid;
-  grid-gap: 0.5rem;
-  align-items: center;
- }
+  &:not(.title) {
+    display: grid;
+    grid-gap: 0.5rem;
+    align-items: center;
+  }
 
-  & img {
+  .#{$module-name}-tooltip-image {
     border: none;
   }
 
-  & span {
+  .#{$module-name}-tooltip-value {
     word-break: break-word;
   }
 }

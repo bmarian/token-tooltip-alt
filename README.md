@@ -61,7 +61,7 @@ This section is divided into two. The settings for the GM, and the settings for 
 You can have a different configuration for every token disposition.
 
 - `Color`: Allows you to change the color for this item's icon.
-- `Icon`: You can use any url/path to an icon, or any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery) (e.g. the icon is called heart you have to write it as fa-heart).
+- `Icon`: You can use any url/path to an icon, any icon from [Font Awesome](https://fontawesome.com/icons?d=gallery) (e.g. the icon is called heart you have to write it as fa-heart), or text/HTML if the icon text starts with a `$`.
 - `Value`: can be found double right-clicking on a token -> resources tab -> go through the attributes possible for bars, you can use anything from there.
 - `Fun`: Marks the item as a JavaScript function (e.g. [FUN_EXAMPLES.md](./FUN_EXAMPLES.md)), here is how the function will look:
 ```js

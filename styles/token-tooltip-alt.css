@@ -18,17 +18,18 @@
 
 .token-tooltip-alt-tooltip-column {
   max-width: 10rem;
+  grid-template-columns: auto auto;
+  align-self: start;
 }
-
-.token-tooltip-alt-tooltip-item:not(.title) {
+.token-tooltip-alt-tooltip-column:not(.title) {
   display: grid;
   grid-gap: 0.5rem;
   align-items: center;
 }
-.token-tooltip-alt-tooltip-item img {
+.token-tooltip-alt-tooltip-column .token-tooltip-alt-tooltip-image {
   border: none;
 }
-.token-tooltip-alt-tooltip-item span {
+.token-tooltip-alt-tooltip-column .token-tooltip-alt-tooltip-value {
   word-break: break-word;
 }
 
@@ -136,23 +137,23 @@
 .token-tooltip-alt-tooltip-container.default {
   background: url("../../../ui/parchment.jpg") repeat;
 }
-.token-tooltip-alt-tooltip-container.default .token-tooltip-alt-tooltip-item.title {
+.token-tooltip-alt-tooltip-container.default.token-tooltip-alt-tooltip-title {
   border-bottom: 1px solid;
 }
-.token-tooltip-alt-tooltip-container.default .token-tooltip-alt-tooltip-item span {
+.token-tooltip-alt-tooltip-container.default .token-tooltip-alt-tooltip-value {
   color: black;
 }
 .token-tooltip-alt-tooltip-container.default.dark {
   background: url("../../../ui/denim075.png") repeat;
   box-shadow: 0 0 20px #000;
 }
-.token-tooltip-alt-tooltip-container.default.dark .token-tooltip-alt-tooltip-item.title {
+.token-tooltip-alt-tooltip-container.default.dark.token-tooltip-alt-tooltip-title {
   border-bottom: 2px solid;
 }
-.token-tooltip-alt-tooltip-container.default.dark .token-tooltip-alt-tooltip-item.title span {
+.token-tooltip-alt-tooltip-container.default.dark.token-tooltip-alt-tooltip-title span {
   color: white;
 }
-.token-tooltip-alt-tooltip-container.default.dark .token-tooltip-alt-tooltip-item span {
+.token-tooltip-alt-tooltip-container.default.dark token-tooltip-alt-tooltip-value {
   color: white;
 }
 

@@ -1,19 +1,19 @@
 <div class="{{moduleName}}-tooltip-content">
     {{#if tokenName}}
-        <h4 class="{{moduleName}}-tooltip-item title"><span>{{tokenName}}</span></h4>
+        <h4 class="{{moduleName}}-tooltip-title"><span>{{tokenName}}</span></h4>
     {{/if}}
     <div class="{{moduleName}}-tooltip-items" style="grid-template-columns: repeat({{numberOfColumns}}, auto)">
         {{#each stats}}
             <div class="{{../moduleName}}-tooltip-column">
                 {{#each this}}
-                    <div class="{{../../moduleName}}-tooltip-item" style="grid-template-columns: {{iconSize}}rem auto;">
-                        {{#if iconType}}
-                            <i class="fas {{icon}}" style="color: {{color}};"></i>
-                        {{else}}
-                            <img src="{{icon}}" alt="">
-                        {{/if}}
-                        <span>{{value}}</span>
-                    </div>
+                    {{#if htmlType}}
+                        <div style="color: {{color}};">{{{icon}}}</div>
+                    {{else if iconType}}
+                        <div><i class="fas {{icon}}" style="color: {{color}};"></i></div>
+                    {{else}}
+                        <img class="{{../../moduleName}}-tooltip-image" src="{{icon}}" alt="" style="max-width:{{iconSize}}">
+                    {{/if}}
+                    <div class="{{../../moduleName}}-tooltip-value">{{value}}</div>
                 {{/each}}
             </div>
         {{/each}}
