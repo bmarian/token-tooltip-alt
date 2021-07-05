@@ -19,6 +19,8 @@ class Tooltip {
       minus: new RegExp(/-/),
       // check if its a font awesome icon
       faIcon: new RegExp(/^[\w\- ]+$/),
+      // check for text
+      html: new RegExp(/^\$.+$/)
     };
     this._tooltip = null;
     this._doStringMath = doMath;
@@ -116,7 +118,12 @@ class Tooltip {
   // * font awesome icon
   // * url
   _getIconData(icon) {
-    return { icon, iconType: icon ? this._reg.faIcon.test(icon.trim()) : true, iconSize: this._fontSize };
+    return {
+      icon: (icon&&this._reg.html.test(icon.trim()))?icon.trim().substring(1) : icon,
+      htmlType: icon ? this._reg.html.test(icon.trim()) : false,
+      iconType: icon ? this._reg.faIcon.test(icon.trim()) : true,
+      iconSize: this._fontSize
+    };
   }
 
   // appends stats with only a value

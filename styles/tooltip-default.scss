@@ -3,35 +3,29 @@
     background: url("../../../ui/parchment.jpg") repeat;
 
 
-    & .#{$module-name}-tooltip-item {
-      &.title {
-        border-bottom: 1px solid;
-      }
+    &.#{$module-name}-tooltip-title {
+      border-bottom: 1px solid;
+    }
 
-      & span {
-        color: black;
-      }
+    .#{$module-name}-tooltip-value {
+      color: black;
     }
 
     &.dark {
       background: url("../../../ui/denim075.png") repeat;
       box-shadow: 0 0 20px #000;
 
-
-      & .#{$module-name}-tooltip-item {
-        &.title {
-          border-bottom: 2px solid;
-
-          & span {
-            color: white;
-          }
-        }
+      &.#{$module-name}-tooltip-title {
+        border-bottom: 2px solid;
 
         & span {
           color: white;
         }
       }
 
+      #{$module-name}-tooltip-value {
+        color: white;
+      }
     }
   }
 }
