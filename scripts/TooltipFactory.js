@@ -85,7 +85,9 @@ class TooltipFactory {
 
   // determines if a token should display a tooltip or not based on the ACTORS settings
   _shouldActorHaveTooltip(token) {
-    const noTooltip = token.getFlag(MODULE_NAME, 'noTooltip');
+    const noTooltip = typeof token?.document?.getFlag === 'function'
+      ? token.document.getFlag(MODULE_NAME, 'noTooltip')
+      : token.getFlag(MODULE_NAME, 'noTooltip');
     if (noTooltip) { return false; }
     const actorType = token?.actor?.data?.type;
     const actors = this._getSetting(this._settingKeys.ACTORS);
