@@ -68,7 +68,8 @@ const hookHandlers = {
     return addHookHandler('renderTokenConfig', HOOK_TYPE.ON, (tokenConfig, $tokenConfig) => {
       const tokenConfigElement = $tokenConfig[0];
       const resources = tokenConfigElement.querySelector('.tab[data-tab="resources"]');
-      const noTooltip = tokenConfig.object.getFlag(MODULE_NAME, 'noTooltip');
+      const config = tokenConfig.document || tokenConfig.object;
+      const noTooltip = config.getFlag(MODULE_NAME, 'noTooltip');
       const noTooltipCheckboxElement = htmlToElement(`
         <div class="form-group">
             <label>No tooltip</label>
@@ -78,7 +79,7 @@ const hookHandlers = {
 
       noTooltipCheckboxElement.addEventListener('change', (ev) => {
         const isChecked = ev?.target?.checked || false;
-        return tokenConfig.object.setFlag(MODULE_NAME, 'noTooltip', isChecked);
+        return config.setFlag(MODULE_NAME, 'noTooltip', isChecked);
       });
     });
   },
