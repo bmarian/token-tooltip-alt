@@ -5,7 +5,19 @@ import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils
 import { clone, debug, MODULE_NAME } from './TTAUtils/TTAUtils.js';
 
 class Tooltip {
-  constructor(token, themeClass, systemClass, fontSize, where, animType, animSpeed, path, template, gameBody, tooltipInfo) {
+  constructor(
+    token,
+    themeClass,
+    systemClass,
+    fontSize,
+    where,
+    animType,
+    animSpeed,
+    path,
+    template,
+    gameBody,
+    tooltipInfo,
+  ) {
     this._reg = {
       // searches if the string is one path
       path: new RegExp(/^([\w_-]+\.)*([\w_-]+)$/),
@@ -19,6 +31,8 @@ class Tooltip {
       minus: new RegExp(/-/),
       // check if its a font awesome icon
       faIcon: new RegExp(/^[\w\- ]+$/),
+      // check for text
+      html: new RegExp(/^\$.+$/),
     };
     this._tooltip = null;
     this._doStringMath = doMath;
@@ -116,7 +130,16 @@ class Tooltip {
   // * font awesome icon
   // * url
   _getIconData(icon) {
-    return { icon, iconType: icon ? this._reg.faIcon.test(icon.trim()) : true, iconSize: this._fontSize };
+    const trimmedText = icon.trim();
+    const htmlType = icon ? this._reg.html.test(trimmedText) : false;
+    const iconType = icon ? this._reg.faIcon.test(trimmedText) : true;
+
+    return {
+      icon: htmlType ? icon.substring(1) : icon,
+      htmlType,
+      iconType,
+      iconSize: this._fontSize,
+    };
   }
 
   // appends stats with only a value
@@ -129,7 +152,13 @@ class Tooltip {
   // appends object stats (they need to have a fixed structure)
   // {value, max} and optional {temp, tempmax}
   _appendObjectStat(values, item, stats) {
-    if (Number.isNaN(values.value) || Number.isNaN(values.max) || values.value === null || values.max === null) { return; }
+    if (
+      Number.isNaN(values.value)
+      || Number.isNaN(values.max)
+      || values.value === null
+      || values.max === null
+    ) { return; }
+
     const temp = values.temp > 0 ? `(${values.temp})` : '';
     const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
     const value = `${values.value}${temp}/${values.max}${tempmax}`;
@@ -192,16 +221,18 @@ class Tooltip {
   // Determines if the tooltip should have the name shown, for the GM this is a simple yes or no answer
   // for players this gets a little bit complicated
   _getActorDisplayName(staticData) {
-    if (!staticData) { return null; }
+    if (!staticData) return null;
     const tokenName = this._token?.data?.name;
-    if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) { return tokenName; }
+    if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) return tokenName;
     if (!this._tooltipInfo.isGM) {
       // here I do some logic that I don't really like but I can't find a good way of doing it
-      const tokenDisposition = parseInt(this._token?.data?.disposition, 10) + 1; // adding a +1 because the numbers start from -1 (hostile)
+
+      // adding a +1 because the numbers start from -1 (hostile)
+      const tokenDisposition = parseInt(this._token?.data?.disposition, 10) + 1;
       const index = staticData?.tokenDispositions?.indexOf(staticData.displayNameInTooltip);
       // Fix for NONE and OWNED
       if (index === -1) {
-        if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) { return null; }
+        if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
         return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
                     && this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? tokenName : null;
       }
@@ -403,7 +434,7 @@ class Tooltip {
       }
       case 'none':
       default: {
-        this._destroyTooltip();
+        // this._destroyTooltip();
         break;
       }
     }

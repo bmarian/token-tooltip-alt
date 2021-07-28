@@ -17,6 +17,7 @@
         "class-methods-use-this": "off",
         "prefer-rest-params": "off",
         "import/prefer-default-export": "off",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "max-len": "off"
     }
 }
