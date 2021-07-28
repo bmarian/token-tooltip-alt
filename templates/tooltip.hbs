@@ -6,7 +6,7 @@
         {{#each stats}}
             <div class="{{../moduleName}}-tooltip-column">
                 {{#each this}}
-                    <div class="{{../../moduleName}}-tooltip-item" style="grid-template-columns: {{iconSize}}rem auto;">
+                    <div class="{{../../moduleName}}-tooltip-item" style="grid-template-columns: minmax({{iconSize}}rem, 1fr) auto;">
                         {{#if htmlType}}
                             <span style="color: {{color}};">{{{icon}}}</span>
                         {{else if iconType}}

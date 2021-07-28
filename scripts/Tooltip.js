@@ -434,7 +434,7 @@ class Tooltip {
       }
       case 'none':
       default: {
-        // this._destroyTooltip();
+        this._destroyTooltip();
         break;
       }
     }
