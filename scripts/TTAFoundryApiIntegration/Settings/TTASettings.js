@@ -24,21 +24,36 @@ function registerTooltipManager() {
 function initSettings() {
   const PUBLIC_CONFIGURE_SETTINGS = [
     {
-      key: SETTING_KEYS.TOOLTIP_POSITION,
+      key: SETTING_KEYS.TOOLTIP_VERTICAL_POSITION,
       settings: {
-        name: i18n('settings.TOOLTIP_POSITION.name'),
-        hint: i18n('settings.TOOLTIP_POSITION.hint'),
+        name: i18n('settings.TOOLTIP_VERTICAL_POSITION.name'),
+        hint: i18n('settings.TOOLTIP_VERTICAL_POSITION.hint'),
         type: String,
         config: true,
         default: 'right',
         choices: {
-          top: i18n('settings.TOOLTIP_POSITION.choices.top'),
-          right: i18n('settings.TOOLTIP_POSITION.choices.right'),
-          bottom: i18n('settings.TOOLTIP_POSITION.choices.bottom'),
-          left: i18n('settings.TOOLTIP_POSITION.choices.left'),
-          overlay: i18n('settings.TOOLTIP_POSITION.choices.overlay'),
-          surprise: i18n('settings.TOOLTIP_POSITION.choices.surprise'),
-          doubleSurprise: i18n('settings.TOOLTIP_POSITION.choices.doubleSurprise'),
+          above: i18n('settings.TOOLTIP_VERTICAL_POSITION.choices.above'),
+          below: i18n('settings.TOOLTIP_VERTICAL_POSITION.choices.below'),
+          snapped: i18n('settings.TOOLTIP_VERTICAL_POSITION.choices.snapped'),
+          surprise: i18n('settings.TOOLTIP_VERTICAL_POSITION.choices.surprise'),
+          doubleSurprise: i18n('settings.TOOLTIP_VERTICAL_POSITION.choices.doubleSurprise'),
+        },
+      },
+    },
+    {
+      key: SETTING_KEYS.TOOLTIP_HORIZONTAL_POSITION,
+      settings: {
+        name: i18n('settings.TOOLTIP_HORIZONTAL_POSITION.name'),
+        hint: i18n('settings.TOOLTIP_HORIZONTAL_POSITION.hint'),
+        type: String,
+        config: true,
+        default: 'right',
+        choices: {
+          right: i18n('settings.TOOLTIP_HORIZONTAL_POSITION.choices.right'),
+          left: i18n('settings.TOOLTIP_HORIZONTAL_POSITION.choices.left'),
+          snapped: i18n('settings.TOOLTIP_HORIZONTAL_POSITION.choices.snapped'),
+          surprise: i18n('settings.TOOLTIP_HORIZONTAL_POSITION.choices.surprise'),
+          doubleSurprise: i18n('settings.TOOLTIP_HORIZONTAL_POSITION.choices.doubleSurprise'),
         },
       },
     },

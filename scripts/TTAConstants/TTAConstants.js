@@ -12,7 +12,8 @@ const TTAConstants = {
     USE_ACCENT_COLOR_FOR_EVERYTHING: 'useAccentColorForEverything',
     ACCENT_COLOR: 'accentColor',
     TOKEN_DISPOSITIONS: 'tokenDispositions',
-    TOOLTIP_POSITION: 'tooltipPosition',
+    TOOLTIP_VERTICAL_POSITION: 'tooltipVerticalPosition',
+    TOOLTIP_HORIZONTAL_POSITION: 'tooltipHorizontalPosition',
     DARK_THEME: 'darkTheme',
     DATA_SOURCE: 'dataSource',
     GM_SETTINGS: 'gmSettings',
@@ -49,7 +50,8 @@ const TTAConstants = {
   SYSTEM_DEFAULT_THEMES: {
     default: 'default',
   },
-  TOOLTIP_POSITIONS: ['top', 'right', 'bottom', 'left', 'overlay'],
+  TOOLTIP_HORIZONTAL_POSITIONS: ['right', 'left', 'snapped'],
+  TOOLTIP_VERTICAL_POSITIONS: ['above', 'below', 'snapped'],
 };
 
 function getSystemTheme() {

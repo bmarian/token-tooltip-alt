@@ -20,10 +20,19 @@ class TooltipFactory {
   }
 
   // get the positioning from settings, and if surprise pick a random possible position
-  _getWhere() {
-    const where = this._getSetting(this._settingKeys.TOOLTIP_POSITION) || 'right';
-    const positions = TTAConstants.TOOLTIP_POSITIONS;
-    return where !== 'surprise' ? where : positions[Math.floor(Math.random() * positions.length)];
+  _getWhereHorizontal() {
+    const whereHorizontal = this._getSetting(this._settingKeys.TOOLTIP_HORIZONTAL_POSITION) || 'right';
+    const horizontalPositions = TTAConstants.TOOLTIP_HORIZONTAL_POSITIONS;
+    
+    return whereHorizontal !== 'surprise' ? whereHorizontal : horizontalPositions[Math.floor(Math.random() * horizontalPositions.length)];
+  }
+
+  // get the positioning from settings, and if surprise pick a random possible position
+  _getWhereVertical() {
+    const whereVertical = this._getSetting(this._settingKeys.TOOLTIP_VERTICAL_POSITION) || 'bottom';
+    const verticalPositions = TTAConstants.TOOLTIP_VERTICAL_POSITIONS;
+
+    return whereVertical !== 'surprise' ? whereVertical : verticalPositions[Math.floor(Math.random() * verticalPositions.length)];
   }
 
   // returns some useful info used in the tooltip,
@@ -42,7 +51,8 @@ class TooltipFactory {
       this._getSetting(this._settingKeys.DARK_THEME) ? 'dark' : 'light',
       getSystemTheme(),
       parseFloat(this._getSetting(this._settingKeys.FONT_SIZE)) || 1,
-      this._getWhere(),
+      this._getWhereHorizontal(),
+      this._getWhereVertical(),
       'none',
       200,
       this._getSetting(this._settingKeys.DATA_SOURCE) || '',
