@@ -386,6 +386,7 @@ class Tooltip {
     if([this._whereHorizontal, this._whereVertical].includes('isometric')) {
       position.transform = 'rotateX(54deg) rotateY(-2deg) rotateZ(-44deg)';
     }
+
     return position;
   }
 
