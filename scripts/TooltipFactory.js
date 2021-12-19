@@ -1,7 +1,7 @@
 import Tooltip from './Tooltip.js';
 import { TTAConstants, getSystemTheme } from './TTAConstants/TTAConstants.js';
 import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
-import { MODULE_NAME } from './TTAUtils/TTAUtils.js';
+import {isFoundry9, MODULE_NAME} from './TTAUtils/TTAUtils.js';
 
 class TooltipFactory {
   constructor() {
@@ -104,10 +104,16 @@ class TooltipFactory {
     }
   }
 
+  _isAltPressed() {
+    const foundry9 = isFoundry9();
+    if (!foundry9) return keyboard?.isDown?.('Alt');
+    return game?.keyboard?.downKeys?.has?.('Alt');
+  }
+
   // public hook when hovering over a token (more precise when a token is focused)
   async hoverToken(token, isHovering) {
     if (!token?.actor || !this._shouldActorHaveTooltip(token)) { return; }
-    const isAltPressed = keyboard?.isDown('Alt');
+    const isAltPressed = this._isAltPressed();
     if (isAltPressed) {
       const altSettings = this._getAltSettings();
       if (!altSettings.showOnAlt) { return; }

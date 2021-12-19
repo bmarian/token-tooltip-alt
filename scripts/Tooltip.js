@@ -29,7 +29,7 @@ class Tooltip {
       expressions: new RegExp(/{([^}]*)}/g),
       // determines if the string is a -
       minus: new RegExp(/-/),
-      // check if its a font awesome icon
+      // check if it's a font awesome icon
       faIcon: new RegExp(/^[\w\- ]+$/),
       // check for text
       html: new RegExp(/^\$.+$/),
