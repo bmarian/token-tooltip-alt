@@ -19,7 +19,7 @@
     "styles/token-tooltip-alt.css"
   ],
   "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "0.9.0",
+  "compatibleCoreVersion": "9",
   "dependencies": [
     {
       "name": "_mathjs",
