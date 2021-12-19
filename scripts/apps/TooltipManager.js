@@ -3,7 +3,7 @@ import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import TooltipEditor from './TooltipEditor.js';
 import DataManager from './DataManager.js';
 import {
-  debug, clone, generateRandomColor, MODULE_NAME,
+  debug, clone, generateRandomColor, MODULE_NAME, isFoundry9,
 } from '../TTAUtils/TTAUtils.js';
 
 export default class TooltipManager extends FormApplication {
@@ -123,10 +123,15 @@ export default class TooltipManager extends FormApplication {
     };
   }
 
+  _getEntityTypes() {
+    const foundry9 = isFoundry9();
+    if (!foundry9) return game?.system?.entityTypes?.Actor;
+    return Object.keys(game?.system?.model?.Actor);
+  }
   // generate a list of actors, to delete it just use in the console
   // game.settings.set('token-tooltip-alt', 'actors', [])
   async _getActorsList() {
-    const systemActors = game?.system?.entityTypes?.Actor || [];
+    const systemActors = this._getEntityTypes() || [];
     const actors = this._getSetting(TTAConstants.SETTING_KEYS.ACTORS);
     const returnActors = [];
     if (!systemActors.length) return returnActors;
