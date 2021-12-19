@@ -1,6 +1,6 @@
 {
   "name": "token-tooltip-alt",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "description": "A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.",
   "main": "module.json",
   "scripts": {},
