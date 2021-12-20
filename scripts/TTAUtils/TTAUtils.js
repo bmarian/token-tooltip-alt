@@ -92,6 +92,19 @@ function htmlToElement(html) {
   template.innerHTML = html.trim();
   return template.content.firstChild;
 }
+/**
+ * Returns the foundry version
+ *
+ * @return {number | string | undefined}
+ */
+const getFoundryVersion = () => game?.version;
+
+/**
+ * Returns if the foundry version is 0.8.x
+ *
+ * @return {boolean}
+ */
+const isFoundry9 = () => getFoundryVersion() >= '9.0';
 
 export {
   debug,
@@ -99,6 +112,7 @@ export {
   i18n,
   generateRandomColor,
   htmlToElement,
+  isFoundry9,
   MODULE_NAME,
   MODULE_TITLE,
 };
