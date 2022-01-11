@@ -324,7 +324,9 @@ class Tooltip {
     const padding = 5;
     const ltPadding = 20; // padding for left and top positioning
     const position = {
-      zIndex: this._token.zIndex,
+      // Fix for #102 and #93: Token Z changes the token z index to be negative, so
+      // we need to clip it to 0
+      zIndex: Math.max(this._token.zIndex, 0),
       color: this._accentColor,
     };
     switch (this._where) {
