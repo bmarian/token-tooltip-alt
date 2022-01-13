@@ -107,7 +107,7 @@ class TooltipFactory {
   _isAltPressed() {
     const foundry9 = isFoundry9();
     if (!foundry9) return keyboard?.isDown?.('Alt');
-    return game?.keyboard?.downKeys?.has?.('Alt');
+    return game?.keyboard?.downKeys?.has?.('AltLeft') || game?.keyboard?.downKeys?.has?.('AltRight');
   }
 
   // public hook when hovering over a token (more precise when a token is focused)
