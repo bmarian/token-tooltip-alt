@@ -18,25 +18,51 @@
   "styles": [
     "styles/token-tooltip-alt.css"
   ],
+  "compatibility": {
+    "minimum": "0.7.5",
+    "verified": 10
+  },
   "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "9",
+  "compatibleCoreVersion": "10",
   "dependencies": [
     {
+      "id": "_mathjs",
       "name": "_mathjs",
       "type": "module",
       "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/mathjs-lib/master/module.json"
     },
     {
+      "id": "_sortablejs",
       "name": "_sortablejs",
       "type": "module",
       "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
     },
     {
+      "id": "_CodeMirror",
       "name": "_CodeMirror",
       "type": "module",
       "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/codemirror-lib/master/module.json"
     }
   ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "_mathjs",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/mathjs-lib/master/module.json"
+      },
+      {
+        "id": "_sortablejs",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
+      },
+      {
+        "id": "_CodeMirror",
+        "type": "module",
+        "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/codemirror-lib/master/module.json"
+      }
+    ]
+  },
   "languages": [
     {
       "lang": "en",

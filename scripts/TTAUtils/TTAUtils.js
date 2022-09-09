@@ -104,7 +104,7 @@ const getFoundryVersion = () => game?.version;
  *
  * @return {boolean}
  */
-const isFoundry9 = () => getFoundryVersion() >= '9.0';
+const versionAfter9 = () => Number(getFoundryVersion()) >= 9;
 
 export {
   debug,
@@ -112,7 +112,7 @@ export {
   i18n,
   generateRandomColor,
   htmlToElement,
-  isFoundry9,
+  versionAfter9,
   MODULE_NAME,
   MODULE_TITLE,
 };
