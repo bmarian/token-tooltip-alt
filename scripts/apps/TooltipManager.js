@@ -3,7 +3,7 @@ import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import TooltipEditor from './TooltipEditor.js';
 import DataManager from './DataManager.js';
 import {
-  debug, clone, generateRandomColor, MODULE_NAME, isFoundry9,
+  debug, clone, generateRandomColor, MODULE_NAME, versionAfter9,
 } from '../TTAUtils/TTAUtils.js';
 
 export default class TooltipManager extends FormApplication {
@@ -46,7 +46,7 @@ export default class TooltipManager extends FormApplication {
 
   // check if no defaults are present for a disposition and creates them
   _createDefaultSettings(entitySettings, tokenDispositions) {
-    for (let i = 0; i < tokenDispositions.length; i++) {
+    for (let i = 0; i < tokenDispositions.length; i += 1) {
       const tokenDisposition = tokenDispositions[i];
       if (entitySettings?.[i]?.disposition !== tokenDisposition) {
         entitySettings.splice(i, 0, this._generateDefaultSettingsForDisposition(tokenDisposition));
@@ -57,7 +57,7 @@ export default class TooltipManager extends FormApplication {
   // this is used in case a module or system plays with the dispositions, or if in
   // the future they will be changed
   _removeDeprecatedSettings(entitySettings, tokenDispositions, returnArray) {
-    for (let i = 0; i < entitySettings.length; i++) {
+    for (let i = 0; i < entitySettings.length; i += 1) {
       const entitySetting = entitySettings[i];
       if (entitySetting.removed || !tokenDispositions.includes(entitySetting.disposition)) entitySetting.removed = true;
       else returnArray.push(entitySetting);
@@ -124,10 +124,11 @@ export default class TooltipManager extends FormApplication {
   }
 
   _getEntityTypes() {
-    const foundry9 = isFoundry9();
-    if (!foundry9) return game?.system?.entityTypes?.Actor;
+    const after9 = versionAfter9();
+    if (!after9) return game?.system?.entityTypes?.Actor;
     return Object.keys(game?.system?.model?.Actor);
   }
+
   // generate a list of actors, to delete it just use in the console
   // game.settings.set('token-tooltip-alt', 'actors', [])
   async _getActorsList() {
@@ -148,7 +149,7 @@ export default class TooltipManager extends FormApplication {
     // this will take all the system actors and add them to the actors list
     // doing it every time in case a new actor was added or one was modified
     // if a new actor was added make a preset for it
-    for (let i = 0; i < systemActors.length; i++) {
+    for (let i = 0; i < systemActors.length; i += 1) {
       const systemActor = systemActors[i];
       let add = true;
       if (check) {
@@ -165,7 +166,7 @@ export default class TooltipManager extends FormApplication {
     // this will take care of the changed values, it will add a new property 'removed',
     // redundant for now but maybe I will implement a way of transferring the old
     // tooltips from that one
-    for (let i = 0; i < actors.length; i++) {
+    for (let i = 0; i < actors.length; i += 1) {
       const actor = actors[i];
       if (actor.id !== TTAConstants.APPS.TOOLTIP_DEFAULT_ACTOR_ID && (actor.removed || !systemActors.includes(actor.id))) actor.removed = true;
       else {
@@ -196,7 +197,7 @@ export default class TooltipManager extends FormApplication {
     for (const key in expObj) {
       if (!expObj.hasOwnProperty(key)) continue;
       const values = expObj[key];
-      for (let i = 0; i < actors.length; i++) {
+      for (let i = 0; i < actors.length; i += 1) {
         const actor = actors[i];
         if (actor.id === key) {
           actor.enable = values.enable;

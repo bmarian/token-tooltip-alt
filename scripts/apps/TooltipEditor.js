@@ -252,7 +252,7 @@ export default class TooltipEditor extends FormApplication {
   _persistEmptyPresets(items, dispositions) {
     // we need this to keep everything in order, otherwise the empty ones will be last
     const returnItems = [];
-    for (let i = 0; i < dispositions.length; i++) {
+    for (let i = 0; i < dispositions.length; i += 1) {
       const disposition = dispositions[i];
       let add = true;
       for (let j = 0; j < items.length; j++) {

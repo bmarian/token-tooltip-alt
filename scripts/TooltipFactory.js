@@ -1,7 +1,7 @@
 import Tooltip from './Tooltip.js';
 import { TTAConstants, getSystemTheme } from './TTAConstants/TTAConstants.js';
 import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
-import {isFoundry9, MODULE_NAME} from './TTAUtils/TTAUtils.js';
+import { versionAfter9, MODULE_NAME, versionAfter10 } from './TTAUtils/TTAUtils.js';
 
 class TooltipFactory {
   constructor() {
@@ -31,7 +31,7 @@ class TooltipFactory {
   _getTooltipInfo(token) {
     return {
       isGM: game?.user?.isGM,
-      actorType: token?.actor?.data?.type,
+      actorType: versionAfter10() ? token?.actor?.type : token?.actor?.data?.type,
     };
   }
 
@@ -62,7 +62,7 @@ class TooltipFactory {
 
   // generates a tooltip if that token doesn't have one and adds it to the array, and shows it
   _addTooltip(token) {
-    for (let i = 0; i < this._tooltips.length; i++) {
+    for (let i = 0; i < this._tooltips.length; i += 1) {
       const t = this._tooltips[i];
       if (t.getTokenId() === token?.id) { return null; }
     }
@@ -73,7 +73,7 @@ class TooltipFactory {
 
   // generates a tooltip if that token doesn't have one and adds it to the array, and shows it
   _removeTooltip(token) {
-    for (let i = 0; i < this._tooltips.length; i++) {
+    for (let i = 0; i < this._tooltips.length; i += 1) {
       const t = this._tooltips[i];
       if (t.getTokenId() === token?.id) {
         t.hide();
@@ -88,9 +88,9 @@ class TooltipFactory {
     const getFlagLoc = token?.document || token;
     const noTooltip = getFlagLoc.getFlag(MODULE_NAME, 'noTooltip');
     if (noTooltip) { return false; }
-    const actorType = token?.actor?.data?.type;
+    const actorType = versionAfter10() ? token?.actor?.type : token?.actor?.data?.type;
     const actors = this._getSetting(this._settingKeys.ACTORS);
-    for (let i = 0; i < actors.length; i++) {
+    for (let i = 0; i < actors.length; i += 1) {
       const actor = actors[i];
       if (actor.id === actorType) { return actor.enable; }
     }
@@ -105,8 +105,8 @@ class TooltipFactory {
   }
 
   _isAltPressed() {
-    const foundry9 = isFoundry9();
-    if (!foundry9) return keyboard?.isDown?.('Alt');
+    const after9 = versionAfter9();
+    if (!after9) return keyboard?.isDown?.('Alt');
     return game?.keyboard?.downKeys?.has?.('AltLeft') || game?.keyboard?.downKeys?.has?.('AltRight');
   }
 

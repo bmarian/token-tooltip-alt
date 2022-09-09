@@ -2,7 +2,9 @@ import doMath from './lib/MathEngine.js';
 import DeferredPromise from './lib/DeferredPromise.js';
 import { TTAConstants } from './TTAConstants/TTAConstants.js';
 import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
-import { clone, debug, MODULE_NAME } from './TTAUtils/TTAUtils.js';
+import {
+  clone, debug, MODULE_NAME, versionAfter10,
+} from './TTAUtils/TTAUtils.js';
 
 class Tooltip {
   constructor(
@@ -204,7 +206,7 @@ class Tooltip {
   // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
   _getActorDisposition(tokenDispositions) {
     const dispositionsWithoutOwned = tokenDispositions.filter((d) => d !== this._appKeys.OWNED_DISPOSITION);
-    const disposition = dispositionsWithoutOwned?.[parseInt(this._token?.data?.disposition, 10) + 1];
+    const disposition = dispositionsWithoutOwned?.[parseInt(versionAfter10() ? this._token?.document?.disposition : this._token?.data?.disposition, 10) + 1];
     if (this._tooltipInfo.isGM) { return disposition; }
     return this._token?.actor?.permission >= CONST?.ENTITY_PERMISSIONS?.OBSERVER ? this._appKeys.OWNED_DISPOSITION : disposition;
   }
@@ -219,16 +221,17 @@ class Tooltip {
   }
 
   // Determines if the tooltip should have the name shown, for the GM this is a simple yes or no answer
-  // for players this gets a little bit complicated
+  // for players this gets a little complicated
   _getActorDisplayName(staticData) {
     if (!staticData) return null;
-    const tokenName = this._token?.data?.name;
+    const tokenDataSource = versionAfter10() ? this._token : this._token?.data;
+    const tokenName = tokenDataSource?.name;
     if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) return tokenName;
     if (!this._tooltipInfo.isGM) {
       // here I do some logic that I don't really like but I can't find a good way of doing it
 
       // adding a +1 because the numbers start from -1 (hostile)
-      const tokenDisposition = parseInt(this._token?.data?.disposition, 10) + 1;
+      const tokenDisposition = parseInt(tokenDataSource?.disposition, 10) + 1;
       const index = staticData?.tokenDispositions?.indexOf(staticData.displayNameInTooltip);
       // Fix for NONE and OWNED
       if (index === -1) {
