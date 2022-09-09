@@ -106,6 +106,8 @@ const getFoundryVersion = () => game?.version;
  */
 const versionAfter9 = () => Number(getFoundryVersion()) >= 9;
 
+const versionAfter10 = () => Number(getFoundryVersion()) >= 10;
+
 export {
   debug,
   clone,
@@ -113,6 +115,7 @@ export {
   generateRandomColor,
   htmlToElement,
   versionAfter9,
+  versionAfter10,
   MODULE_NAME,
   MODULE_TITLE,
 };

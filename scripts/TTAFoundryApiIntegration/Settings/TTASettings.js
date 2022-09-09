@@ -81,7 +81,7 @@ function initSettings() {
         scope: 'world',
         config: true,
         restricted: true,
-        default: 'actor.data.data',
+        default: 'actor.system',
       },
     },
     {

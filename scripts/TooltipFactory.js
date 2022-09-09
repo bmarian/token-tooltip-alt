@@ -1,7 +1,7 @@
 import Tooltip from './Tooltip.js';
 import { TTAConstants, getSystemTheme } from './TTAConstants/TTAConstants.js';
 import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
-import { versionAfter9, MODULE_NAME } from './TTAUtils/TTAUtils.js';
+import { versionAfter9, MODULE_NAME, versionAfter10 } from './TTAUtils/TTAUtils.js';
 
 class TooltipFactory {
   constructor() {
@@ -31,7 +31,7 @@ class TooltipFactory {
   _getTooltipInfo(token) {
     return {
       isGM: game?.user?.isGM,
-      actorType: token?.actor?.data?.type,
+      actorType: versionAfter10() ? token?.actor?.type : token?.actor?.data?.type,
     };
   }
 
@@ -88,7 +88,7 @@ class TooltipFactory {
     const getFlagLoc = token?.document || token;
     const noTooltip = getFlagLoc.getFlag(MODULE_NAME, 'noTooltip');
     if (noTooltip) { return false; }
-    const actorType = token?.actor?.data?.type;
+    const actorType = versionAfter10() ? token?.actor?.type : token?.actor?.data?.type;
     const actors = this._getSetting(this._settingKeys.ACTORS);
     for (let i = 0; i < actors.length; i += 1) {
       const actor = actors[i];
