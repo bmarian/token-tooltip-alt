@@ -209,10 +209,10 @@ class Tooltip {
     const disposition = dispositionsWithoutOwned?.[parseInt(versionAfter10() ? this._token?.document?.disposition : this._token?.data?.disposition, 10) + 1];
 
     // albions-angel: fixed >= which should have been >
-    // albions-angel: temporary fix for CONST?.ENTITY_PERMISSIONS?.OBSERVER not being defined
-    // replaced variable with constant 2
+    // albions-angel: fix for CONST?.ENTITY_PERMISSIONS?.OBSERVER 
+    // albions-angel: now changed to CONST.DOCUMENT_OWNERSHIP_LEVELS as of V10
     if (this._tooltipInfo.isGM) { return disposition; }
-    return this._token?.actor?.permission > 2 ? this._appKeys.OWNED_DISPOSITION : disposition;
+    return this._token?.actor?.permission > CONST?.DOCUMENT_OWNERSHIP_LEVELS?.OBSERVER ? this._appKeys.OWNED_DISPOSITION : disposition;
   }
 
   // This returns the itemList for a given disposition
@@ -238,12 +238,12 @@ class Tooltip {
       const tokenDisposition = parseInt(tokenDataSource?.disposition, 10) + 1;
       const index = staticData?.tokenDispositions?.indexOf(staticData.displayNameInTooltip);
       // Fix for NONE and OWNED
-      // albions-angel: temporary fix for CONST?.ENTITY_PERMISSIONS?.OBSERVER not being defined
-      // replaced variable with constant 2
+      // albions-angel: fix for CONST?.ENTITY_PERMISSIONS?.OBSERVER
+      // albions-angel: now changed to CONST.DOCUMENT_OWNERSHIP_LEVELS as of V10
       if (index === -1) {
         if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
         return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
-                    && this._token?.actor?.permission >= 2 ? tokenName : null;
+                    && this._token?.actor?.permission >= CONST?.DOCUMENT_OWNERSHIP_LEVELS?.OBSERVER ? tokenName : null;
       }
       // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
       // tokenDisposition = -1 + 1 (0) <=> HOSTILE
