@@ -12,7 +12,8 @@ class Tooltip {
     themeClass,
     systemClass,
     fontSize,
-    where,
+    whereHorizontal,
+    whereVertical,
     animType,
     animSpeed,
     path,
@@ -43,7 +44,8 @@ class Tooltip {
     this._themeClass = themeClass;
     this._systemClass = systemClass;
     this._fontSize = fontSize;
-    this._where = where;
+    this._whereVertical = whereVertical;
+    this._whereHorizontal = whereHorizontal;
     this._animType = animType;
     this._animSpeed = animSpeed;
     this._template = template;
@@ -338,51 +340,64 @@ class Tooltip {
       zIndex: Math.max(this._token.zIndex, 0),
       color: this._accentColor,
     };
-    switch (this._where) {
-      case 'right':
-      default: {
-        position.top = tokenWT.ty - padding;
+
+    switch (this._whereHorizontal) {
+      case 'right': {
         position.left = tokenWT.tx + (this._token.w * tokenWT.a) + padding;
-        break;
-      }
-      case 'bottom': {
-        position.top = tokenWT.ty + (this._token.h * tokenWT.a) + padding;
-        position.left = tokenWT.tx - padding;
         break;
       }
       case 'left': {
         const cW = this._tooltip.width();
-        position.top = tokenWT.ty - padding;
         position.left = tokenWT.tx - cW - ltPadding;
         break;
       }
-      case 'top': {
-        const cH = this._tooltip.height();
-        position.top = tokenWT.ty - cH - ltPadding;
-        position.left = tokenWT.tx - padding;
-        break;
-      }
-      case 'overlay': {
-        position.top = tokenWT.ty - padding;
+      case 'snapped': {
         position.left = tokenWT.tx - padding;
         break;
       }
       case 'isometric': {
         const cW = this._tooltip.width();
-        position.top = tokenWT.ty;
         position.left = tokenWT.tx - cW;
-        position.transform = 'rotateX(54deg) rotateY(-2deg) rotateZ(-44deg)';
         break;
       }
       case 'doubleSurprise': {
         const canvas = $('#board');
         const w = canvas.width() - this._tooltip.width();
-        const h = canvas.height() - this._tooltip.height();
-        position.top = Math.floor(Math.random() * h);
         position.left = Math.floor(Math.random() * w);
         break;
       }
     }
+
+    switch (this._whereVertical) {
+      case 'below': {
+        position.top = tokenWT.ty + (this._token.h * tokenWT.a) + padding;
+        break;
+      }
+      case 'above': {
+        const cH = this._tooltip.height();
+        position.top = tokenWT.ty - cH - ltPadding;
+        break;
+      }
+      case 'snapped': {
+        position.top = tokenWT.ty - padding;
+        break;
+      }
+      case 'isometric': {
+        position.top = tokenWT.ty;
+        break;
+      }
+      case 'doubleSurprise': {
+        const canvas = $('#board');
+        const h = canvas.height() - this._tooltip.height();
+        position.top = Math.floor(Math.random() * h);
+        break;
+      }
+    }
+    
+    if([this._whereHorizontal, this._whereVertical].includes('isometric')) {
+      position.transform = 'rotateX(54deg) rotateY(-2deg) rotateZ(-44deg)';
+    }
+
     return position;
   }
 
