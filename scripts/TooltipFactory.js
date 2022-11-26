@@ -126,10 +126,10 @@ class TooltipFactory {
   // public hook whenever a token is refreshed
   async refreshToken(token, extra) {	
     console.log(token);
-	if (!token?.actor || !this._shouldActorHaveTooltip(token)) { return; }
-	// Check if this refresh was caused by alt being pressed, and if so should tooltips render
+    if (!token?.actor || !this._shouldActorHaveTooltip(token)) { return; }
+    // Check if this refresh was caused by alt being pressed, and if so should tooltips render
     const altHeldRenderTooltip = this._isAltPressed() && this._getAltSettings().showOnAlt &&	
-									(token?.document?.hidden ? this._getAltSettings().showAllOnAlt : true);
+                                 (token?.document?.hidden ? this._getAltSettings().showAllOnAlt : true);
     this[altHeldRenderTooltip ? '_addTooltip' : '_removeTooltip'](token);
   }
 
