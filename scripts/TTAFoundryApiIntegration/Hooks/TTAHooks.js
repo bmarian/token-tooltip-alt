@@ -54,7 +54,7 @@ const hookHandlers = {
     return addHookHandler('hoverToken', HOOK_TYPE.ON, TooltipFactory.hoverToken.bind(TooltipFactory));
   },
   refreshTokenHandler() {
-    return addHookHandler('refreshToken', HOOK_TYPE.ON, TooltipFactory.hoverToken.bind(TooltipFactory)); // Check to show tooltips if ALT is held
+    return addHookHandler('refreshToken', HOOK_TYPE.ON, TooltipFactory.refreshToken.bind(TooltipFactory));
   },
   removeTooltipHandlers() {
     ['preUpdateToken', 'canvasPan', 'deleteToken'].forEach((hook) => {
