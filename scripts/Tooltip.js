@@ -228,7 +228,7 @@ class Tooltip {
   // for players this gets a little complicated
   _getActorDisplayName(staticData) {
     if (!staticData) return null;
-    const tokenDataSource = versionAfter10() ? this._token : this._token?.data;
+    const tokenDataSource = versionAfter10() ? this._token?.document : this._token?.data;
     const tokenName = tokenDataSource?.name;
     if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) return tokenName;
     if (!this._tooltipInfo.isGM) {
