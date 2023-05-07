@@ -2,9 +2,7 @@ import doMath from './lib/MathEngine.js';
 import DeferredPromise from './lib/DeferredPromise.js';
 import { TTAConstants } from './TTAConstants/TTAConstants.js';
 import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
-import {
-  clone, debug, MODULE_NAME, versionAfter10,
-} from './TTAUtils/TTAUtils.js';
+import { clone, debug, MODULE_NAME, } from './TTAUtils/TTAUtils.js';
 
 class Tooltip {
   constructor(
@@ -67,12 +65,18 @@ class Tooltip {
   // extracts data from an object, and a string path,
   // it has no depth search limit
   _getNestedData(data, path) {
-    if (!this._reg.path.test(path)) { return null; }
+    if (!this._reg.path.test(path)) {
+      return null;
+    }
     const paths = path.split('.');
-    if (!paths.length) { return null; }
+    if (!paths.length) {
+      return null;
+    }
     let res = data;
     for (let i = 0; i < paths.length; i += 1) {
-      if (res === undefined) { return null; }
+      if (res === undefined) {
+        return null;
+      }
       res = res?.[paths[i]];
     }
     return res;
@@ -89,7 +93,9 @@ class Tooltip {
     const t = this;
     const convOp = operation.replace(this._reg.paths, (dataPath) => {
       const dp = dataPath.substring(1, dataPath.length - 1);
-      if (t._reg.number.test(dp) || t._reg.minus.test(dp)) { return dp; }
+      if (t._reg.number.test(dp) || t._reg.minus.test(dp)) {
+        return dp;
+      }
       return t._getNestedData(this._data, dp);
     });
     return this._doStringMath(convOp);
@@ -117,7 +123,7 @@ class Tooltip {
 
   _evalFunction(data, funString) {
     const userFunStr = `${'const {token, data, tooltip, utils} = arguments[0];'
-            + 'try {\n'}${
+    + 'try {\n'}${
       funString
     }\n} catch (err) { utils.debug(err); return ""; }`;
 
@@ -146,7 +152,9 @@ class Tooltip {
 
   // appends stats with only a value
   _appendSimpleStat(value, item, stats) {
-    if (value === '' || (typeof value !== 'string' && Number.isNaN(value))) { return; }
+    if (value === '' || (typeof value !== 'string' && Number.isNaN(value))) {
+      return;
+    }
     const v = item.isNumber ? this._extractNumber(value) : value;
     stats.push({ value: v, color: item?.color, ...this._getIconData(item?.icon) });
   }
@@ -159,7 +167,9 @@ class Tooltip {
       || Number.isNaN(values.max)
       || values.value === null
       || values.max === null
-    ) { return; }
+    ) {
+      return;
+    }
 
     const temp = values.temp > 0 ? `(${values.temp})` : '';
     const tempmax = values.tempmax > 0 ? `(${values.tempmax})` : '';
@@ -169,7 +179,9 @@ class Tooltip {
 
   // appends to a stats array a structure for stats
   _appendStat(item, value, stats) {
-    if (!(item && value !== null && stats)) { return; }
+    if (!(item && value !== null && stats)) {
+      return;
+    }
     if (typeof value === 'object') {
       this._appendObjectStat({
         value: this._extractNumber(value.value),
@@ -186,7 +198,9 @@ class Tooltip {
   _getActorData() {
     const defaultType = this._appKeys.TOOLTIP_DEFAULT_ACTOR_ID;
     const actors = this._getSetting(this._settingsKeys.ACTORS);
-    if (!actors.length) { return {}; }
+    if (!actors.length) {
+      return {};
+    }
     // determine the actor we are working with
     let actor = null;
     for (let i = 0; i < actors.length; i += 1) {
@@ -196,7 +210,9 @@ class Tooltip {
         break;
       }
     }
-    if (!actor) { return {}; }
+    if (!actor) {
+      return {};
+    }
     // determines if we should get the data from the gms settings or from players
     const settings = this._getSetting(this._tooltipInfo.isGM ? this._settingsKeys.GM_SETTINGS : this._settingsKeys.PLAYER_SETTINGS);
     // if the actor has custom data we try to get that, if not we use the default
@@ -206,12 +222,14 @@ class Tooltip {
   // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
   _getActorDisposition(tokenDispositions) {
     const dispositionsWithoutOwned = tokenDispositions.filter((d) => d !== this._appKeys.OWNED_DISPOSITION);
-    const disposition = dispositionsWithoutOwned?.[parseInt(versionAfter10() ? this._token?.document?.disposition : this._token?.data?.disposition, 10) + 1];
+    const disposition = dispositionsWithoutOwned?.[parseInt(this._token?.document?.disposition, 10) + 1];
 
     // albions-angel: fixed >= which should have been >
     // albions-angel: fix for CONST?.ENTITY_PERMISSIONS?.OBSERVER 
     // albions-angel: now changed to CONST.DOCUMENT_OWNERSHIP_LEVELS as of V10
-    if (this._tooltipInfo.isGM) { return disposition; }
+    if (this._tooltipInfo.isGM) {
+      return disposition;
+    }
     return this._token?.actor?.permission > CONST?.DOCUMENT_OWNERSHIP_LEVELS?.OBSERVER ? this._appKeys.OWNED_DISPOSITION : disposition;
   }
 
@@ -219,7 +237,9 @@ class Tooltip {
   _getItemListForDisposition(items, disposition) {
     for (let i = 0; i < items?.length; i += 1) {
       const item = items[i];
-      if (item.disposition === disposition) { return item.items; }
+      if (item.disposition === disposition) {
+        return item.items;
+      }
     }
     return [];
   }
@@ -228,7 +248,7 @@ class Tooltip {
   // for players this gets a little complicated
   _getActorDisplayName(staticData) {
     if (!staticData) return null;
-    const tokenDataSource = versionAfter10() ? this._token : this._token?.data;
+    const tokenDataSource = this._token;
     const tokenName = tokenDataSource?.name;
     if (this._tooltipInfo.isGM && staticData.displayNameInTooltip) return tokenName;
     if (!this._tooltipInfo.isGM) {
@@ -243,13 +263,15 @@ class Tooltip {
       if (index === -1) {
         if (staticData.displayNameInTooltip === this._appKeys.NONE_DISPOSITION) return null;
         return staticData.displayNameInTooltip === this._appKeys.OWNED_DISPOSITION
-                    && this._token?.actor?.permission >= CONST?.DOCUMENT_OWNERSHIP_LEVELS?.OBSERVER ? tokenName : null;
+        && this._token?.actor?.permission >= CONST?.DOCUMENT_OWNERSHIP_LEVELS?.OBSERVER ? tokenName : null;
       }
       // Example: ['HOSTILE', 'NEUTRAL', 'FRIENDLY'] <=> [-1, 0, 1]
       // tokenDisposition = -1 + 1 (0) <=> HOSTILE
       // index = indexOf('FRIENDLY') <=> 2
       // In this case we don't want to show the name so: index > tokenDisposition => NO NAME
-      if (index <= tokenDisposition) { return tokenName; }
+      if (index <= tokenDisposition) {
+        return tokenName;
+      }
     }
     return null;
   }
@@ -257,7 +279,9 @@ class Tooltip {
   // generates an array of stats that should be displayed
   _getTooltipData() {
     const data = this._getActorData();
-    if (!data) { return { stats: [] }; }
+    if (!data) {
+      return { stats: [] };
+    }
     const stats = [];
     const staticData = {
       ...data.static,
@@ -265,13 +289,17 @@ class Tooltip {
       tokenDispositions: data?.static?.tokenDispositions ? clone(data?.static?.tokenDispositions)?.reverse() : [],
     };
     const itemList = this._getItemListForDisposition(data.items, this._getActorDisposition(staticData?.tokenDispositions));
-    if (!staticData || !itemList.length) { return { stats: [] }; }
+    if (!staticData || !itemList.length) {
+      return { stats: [] };
+    }
     for (let i = 0; i < itemList.length; i += 1) {
       const item = itemList[i];
       const value = item?.isFunction
         ? this._evalFunction(this._data, item.value)
         : this[item?.expression ? '_expressionHandler' : '_getNestedData'](this._data, item.value);
-      if (staticData.useAccentEverywhere) { item.color = staticData.accentColor; }
+      if (staticData.useAccentEverywhere) {
+        item.color = staticData.accentColor;
+      }
       this._appendStat(item, value, stats);
     }
     const tokenName = this._getActorDisplayName(staticData);
@@ -283,7 +311,9 @@ class Tooltip {
 
   // break the rows into columns
   _breakInColumns(stats) {
-    if (stats.length <= this._maxRows) { return [stats]; }
+    if (stats.length <= this._maxRows) {
+      return [stats];
+    }
     const colStats = [];
     for (let i = 0; i < stats.length; i += this._maxRows) {
       colStats.push(stats.slice(i, i + this._maxRows));
@@ -294,7 +324,9 @@ class Tooltip {
   // determines what should be shown in the tooltip
   async _buildTooltipContent() {
     const data = this._getTooltipData();
-    if (!data.stats.length) { return null; }
+    if (!data.stats.length) {
+      return null;
+    }
     const columns = this._breakInColumns(data.stats);
     const templateData = {
       ...data,
@@ -309,7 +341,9 @@ class Tooltip {
   // should only be called by _createTooltip()
   async _populateContainer() {
     const content = await this._buildTooltipContent();
-    if (content && this._tooltip) { this._tooltip.html(content); }
+    if (content && this._tooltip) {
+      this._tooltip.html(content);
+    }
     return !!content;
   }
 
@@ -389,7 +423,9 @@ class Tooltip {
   // positions the newly created tooltip
   // should only be called by _createTooltip()
   _positionTooltip() {
-    if (!this._tooltip) { return; }
+    if (!this._tooltip) {
+      return;
+    }
     const position = this._getTooltipPosition();
     this._tooltip.css(position);
   }
@@ -398,14 +434,18 @@ class Tooltip {
   async _createTooltip() {
     this._createContainer();
     const hasContent = await this._populateContainer();
-    if (!hasContent) { return; }
+    if (!hasContent) {
+      return;
+    }
     this._appendContainerToBody();
     this._positionTooltip();
   }
 
   // will first remove the tooltip from the DOM, then make the reference null
   _destroyTooltip() {
-    if (!this._tooltip) { return; }
+    if (!this._tooltip) {
+      return;
+    }
     this._tooltip.remove();
     this._tooltip = null;
   }
@@ -451,4 +491,5 @@ class Tooltip {
     }
   }
 }
+
 export default Tooltip;

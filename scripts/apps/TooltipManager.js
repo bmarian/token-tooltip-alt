@@ -2,9 +2,7 @@ import { getSetting, setSettingSync } from '../TTAFoundryApiIntegration/Settings
 import { TTAConstants } from '../TTAConstants/TTAConstants.js';
 import TooltipEditor from './TooltipEditor.js';
 import DataManager from './DataManager.js';
-import {
-  debug, clone, generateRandomColor, MODULE_NAME, versionAfter9,
-} from '../TTAUtils/TTAUtils.js';
+import { clone, debug, generateRandomColor, MODULE_NAME } from '../TTAUtils/TTAUtils.js';
 
 export default class TooltipManager extends FormApplication {
   static get defaultOptions() {
@@ -124,8 +122,6 @@ export default class TooltipManager extends FormApplication {
   }
 
   _getEntityTypes() {
-    const after9 = versionAfter9();
-    if (!after9) return game?.system?.entityTypes?.Actor;
     return Object.keys(game?.system?.model?.Actor);
   }
 

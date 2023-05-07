@@ -19,13 +19,12 @@
   },
   "homepage": "https://github.com/bmarian/token-tooltip-alt#readme",
   "devDependencies": {
-    "@types/codemirror": "0.0.108",
-    "@types/jquery": "^3.5.5",
-    "@types/mathjs": "^6.0.11",
-    "@types/sortablejs": "^1.10.6",
-    "eslint": "^7.23.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.27.5",
+    "mathjs": "^11.8.0",
+    "sortablejs": "^1.15.0",
+    "codemirror": "^6.65.7",
     "foundry-pc-types": "gitlab:foundry-projects/foundry-pc/foundry-pc-types"
   }
 }
