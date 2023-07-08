@@ -206,7 +206,7 @@ class Tooltip {
   // get the current actor disposition as a string (foundry has it as an enum e.g. 0 -> NEUTRAL)
   _getActorDisposition(tokenDispositions) {
     const dispositionsWithoutOwned = tokenDispositions.filter((d) => d !== this._appKeys.OWNED_DISPOSITION);
-    const disposition = dispositionsWithoutOwned?.[parseInt(versionAfter10() ? this._token?.document?.disposition : this._token?.data?.disposition, 10) + 1];
+    const disposition = dispositionsWithoutOwned?.[parseInt(versionAfter10() ? this._token?.document?.disposition : this._token?.data?.disposition, 10) + 2];
 
     // albions-angel: fixed >= which should have been >
     // albions-angel: fix for CONST?.ENTITY_PERMISSIONS?.OBSERVER 
