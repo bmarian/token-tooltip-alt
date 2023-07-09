@@ -1,8 +1,8 @@
 {
-  "id": "token-tooltip-alt-for-V11",
-  "title": "Token Tooltip Alt for V11",
-  "description": "Based on the original Token Tooltip Alt, integrating the currently open PRs from the main repo.",
-  "version": "3.3.1",
+  "id": "token-tooltip-alt",
+  "title": "Token Tooltip Alt",
+  "description": "Based on the original Token Tooltip Alt, updated for v11 and integrating the currently open PRs from the main repo.",
+  "version": "3.3.2",
   "authors": [
     {
       "name": "bmarian",
@@ -72,7 +72,7 @@
   ],
   "url": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition",
   "manifest": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases/latest/download/module.json",
-  "download": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases/download/3.3.1/module.zip",
+  "download": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases/latest/download/module.zip",
   "changelog": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases",
   "flags": {
     "media": [
