@@ -137,7 +137,9 @@ class TooltipFactory {
     // Check if this refresh was caused by alt being pressed, and if so should tooltips render
     const altHeldRenderTooltip = this._isAltPressed() && this._getAltSettings().showOnAlt &&	
                                  (token?.document?.hidden ? this._getAltSettings().showAllOnAlt : true);
-    this[altHeldRenderTooltip ? '_addTooltip' : '_removeTooltip'](token);
+    // Prevent tooltip from disappearing when hovered in
+    const shouldShowTooltip = altHeldRenderTooltip || token._isHoverIn;
+    this[shouldShowTooltip ? '_addTooltip' : '_removeTooltip'](token);
   }
 
   // public hook to remove all tooltips

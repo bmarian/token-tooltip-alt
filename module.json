@@ -1,8 +1,8 @@
 {
-  "id": "token-tooltip-alt",
-  "title": "Token Tooltip Alt",
-  "description": "A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.",
-  "version": "3.3.0",
+  "id": "token-tooltip-alt-for-V11",
+  "title": "Token Tooltip Alt for V11",
+  "description": "Based on the original Token Tooltip Alt, integrating the currently open PRs from the main repo.",
+  "version": "3.3.1",
   "authors": [
     {
       "name": "bmarian",
@@ -72,7 +72,7 @@
   ],
   "url": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition",
   "manifest": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases/latest/download/module.json",
-  "download": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases/download/3.3.0/module.zip",
+  "download": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases/download/3.3.1/module.zip",
   "changelog": "https://github.com/Testbaby02/token-tooltip-alt-fix-disposition/releases",
   "flags": {
     "media": [
