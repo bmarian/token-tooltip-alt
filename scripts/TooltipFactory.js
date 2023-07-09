@@ -1,7 +1,7 @@
 import Tooltip from './Tooltip.js';
-import { TTAConstants, getSystemTheme } from './TTAConstants/TTAConstants.js';
+import { getSystemTheme, TTAConstants } from './TTAConstants/TTAConstants.js';
 import { getSetting } from './TTAFoundryApiIntegration/Settings/TTASettingsUtils.js';
-import { versionAfter9, MODULE_NAME, versionAfter10 } from './TTAUtils/TTAUtils.js';
+import { MODULE_NAME } from './TTAUtils/TTAUtils.js';
 
 class TooltipFactory {
   constructor() {
@@ -10,7 +10,9 @@ class TooltipFactory {
   }
 
   static getInstance() {
-    if (!TooltipFactory._instance) { TooltipFactory._instance = new TooltipFactory(); }
+    if (!TooltipFactory._instance) {
+      TooltipFactory._instance = new TooltipFactory();
+    }
     return TooltipFactory._instance;
   }
 
@@ -31,7 +33,7 @@ class TooltipFactory {
   _getTooltipInfo(token) {
     return {
       isGM: game?.user?.isGM,
-      actorType: versionAfter10() ? token?.actor?.type : token?.actor?.data?.type,
+      actorType: token?.actor?.type,
     };
   }
 
@@ -64,7 +66,9 @@ class TooltipFactory {
   _addTooltip(token) {
     for (let i = 0; i < this._tooltips.length; i += 1) {
       const t = this._tooltips[i];
-      if (t.getTokenId() === token?.id) { return null; }
+      if (t.getTokenId() === token?.id) {
+        return null;
+      }
     }
     const tooltip = new Tooltip(...this._getTooltipData(token));
     this._tooltips.push(tooltip);
@@ -87,12 +91,16 @@ class TooltipFactory {
   _shouldActorHaveTooltip(token) {
     const getFlagLoc = token?.document || token;
     const noTooltip = getFlagLoc.getFlag(MODULE_NAME, 'noTooltip');
-    if (noTooltip) { return false; }
-    const actorType = versionAfter10() ? token?.actor?.type : token?.actor?.data?.type;
+    if (noTooltip) {
+      return false;
+    }
+    const actorType = token?.actor?.type;
     const actors = this._getSetting(this._settingKeys.ACTORS);
     for (let i = 0; i < actors.length; i += 1) {
       const actor = actors[i];
-      if (actor.id === actorType) { return actor.enable; }
+      if (actor.id === actorType) {
+        return actor.enable;
+      }
     }
     return true;
   }
@@ -105,14 +113,14 @@ class TooltipFactory {
   }
 
   _isAltPressed() {
-    const after9 = versionAfter9();
-    if (!after9) return keyboard?.isDown?.('Alt');
     return game?.keyboard?.downKeys?.has?.('AltLeft') || game?.keyboard?.downKeys?.has?.('AltRight');
   }
 
   // public hook when hovering over a token (more precise when a token is focused)
   async hoverToken(token, isHovering) {
-    if (!token?.actor || !this._shouldActorHaveTooltip(token)) { return; }
+    if (!token?.actor || !this._shouldActorHaveTooltip(token)) {
+      return;
+    }
     const isAltPressed = this._isAltPressed();
     if (isAltPressed) {
       const altSettings = this._getAltSettings();
@@ -137,4 +145,5 @@ class TooltipFactory {
     this._removeTooltips();
   }
 }
+
 export default TooltipFactory.getInstance();

@@ -1,6 +1,6 @@
 import { TTAConstants } from '../../TTAConstants/TTAConstants.js';
 import TooltipManager from '../../apps/TooltipManager.js';
-import { i18n, versionAfter10 } from '../../TTAUtils/TTAUtils.js';
+import { i18n, } from '../../TTAUtils/TTAUtils.js';
 import { registerMenu, registerSettings } from './TTASettingsUtils.js';
 
 const { SETTING_KEYS } = TTAConstants;
@@ -81,7 +81,7 @@ function initSettings() {
         scope: 'world',
         config: true,
         restricted: true,
-        default: versionAfter10() ? 'actor.system' : 'actor.data.data',
+        default: 'actor.system',
       },
     },
     {

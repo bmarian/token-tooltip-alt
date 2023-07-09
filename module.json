@@ -1,10 +1,8 @@
 {
-  "name": "token-tooltip-alt",
+  "id": "token-tooltip-alt",
   "title": "Token Tooltip Alt",
   "description": "A module that adds a fully customizable tooltip next to the currently hovered token to show some useful information for players and DMs.",
-  "version": "3.1.4",
-  "manifestPlusVersion": "1.0.0",
-  "author": "bmarian",
+  "version": "3.2.1",
   "authors": [
     {
       "name": "bmarian",
@@ -15,53 +13,18 @@
   "esmodules": [
     "scripts/TTAFoundryApiIntegration/TTAMain.js"
   ],
+  "scripts": [
+    "https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"
+  ],
   "styles": [
+    "https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css",
     "styles/token-tooltip-alt.css"
   ],
   "compatibility": {
-    "minimum": "0.7.5",
-    "verified": 10
-  },
-  "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "10",
-  "dependencies": [
-    {
-      "id": "_mathjs",
-      "name": "_mathjs",
-      "type": "module",
-      "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/mathjs-lib/master/module.json"
-    },
-    {
-      "id": "_sortablejs",
-      "name": "_sortablejs",
-      "type": "module",
-      "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
-    },
-    {
-      "id": "_CodeMirror",
-      "name": "_CodeMirror",
-      "type": "module",
-      "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/codemirror-lib/master/module.json"
-    }
-  ],
-  "relationships": {
-    "requires": [
-      {
-        "id": "_mathjs",
-        "type": "module",
-        "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/mathjs-lib/master/module.json"
-      },
-      {
-        "id": "_sortablejs",
-        "type": "module",
-        "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/sortablejs-lib/main/module.json"
-      },
-      {
-        "id": "_CodeMirror",
-        "type": "module",
-        "manifest": "https://raw.githubusercontent.com/League-of-Foundry-Developers/codemirror-lib/master/module.json"
-      }
-    ]
+    "minimum": "10",
+    "verified": "10"
   },
   "languages": [
     {
@@ -91,8 +54,18 @@
       "url": "https://i.imgur.com/V3n665D.png"
     }
   ],
-  "url": "https://github.com/bmarian/token-tooltip-alt",
-  "manifest": "https://github.com/bmarian/token-tooltip-alt/releases/latest/download/module.json",
-  "download": "https://github.com/bmarian/token-tooltip-alt/releases/download/3.1.2/module.zip",
-  "changelog": "https://github.com/bmarian/token-tooltip-alt/releases"
+  "url": "https://github.com/xdy-forks/token-tooltip-alt",
+  "manifest": "https://github.com/xdy-forks/token-tooltip-alt/releases/latest/download/module.json",
+  "download": "https://github.com/xdy-forks/token-tooltip-alt/releases/download/3.2.1/module.zip",
+  "changelog": "https://github.com/xdy-forks/token-tooltip-alt/releases",
+  "flags": {
+    "media": [
+      {
+        "type": "icon",
+        "url": "https://i.imgur.com/V3n665D.png"
+      }
+    ],
+    "manifestPlusVersion": "1.2.0",
+    "allowBugReporter": true
+  }
 }

@@ -38,6 +38,7 @@ function consoleTrace(output) {
   console.trace();
   console.groupEnd();
 }
+
 /* eslint-enable no-console */
 
 /**
@@ -92,21 +93,6 @@ function htmlToElement(html) {
   template.innerHTML = html.trim();
   return template.content.firstChild;
 }
-/**
- * Returns the foundry version
- *
- * @return {number | string | undefined}
- */
-const getFoundryVersion = () => game?.version;
-
-/**
- * Returns if the foundry version is 0.8.x
- *
- * @return {boolean}
- */
-const versionAfter9 = () => Number(getFoundryVersion()) >= 9;
-
-const versionAfter10 = () => Number(getFoundryVersion()) >= 10;
 
 export {
   debug,
@@ -114,8 +100,6 @@ export {
   i18n,
   generateRandomColor,
   htmlToElement,
-  versionAfter9,
-  versionAfter10,
   MODULE_NAME,
   MODULE_TITLE,
 };
