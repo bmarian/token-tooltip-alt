@@ -53,6 +53,9 @@ const hookHandlers = {
   hoverTokenHandler() {
     return addHookHandler('hoverToken', HOOK_TYPE.ON, TooltipFactory.hoverToken.bind(TooltipFactory));
   },
+  refreshTokenHandler() {
+    return addHookHandler('refreshToken', HOOK_TYPE.ON, TooltipFactory.refreshToken.bind(TooltipFactory));
+  },
   removeTooltipHandlers() {
     ['preUpdateToken', 'canvasPan', 'deleteToken'].forEach((hook) => {
       addHookHandler(hook, HOOK_TYPE.ON, TooltipFactory.removeTooltips.bind(TooltipFactory));

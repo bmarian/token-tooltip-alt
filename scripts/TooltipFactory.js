@@ -117,10 +117,19 @@ class TooltipFactory {
     if (isAltPressed) {
       const altSettings = this._getAltSettings();
       if (!altSettings.showOnAlt) { return; }
-      const isTokenHidden = token?.data?.hidden;
+      const isTokenHidden = token?.document?.hidden;
       if (altSettings.showOnAlt && !altSettings.showAllOnAlt && isTokenHidden) { return; }
     }
     this[isHovering ? '_addTooltip' : '_removeTooltip'](token);
+  }
+  
+  // public hook whenever a token is refreshed
+  async refreshToken(token) {	
+    if (!token?.actor || !this._shouldActorHaveTooltip(token)) { return; }
+    // Check if this refresh was caused by alt being pressed, and if so should tooltips render
+    const altHeldRenderTooltip = this._isAltPressed() && this._getAltSettings().showOnAlt &&	
+                                 (token?.document?.hidden ? this._getAltSettings().showAllOnAlt : true);
+    this[altHeldRenderTooltip ? '_addTooltip' : '_removeTooltip'](token);
   }
 
   // public hook to remove all tooltips
